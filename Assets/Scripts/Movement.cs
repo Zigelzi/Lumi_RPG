@@ -6,14 +6,18 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField] LayerMask groundLayer;
     PlayerInputActions playerInputActions;
     InputAction movementInput;
+
+    Camera mainCamera;
 
     NavMeshAgent navAgent;
     // Start is called before the first frame update
     void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
+        mainCamera = Camera.main;
 
         playerInputActions = new PlayerInputActions();
 
@@ -35,6 +39,17 @@ public class Movement : MonoBehaviour
     }
 
     void HandleMovementInput(InputAction.CallbackContext ctx) {
-        Debug.Log("Clicked!");
+        TryMoveToClickedPosition();
+    }
+
+    void TryMoveToClickedPosition()
+    {
+        RaycastHit rayHit;
+        Ray clickedPosition = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        bool hasClickedGround = Physics.Raycast(clickedPosition, out rayHit, Mathf.Infinity, groundLayer);
+        
+        if (hasClickedGround) {
+            navAgent.SetDestination(rayHit.point);
+        }
     }
 }
