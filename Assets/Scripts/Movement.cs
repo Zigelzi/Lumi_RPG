@@ -7,17 +7,20 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer;
+
     PlayerInputActions playerInputActions;
     InputAction movementInput;
 
+    Animator animator;
     Camera mainCamera;
-
     NavMeshAgent navAgent;
+    
     // Start is called before the first frame update
     void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
         mainCamera = Camera.main;
+        animator = GetComponent<Animator>();
 
         playerInputActions = new PlayerInputActions();
 
@@ -35,7 +38,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateAnimator();
     }
 
     void HandleMovementInput(InputAction.CallbackContext ctx) {
@@ -51,5 +54,16 @@ public class Movement : MonoBehaviour
         if (hasClickedGround) {
             navAgent.SetDestination(rayHit.point);
         }
+    }
+
+    void UpdateAnimator()
+    {
+        Vector3 playerVelocity = navAgent.velocity;
+        Vector3 localVelocity = transform.InverseTransformDirection(playerVelocity);
+        float forwardSpeed = localVelocity.z;
+
+        // String reference defined in the character animator
+        animator.SetFloat("forwardSpeed", forwardSpeed);
+
     }
 }
