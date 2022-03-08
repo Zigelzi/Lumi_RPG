@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FollowPlayerCamera : MonoBehaviour
 {
-    Player player;
+    PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame

@@ -1613,6 +1613,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1990650890259209718, guid: 847bd5e383deed643981146f71130d4c, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 2358616886315960968, guid: 847bd5e383deed643981146f71130d4c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1670,9 +1674,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5400535355654502330, guid: c65b70484d458c1448ff88fce1f151cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18922c57260c4784cbe6fc6a3eb1536d, type: 2}
     - target: {fileID: 6425254681419954527, guid: c65b70484d458c1448ff88fce1f151cb, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839810601895757601, guid: c65b70484d458c1448ff88fce1f151cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c65b70484d458c1448ff88fce1f151cb, type: 3}
