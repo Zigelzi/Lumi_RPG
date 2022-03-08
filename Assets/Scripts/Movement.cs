@@ -14,6 +14,8 @@ public class Movement : MonoBehaviour
     Animator animator;
     Camera mainCamera;
     NavMeshAgent navAgent;
+
+    bool rightButtonPressed = false;
     
     // Start is called before the first frame update
     void Start()
@@ -27,32 +29,45 @@ public class Movement : MonoBehaviour
         movementInput = playerInputActions.Player.Movement;
         movementInput.Enable();
 
-        movementInput.performed += HandleMovementInput;
+        movementInput.performed += HandleMousePressedDown;
+        movementInput.canceled += HandleMouseReleased;
     }
 
     void OnDestroy() {
         movementInput.Disable();
-        movementInput.performed -= HandleMovementInput;
+        movementInput.performed -= HandleMousePressedDown;
+        movementInput.canceled -= HandleMouseReleased;
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateAnimator();
+        TryMoveToClickedPosition();
     }
 
-    void HandleMovementInput(InputAction.CallbackContext ctx) {
-        TryMoveToClickedPosition();
+    void HandleMousePressedDown(InputAction.CallbackContext ctx)
+    {
+        rightButtonPressed = true;
+    }
+
+    void HandleMouseReleased(InputAction.CallbackContext ctx)
+    {
+        rightButtonPressed = false;
     }
 
     void TryMoveToClickedPosition()
     {
-        RaycastHit rayHit;
-        Ray clickedPosition = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        bool hasClickedGround = Physics.Raycast(clickedPosition, out rayHit, Mathf.Infinity, groundLayer);
-        
-        if (hasClickedGround) {
-            navAgent.SetDestination(rayHit.point);
+        if (rightButtonPressed)
+        {
+            RaycastHit rayHit;
+            Ray clickedPosition = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            bool hasClickedGround = Physics.Raycast(clickedPosition, out rayHit, Mathf.Infinity, groundLayer);
+
+            if (hasClickedGround)
+            {
+                navAgent.SetDestination(rayHit.point);
+            }
         }
     }
 
