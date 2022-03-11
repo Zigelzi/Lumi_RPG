@@ -100,8 +100,7 @@ namespace RPG.Control
             {
                 if (rightButtonPressed)
                 {
-                    movement.MoveTo(rayHit.point);
-                    attacking.ClearTarget();
+                    movement.StartMovementAction(rayHit.point);
                 }
                 return true;
             }

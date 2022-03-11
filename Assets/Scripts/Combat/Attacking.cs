@@ -1,20 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Core;
 using RPG.Control;
 using RPG.Movement;
 
 namespace RPG.Combat
 {
-    public class Attacking : MonoBehaviour
+    public class Attacking : MonoBehaviour, IAction
     {
         [SerializeField] float attackRange = 2f;
 
+        ActionScheduler actionScheduler;
         UnitMovement movement;
         Transform target;
 
         void Start()
         {
+            actionScheduler = GetComponent<ActionScheduler>();
             movement = GetComponent<UnitMovement>();    
         }
 
@@ -24,22 +27,23 @@ namespace RPG.Combat
             {
                 if (IsInAttackRange())
                 {
-                    movement.Stop();
+                    movement.Cancel();
                     transform.LookAt(target.position);
                 }
                 else
                 {
                     movement.MoveTo(target.position);
                 }
-                
+
             }    
         }
         public void Attack(EnemyController enemy)
         {
+            actionScheduler.StartAction(this);
             target = enemy.transform;
         }
 
-        public void ClearTarget()
+        public void Cancel()
         {
             target = null;
         }

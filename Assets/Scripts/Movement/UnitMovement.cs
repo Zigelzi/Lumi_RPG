@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using RPG.Core;
 
 namespace RPG.Movement
 {
-    public class UnitMovement : MonoBehaviour
+    public class UnitMovement : MonoBehaviour, IAction
     {
+        ActionScheduler actionScheduler;
         Animator animator;
         NavMeshAgent navAgent;
 
         // Start is called before the first frame update
         void Start()
         {
-            navAgent = GetComponent<NavMeshAgent>();
+            actionScheduler = GetComponent<ActionScheduler>();
             animator = GetComponent<Animator>();
+            navAgent = GetComponent<NavMeshAgent>();
         }
 
         // Update is called once per frame
@@ -23,6 +26,11 @@ namespace RPG.Movement
             UpdateAnimator();
         }
 
+        public void StartMovementAction(Vector3 destination)
+        {
+            actionScheduler.StartAction(this);
+            MoveTo(destination);
+        }
 
         public void MoveTo(Vector3 destination)
         {
@@ -30,7 +38,7 @@ namespace RPG.Movement
             navAgent.isStopped = false;
         }
 
-        public void Stop()
+        public void Cancel()
         {
             navAgent.isStopped = true;
         }
