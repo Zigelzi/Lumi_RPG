@@ -9,7 +9,7 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] LayerMask clickableLayer;
+        [SerializeField] LayerMask interactableLayers;
 
         PlayerInputActions playerInputActions;
         InputAction movementInput;
@@ -44,7 +44,8 @@ namespace RPG.Control
         // Update is called once per frame
         void Update()
         {
-            HandleMouseClick();
+            if (InteractWithCombat()) return;
+            if (InteractWithMovement()) return;
         }
 
         void HandleMousePressedDown(InputAction.CallbackContext ctx)
@@ -57,40 +58,56 @@ namespace RPG.Control
             rightButtonPressed = false;
         }
 
-        void HandleMouseClick()
+        bool InteractWithCombat()
         {
-            if (rightButtonPressed)
-            {
-                TryMoveAndAttack();
-            }
-        }
-
-        void TryMoveAndAttack()
-        {
-            bool hasClickedValidPosition = Physics.Raycast(
+            bool isHoveringOverInteractable = Physics.Raycast(
                 GetMouseRay(),
                 out RaycastHit rayHit,
                 Mathf.Infinity,
-                clickableLayer
+                interactableLayers
                 );
 
-            if (hasClickedValidPosition)
+            if (rayHit.collider == null) { return false; }
+
+            bool isEnemy = rayHit.collider.TryGetComponent<EnemyController>(out EnemyController target);
+            if (isHoveringOverInteractable && isEnemy)
             {
-                if (rayHit.collider.TryGetComponent<EnemyController>(out EnemyController target))
+                if (rightButtonPressed)
                 {
-                    attacking.Attack();
-                    movement.MoveTo(target.transform.position);
+                    attacking.Attack(target);
+                    //movement.MoveTo(target.transform.position);
                 }
-                else
-                {
-                    movement.MoveTo(rayHit.point);
-                }
+                return true;
             }
+
+            return false;
         }
 
         private Ray GetMouseRay()
         {
             return mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        }
+
+        bool InteractWithMovement()
+        {
+            bool isHoveringOverInteractable = Physics.Raycast(
+                GetMouseRay(),
+                out RaycastHit rayHit,
+                Mathf.Infinity,
+                interactableLayers
+                );
+
+            if (isHoveringOverInteractable)
+            {
+                if (rightButtonPressed)
+                {
+                    movement.MoveTo(rayHit.point);
+                }
+                return true;
+            }
+            
+            return false;
+            
         }
     }
 }
