@@ -27,6 +27,12 @@ namespace RPG.Movement
         public void MoveTo(Vector3 destination)
         {
             navAgent.SetDestination(destination);
+            navAgent.isStopped = false;
+        }
+
+        public void Stop()
+        {
+            navAgent.isStopped = true;
         }
 
         void UpdateAnimator()

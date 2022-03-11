@@ -75,7 +75,6 @@ namespace RPG.Control
                 if (rightButtonPressed)
                 {
                     attacking.Attack(target);
-                    //movement.MoveTo(target.transform.position);
                 }
                 return true;
             }
@@ -83,7 +82,7 @@ namespace RPG.Control
             return false;
         }
 
-        private Ray GetMouseRay()
+        Ray GetMouseRay()
         {
             return mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         }
@@ -102,6 +101,7 @@ namespace RPG.Control
                 if (rightButtonPressed)
                 {
                     movement.MoveTo(rayHit.point);
+                    attacking.ClearTarget();
                 }
                 return true;
             }
