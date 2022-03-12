@@ -10,14 +10,20 @@ namespace RPG.Combat
     public class Attacking : MonoBehaviour, IAction
     {
         [SerializeField] float attackRange = 2f;
+        [SerializeField][Range(0, 3f)] float attackSpeed = 1f;
 
         ActionScheduler actionScheduler;
+        Animator animator;
+        EnemyController currentEnemy;
         UnitMovement movement;
         Transform target;
+
+        float previousAttack;
 
         void Start()
         {
             actionScheduler = GetComponent<ActionScheduler>();
+            animator = GetComponent<Animator>();
             movement = GetComponent<UnitMovement>();    
         }
 
@@ -25,22 +31,43 @@ namespace RPG.Combat
         {
             if (target)
             {
-                if (IsInAttackRange())
-                {
-                    movement.Cancel();
-                    transform.LookAt(target.position);
-                }
-                else
-                {
-                    movement.MoveTo(target.position);
-                }
-
+                ChaseTarget();
+                TryAttackTarget();
             }    
         }
-        public void Attack(EnemyController enemy)
+
+        public void StartAttackAction(EnemyController enemy)
         {
             actionScheduler.StartAction(this);
             target = enemy.transform;
+            currentEnemy = enemy;
+        }
+
+        void ChaseTarget()
+        {
+            if (IsInAttackRange())
+            {
+                movement.Cancel();
+                transform.LookAt(target.position);
+            }
+            else
+            {
+                movement.MoveTo(target.position);
+            }
+        }
+
+        void TryAttackTarget()
+        {
+            if (IsInAttackRange() && IsAbleToAttackAgain())
+            {
+                Attack(currentEnemy);
+                previousAttack = Time.time;
+            }
+        }
+
+        void Attack(EnemyController enemy)
+        {
+            PlayAttackAnimation();
         }
 
         public void Cancel()
@@ -57,6 +84,30 @@ namespace RPG.Combat
             }
 
             return false;
+        }
+
+        bool IsAbleToAttackAgain()
+        {
+            float nextAttackTime = previousAttack + attackSpeed;
+            if (Time.time >= nextAttackTime)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        void PlayAttackAnimation()
+        {
+            animator.SetTrigger("attack");
+        }
+
+        // Triggered by attacking animation event
+        void HandleHitAnimation()
+        {
+            
         }
     }
 }

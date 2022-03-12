@@ -23,7 +23,7 @@ namespace RPG.Movement
         // Update is called once per frame
         void Update()
         {
-            UpdateAnimator();
+            UpdateRunAnimation();
         }
 
         public void StartMovementAction(Vector3 destination)
@@ -43,7 +43,7 @@ namespace RPG.Movement
             navAgent.isStopped = true;
         }
 
-        void UpdateAnimator()
+        void UpdateRunAnimation()
         {
             Vector3 playerVelocity = navAgent.velocity;
             Vector3 localVelocity = transform.InverseTransformDirection(playerVelocity);
