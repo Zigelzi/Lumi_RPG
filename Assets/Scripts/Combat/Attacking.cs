@@ -11,6 +11,7 @@ namespace RPG.Combat
     {
         [SerializeField] float attackRange = 2f;
         [SerializeField][Range(0, 3f)] float attackSpeed = 1f;
+        [SerializeField] int attackDamage = 20;
 
         ActionScheduler actionScheduler;
         Animator animator;
@@ -18,7 +19,7 @@ namespace RPG.Combat
         UnitMovement movement;
         Transform target;
 
-        float previousAttack;
+        float timeSinceLastAttack;
 
         void Start()
         {
@@ -29,6 +30,7 @@ namespace RPG.Combat
 
         void Update()
         {
+            UpdateLastAttackTime();
             if (target)
             {
                 ChaseTarget();
@@ -41,6 +43,15 @@ namespace RPG.Combat
             actionScheduler.StartAction(this);
             target = enemy.transform;
             currentEnemy = enemy;
+        }
+        public void Cancel()
+        {
+            target = null;
+        }
+
+        void UpdateLastAttackTime()
+        {
+            timeSinceLastAttack += Time.deltaTime;
         }
 
         void ChaseTarget()
@@ -61,18 +72,13 @@ namespace RPG.Combat
             if (IsInAttackRange() && IsAbleToAttackAgain())
             {
                 Attack(currentEnemy);
-                previousAttack = Time.time;
+                timeSinceLastAttack = 0;
             }
         }
 
         void Attack(EnemyController enemy)
         {
             PlayAttackAnimation();
-        }
-
-        public void Cancel()
-        {
-            target = null;
         }
 
         bool IsInAttackRange()
@@ -88,8 +94,7 @@ namespace RPG.Combat
 
         bool IsAbleToAttackAgain()
         {
-            float nextAttackTime = previousAttack + attackSpeed;
-            if (Time.time >= nextAttackTime)
+            if (timeSinceLastAttack >= attackSpeed)
             {
                 return true;
             }
@@ -105,9 +110,14 @@ namespace RPG.Combat
         }
 
         // Triggered by attacking animation event
-        void HandleHitAnimation()
+        void Hit()
         {
-            
+            if (target == null) { return; }
+
+            if (target.TryGetComponent<Health>(out Health targetHealth))
+            {
+                targetHealth.TakeDamage(attackDamage);
+            }
         }
     }
 }
