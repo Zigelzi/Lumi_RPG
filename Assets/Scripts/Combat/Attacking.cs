@@ -12,6 +12,7 @@ namespace RPG.Combat
         [SerializeField] float attackRange = 2f;
         [SerializeField][Range(0, 3f)] float attackSpeed = 1f;
         [SerializeField] int attackDamage = 20;
+        [SerializeField] ParticleSystem attackParticles;
 
         ActionScheduler actionScheduler;
         Animator animator;
@@ -106,19 +107,29 @@ namespace RPG.Combat
 
         void PlayAttackAnimation()
         {
+            // This will trigger Hit() event
             animator.SetTrigger("attack");
         }
 
-        // Triggered by attacking animation event
+        // Triggered by attacking animation event "Hit"
         void Hit()
         {
-            if (target == null) { return; }
+            if (target == null) return;
 
             if (target.TryGetComponent<Health>(out Health targetHealth))
             {
                 targetHealth.TakeDamage(attackDamage);
+                PlayAttackParticleEffect();
             }
         }
+
+        void PlayAttackParticleEffect()
+        {
+            if (attackParticles == null) return;
+
+            attackParticles.Play();
+        }
+
     }
 }
 
