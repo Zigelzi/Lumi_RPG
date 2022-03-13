@@ -9,12 +9,17 @@ namespace RPG.Combat
     {
         [SerializeField] int maxHealth = 100;
         [SerializeField] int currentHealth;
+        [SerializeField] [Range(0, 30f)] float despawnTime = 10f; 
+
+        Animator animator;
+        bool isAlive = true;
 
         public event Action OnUnitDeath;
 
         // Start is called before the first frame update
         void Start()
         {
+            animator = GetComponent<Animator>();
             currentHealth = maxHealth;
         }
 
@@ -39,8 +44,18 @@ namespace RPG.Combat
 
         void Die()
         {
+            if (isAlive)
+            {
+                isAlive = false;
+                animator.SetTrigger("die");
+                OnUnitDeath?.Invoke();
+                Invoke("Despawn", despawnTime);
+            } 
+        }
+
+        void Despawn()
+        {
             Destroy(gameObject);
-            OnUnitDeath?.Invoke();
         }
     }
 }
