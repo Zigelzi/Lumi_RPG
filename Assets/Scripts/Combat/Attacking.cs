@@ -15,9 +15,8 @@ namespace RPG.Combat
 
         ActionScheduler actionScheduler;
         Animator animator;
-        CombatTarget currentEnemy;
+        CombatTarget currentTarget;
         UnitMovement movement;
-        Transform target;
 
         float timeSinceLastAttack;
 
@@ -31,7 +30,7 @@ namespace RPG.Combat
         void Update()
         {
             UpdateLastAttackTime();
-            if (target)
+            if (currentTarget)
             {
                 ChaseTarget();
                 TryAttackTarget();
@@ -41,12 +40,13 @@ namespace RPG.Combat
         public void StartAttackAction(CombatTarget enemy)
         {
             actionScheduler.StartAction(this);
-            target = enemy.transform;
-            currentEnemy = enemy;
+            currentTarget = enemy;
         }
         public void Cancel()
         {
-            target = null;
+            currentTarget = null;
+
+            StopAttackAnimation();
         }
 
         void UpdateLastAttackTime()
@@ -59,11 +59,11 @@ namespace RPG.Combat
             if (IsInAttackRange())
             {
                 movement.Cancel();
-                transform.LookAt(target.position);
+                transform.LookAt(currentTarget.transform.position);
             }
             else
             {
-                movement.MoveTo(target.position);
+                movement.MoveTo(currentTarget.transform.position);
             }
         }
 
@@ -73,19 +73,18 @@ namespace RPG.Combat
                 IsAbleToAttackAgain() &&
                 IsTargetAlive())
             {
-                Attack(currentEnemy);
+                Attack(currentTarget);
                 timeSinceLastAttack = 0;
             }
         }
 
-        void Attack(CombatTarget enemy)
-        {
-            PlayAttackAnimation();
-        }
-
         bool IsInAttackRange()
         {
-            float distanceFromTarget = Vector3.Distance(transform.position, target.position);
+            float distanceFromTarget = Vector3.Distance(
+                transform.position,
+                currentTarget.transform.position
+                );
+
             if (distanceFromTarget <= attackRange)
             {
                 return true;
@@ -108,11 +107,11 @@ namespace RPG.Combat
 
         bool IsTargetAlive()
         {
-            Health currentEnemyHealth = currentEnemy.GetComponent<Health>();
+            Health currentTargetHealth = currentTarget.GetComponent<Health>();
 
-            if (currentEnemyHealth == null) return false;
+            if (currentTargetHealth == null) return false;
 
-            if (currentEnemyHealth.IsAlive)
+            if (currentTargetHealth.IsAlive)
             {
                 return true;
             }
@@ -122,20 +121,34 @@ namespace RPG.Combat
             }
         }
 
+        void Attack(CombatTarget enemy)
+        {
+            PlayAttackAnimation();
+        }
+
         void PlayAttackAnimation()
         {
+            // Reset trigger so the animation isn't canceled immediately if 
+            // player has canceled the attacking previously
+            animator.ResetTrigger("stopAttack");
             // This will trigger Hit() event
             animator.SetTrigger("attack");
+        }
+
+        void StopAttackAnimation()
+        {
+            animator.ResetTrigger("attack");
+            animator.SetTrigger("stopAttack");
         }
 
         // Triggered by attacking animation event "Hit"
         void Hit()
         {
-            if (target == null) return;
+            if (currentTarget == null) return;
 
-            if (target.TryGetComponent<Health>(out Health targetHealth))
+            if (currentTarget.TryGetComponent<Health>(out Health currentTargetHealth))
             {
-                targetHealth.TakeDamage(attackDamage);
+                currentTargetHealth.TakeDamage(attackDamage);
                 PlayAttackParticleEffect();
             }
         }

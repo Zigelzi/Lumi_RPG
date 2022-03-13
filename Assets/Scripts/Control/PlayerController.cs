@@ -69,8 +69,13 @@ namespace RPG.Control
 
             if (rayHit.collider == null) { return false; }
 
-            bool isEnemy = rayHit.collider.TryGetComponent<CombatTarget>(out CombatTarget target);
-            if (isHoveringOverInteractable && isEnemy)
+            bool isEnemy = rayHit.collider.TryGetComponent<CombatTarget>(
+                out CombatTarget target
+                );
+            
+
+            if (isHoveringOverInteractable &&
+                isEnemy)
             {
                 if (rightButtonPressed)
                 {
