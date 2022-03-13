@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Core;
-using RPG.Control;
 using RPG.Movement;
 
 namespace RPG.Combat
@@ -16,7 +15,7 @@ namespace RPG.Combat
 
         ActionScheduler actionScheduler;
         Animator animator;
-        EnemyController currentEnemy;
+        CombatTarget currentEnemy;
         UnitMovement movement;
         Transform target;
 
@@ -39,7 +38,7 @@ namespace RPG.Combat
             }    
         }
 
-        public void StartAttackAction(EnemyController enemy)
+        public void StartAttackAction(CombatTarget enemy)
         {
             actionScheduler.StartAction(this);
             target = enemy.transform;
@@ -77,7 +76,7 @@ namespace RPG.Combat
             }
         }
 
-        void Attack(EnemyController enemy)
+        void Attack(CombatTarget enemy)
         {
             PlayAttackAnimation();
         }

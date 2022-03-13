@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Control
+namespace RPG.Combat
 {
-    public class EnemyController : MonoBehaviour
+    public class CombatTarget : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()
