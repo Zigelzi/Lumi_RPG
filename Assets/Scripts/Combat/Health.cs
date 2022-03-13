@@ -14,6 +14,8 @@ namespace RPG.Combat
         Animator animator;
         bool isAlive = true;
 
+        public bool IsAlive { get { return isAlive; } }
+
         public event Action OnUnitDeath;
 
         // Start is called before the first frame update
@@ -31,12 +33,9 @@ namespace RPG.Combat
 
         public void TakeDamage(int amount)
         {
-            if (currentHealth > 0)
-            {
-                currentHealth -= amount;
-            }
+            currentHealth = Mathf.Max(currentHealth - amount, 0);
 
-            if (currentHealth <= 0)
+            if (currentHealth == 0)
             {
                 Die();
             }

@@ -69,7 +69,9 @@ namespace RPG.Combat
 
         void TryAttackTarget()
         {
-            if (IsInAttackRange() && IsAbleToAttackAgain())
+            if (IsInAttackRange() && 
+                IsAbleToAttackAgain() &&
+                IsTargetAlive())
             {
                 Attack(currentEnemy);
                 timeSinceLastAttack = 0;
@@ -99,6 +101,22 @@ namespace RPG.Combat
                 return true;
             }
             else
+            {
+                return false;
+            }
+        }
+
+        bool IsTargetAlive()
+        {
+            Health currentEnemyHealth = currentEnemy.GetComponent<Health>();
+
+            if (currentEnemyHealth == null) return false;
+
+            if (currentEnemyHealth.IsAlive)
+            {
+                return true;
+            }
+            else 
             {
                 return false;
             }
