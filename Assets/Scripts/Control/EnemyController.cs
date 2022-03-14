@@ -53,6 +53,7 @@ namespace RPG.Control
         {
             enabled = false;
             actionScheduler.CancelCurrentAction();
+            movement.DisableNavAgent();
         }
 
         bool IsPlayerInChaseRange()

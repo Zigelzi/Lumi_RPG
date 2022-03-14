@@ -18,6 +18,7 @@ namespace RPG.Movement
             actionScheduler = GetComponent<ActionScheduler>();
             animator = GetComponent<Animator>();
             navAgent = GetComponent<NavMeshAgent>();
+
         }
 
         // Update is called once per frame
@@ -41,6 +42,11 @@ namespace RPG.Movement
         public void Cancel()
         {
             navAgent.isStopped = true;
+        }
+
+        public void DisableNavAgent()
+        {
+            navAgent.enabled = false;
         }
 
         void UpdateRunAnimation()

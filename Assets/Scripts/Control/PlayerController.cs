@@ -13,6 +13,7 @@ namespace RPG.Control
     {
         [SerializeField] LayerMask interactableLayers;
 
+        ActionScheduler actionScheduler;
         Attacking attacking;
         Camera mainCamera;
         Health health;
@@ -25,6 +26,7 @@ namespace RPG.Control
         // Start is called before the first frame update
         void Start()
         {
+            actionScheduler = GetComponent<ActionScheduler>();
             mainCamera = Camera.main;
             movement = GetComponent<UnitMovement>();
             attacking = GetComponent<Attacking>();
@@ -60,8 +62,8 @@ namespace RPG.Control
         void HandleDeath()
         {
             enabled = false;
-            attacking.Cancel();
-            movement.Cancel();
+            actionScheduler.CancelCurrentAction();
+            movement.DisableNavAgent();
         }
 
         void HandleMousePressedDown(InputAction.CallbackContext ctx)
