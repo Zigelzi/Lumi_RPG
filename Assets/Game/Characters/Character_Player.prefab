@@ -144,6 +144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2358616886315960968, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2898046297569839315, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: attackSpeed
       value: 3
