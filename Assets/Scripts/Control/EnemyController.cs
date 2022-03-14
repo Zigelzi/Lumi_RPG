@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Combat;
 using RPG.Movement;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -10,6 +11,7 @@ namespace RPG.Control
     {
         [SerializeField] [Range(0, 100f)] float chaseDistance = 5f;
 
+        ActionScheduler actionScheduler;
         Attacking attacking;
         GameObject player;
         Health health;
@@ -18,6 +20,7 @@ namespace RPG.Control
 
         void Start()
         {
+            actionScheduler = GetComponent<ActionScheduler>();
             attacking = GetComponent<Attacking>();
             movement = GetComponent<UnitMovement>();
             health = GetComponent<Health>();
@@ -49,8 +52,7 @@ namespace RPG.Control
         void HandleDeath()
         {
             enabled = false;
-            attacking.Cancel();
-            movement.Cancel();
+            actionScheduler.CancelCurrentAction();
         }
 
         bool IsPlayerInChaseRange()

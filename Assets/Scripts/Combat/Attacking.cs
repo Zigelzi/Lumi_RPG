@@ -18,7 +18,7 @@ namespace RPG.Combat
         GameObject currentTarget;
         UnitMovement movement;
 
-        float timeSinceLastAttack;
+        float timeSinceLastAttack = Mathf.Infinity;
 
         void Start()
         {

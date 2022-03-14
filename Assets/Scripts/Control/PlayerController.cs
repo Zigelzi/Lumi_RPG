@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using RPG.Movement;
+
+using RPG.Core;
 using RPG.Combat;
+using RPG.Movement;
 
 namespace RPG.Control
 {
