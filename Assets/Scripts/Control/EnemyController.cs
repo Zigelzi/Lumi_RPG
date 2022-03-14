@@ -16,6 +16,7 @@ namespace RPG.Control
         GameObject player;
         Health health;
         Vector3 spawnPosition;
+        Quaternion spawnDirection;
         UnitMovement movement;
 
         void Start()
@@ -29,6 +30,7 @@ namespace RPG.Control
 
             player = GameObject.FindGameObjectWithTag("Player");
             spawnPosition = transform.position;
+            spawnDirection = transform.rotation;
         }
 
         void OnDestroy()
@@ -44,8 +46,7 @@ namespace RPG.Control
             }
             else
             {
-                attacking.Cancel();
-                movement.MoveTo(spawnPosition);
+                ReturnToSpawnPosition();
             }
         }
 
@@ -70,6 +71,27 @@ namespace RPG.Control
         void Chase()
         {
             attacking.StartAttackAction(player);
+        }
+
+        void ReturnToSpawnPosition()
+        {
+            float distanceFromSpawnPosition = Vector3.Distance(transform.position, spawnPosition);
+
+            movement.StartMovementAction(spawnPosition);
+
+            if (distanceFromSpawnPosition <= 0.2f)
+            {
+                transform.rotation = spawnDirection;
+            }
+        }
+
+        /*
+         * Debugging methods 
+         */
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, chaseDistance);
         }
     }
 }
