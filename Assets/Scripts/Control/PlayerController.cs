@@ -11,19 +11,22 @@ namespace RPG.Control
     {
         [SerializeField] LayerMask interactableLayers;
 
-        PlayerInputActions playerInputActions;
-        InputAction movementInput;
-        Camera mainCamera;
-        UnitMovement movement;
         Attacking attacking;
+        Camera mainCamera;
+        Health health;
+        InputAction movementInput;
+        PlayerInputActions playerInputActions;
+        UnitMovement movement;
 
         bool rightButtonPressed = false;
+
         // Start is called before the first frame update
         void Start()
         {
             mainCamera = Camera.main;
             movement = GetComponent<UnitMovement>();
             attacking = GetComponent<Attacking>();
+            health = GetComponent<Health>();
 
             playerInputActions = new PlayerInputActions();
 
@@ -44,8 +47,11 @@ namespace RPG.Control
         // Update is called once per frame
         void Update()
         {
-            if (InteractWithCombat()) return;
-            if (InteractWithMovement()) return;
+            if (health.IsAlive)
+            {
+                if (InteractWithCombat()) return;
+                if (InteractWithMovement()) return;
+            }
         }
 
         void HandleMousePressedDown(InputAction.CallbackContext ctx)

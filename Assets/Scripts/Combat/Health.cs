@@ -48,7 +48,12 @@ namespace RPG.Combat
                 isAlive = false;
                 animator.SetTrigger("die");
                 OnUnitDeath?.Invoke();
-                Invoke("Despawn", despawnTime);
+
+                if (gameObject.tag != "Player")
+                {
+                    Invoke("Despawn", despawnTime);
+                }
+                
             } 
         }
 
