@@ -15,7 +15,7 @@ namespace RPG.Combat
 
         ActionScheduler actionScheduler;
         Animator animator;
-        CombatTarget currentTarget;
+        GameObject currentTarget;
         UnitMovement movement;
 
         float timeSinceLastAttack;
@@ -37,7 +37,7 @@ namespace RPG.Combat
             }    
         }
 
-        public void StartAttackAction(CombatTarget enemy)
+        public void StartAttackAction(GameObject enemy)
         {
             actionScheduler.StartAction(this);
             currentTarget = enemy;
@@ -121,7 +121,7 @@ namespace RPG.Combat
             }
         }
 
-        void Attack(CombatTarget enemy)
+        void Attack(GameObject enemy)
         {
             PlayAttackAnimation();
         }

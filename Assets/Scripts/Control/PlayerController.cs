@@ -79,7 +79,7 @@ namespace RPG.Control
             {
                 if (rightButtonPressed)
                 {
-                    attacking.StartAttackAction(target);
+                    attacking.StartAttackAction(target.gameObject);
                 }
                 return true;
             }

@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  despawnTime: 10
 --- !u!95 &427676080936540758
 Animator:
   serializedVersion: 3
