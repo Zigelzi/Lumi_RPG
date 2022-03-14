@@ -105,7 +105,7 @@ namespace RPG.Combat
             }
         }
 
-        bool IsTargetAlive()
+        public bool IsTargetAlive()
         {
             Health currentTargetHealth = currentTarget.GetComponent<Health>();
 

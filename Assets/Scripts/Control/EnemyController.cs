@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Combat;
+using RPG.Movement;
 
 namespace RPG.Control
 {
@@ -11,11 +12,25 @@ namespace RPG.Control
 
         Attacking attacking;
         GameObject player;
+        Health health;
+        Vector3 spawnPosition;
+        UnitMovement movement;
 
         void Start()
         {
             attacking = GetComponent<Attacking>();
+            movement = GetComponent<UnitMovement>();
+            health = GetComponent<Health>();
+
+            health.OnUnitDeath += HandleDeath;
+
             player = GameObject.FindGameObjectWithTag("Player");
+            spawnPosition = transform.position;
+        }
+
+        void OnDestroy()
+        {
+            health.OnUnitDeath -= HandleDeath;
         }
 
         void Update()
@@ -24,13 +39,29 @@ namespace RPG.Control
             {
                 Chase();
             }
+            else
+            {
+                attacking.Cancel();
+                movement.MoveTo(spawnPosition);
+            }
+        }
+
+        void HandleDeath()
+        {
+            enabled = false;
+            attacking.Cancel();
+            movement.Cancel();
         }
 
         bool IsPlayerInChaseRange()
         {
             if (player == null) return false;
 
-            return Vector3.Distance(transform.position, player.transform.position) <= chaseDistance;
+            float distanceToPlayer = Vector3.Distance(
+                transform.position,
+                player.transform.position
+                );
+            return distanceToPlayer <= chaseDistance;
         }
 
         void Chase()

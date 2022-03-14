@@ -154,6 +154,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Enemy_Knight
       objectReference: {fileID: 0}
+    - target: {fileID: 2898046297569839315, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: attackDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8507673119592447681, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: m_Speed
+      value: 3.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
 --- !u!1 &8455874577599676405 stripped

@@ -28,6 +28,8 @@ namespace RPG.Control
             attacking = GetComponent<Attacking>();
             health = GetComponent<Health>();
 
+            health.OnUnitDeath += HandleDeath;
+
             playerInputActions = new PlayerInputActions();
 
             movementInput = playerInputActions.Player.Movement;
@@ -39,6 +41,8 @@ namespace RPG.Control
 
         private void OnDestroy()
         {
+            health.OnUnitDeath -= HandleDeath;
+
             movementInput.Disable();
             movementInput.performed -= HandleMousePressedDown;
             movementInput.canceled -= HandleMouseReleased;
@@ -47,11 +51,15 @@ namespace RPG.Control
         // Update is called once per frame
         void Update()
         {
-            if (health.IsAlive)
-            {
-                if (InteractWithCombat()) return;
-                if (InteractWithMovement()) return;
-            }
+            if (InteractWithCombat()) return;
+            if (InteractWithMovement()) return;
+        }
+
+        void HandleDeath()
+        {
+            enabled = false;
+            attacking.Cancel();
+            movement.Cancel();
         }
 
         void HandleMousePressedDown(InputAction.CallbackContext ctx)
