@@ -4,6 +4,7 @@ using UnityEngine;
 using RPG.Combat;
 using RPG.Movement;
 using RPG.Core;
+using System;
 
 namespace RPG.Control
 {
@@ -11,15 +12,18 @@ namespace RPG.Control
     {
         [SerializeField] [Range(0, 100f)] float chaseDistance = 5f;
         [SerializeField] [Range(0, 20f)] float suspiciousDuration = 3f;
+        [SerializeField] float waypointTolerance = 0.3f;
+        [SerializeField] PatrolPath patrolPath;
 
         ActionScheduler actionScheduler;
         Attacking attacking;
         GameObject player;
         Health health;
-        Vector3 spawnPosition;
-        Quaternion spawnDirection;
+        Vector3 guardPosition;
+        Quaternion guardDirection;
         UnitMovement movement;
 
+        [SerializeField]int currentWaypointIndex = 0;
         
         float timeLastSawPlayer = Mathf.Infinity;
 
@@ -33,8 +37,8 @@ namespace RPG.Control
             health.OnUnitDeath += HandleDeath;
 
             player = GameObject.FindGameObjectWithTag("Player");
-            spawnPosition = transform.position;
-            spawnDirection = transform.rotation;
+            guardPosition = transform.position;
+            guardDirection = transform.rotation;
         }
 
         void OnDestroy()
@@ -95,14 +99,42 @@ namespace RPG.Control
 
         void GuardBehaviour()
         {
-            float distanceFromSpawnPosition = Vector3.Distance(transform.position, spawnPosition);
+            Vector3 nextPosition = guardPosition;
 
-            movement.StartMovementAction(spawnPosition);
-
-            if (distanceFromSpawnPosition <= 0.2f)
+            if (patrolPath != null)
             {
-                transform.rotation = spawnDirection;
+                if (AtWaypoint())
+                {
+                    SetNextWaypoint();
+                }
+                nextPosition = GetCurrentWaypointPosition();
             }
+
+            movement.StartMovementAction(nextPosition);
+
+            //if (distanceFromGuardPosition <= waypointTolerance)
+            //{
+            //    transform.rotation = guardDirection;
+            //}
+        }
+
+        private bool AtWaypoint()
+        {
+            float distanceFromWaypoint = Vector3.Distance(
+                transform.position,
+                GetCurrentWaypointPosition()
+                );
+            return distanceFromWaypoint < waypointTolerance;
+        }
+
+        void SetNextWaypoint()
+        {
+            currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
+        }
+
+        Vector3 GetCurrentWaypointPosition()
+        {
+            return patrolPath.GetWaypointPosition(currentWaypointIndex);
         }
 
         /*
