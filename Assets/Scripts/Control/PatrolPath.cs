@@ -17,20 +17,27 @@ namespace RPG.Control
         {
             for (int waypointIndex = 0; waypointIndex < transform.childCount; waypointIndex++)
             {
-                Transform currentWaypoint = transform.GetChild(waypointIndex);
-                DrawWaypointSphere(currentWaypoint.position);
+                Vector3 currentWaypointPosition = GetWaypointPosition(waypointIndex);
+                int nextWaypointIndex = GetNextIndex(waypointIndex);
+                Vector3 nextWaypoint = GetWaypointPosition(nextWaypointIndex);
 
-                if (waypointIndex < transform.childCount - 1)
-                {
-                    Transform nextWaypoint = transform.GetChild(waypointIndex + 1);
-                    DrawWaypointLine(currentWaypoint.position, nextWaypoint.position);
-                }
-                if (waypointIndex == transform.childCount - 1)
-                {
-                    Transform firstWaypoint = transform.GetChild(0);
-                    DrawWaypointLine(currentWaypoint.position, firstWaypoint.position);
-                }
+                DrawWaypointSphere(currentWaypointPosition);
+                DrawWaypointLine(currentWaypointPosition, nextWaypoint);
             }
+        }
+
+        Vector3 GetWaypointPosition(int waypointIndex)
+        {
+            return transform.GetChild(waypointIndex).position;
+        }
+
+        int GetNextIndex(int waypointIndex)
+        {
+            if (waypointIndex + 1 == transform.childCount)
+            {
+                return 0;
+            }
+            return waypointIndex + 1;
         }
 
         void DrawWaypointSphere(Vector3 waypointPosition)
