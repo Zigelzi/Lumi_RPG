@@ -10,6 +10,7 @@ namespace RPG.Control
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] [Range(0, 100f)] float chaseDistance = 5f;
+        [SerializeField] [Range(0, 20f)] float suspiciousDuration = 3f;
 
         ActionScheduler actionScheduler;
         Attacking attacking;
@@ -18,6 +19,9 @@ namespace RPG.Control
         Vector3 spawnPosition;
         Quaternion spawnDirection;
         UnitMovement movement;
+
+        
+        float timeLastSawPlayer = Mathf.Infinity;
 
         void Start()
         {
@@ -40,14 +44,20 @@ namespace RPG.Control
 
         void Update()
         {
-            if (IsPlayerInChaseRange())
+            if (IsPlayerInAggroRange())
             {
-                Chase();
+                timeLastSawPlayer = 0;
+                AttackBehaviour();
+            }
+            else if (IsStillSuspicious()) {
+                SuspiciousBehaviour();
             }
             else
             {
-                ReturnToSpawnPosition();
+                GuardBehaviour();
             }
+
+            timeLastSawPlayer += Time.deltaTime;
         }
 
         void HandleDeath()
@@ -57,7 +67,7 @@ namespace RPG.Control
             movement.DisableNavAgent();
         }
 
-        bool IsPlayerInChaseRange()
+        bool IsPlayerInAggroRange()
         {
             if (player == null) return false;
 
@@ -68,12 +78,22 @@ namespace RPG.Control
             return distanceToPlayer <= chaseDistance;
         }
 
-        void Chase()
+        bool IsStillSuspicious()
+        {
+            return timeLastSawPlayer <= suspiciousDuration;
+        }
+
+        void AttackBehaviour()
         {
             attacking.StartAttackAction(player);
         }
 
-        void ReturnToSpawnPosition()
+        void SuspiciousBehaviour()
+        {
+            actionScheduler.CancelCurrentAction();
+        }
+
+        void GuardBehaviour()
         {
             float distanceFromSpawnPosition = Vector3.Distance(transform.position, spawnPosition);
 
