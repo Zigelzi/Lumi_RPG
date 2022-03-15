@@ -12,6 +12,7 @@ namespace RPG.Control
     {
         [SerializeField] [Range(0, 100f)] float chaseDistance = 5f;
         [SerializeField] [Range(0, 20f)] float suspiciousDuration = 3f;
+        [SerializeField] [Range(0, 10f)] float patrolStopDuration = 1f;
         [SerializeField] float waypointTolerance = 0.3f;
         [SerializeField] PatrolPath patrolPath;
 
@@ -23,9 +24,10 @@ namespace RPG.Control
         Quaternion guardDirection;
         UnitMovement movement;
 
-        [SerializeField]int currentWaypointIndex = 0;
+        int currentWaypointIndex = 0;
         
         float timeLastSawPlayer = Mathf.Infinity;
+        float timeAtWaypoint = Mathf.Infinity;
 
         void Start()
         {
@@ -61,7 +63,7 @@ namespace RPG.Control
                 GuardBehaviour();
             }
 
-            timeLastSawPlayer += Time.deltaTime;
+            UpdateTimers();
         }
 
         void HandleDeath()
@@ -105,12 +107,18 @@ namespace RPG.Control
             {
                 if (AtWaypoint())
                 {
+                    timeAtWaypoint = 0;
                     SetNextWaypoint();
                 }
                 nextPosition = GetCurrentWaypointPosition();
             }
 
-            movement.StartMovementAction(nextPosition);
+            if (!IsWaitingAtWaypoint())
+            {
+                movement.StartMovementAction(nextPosition);
+                
+            }
+            
 
             //if (distanceFromGuardPosition <= waypointTolerance)
             //{
@@ -135,6 +143,17 @@ namespace RPG.Control
         Vector3 GetCurrentWaypointPosition()
         {
             return patrolPath.GetWaypointPosition(currentWaypointIndex);
+        }
+
+        bool IsWaitingAtWaypoint()
+        {
+            return timeAtWaypoint < patrolStopDuration;
+        }
+
+        void UpdateTimers()
+        {
+            timeLastSawPlayer += Time.deltaTime;
+            timeAtWaypoint += Time.deltaTime;
         }
 
         /*
