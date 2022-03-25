@@ -15,6 +15,7 @@ MonoBehaviour:
   chaseDistance: 5
   suspiciousDuration: 3
   patrolStopDuration: 1
+  patrolSpeedMultiplier: 0.5
   waypointTolerance: 0.3
   patrolPath: {fileID: 0}
 --- !u!114 &1028511446174766933
@@ -102,6 +103,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1061843811, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: maxSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5180658012786564, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -169,10 +174,6 @@ PrefabInstance:
     - target: {fileID: 8410750484971037660, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: m_Radius
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8507673119592447681, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
-      propertyPath: m_Speed
-      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}

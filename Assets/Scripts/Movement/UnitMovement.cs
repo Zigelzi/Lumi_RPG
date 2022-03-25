@@ -8,6 +8,7 @@ namespace RPG.Movement
 {
     public class UnitMovement : MonoBehaviour, IAction
     {
+        [SerializeField] float maxSpeed = 3f;
         ActionScheduler actionScheduler;
         Animator animator;
         NavMeshAgent navAgent;
@@ -33,8 +34,24 @@ namespace RPG.Movement
             MoveTo(destination);
         }
 
+        public void StartMovementAction(Vector3 destination, float speedMultiplier)
+        {
+            actionScheduler.StartAction(this);
+            MoveTo(destination, speedMultiplier);
+        }
         public void MoveTo(Vector3 destination)
         {
+            navAgent.speed = maxSpeed;
+            navAgent.SetDestination(destination);
+            navAgent.isStopped = false;
+        }
+
+        public void MoveTo(Vector3 destination, float speedMultiplier)
+        {
+            // Safeguard to keep the multiplier between 0 and 1
+            speedMultiplier = Mathf.Clamp01(speedMultiplier);
+
+            navAgent.speed = maxSpeed * speedMultiplier;
             navAgent.SetDestination(destination);
             navAgent.isStopped = false;
         }

@@ -13,6 +13,7 @@ namespace RPG.Control
         [SerializeField] [Range(0, 100f)] float chaseDistance = 5f;
         [SerializeField] [Range(0, 20f)] float suspiciousDuration = 3f;
         [SerializeField] [Range(0, 10f)] float patrolStopDuration = 1f;
+        [SerializeField] [Range(0, 1f)] float patrolSpeedMultiplier = 0.5f;
         [SerializeField] float waypointTolerance = 0.3f;
         [SerializeField] PatrolPath patrolPath;
 
@@ -115,7 +116,7 @@ namespace RPG.Control
 
             if (!IsWaitingAtWaypoint())
             {
-                movement.StartMovementAction(nextPosition);
+                movement.StartMovementAction(nextPosition, patrolSpeedMultiplier);
                 
             }
             
