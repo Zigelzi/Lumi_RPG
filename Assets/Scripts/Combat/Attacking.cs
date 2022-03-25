@@ -10,7 +10,7 @@ namespace RPG.Combat
     {
         [SerializeField] float attackRange = 2f;
         [SerializeField][Range(0, 3f)] float attackSpeed = 1f;
-        [SerializeField] int attackDamage = 20;
+        [SerializeField] float attackDamage = 20f;
         [SerializeField] ParticleSystem attackParticles;
 
         ActionScheduler actionScheduler;

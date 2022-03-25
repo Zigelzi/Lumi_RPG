@@ -7,8 +7,8 @@ namespace RPG.Core
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] int maxHealth = 100;
-        [SerializeField] int currentHealth;
+        [SerializeField] float maxHealth = 100f;
+        [SerializeField] float currentHealth;
         [SerializeField] [Range(0, 30f)] float despawnTime = 10f; 
 
         Animator animator;
@@ -31,7 +31,7 @@ namespace RPG.Core
 
         }
 
-        public void TakeDamage(int amount)
+        public void TakeDamage(float amount)
         {
             currentHealth = Mathf.Max(currentHealth - amount, 0);
 
