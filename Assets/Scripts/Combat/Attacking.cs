@@ -47,6 +47,7 @@ namespace RPG.Combat
             currentTarget = null;
 
             StopAttackAnimation();
+            movement.Cancel();
         }
 
         void UpdateLastAttackTime()

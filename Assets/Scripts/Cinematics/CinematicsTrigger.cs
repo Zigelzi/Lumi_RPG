@@ -11,15 +11,14 @@ namespace RPG.Cinematics
 
         void OnTriggerEnter(Collider other)
         {
-            PlayableDirector director = GetComponent<PlayableDirector>();
-
             if (other.gameObject.tag == "Player" && isUnplayed)
             {
+                PlayableDirector director = GetComponent<PlayableDirector>();
                 isUnplayed = false;
                 director.Play();
             }
-            
         }
+
     }
 }
 
