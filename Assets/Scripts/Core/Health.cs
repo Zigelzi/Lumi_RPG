@@ -25,12 +25,6 @@ namespace RPG.Core
             currentHealth = maxHealth;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void TakeDamage(float amount)
         {
             currentHealth = Mathf.Max(currentHealth - amount, 0);
@@ -38,6 +32,15 @@ namespace RPG.Core
             if (currentHealth == 0)
             {
                 Die();
+            }
+        }
+
+        public void AddHealth(float amount)
+        {
+            if (currentHealth < maxHealth)
+            {
+                float healAmount = Mathf.Min(maxHealth - currentHealth, amount);
+                currentHealth += healAmount;
             }
         }
 
