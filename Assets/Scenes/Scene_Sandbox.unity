@@ -521,6 +521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9019070653613845435, guid: 36e8061970824d9498745a0a4c9f09d3, type: 3}
+      propertyPath: spellParticles
+      value: 
+      objectReference: {fileID: 2822917930449453751, guid: 90206772f7a9d8c479c8392c06bd1afb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36e8061970824d9498745a0a4c9f09d3, type: 3}
 --- !u!1 &408808957

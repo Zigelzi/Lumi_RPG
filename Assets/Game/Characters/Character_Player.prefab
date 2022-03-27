@@ -15,6 +15,7 @@ MonoBehaviour:
   interactableLayers:
     serializedVersion: 2
     m_Bits: 1792
+  spellCastingPoint: {fileID: 6600454130212123151}
 --- !u!114 &9019070653613845435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,6 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healAmount: 50
   cooldownTime: 2
+  spellParticles: {fileID: 2822917930449453753, guid: 90206772f7a9d8c479c8392c06bd1afb, type: 3}
 --- !u!1001 &2877326096519122261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +152,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 40242568789526872, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.952
+      objectReference: {fileID: 0}
     - target: {fileID: 427676080936540758, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: m_Avatar
       value: 
@@ -184,5 +190,10 @@ GameObject:
 --- !u!4 &5731440032713782177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1485436083194464502, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+  m_PrefabInstance: {fileID: 6563853970178128727}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6600454130212123151 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 40242568789526872, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
   m_PrefabInstance: {fileID: 6563853970178128727}
   m_PrefabAsset: {fileID: 0}

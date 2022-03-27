@@ -35,13 +35,16 @@ namespace RPG.Core
             }
         }
 
-        public void AddHealth(float amount)
+        public bool AddHealth(float amount)
         {
             if (currentHealth < maxHealth)
             {
                 float healAmount = Mathf.Min(maxHealth - currentHealth, amount);
                 currentHealth += healAmount;
+                return true;
             }
+
+            return false;
         }
 
         void Die()

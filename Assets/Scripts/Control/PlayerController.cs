@@ -12,6 +12,7 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] LayerMask interactableLayers;
+        [SerializeField] Transform spellCastingPoint;
 
         ActionScheduler actionScheduler;
         Attacking attacking;
@@ -19,9 +20,12 @@ namespace RPG.Control
         Health health;
         InputAction movementInput;
         PlayerInputActions playerInputActions;
+        
         UnitMovement movement;
 
         bool rightButtonPressed = false;
+
+        public Transform SpellCastingPoint { get { return spellCastingPoint; } }
 
         // Start is called before the first frame update
         void Start()
