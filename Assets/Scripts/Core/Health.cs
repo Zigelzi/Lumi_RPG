@@ -7,16 +7,19 @@ namespace RPG.Core
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] float maxHealth = 100f;
         [SerializeField] float currentHealth;
+        [SerializeField] float maxHealth = 100f;
         [SerializeField] [Range(0, 30f)] float despawnTime = 10f; 
 
         Animator animator;
         bool isAlive = true;
 
+        public float CurrentHealth { get { return currentHealth; } }
+        public float MaxHealth { get { return maxHealth; } }
         public bool IsAlive { get { return isAlive; } }
 
         public event Action OnUnitDeath;
+        public event Action<float> OnHealthChange;
 
         // Start is called before the first frame update
         void Start()
@@ -28,6 +31,7 @@ namespace RPG.Core
         public void TakeDamage(float amount)
         {
             currentHealth = Mathf.Max(currentHealth - amount, 0);
+            OnHealthChange?.Invoke(currentHealth);
 
             if (currentHealth == 0)
             {
@@ -41,6 +45,8 @@ namespace RPG.Core
             {
                 float healAmount = Mathf.Min(maxHealth - currentHealth, amount);
                 currentHealth += healAmount;
+                OnHealthChange?.Invoke(currentHealth);
+
                 return true;
             }
 
