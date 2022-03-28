@@ -10,14 +10,14 @@ namespace RPG.Cinematics
     public class CinematicsControlToggler : MonoBehaviour
     {
         ActionScheduler actionScheduler;
-        PlayerController player;
+        PlayerController playerController;
         PlayableDirector director;
 
         // Start is called before the first frame update
         void Start()
         {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-            actionScheduler = player.GetComponent<ActionScheduler>();
+            playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            actionScheduler = playerController.GetComponent<ActionScheduler>();
 
             director = GetComponent<PlayableDirector>();
 
@@ -34,12 +34,12 @@ namespace RPG.Cinematics
         void DisablePlayerControl(PlayableDirector pd)
         {
             actionScheduler.CancelCurrentAction();
-            player.enabled = false;
+            playerController.enabled = false;
         }
 
         void EnablePlayerControl(PlayableDirector pd)
         {
-            player.enabled = true;
+            playerController.enabled = true;
         }
     }
 }

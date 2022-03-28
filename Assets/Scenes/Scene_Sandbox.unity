@@ -858,6 +858,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 478948553}
     - target: {fileID: 2987779470280632789, guid: 8637d3dc08b23604e8d492ca9375b01e, type: 3}
+      propertyPath: aggroRadius
+      value: 11.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2987779470280632789, guid: 8637d3dc08b23604e8d492ca9375b01e, type: 3}
       propertyPath: patrolStopDuration
       value: 3
       objectReference: {fileID: 0}

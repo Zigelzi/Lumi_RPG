@@ -4,13 +4,12 @@ using UnityEngine;
 using RPG.Combat;
 using RPG.Movement;
 using RPG.Core;
-using System;
 
 namespace RPG.Control
 {
     public class EnemyController : MonoBehaviour
     {
-        [SerializeField] [Range(0, 100f)] float chaseDistance = 5f;
+        [SerializeField] [Range(0, 100f)] float aggroRadius = 5f;
         [SerializeField] [Range(0, 20f)] float suspiciousDuration = 3f;
         [SerializeField] [Range(0, 10f)] float patrolStopDuration = 1f;
         [SerializeField] [Range(0, 1f)] float patrolSpeedMultiplier = 0.5f;
@@ -22,7 +21,6 @@ namespace RPG.Control
         GameObject player;
         Health health;
         Vector3 guardPosition;
-        Quaternion guardDirection;
         UnitMovement movement;
 
         int currentWaypointIndex = 0;
@@ -41,7 +39,6 @@ namespace RPG.Control
 
             player = GameObject.FindGameObjectWithTag("Player");
             guardPosition = transform.position;
-            guardDirection = transform.rotation;
         }
 
         void OnDestroy()
@@ -82,7 +79,7 @@ namespace RPG.Control
                 transform.position,
                 player.transform.position
                 );
-            return distanceToPlayer <= chaseDistance;
+            return distanceToPlayer <= aggroRadius;
         }
 
         bool IsStillSuspicious()
@@ -119,12 +116,7 @@ namespace RPG.Control
                 movement.StartMovementAction(nextPosition, patrolSpeedMultiplier);
                 
             }
-            
 
-            //if (distanceFromGuardPosition <= waypointTolerance)
-            //{
-            //    transform.rotation = guardDirection;
-            //}
         }
 
         private bool AtWaypoint()
@@ -163,7 +155,7 @@ namespace RPG.Control
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, chaseDistance);
+            Gizmos.DrawWireSphere(transform.position, aggroRadius);
         }
     }
 }
