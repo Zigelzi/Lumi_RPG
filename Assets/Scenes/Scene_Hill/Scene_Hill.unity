@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2380250600911515923, guid: 0cd0a0182937f6f449bd7fa20a81b890, type: 3}
       propertyPath: m_Name
-      value: Portal
+      value: Portal_A
       objectReference: {fileID: 0}
     - target: {fileID: 2380250600911515924, guid: 0cd0a0182937f6f449bd7fa20a81b890, type: 3}
       propertyPath: m_RootOrder
@@ -184,6 +184,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2380250600911515924, guid: 0cd0a0182937f6f449bd7fa20a81b890, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6372229739036568825, guid: 0cd0a0182937f6f449bd7fa20a81b890, type: 3}
+      propertyPath: identifier
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

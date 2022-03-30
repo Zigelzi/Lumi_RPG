@@ -6,14 +6,24 @@ using UnityEngine.SceneManagement;
 
 namespace RPG.SceneManagement
 {
-    
+    [ExecuteAlways]
     public class Portal : MonoBehaviour
     {
         [SerializeField] [Range(0, 10)] int destinationSceneIndex = 0;
         [SerializeField] Transform spawnPoint;
-        void Awake()
+        [SerializeField] PortalIdentifier identifier;
+        enum PortalIdentifier
         {
-              
+            A, B
+        }
+
+        void Update()
+        {
+            if (!Application.IsPlaying(this))
+            {
+                gameObject.name = $"Portal_{identifier}";
+            }
+                     
         }
 
         private void OnTriggerEnter(Collider other)
@@ -29,24 +39,23 @@ namespace RPG.SceneManagement
             DontDestroyOnLoad(gameObject);
             yield return SceneManager.LoadSceneAsync(destinationSceneIndex);
 
-            Portal otherPortal = GetOtherPortal();
+            Portal otherPortal = GetOtherPortal(identifier);
             UpdatePlayerLocation(otherPortal);
 
             Destroy(gameObject);
         }
 
-        Portal GetOtherPortal()
+        Portal GetOtherPortal(PortalIdentifier destinationPortalIdentifier)
         {
             Portal[] portals = FindObjectsOfType<Portal>();
 
             foreach (Portal portal in portals)
             {
-                if (portal == this)
+                
+                if (portal != this && portal.identifier == destinationPortalIdentifier)
                 {
-                    continue;
+                    return portal;
                 }
-
-                return portal;
             }
 
             return null;
@@ -54,6 +63,11 @@ namespace RPG.SceneManagement
 
         void UpdatePlayerLocation(Portal otherPortal)
         {
+            if (otherPortal == null)
+            {
+                Debug.LogError("No other portal was found");
+            }
+
             GameObject player = GameObject.FindGameObjectWithTag("Player");
 
             player.GetComponent<NavMeshAgent> ().Warp(otherPortal.spawnPoint.position);
