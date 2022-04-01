@@ -19,9 +19,9 @@ namespace RPG.SceneManagement
 
         void Update()
         {
-            if (!Application.IsPlaying(this))
+            if (!Application.isPlaying)
             {
-                gameObject.name = $"Portal_{identifier}";
+                //gameObject.name = $"Portal_{identifier}";
             }
                      
         }
