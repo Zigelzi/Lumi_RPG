@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+
 namespace RPG.SceneManagement
 {
-    [ExecuteAlways]
     public class Portal : MonoBehaviour
     {
         [SerializeField] [Range(0, 10)] int destinationSceneIndex = 0;
         [SerializeField] Transform spawnPoint;
         [SerializeField] PortalIdentifier identifier;
+        [SerializeField][Range(0,5f)] float sceneFadeDuration = 1f;
+
         enum PortalIdentifier
         {
             A, B
@@ -36,11 +38,18 @@ namespace RPG.SceneManagement
 
         IEnumerator TransitionToScene()
         {
-            DontDestroyOnLoad(gameObject);
-            yield return SceneManager.LoadSceneAsync(destinationSceneIndex);
+            CanvasFader canvasFader = FindObjectOfType<CanvasFader>();
 
+            DontDestroyOnLoad(gameObject);
+            yield return canvasFader.FadeOut(sceneFadeDuration);
+
+            yield return SceneManager.LoadSceneAsync(destinationSceneIndex);
             Portal otherPortal = GetOtherPortal(identifier);
             UpdatePlayerLocation(otherPortal);
+
+            yield return new WaitForSeconds(1f);
+            yield return canvasFader.FadeIn(sceneFadeDuration);
+            
 
             Destroy(gameObject);
         }

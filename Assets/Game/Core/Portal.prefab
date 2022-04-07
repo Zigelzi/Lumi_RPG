@@ -79,6 +79,7 @@ MonoBehaviour:
   destinationSceneIndex: 0
   spawnPoint: {fileID: 622368441197844815}
   identifier: 0
+  sceneFadeDuration: 0.7
 --- !u!1 &5146030813197940863
 GameObject:
   m_ObjectHideFlags: 0
