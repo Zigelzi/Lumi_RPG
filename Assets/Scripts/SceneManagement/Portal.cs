@@ -12,7 +12,9 @@ namespace RPG.SceneManagement
         [SerializeField] [Range(0, 10)] int destinationSceneIndex = 0;
         [SerializeField] Transform spawnPoint;
         [SerializeField] PortalIdentifier identifier;
-        [SerializeField][Range(0,5f)] float sceneFadeDuration = 1f;
+        [SerializeField][Range(0,5f)] float sceneFadeOutDuration = 1f;
+        [SerializeField] [Range(0, 5f)] float sceneFadeWaitDuration = .5f;
+        [SerializeField] [Range(0, 5f)] float sceneFadeInDuration = .5f;
 
         enum PortalIdentifier
         {
@@ -41,14 +43,14 @@ namespace RPG.SceneManagement
             CanvasFader canvasFader = FindObjectOfType<CanvasFader>();
 
             DontDestroyOnLoad(gameObject);
-            yield return canvasFader.FadeOut(sceneFadeDuration);
+            yield return canvasFader.FadeOut(sceneFadeOutDuration);
 
             yield return SceneManager.LoadSceneAsync(destinationSceneIndex);
             Portal otherPortal = GetOtherPortal(identifier);
             UpdatePlayerLocation(otherPortal);
 
-            yield return new WaitForSeconds(1f);
-            yield return canvasFader.FadeIn(sceneFadeDuration);
+            yield return new WaitForSeconds(sceneFadeWaitDuration);
+            yield return canvasFader.FadeIn(sceneFadeInDuration);
             
 
             Destroy(gameObject);
