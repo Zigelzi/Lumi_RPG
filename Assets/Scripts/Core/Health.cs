@@ -23,7 +23,7 @@ namespace RPG.Core
         public event Action<float> OnHealthChange;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             animator = GetComponent<Animator>();
             currentHealth = maxHealth;
@@ -96,6 +96,7 @@ namespace RPG.Core
             float restoredHealth = (float)state;
 
             currentHealth = restoredHealth;
+
             OnHealthChange?.Invoke(currentHealth);
         }
     }

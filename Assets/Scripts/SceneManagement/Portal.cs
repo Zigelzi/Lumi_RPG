@@ -41,17 +41,22 @@ namespace RPG.SceneManagement
         IEnumerator TransitionToScene()
         {
             CanvasFader canvasFader = FindObjectOfType<CanvasFader>();
+            SavingWrapper saving = FindObjectOfType<SavingWrapper>();
 
             DontDestroyOnLoad(gameObject);
             yield return canvasFader.FadeOut(sceneFadeOutDuration);
 
+            saving.Save();
+
             yield return SceneManager.LoadSceneAsync(destinationSceneIndex);
+
+            saving.Load();
+
             Portal otherPortal = GetOtherPortal(identifier);
             UpdatePlayerLocation(otherPortal);
 
             yield return new WaitForSeconds(sceneFadeWaitDuration);
             yield return canvasFader.FadeIn(sceneFadeInDuration);
-            
 
             Destroy(gameObject);
         }

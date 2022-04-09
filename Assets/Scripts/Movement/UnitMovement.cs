@@ -15,7 +15,7 @@ namespace RPG.Movement
         NavMeshAgent navAgent;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             actionScheduler = GetComponent<ActionScheduler>();
             animator = GetComponent<Animator>();
@@ -88,6 +88,7 @@ namespace RPG.Movement
             SerializableVector3 restoredPosition = (SerializableVector3)state;
 
             navAgent.Warp(restoredPosition.ToVector());
+            
         }
     }
 }

@@ -41,9 +41,19 @@ namespace RPG.SceneManagement
             loadingInput.performed -= Load;
         }
 
+        public void Save()
+        {
+            savingSystem.Save(defaultSaveFile);
+        }
+
         void Save(InputAction.CallbackContext ctx)
         {
             savingSystem.Save(defaultSaveFile);
+        }
+
+        public void Load()
+        {
+            savingSystem.Load(defaultSaveFile);
         }
 
         void Load(InputAction.CallbackContext ctx)
