@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using RPG.Saving;
 
 namespace RPG.Core
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float currentHealth;
         [SerializeField] float maxHealth = 100f;
@@ -26,6 +27,13 @@ namespace RPG.Core
         {
             animator = GetComponent<Animator>();
             currentHealth = maxHealth;
+
+            OnHealthChange += HandleHeathUpdate;
+        }
+
+        void OnDestroy()
+        {
+            OnHealthChange -= HandleHeathUpdate;
         }
 
         public void TakeDamage(float amount)
@@ -33,10 +41,6 @@ namespace RPG.Core
             currentHealth = Mathf.Max(currentHealth - amount, 0);
             OnHealthChange?.Invoke(currentHealth);
 
-            if (currentHealth == 0)
-            {
-                Die();
-            }
         }
 
         public bool AddHealth(float amount)
@@ -51,6 +55,14 @@ namespace RPG.Core
             }
 
             return false;
+        }
+
+        void HandleHeathUpdate(float newHealth)
+        {
+            if (newHealth == 0)
+            {
+                Die();
+            }
         }
 
         void Die()
@@ -72,6 +84,19 @@ namespace RPG.Core
         void Despawn()
         {
             Destroy(gameObject);
+        }
+
+        public object CaptureState()
+        {
+            return currentHealth;
+        }
+
+        public void RestoreState(object state)
+        {
+            float restoredHealth = (float)state;
+
+            currentHealth = restoredHealth;
+            OnHealthChange?.Invoke(currentHealth);
         }
     }
 }

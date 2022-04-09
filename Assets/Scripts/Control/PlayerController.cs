@@ -25,6 +25,7 @@ namespace RPG.Control
 
         bool rightButtonPressed = false;
 
+        public PlayerInputActions PlayerInputActions { get { return playerInputActions; } }
         public Transform SpellCastingPoint { get { return spellCastingPoint; } }
 
         // Start is called before the first frame update

@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 427676080936540758}
   - component: {fileID: 8410750484971037660}
   - component: {fileID: 8507673119592447681}
+  - component: {fileID: -1614425023234381436}
   m_Layer: 9
   m_Name: Character_Root
   m_TagString: Character
@@ -123,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6efc8284c68494d8d3fc73ddcd26d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   currentHealth: 0
+  maxHealth: 100
   despawnTime: 10
 --- !u!95 &427676080936540758
 Animator:
@@ -181,6 +182,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-1614425023234381436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358616886315960968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
 --- !u!1 &8661483401128137841
 GameObject:
   m_ObjectHideFlags: 0

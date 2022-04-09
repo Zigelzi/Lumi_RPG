@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Core;
+using RPG.Saving;
 
 namespace RPG.Movement
 {
-    public class UnitMovement : MonoBehaviour, IAction
+    public class UnitMovement : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float maxSpeed = 3f;
         ActionScheduler actionScheduler;
@@ -75,6 +76,18 @@ namespace RPG.Movement
             // String reference defined in the character animator
             animator.SetFloat("forwardSpeed", forwardSpeed);
 
+        }
+
+        public object CaptureState()
+        {
+            return new SerializableVector3(transform.position);
+        }
+
+        public void RestoreState(object state)
+        {
+            SerializableVector3 restoredPosition = (SerializableVector3)state;
+
+            navAgent.Warp(restoredPosition.ToVector());
         }
     }
 }
