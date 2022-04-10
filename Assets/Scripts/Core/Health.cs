@@ -26,9 +26,10 @@ namespace RPG.Core
         void Awake()
         {
             animator = GetComponent<Animator>();
+            OnHealthChange += HandleHeathUpdate;
+
             currentHealth = maxHealth;
 
-            OnHealthChange += HandleHeathUpdate;
         }
 
         void OnDestroy()
@@ -88,6 +89,10 @@ namespace RPG.Core
 
         public object CaptureState()
         {
+            if (gameObject.tag == "Player")
+            {
+                Debug.Log($"Saving player health to {currentHealth}");
+            }
             return currentHealth;
         }
 

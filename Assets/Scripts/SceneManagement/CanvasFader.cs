@@ -9,9 +9,15 @@ namespace RPG.SceneManagement
     {
         CanvasGroup canvasGroup;
 
-        void Start()
+        void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
+        }
+
+        public void SetCanvasToOpaque()
+        {
+            canvasGroup.alpha = 1;
+            StartCoroutine(FadeIn(2f));
         }
 
         public IEnumerator FadeOut(float time)

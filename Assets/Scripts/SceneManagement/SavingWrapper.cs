@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using RPG.Saving;
 
 namespace RPG.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
+        [SerializeField][Range(0, 5f)] float loadingDuration = 1f;
+
+        CanvasFader canvasFader;
         InputAction savingInput;
         InputAction loadingInput;
         PlayerInputActions playerInputActions;
@@ -17,10 +19,11 @@ namespace RPG.SceneManagement
         const string defaultSaveFile = "lumi_save";
 
         // Start is called before the first frame update
-        void Start()
+        IEnumerator Start()
         {
             playerInputActions = new PlayerInputActions();
             savingSystem = GetComponent<SavingSystem>();
+            canvasFader = FindObjectOfType<CanvasFader>();
 
             savingInput = playerInputActions.Player.Save;
             loadingInput = playerInputActions.Player.Load;
@@ -30,6 +33,11 @@ namespace RPG.SceneManagement
 
             savingInput.performed += Save;
             loadingInput.performed += Load;
+
+            canvasFader.SetCanvasToOpaque();
+            yield return savingSystem.LoadLastScene(defaultSaveFile);
+            yield return canvasFader.FadeIn(loadingDuration);
+            
         }
 
         void OnDestroy()

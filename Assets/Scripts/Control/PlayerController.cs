@@ -29,7 +29,7 @@ namespace RPG.Control
         public Transform SpellCastingPoint { get { return spellCastingPoint; } }
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             actionScheduler = GetComponent<ActionScheduler>();
             mainCamera = Camera.main;
