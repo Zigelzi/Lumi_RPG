@@ -6,9 +6,10 @@ namespace RPG.Combat
 {
     public class WeaponManager : MonoBehaviour
     {
-        [SerializeField] GameObject weaponPrefab = null;
         [SerializeField] Transform weaponHoldingLocation = null;
         [SerializeField] Weapon currentWeapon = null;
+
+        public Weapon CurrentWeapon { get {  return currentWeapon; } }
 
         // Start is called before the first frame update
         void Start()
@@ -16,35 +17,21 @@ namespace RPG.Combat
             SpawnWeapon();
         }
 
-        void SetAttackAnimation(Weapon weapon)
-        {
-            Animator animator = GetComponent<Animator>();
-
-            if (weapon.AttackAnimation == null) return;
-
-            if (weapon.Type == Weapon.WeaponType.Sword)
-            {
-                animator.runtimeAnimatorController = weapon.AttackAnimation;
-            }
-        }
-
         void SpawnWeapon()
         {
-            
+            Animator animator = GetComponent<Animator>();
             if (CanSpawnWeapon())
             {
-                Weapon spawnedWeapon = Instantiate(weaponPrefab, weaponHoldingLocation)
-                    .GetComponent<Weapon>();
-
-                currentWeapon = spawnedWeapon;
-                SetAttackAnimation(spawnedWeapon);
+                currentWeapon.Spawn(weaponHoldingLocation);
+                currentWeapon.SetAttackAnimation(animator);
             }
+
             
         }
 
         bool CanSpawnWeapon()
         {
-            if (weaponPrefab != null && weaponHoldingLocation != null)
+            if (weaponHoldingLocation != null && currentWeapon != null)
             {
                 return true;
             }

@@ -8,15 +8,11 @@ namespace RPG.Combat
 {
     public class Attacking : MonoBehaviour, IAction
     {
-        [SerializeField] float attackRange = 2f;
-        [SerializeField][Range(0, 3f)] float attackSpeed = 1f;
-        [SerializeField][Range(0, 1f)] float attackDamage = 20f;
-        [SerializeField] ParticleSystem attackParticles;
-
         ActionScheduler actionScheduler;
         Animator animator;
         GameObject currentTarget;
         UnitMovement movement;
+        WeaponManager weaponManager;
 
         float timeSinceLastAttack = Mathf.Infinity;
 
@@ -24,7 +20,8 @@ namespace RPG.Combat
         {
             actionScheduler = GetComponent<ActionScheduler>();
             animator = GetComponent<Animator>();
-            movement = GetComponent<UnitMovement>();    
+            movement = GetComponent<UnitMovement>();
+            weaponManager = GetComponent<WeaponManager>();
         }
 
         void Update()
@@ -86,7 +83,8 @@ namespace RPG.Combat
                 currentTarget.transform.position
                 );
 
-            if (distanceFromTarget <= attackRange)
+            Weapon currentWeapon = weaponManager.CurrentWeapon;
+            if (distanceFromTarget <= currentWeapon.AttackRange)
             {
                 return true;
             }
@@ -96,7 +94,9 @@ namespace RPG.Combat
 
         bool IsAbleToAttackAgain()
         {
-            if (timeSinceLastAttack >= attackSpeed)
+            Weapon currentWeapon = weaponManager.CurrentWeapon;
+
+            if (timeSinceLastAttack >= currentWeapon.AttackSpeed)
             {
                 return true;
             }
@@ -147,18 +147,11 @@ namespace RPG.Combat
         {
             if (currentTarget == null) return;
 
+            Weapon currentWeapon = weaponManager.CurrentWeapon;
             if (currentTarget.TryGetComponent<Health>(out Health currentTargetHealth))
             {
-                currentTargetHealth.TakeDamage(attackDamage);
-                PlayAttackParticleEffect();
+                currentTargetHealth.TakeDamage(currentWeapon.AttackDamage);
             }
-        }
-
-        void PlayAttackParticleEffect()
-        {
-            if (attackParticles == null) return;
-
-            attackParticles.Play();
         }
 
     }

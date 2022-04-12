@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 8410750484971037660}
   - component: {fileID: 8507673119592447681}
   - component: {fileID: -1614425023234381436}
+  - component: {fileID: 704809371613627490}
   m_Layer: 9
   m_Name: Character_Root
   m_TagString: Character
@@ -95,10 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203f71f38213cfa4c84209b35f35e639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1.2
-  attackSpeed: 1
-  attackDamage: 20
-  attackParticles: {fileID: 0}
 --- !u!114 &1061843811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +192,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueIdentifier: 
+--- !u!114 &704809371613627490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358616886315960968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f2e37eff517244381e75801064ffec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponHoldingLocation: {fileID: 0}
+  currentWeapon: {fileID: 0}
 --- !u!1 &8661483401128137841
 GameObject:
   m_ObjectHideFlags: 0

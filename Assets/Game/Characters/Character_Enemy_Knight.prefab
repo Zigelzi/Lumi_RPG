@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806182c7e7ebcdb469b8396b4eca90c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 5
+  aggroRadius: 5
   suspiciousDuration: 3
   patrolStopDuration: 1
   patrolSpeedMultiplier: 0.5
@@ -96,6 +96,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9572094, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+--- !u!4 &3743096574903243938 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 423694, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+  m_PrefabInstance: {fileID: 3743096574902838188}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6188562367363446141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,6 +164,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 369f269a6cae34b4ba3a635362a489fa, type: 2}
+    - target: {fileID: 704809371613627490, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: f3224321ec0f2e94caf90f5221908d11, type: 2}
+    - target: {fileID: 704809371613627490, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: weaponHoldingLocation
+      value: 
+      objectReference: {fileID: 3743096574903243938}
     - target: {fileID: 2358616886315960968, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: m_Name
       value: Character_Enemy_Knight
