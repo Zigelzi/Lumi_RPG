@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 108747778545443223}
+  - component: {fileID: 8851724556029057958}
   m_Layer: 0
-  m_Name: Weapon_Holding_Position_Sword
+  m_Name: Weapon_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +32,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8851724556029057958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3405123268038805112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14395aa81f72a84abdffe3a6b1da872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  attackAnimation: {fileID: 22100000, guid: 5da09ef344719474aa9831f53a0f4e7b, type: 2}
 --- !u!1001 &570152337556911431
 PrefabInstance:
   m_ObjectHideFlags: 0
