@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Spells
+namespace RPG.Combat
 {
     public class Spell_Heal : MonoBehaviour
     {
