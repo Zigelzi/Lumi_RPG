@@ -22,6 +22,13 @@ namespace RPG.Combat
         {
             health = GetComponent<Health>();
             player = GetComponent<PlayerController>();
+
+            health.OnUnitDeath += HandleUnitDeath;
+        }
+
+        void OnDestroy()
+        {
+            health.OnUnitDeath -= HandleUnitDeath;
         }
 
         // Update is called once per frame
@@ -34,6 +41,12 @@ namespace RPG.Combat
                 Heal();
             }
         }
+
+        void HandleUnitDeath()
+        {
+            enabled = false;
+        }
+
         bool IsSpellReady()
         {
             if (timeSinceLastUsage >= cooldownTime)

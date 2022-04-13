@@ -7,31 +7,31 @@ namespace RPG.Combat
     public class WeaponManager : MonoBehaviour
     {
         [SerializeField] Transform weaponHoldingLocation = null;
+        [SerializeField] Weapon defaultWeapon = null;
         [SerializeField] Weapon currentWeapon = null;
 
         public Weapon CurrentWeapon { get {  return currentWeapon; } }
 
-        // Start is called before the first frame update
         void Start()
         {
-            SpawnWeapon();
+            EquipWeapon(defaultWeapon);    
         }
 
-        void SpawnWeapon()
+        public void EquipWeapon(Weapon weapon)
         {
             Animator animator = GetComponent<Animator>();
             if (CanSpawnWeapon())
             {
-                currentWeapon.Spawn(weaponHoldingLocation);
-                currentWeapon.SetAttackAnimation(animator);
-            }
+                weapon.Spawn(weaponHoldingLocation);
+                weapon.SetAttackAnimation(animator);
 
-            
+                currentWeapon = weapon;
+            }
         }
 
         bool CanSpawnWeapon()
         {
-            if (weaponHoldingLocation != null && currentWeapon != null)
+            if (weaponHoldingLocation != null)
             {
                 return true;
             }
