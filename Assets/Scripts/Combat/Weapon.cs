@@ -12,11 +12,13 @@ namespace RPG.Combat
         [SerializeField] [Range(0, 100f)] float attackDamage = 20f;
         [SerializeField] float attackRange = 2f;
         [SerializeField] [Range(0, 3f)] float attackSpeed = 1f;
+        [SerializeField] bool isRightHanded = true;
         
         public enum WeaponType
         {
             Unarmed,
-            Sword
+            Sword,
+            Bow
         }
 
         public WeaponType Type { get { return type; } }
@@ -24,12 +26,21 @@ namespace RPG.Combat
         public float AttackRange { get { return attackRange; } }
         public float AttackSpeed { get { return attackSpeed; } }
 
-        public void Spawn(Transform holdinPosition)
+        public void Spawn(Transform leftHand, Transform rightHand)
         {
+            Transform holdingPosition;
+            if (isRightHanded)
+            {
+                holdingPosition = rightHand;
+            }
+            else
+            {
+                holdingPosition = leftHand;
+            }
             // TODO: Fix setting animation
             if (equippedPrefab != null)
             {
-                Instantiate(equippedPrefab, holdinPosition);
+                Instantiate(equippedPrefab, holdingPosition);
             }
         }
 

@@ -96,6 +96,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9572094, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+--- !u!4 &3743096574903317664 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 481036, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+  m_PrefabInstance: {fileID: 3743096574902838188}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3743096574903243938 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423694, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
@@ -170,6 +175,14 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f3224321ec0f2e94caf90f5221908d11, type: 2}
     - target: {fileID: 704809371613627490, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: weaponHoldingLocation
+      value: 
+      objectReference: {fileID: 3743096574903243938}
+    - target: {fileID: 704809371613627490, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: leftHandHoldingLocation
+      value: 
+      objectReference: {fileID: 3743096574903317664}
+    - target: {fileID: 704809371613627490, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: rightHandHoldingLocation
       value: 
       objectReference: {fileID: 3743096574903243938}
     - target: {fileID: 2358616886315960968, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}

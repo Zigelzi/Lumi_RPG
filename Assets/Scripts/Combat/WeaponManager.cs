@@ -6,7 +6,8 @@ namespace RPG.Combat
 {
     public class WeaponManager : MonoBehaviour
     {
-        [SerializeField] Transform weaponHoldingLocation = null;
+        [SerializeField] Transform leftHandHoldingLocation = null;
+        [SerializeField] Transform rightHandHoldingLocation = null;
         [SerializeField] Weapon defaultWeapon = null;
         [SerializeField] Weapon currentWeapon = null;
 
@@ -22,7 +23,7 @@ namespace RPG.Combat
             Animator animator = GetComponent<Animator>();
             if (CanSpawnWeapon())
             {
-                weapon.Spawn(weaponHoldingLocation);
+                weapon.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
                 weapon.SetAttackAnimation(animator);
 
                 currentWeapon = weapon;
@@ -31,7 +32,7 @@ namespace RPG.Combat
 
         bool CanSpawnWeapon()
         {
-            if (weaponHoldingLocation != null)
+            if (leftHandHoldingLocation != null || rightHandHoldingLocation != null)
             {
                 return true;
             }
