@@ -51,5 +51,6 @@ namespace RPG.Combat
                 animator.runtimeAnimatorController = attackAnimation;
             }
         }
+
     }
 }
