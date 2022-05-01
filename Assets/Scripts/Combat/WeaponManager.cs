@@ -11,6 +11,8 @@ namespace RPG.Combat
         [SerializeField] Weapon defaultWeapon = null;
         [SerializeField] Weapon currentWeapon = null;
 
+        public Transform LeftHandHoldingLocation { get { return leftHandHoldingLocation; } }
+        public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
         public Weapon CurrentWeapon { get {  return currentWeapon; } }
 
         void Start()

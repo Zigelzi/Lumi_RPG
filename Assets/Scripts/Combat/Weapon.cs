@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using RPG.Core;
 
 namespace RPG.Combat
 {
@@ -7,12 +8,15 @@ namespace RPG.Combat
     {
         [SerializeField] AnimatorOverrideController attackAnimation;
         [SerializeField] GameObject equippedPrefab = null;
+        [SerializeField] Projectile projectile;
         [SerializeField] WeaponType type;
 
         [SerializeField] [Range(0, 100f)] float attackDamage = 20f;
         [SerializeField] float attackRange = 2f;
         [SerializeField] [Range(0, 3f)] float attackSpeed = 1f;
         [SerializeField] bool isRightHanded = true;
+
+        public bool HasProjectile { get { return projectile != null; } }
         
         public enum WeaponType
         {
@@ -28,19 +32,12 @@ namespace RPG.Combat
 
         public void Spawn(Transform leftHand, Transform rightHand)
         {
-            Transform holdingPosition;
-            if (isRightHanded)
-            {
-                holdingPosition = rightHand;
-            }
-            else
-            {
-                holdingPosition = leftHand;
-            }
+            Transform handTransform = GetHandTransform(leftHand, rightHand);
+            
             // TODO: Fix setting animation
             if (equippedPrefab != null)
             {
-                Instantiate(equippedPrefab, holdingPosition);
+                Instantiate(equippedPrefab, handTransform);
             }
         }
 
@@ -50,6 +47,31 @@ namespace RPG.Combat
             {
                 animator.runtimeAnimatorController = attackAnimation;
             }
+        }
+
+        public void LaunchProjectile(Transform leftHand,
+            Transform rightHand,
+            Health target)
+        {
+            Transform handTransform = GetHandTransform(leftHand, rightHand);
+            Projectile projectileInstance = Instantiate(projectile, handTransform.position, Quaternion.identity);
+
+            projectileInstance.SetTarget(target);
+        }
+
+        Transform GetHandTransform(Transform leftHand, Transform rightHand)
+        {
+            Transform handTransform;
+            if (isRightHanded)
+            {
+                handTransform = rightHand;
+            }
+            else
+            {
+                handTransform = leftHand;
+            }
+
+            return handTransform;
         }
 
     }

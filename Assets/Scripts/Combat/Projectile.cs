@@ -1,29 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Core;
 
-public class Projectile : MonoBehaviour
+namespace RPG.Combat
 {
-    [SerializeField] float speed = 5f;
-    [SerializeField] Transform target;
-
-    // Start is called before the first frame update
-    void Update()
+    public class Projectile : MonoBehaviour
     {
-        FlyTowards();
-    }
+        [SerializeField] float speed = 5f;
+        
+        Health currentTarget;
 
-    void FlyTowards()
-    {
-        Vector3 aimLocation = GetAimLocation();
-        transform.LookAt(aimLocation);
-        transform.position += transform.forward * speed * Time.deltaTime;
-    }
+        // Start is called before the first frame update
+        void Update()
+        {
+            FlyTowards();
+        }
 
-    Vector3 GetAimLocation()
-    {
-        CapsuleCollider targetCollider = target.GetComponent<CapsuleCollider>();
-        Vector3 targetCenter = Vector3.up * targetCollider.height / 2;
-        return target.position + targetCenter;
+        public void SetTarget(Health target)
+        {
+            currentTarget = target;
+        }
+
+        void FlyTowards()
+        {
+            Vector3 aimLocation = GetAimLocation();
+            transform.LookAt(aimLocation);
+            transform.position += transform.forward * speed * Time.deltaTime;
+        }
+
+        Vector3 GetAimLocation()
+        {
+            CapsuleCollider targetCollider = currentTarget.GetComponent<CapsuleCollider>();
+            Vector3 targetCenter = Vector3.up * targetCollider.height / 2;
+            return currentTarget.transform.position + targetCenter;
+        }
     }
 }
+

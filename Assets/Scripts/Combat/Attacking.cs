@@ -150,8 +150,24 @@ namespace RPG.Combat
             Weapon currentWeapon = weaponManager.CurrentWeapon;
             if (currentTarget.TryGetComponent<Health>(out Health currentTargetHealth))
             {
-                currentTargetHealth.TakeDamage(currentWeapon.AttackDamage);
+                if (currentWeapon.HasProjectile)
+                {
+                    currentWeapon.LaunchProjectile(weaponManager.LeftHandHoldingLocation, 
+                        weaponManager.RightHandHoldingLocation,
+                        currentTargetHealth);
+                }
+                else
+                {
+                    currentTargetHealth.TakeDamage(currentWeapon.AttackDamage);
+                }
+                
             }
+        }
+
+        // Triggered by attacking animation event "Shoot"
+        void Shoot()
+        {
+            Hit();
         }
 
     }
