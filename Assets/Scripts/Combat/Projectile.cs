@@ -13,8 +13,6 @@ namespace RPG.Combat
         Health currentTarget;
         float damage = 0;
 
-        public float Damage { set { damage = value; } }
-
         // Start is called before the first frame update
         void Update()
         {
@@ -23,11 +21,11 @@ namespace RPG.Combat
 
         void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent<Health>(out Health health))
+            if(other.TryGetComponent<Health>(out Health collidedObject))
             {
-                if(IsEnemy(health))
+                if(collidedObject == currentTarget)
                 {
-                    health.TakeDamage(damage);
+                    collidedObject.TakeDamage(damage);
                     Destroy(gameObject);
                 }
             }
@@ -36,6 +34,11 @@ namespace RPG.Combat
         public void SetTarget(Health target)
         {
             currentTarget = target;
+        }
+
+        public void SetDamage(float newDamage)
+        {
+            damage = newDamage;
         }
 
         void FlyTowards()
@@ -50,18 +53,6 @@ namespace RPG.Combat
             CapsuleCollider targetCollider = currentTarget.GetComponent<CapsuleCollider>();
             Vector3 targetCenter = Vector3.up * targetCollider.height / 2;
             return currentTarget.transform.position + targetCenter;
-        }
-
-        bool IsEnemy(Health health)
-        {
-            if(health.TryGetComponent<EnemyController>(out EnemyController enemy))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }
