@@ -56,6 +56,7 @@ namespace RPG.Combat
             Transform handTransform = GetHandTransform(leftHand, rightHand);
             Projectile projectileInstance = Instantiate(projectile, handTransform.position, Quaternion.identity);
 
+            projectileInstance.Damage = attackDamage;
             projectileInstance.SetTarget(target);
         }
 
