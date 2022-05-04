@@ -10,6 +10,7 @@ namespace RPG.Combat
         [SerializeField] Transform rightHandHoldingLocation = null;
         [SerializeField] Weapon defaultWeapon = null;
         [SerializeField] Weapon currentWeapon = null;
+        GameObject currentWeaponInstance = null;
 
         public Transform LeftHandHoldingLocation { get { return leftHandHoldingLocation; } }
         public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
@@ -25,7 +26,9 @@ namespace RPG.Combat
             Animator animator = GetComponent<Animator>();
             if (CanSpawnWeapon())
             {
-                weapon.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
+
+                DestroyCurrentWeapon();
+                currentWeaponInstance = weapon.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
                 weapon.SetAttackAnimation(animator);
 
                 currentWeapon = weapon;
@@ -41,6 +44,15 @@ namespace RPG.Combat
             else
             {
                 return false;
+            }
+        }
+
+        void DestroyCurrentWeapon()
+        {
+            if (currentWeapon != null)
+            {
+                Destroy(currentWeaponInstance);
+                currentWeapon = null;
             }
         }
     }

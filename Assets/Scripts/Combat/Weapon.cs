@@ -30,15 +30,18 @@ namespace RPG.Combat
         public float AttackRange { get { return attackRange; } }
         public float AttackSpeed { get { return attackSpeed; } }
 
-        public void Spawn(Transform leftHand, Transform rightHand)
+        public GameObject Spawn(Transform leftHand, Transform rightHand)
         {
             Transform handTransform = GetHandTransform(leftHand, rightHand);
             
             // TODO: Fix setting animation
             if (equippedPrefab != null)
             {
-                Instantiate(equippedPrefab, handTransform);
+                GameObject weaponInstance = Instantiate(equippedPrefab, handTransform);
+                return weaponInstance;
             }
+
+            return null;
         }
 
         public void SetAttackAnimation(Animator animator)
