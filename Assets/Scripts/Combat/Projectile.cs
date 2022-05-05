@@ -9,14 +9,22 @@ namespace RPG.Combat
     public class Projectile : MonoBehaviour
     {
         [SerializeField] float speed = 5f;
+        [SerializeField] float lifetime = 5f;
         
         Health currentTarget;
         float damage = 0;
 
+        void Start()
+        {
+            Vector3 aimLocation = GetAimLocation();
+            transform.LookAt(aimLocation);
+            Invoke("DestroyProjectile", lifetime);
+        }
+
         // Start is called before the first frame update
         void Update()
         {
-            FlyTowards();
+            MoveForward();
         }
 
         void OnTriggerEnter(Collider other)
@@ -41,10 +49,9 @@ namespace RPG.Combat
             damage = newDamage;
         }
 
-        void FlyTowards()
+        void MoveForward()
         {
-            Vector3 aimLocation = GetAimLocation();
-            transform.LookAt(aimLocation);
+            
             transform.position += transform.forward * speed * Time.deltaTime;
         }
 
@@ -53,6 +60,11 @@ namespace RPG.Combat
             CapsuleCollider targetCollider = currentTarget.GetComponent<CapsuleCollider>();
             Vector3 targetCenter = Vector3.up * targetCollider.height / 2;
             return currentTarget.transform.position + targetCenter;
+        }
+
+        void DestroyProjectile()
+        {
+            Destroy(gameObject);
         }
     }
 }
