@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 26822912706313069, guid: 8b21e8ecb4d4a504c821ed70022fa550, type: 3}
       propertyPath: m_Name
-      value: Projectile_Arrow_Orange
+      value: Projectile_Arrow_Orange_Homing
       objectReference: {fileID: 0}
     - target: {fileID: 4206735325545406022, guid: 8b21e8ecb4d4a504c821ed70022fa550, type: 3}
       propertyPath: m_RootOrder
@@ -58,6 +58,10 @@ PrefabInstance:
     - target: {fileID: 4458971358934252928, guid: 8b21e8ecb4d4a504c821ed70022fa550, type: 3}
       propertyPath: speed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458971358934252928, guid: 8b21e8ecb4d4a504c821ed70022fa550, type: 3}
+      propertyPath: isHoming
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b21e8ecb4d4a504c821ed70022fa550, type: 3}

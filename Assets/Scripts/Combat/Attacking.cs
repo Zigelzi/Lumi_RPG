@@ -74,6 +74,12 @@ namespace RPG.Combat
                 Attack(currentTarget);
                 timeSinceLastAttack = 0;
             }
+
+            if (!IsTargetAlive())
+            {
+                Cancel();
+                timeSinceLastAttack = 0;
+            }
         }
 
         bool IsInAttackRange()

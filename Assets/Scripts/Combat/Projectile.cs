@@ -10,14 +10,18 @@ namespace RPG.Combat
     {
         [SerializeField] float speed = 5f;
         [SerializeField] float lifetime = 5f;
+        [SerializeField] bool isHoming = false;
         
         Health currentTarget;
         float damage = 0;
 
         void Start()
         {
-            Vector3 aimLocation = GetAimLocation();
-            transform.LookAt(aimLocation);
+            if (!isHoming)
+            {
+                Vector3 aimLocation = GetAimLocation();
+                transform.LookAt(aimLocation);
+            }
             Invoke("DestroyProjectile", lifetime);
         }
 
@@ -31,7 +35,7 @@ namespace RPG.Combat
         {
             if(other.TryGetComponent<Health>(out Health collidedObject))
             {
-                if(collidedObject == currentTarget)
+                if(collidedObject == currentTarget && collidedObject.IsAlive)
                 {
                     collidedObject.TakeDamage(damage);
                     Destroy(gameObject);
@@ -51,7 +55,11 @@ namespace RPG.Combat
 
         void MoveForward()
         {
-            
+            if (isHoming && currentTarget.IsAlive)
+            {
+                Vector3 aimLocation = GetAimLocation();
+                transform.LookAt(aimLocation);
+            }
             transform.position += transform.forward * speed * Time.deltaTime;
         }
 
