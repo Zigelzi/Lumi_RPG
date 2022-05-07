@@ -9,7 +9,6 @@ namespace RPG.Combat
         [SerializeField] AnimatorOverrideController attackAnimation;
         [SerializeField] GameObject equippedPrefab = null;
         [SerializeField] Projectile projectile;
-        [SerializeField] WeaponType type;
 
         [SerializeField] [Range(0, 100f)] float attackDamage = 20f;
         [SerializeField] float attackRange = 2f;
@@ -17,15 +16,6 @@ namespace RPG.Combat
         [SerializeField] bool isRightHanded = true;
 
         public bool HasProjectile { get { return projectile != null; } }
-        
-        public enum WeaponType
-        {
-            Unarmed,
-            Sword,
-            Bow
-        }
-
-        public WeaponType Type { get { return type; } }
         public float AttackDamage { get { return attackDamage; } }
         public float AttackRange { get { return attackRange; } }
         public float AttackSpeed { get { return attackSpeed; } }
