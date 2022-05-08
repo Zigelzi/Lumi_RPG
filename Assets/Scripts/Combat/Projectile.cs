@@ -10,7 +10,10 @@ namespace RPG.Combat
     {
         [SerializeField] float speed = 5f;
         [SerializeField] float lifetime = 5f;
+        [SerializeField] float lifetimeAfterImpact = 1f;
         [SerializeField] bool isHoming = false;
+        [SerializeField] GameObject hitEffect;
+        [SerializeField] GameObject[] onHitDestroyedObjects = null;
         
         Health currentTarget;
         float damage = 0;
@@ -22,10 +25,9 @@ namespace RPG.Combat
                 Vector3 aimLocation = GetAimLocation();
                 transform.LookAt(aimLocation);
             }
-            Invoke("DestroyProjectile", lifetime);
+            Invoke(nameof(DestroyProjectile), lifetime);
         }
 
-        // Start is called before the first frame update
         void Update()
         {
             MoveForward();
@@ -38,7 +40,9 @@ namespace RPG.Combat
                 if(collidedObject == currentTarget && collidedObject.IsAlive)
                 {
                     collidedObject.TakeDamage(damage);
-                    Destroy(gameObject);
+                    DestroyOnHitObjects();
+                    PlayHitFX();
+                    speed = 0;
                 }
             }
         }
@@ -53,6 +57,35 @@ namespace RPG.Combat
             damage = newDamage;
         }
 
+        Vector3 GetAimLocation()
+        {
+            CapsuleCollider targetCollider = currentTarget.GetComponent<CapsuleCollider>();
+            Vector3 targetCenter = Vector3.up * targetCollider.height / 2;
+            return currentTarget.transform.position + targetCenter;
+        }
+
+        void DestroyOnHitObjects()
+        {
+            if (onHitDestroyedObjects.Length > 0)
+            {
+                foreach (GameObject destroyable in onHitDestroyedObjects)
+                {
+                    Destroy(destroyable);
+                }
+                Invoke(nameof(DestroyProjectile), lifetimeAfterImpact);
+            }
+            else
+            {
+                DestroyProjectile();
+            }
+            
+        }
+
+        void DestroyProjectile()
+        {
+            Destroy(gameObject);
+        }
+
         void MoveForward()
         {
             if (isHoming && currentTarget.IsAlive)
@@ -63,16 +96,11 @@ namespace RPG.Combat
             transform.position += transform.forward * speed * Time.deltaTime;
         }
 
-        Vector3 GetAimLocation()
+        void PlayHitFX()
         {
-            CapsuleCollider targetCollider = currentTarget.GetComponent<CapsuleCollider>();
-            Vector3 targetCenter = Vector3.up * targetCollider.height / 2;
-            return currentTarget.transform.position + targetCenter;
-        }
+            if (hitEffect == null) return;
 
-        void DestroyProjectile()
-        {
-            Destroy(gameObject);
+            Instantiate(hitEffect, GetAimLocation(), transform.rotation);
         }
     }
 }

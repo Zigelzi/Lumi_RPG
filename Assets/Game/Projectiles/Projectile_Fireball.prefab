@@ -46,9 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45fd0466e03fae40b185d116979d817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 10
   lifetime: 5
+  lifetimeAfterImpact: 0.2
   isHoming: 1
+  hitEffect: {fileID: 2302457091093092515, guid: 69d1b1037536b504884c93bb73d662db, type: 3}
+  onHitDestroyedObjects:
+  - {fileID: 8307994335903737316}
 --- !u!136 &4423683097460514034
 CapsuleCollider:
   m_ObjectHideFlags: 0
