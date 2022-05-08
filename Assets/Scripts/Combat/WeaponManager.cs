@@ -8,9 +8,10 @@ namespace RPG.Combat
     {
         [SerializeField] Transform leftHandHoldingLocation = null;
         [SerializeField] Transform rightHandHoldingLocation = null;
-        [SerializeField] Weapon defaultWeapon = null;
         [SerializeField] Weapon currentWeapon = null;
-        GameObject currentWeaponInstance = null;
+        [SerializeField] string defaultWeaponName = "Unarmed";
+
+        GameObject currentWeaponInstance = null;        
 
         public Transform LeftHandHoldingLocation { get { return leftHandHoldingLocation; } }
         public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
@@ -18,6 +19,9 @@ namespace RPG.Combat
 
         void Start()
         {
+            Weapon defaultWeapon = Resources.Load<Weapon>(defaultWeaponName);
+            if (defaultWeapon == null) return;
+
             EquipWeapon(defaultWeapon);    
         }
 
