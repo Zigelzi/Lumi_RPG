@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Weapon_Fireball_Animator_Override
+  m_Name: Weapon_Wand_Animator_Override
   m_Controller: {fileID: 9100000, guid: 369f269a6cae34b4ba3a635362a489fa, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 69f3b1b43eb337548a8633b7b82d6fc6, type: 3}

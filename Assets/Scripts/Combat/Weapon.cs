@@ -40,6 +40,10 @@ namespace RPG.Combat
             {
                 animator.runtimeAnimatorController = attackAnimation;
             }
+            else
+            {
+                ResetAnimationControllerToDefault(animator);
+            }
         }
 
         public void LaunchProjectile(Transform leftHand,
@@ -66,6 +70,22 @@ namespace RPG.Combat
             }
 
             return handTransform;
+        }
+
+        void ResetAnimationControllerToDefault(Animator animator)
+        {
+            // Check if animator is currently using the default runtime controller
+            // Casting returns null if animator is not using the default controller
+
+            AnimatorOverrideController overrideController =
+                animator.runtimeAnimatorController as AnimatorOverrideController;
+
+
+            if (overrideController != null)
+            {
+                animator.runtimeAnimatorController =
+                    overrideController.runtimeAnimatorController;
+            }
         }
 
     }
