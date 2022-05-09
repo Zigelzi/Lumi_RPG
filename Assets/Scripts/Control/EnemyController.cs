@@ -28,7 +28,7 @@ namespace RPG.Control
         float timeLastSawPlayer = Mathf.Infinity;
         float timeAtWaypoint = Mathf.Infinity;
 
-        void Start()
+        void Awake()
         {
             actionScheduler = GetComponent<ActionScheduler>();
             attacking = GetComponent<Attacking>();
@@ -66,9 +66,9 @@ namespace RPG.Control
 
         void HandleDeath()
         {
-            enabled = false;
             actionScheduler.CancelCurrentAction();
             movement.DisableNavAgent();
+            enabled = false;
         }
 
         bool IsPlayerInAggroRange()

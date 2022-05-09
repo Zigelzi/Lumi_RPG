@@ -14,16 +14,6 @@ namespace RPG.Combat
         [SerializeField][Range(0, 3f)] float attackSpeed = 1f;
         [SerializeField] float attackRange = 2f;
         [SerializeField] bool isRightHanded = true;
-        [SerializeField] int id = 0;
-        [SerializeField] WeaponType weaponType;
-
-        public enum WeaponType
-        {
-            Unarmed,
-            Sword,
-            Wand,
-            Bow
-        }
 
         public bool HasProjectile { get { return projectile != null; } }
         public float AttackDamage { get { return attackDamage; } }
