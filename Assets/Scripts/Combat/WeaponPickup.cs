@@ -21,12 +21,12 @@ namespace RPG.Combat
 
         IEnumerator HideForSeconds(float duration)
         {
-            TogglePickup(false);
+            ShowPickup(false);
             yield return new WaitForSeconds(duration);
-            TogglePickup(true);
+            ShowPickup(true);
         }
 
-        void TogglePickup(bool isVisible)
+        void ShowPickup(bool isVisible)
         {
             CapsuleCollider collider = GetComponent<CapsuleCollider>();
             
