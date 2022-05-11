@@ -38,7 +38,6 @@ namespace RPG.Combat
                 weapon.SetAttackAnimation(animator);
 
                 currentWeapon = weapon;
-                //Debug.Log($"{gameObject.name} equipped weapon {currentWeapon.name}");
             }
         }
 
@@ -72,7 +71,6 @@ namespace RPG.Combat
         {
             string restoredWeaponName = (string)state;
             Weapon restoredWeapon = Resources.Load<Weapon>(restoredWeaponName);
-            Debug.Log($"Restored weapon {restoredWeapon.name} to {gameObject.name}");
             EquipWeapon(restoredWeapon);
         }
     }

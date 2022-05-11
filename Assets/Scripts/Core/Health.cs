@@ -89,10 +89,6 @@ namespace RPG.Core
 
         public object CaptureState()
         {
-            if (gameObject.tag == "Player")
-            {
-                Debug.Log($"Saving player health to {currentHealth}");
-            }
             return currentHealth;
         }
 
