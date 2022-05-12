@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Spell_Heal : MonoBehaviour
+    public class SpellHeal : MonoBehaviour
     {
         [SerializeField] float spellLifetime = 3f;
         // Start is called before the first frame update

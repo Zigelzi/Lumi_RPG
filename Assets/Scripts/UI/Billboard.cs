@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG.UI
 {
-    public class UI_Billboard : MonoBehaviour
+    public class Billboard : MonoBehaviour
     {
         Camera mainCamera;
 

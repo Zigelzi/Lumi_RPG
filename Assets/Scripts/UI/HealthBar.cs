@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using RPG.Core;
 
-public class UI_HealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     Health health;
     Slider healthSlider;
