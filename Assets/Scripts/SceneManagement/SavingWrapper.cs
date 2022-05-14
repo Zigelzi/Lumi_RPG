@@ -20,8 +20,6 @@ namespace RPG.SceneManagement
 
         const string defaultSaveFile = "lumi_save";
 
-        public event Action OnGameLoad;
-
         // Start is called before the first frame update
         IEnumerator Start()
         {
@@ -66,7 +64,6 @@ namespace RPG.SceneManagement
         public void Load()
         {
             savingSystem.Load(defaultSaveFile);
-            OnGameLoad?.Invoke();
         }
 
         void Load(InputAction.CallbackContext ctx)
