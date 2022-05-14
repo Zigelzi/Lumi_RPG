@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using RPG.Combat;
-using RPG.Movement;
 using RPG.Core;
+using RPG.Movement;
+using RPG.SceneManagement;
+
 
 namespace RPG.Control
 {
@@ -34,6 +37,7 @@ namespace RPG.Control
             attacking = GetComponent<Attacking>();
             movement = GetComponent<UnitMovement>();
             health = GetComponent<Health>();
+            
 
             health.OnUnitDeath += HandleDeath;
 
@@ -67,7 +71,7 @@ namespace RPG.Control
         void HandleDeath()
         {
             actionScheduler.CancelCurrentAction();
-            movement.DisableNavAgent();
+            movement.SetNavAgent(false);
             enabled = false;
         }
 

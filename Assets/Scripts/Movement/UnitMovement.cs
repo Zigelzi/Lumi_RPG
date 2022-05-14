@@ -62,9 +62,9 @@ namespace RPG.Movement
             navAgent.isStopped = true;
         }
 
-        public void DisableNavAgent()
+        public void SetNavAgent(bool isActive)
         {
-            navAgent.enabled = false;
+            navAgent.enabled = isActive;
         }
 
         void UpdateRunAnimation()

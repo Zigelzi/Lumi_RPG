@@ -21,7 +21,6 @@ namespace RPG.Control
         Health health;
         InputAction movementInput;
         PlayerInputActions playerInputActions;
-        
         UnitMovement movement;
 
         bool rightButtonPressed = false;
@@ -36,11 +35,13 @@ namespace RPG.Control
         {
             actionScheduler = GetComponent<ActionScheduler>();
             mainCamera = Camera.main;
+            
             movement = GetComponent<UnitMovement>();
             attacking = GetComponent<Attacking>();
             health = GetComponent<Health>();
 
             health.OnUnitDeath += HandleDeath;
+            
 
             playerInputActions = new PlayerInputActions();
 
@@ -50,8 +51,7 @@ namespace RPG.Control
             movementInput.performed += HandleMousePressedDown;
             movementInput.canceled += HandleMouseReleased;
         }
-
-        private void OnDestroy()
+        void OnDestroy()
         {
             health.OnUnitDeath -= HandleDeath;
 
@@ -72,7 +72,7 @@ namespace RPG.Control
             OnPlayerDeath?.Invoke();
             enabled = false;
             actionScheduler.CancelCurrentAction();
-            movement.DisableNavAgent();
+            movement.SetNavAgent(false);
         }
 
         void HandleMousePressedDown(InputAction.CallbackContext ctx)
