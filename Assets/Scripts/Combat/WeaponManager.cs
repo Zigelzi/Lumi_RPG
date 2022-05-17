@@ -19,7 +19,7 @@ namespace RPG.Combat
         public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
         public Weapon CurrentWeapon { get {  return currentWeapon; } }
 
-        void Start()
+        void Awake()
         {
             if (currentWeapon == null)
             {
