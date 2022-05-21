@@ -41,6 +41,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""OpenMainMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""52f7a239-61da-4a73-9ba5-38c5ad71ebb0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -76,6 +84,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Load"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84033e2d-ca78-4acc-8a2f-e65ed3010af0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMainMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -87,6 +106,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
         m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
+        m_Player_OpenMainMenu = m_Player.FindAction("OpenMainMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,6 +159,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Save;
     private readonly InputAction m_Player_Load;
+    private readonly InputAction m_Player_OpenMainMenu;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -146,6 +167,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Save => m_Wrapper.m_Player_Save;
         public InputAction @Load => m_Wrapper.m_Player_Load;
+        public InputAction @OpenMainMenu => m_Wrapper.m_Player_OpenMainMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -164,6 +186,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Load.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoad;
                 @Load.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoad;
                 @Load.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoad;
+                @OpenMainMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMainMenu;
+                @OpenMainMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMainMenu;
+                @OpenMainMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMainMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -177,6 +202,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Load.started += instance.OnLoad;
                 @Load.performed += instance.OnLoad;
                 @Load.canceled += instance.OnLoad;
+                @OpenMainMenu.started += instance.OnOpenMainMenu;
+                @OpenMainMenu.performed += instance.OnOpenMainMenu;
+                @OpenMainMenu.canceled += instance.OnOpenMainMenu;
             }
         }
     }
@@ -186,5 +214,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
+        void OnOpenMainMenu(InputAction.CallbackContext context);
     }
 }
