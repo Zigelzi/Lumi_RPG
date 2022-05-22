@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using RPG.Attributes;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
-using RPG.SceneManagement;
-
 
 namespace RPG.Control
 {

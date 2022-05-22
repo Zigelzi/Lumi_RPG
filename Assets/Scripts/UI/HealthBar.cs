@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using RPG.Core;
+using RPG.Attributes;
 
 public class HealthBar : MonoBehaviour
 {

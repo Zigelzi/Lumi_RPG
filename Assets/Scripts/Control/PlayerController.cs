@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
+using RPG.Attributes;
 using RPG.Core;
 using RPG.Combat;
 using RPG.Movement;
