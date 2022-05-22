@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: -1614425023234381436}
   - component: {fileID: 704809371613627490}
   - component: {fileID: -155862983742245048}
+  - component: {fileID: -6926742722821068626}
   m_Layer: 9
   m_Name: Character_Root
   m_TagString: Character
@@ -205,9 +206,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f2e37eff517244381e75801064ffec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponHoldingLocation: {fileID: 0}
-  defaultWeapon: {fileID: 11400000, guid: f3224321ec0f2e94caf90f5221908d11, type: 2}
+  leftHandHoldingLocation: {fileID: 0}
+  rightHandHoldingLocation: {fileID: 0}
   currentWeapon: {fileID: 0}
+  defaultWeapon: {fileID: 11400000, guid: f3224321ec0f2e94caf90f5221908d11, type: 2}
 --- !u!54 &-155862983742245048
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224,6 +226,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6926742722821068626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358616886315960968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3199244164208d6419973e52b647f4ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterClass: 1
+  level: 1
 --- !u!1 &8661483401128137841
 GameObject:
   m_ObjectHideFlags: 0
