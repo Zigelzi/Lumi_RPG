@@ -1158,7 +1158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3661675648876743191, guid: 8637d3dc08b23604e8d492ca9375b01e, type: 3}
       propertyPath: m_Name
-      value: Character_Enemy_Knight_Boss
+      value: Character_Enemy_GrandKnight
       objectReference: {fileID: 0}
     - target: {fileID: 3661675648876743191, guid: 8637d3dc08b23604e8d492ca9375b01e, type: 3}
       propertyPath: m_IsActive
