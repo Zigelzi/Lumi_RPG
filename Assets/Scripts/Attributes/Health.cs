@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+
 using RPG.Saving;
+using RPG.Stats;
 
 namespace RPG.Attributes
 {
@@ -13,6 +15,7 @@ namespace RPG.Attributes
         [SerializeField] [Range(0, 30f)] float despawnTime = 10f; 
 
         Animator animator;
+        BaseStats baseStats;
         bool isAlive = true;
 
         public float CurrentHealth { get { return currentHealth; } }
@@ -26,8 +29,11 @@ namespace RPG.Attributes
         void Awake()
         {
             animator = GetComponent<Animator>();
+            baseStats = GetComponent<BaseStats>();
             OnHealthChange += HandleHeathUpdate;
 
+
+            maxHealth = baseStats.GetStartingHealth();
             currentHealth = maxHealth;
 
         }
