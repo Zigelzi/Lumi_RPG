@@ -16,6 +16,8 @@ namespace RPG.Attributes
 
         Animator animator;
         BaseStats baseStats;
+        GameObject attacker;
+
         bool isAlive = true;
 
         public float CurrentHealth { get { return currentHealth; } }
@@ -43,10 +45,12 @@ namespace RPG.Attributes
             OnHealthChange -= HandleHeathUpdate;
         }
 
-        public void TakeDamage(float amount)
+        public void TakeDamage(float amount, GameObject attacker)
         {
             currentHealth = Mathf.Max(currentHealth - amount, 0);
             OnHealthChange?.Invoke(currentHealth);
+
+            this.attacker = attacker;
 
         }
 
@@ -62,6 +66,20 @@ namespace RPG.Attributes
             }
 
             return false;
+        }
+
+        public object CaptureState()
+        {
+            return currentHealth;
+        }
+
+        public void RestoreState(object state)
+        {
+            float restoredHealth = (float)state;
+
+            currentHealth = restoredHealth;
+
+            OnHealthChange?.Invoke(currentHealth);
         }
 
         void HandleHeathUpdate(float newHealth)
@@ -83,6 +101,7 @@ namespace RPG.Attributes
                 if (gameObject.tag != "Player")
                 {
                     Invoke("Despawn", despawnTime);
+                    AwardExperience();
                 }
                 
             } 
@@ -93,19 +112,21 @@ namespace RPG.Attributes
             Destroy(gameObject);
         }
 
-        public object CaptureState()
+        void AwardExperience()
         {
-            return currentHealth;
+            if (baseStats == null) return;
+
+            float experienceReward = baseStats.GetExperienceReward();
+            if (attacker.TryGetComponent(out Experience attackerExperience))
+            {
+                attackerExperience.AddExperience(experienceReward);
+            }
+
+            
+
         }
 
-        public void RestoreState(object state)
-        {
-            float restoredHealth = (float)state;
-
-            currentHealth = restoredHealth;
-
-            OnHealthChange?.Invoke(currentHealth);
-        }
+        
     }
 }
 

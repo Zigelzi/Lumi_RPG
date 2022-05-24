@@ -13,7 +13,8 @@ namespace RPG.Combat
         [SerializeField] bool isHoming = false;
         [SerializeField] GameObject hitEffect;
         [SerializeField] GameObject[] onHitDestroyedObjects = null;
-        
+
+        GameObject owner;
         Health currentTarget;
         float damage = 0;
 
@@ -38,7 +39,7 @@ namespace RPG.Combat
             {
                 if(collidedObject == currentTarget && collidedObject.IsAlive)
                 {
-                    collidedObject.TakeDamage(damage);
+                    collidedObject.TakeDamage(damage, owner);
                     DestroyOnHitObjects();
                     PlayHitFX();
                     speed = 0;
@@ -54,6 +55,11 @@ namespace RPG.Combat
         public void SetDamage(float newDamage)
         {
             damage = newDamage;
+        }
+
+        public void SetProjectileOwner(GameObject owner)
+        {
+            this.owner = owner;
         }
 
         Vector3 GetAimLocation()

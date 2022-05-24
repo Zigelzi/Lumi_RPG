@@ -162,11 +162,12 @@ namespace RPG.Combat
                 {
                     currentWeapon.LaunchProjectile(weaponManager.LeftHandHoldingLocation, 
                         weaponManager.RightHandHoldingLocation,
-                        currentTargetHealth);
+                        currentTargetHealth,
+                        gameObject);
                 }
                 else
                 {
-                    currentTargetHealth.TakeDamage(currentWeapon.AttackDamage);
+                    currentTargetHealth.TakeDamage(currentWeapon.AttackDamage, gameObject);
                 }
                 
             }

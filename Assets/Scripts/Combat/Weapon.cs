@@ -48,13 +48,15 @@ namespace RPG.Combat
 
         public void LaunchProjectile(Transform leftHand,
             Transform rightHand,
-            Health target)
+            Health target,
+            GameObject owner)
         {
             Transform handTransform = GetHandTransform(leftHand, rightHand);
             Projectile projectileInstance = Instantiate(projectile, handTransform.position, Quaternion.identity);
 
             projectileInstance.SetDamage(attackDamage);
             projectileInstance.SetTarget(target);
+            projectileInstance.SetProjectileOwner(owner);
         }
 
         Transform GetHandTransform(Transform leftHand, Transform rightHand)
