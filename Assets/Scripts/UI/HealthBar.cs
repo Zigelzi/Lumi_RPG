@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour
     Health health;
     Slider healthSlider;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         health = GetComponentInParent<Health>();
         healthSlider = GetComponentInChildren<Slider>();

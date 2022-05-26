@@ -19,9 +19,9 @@ namespace RPG.Stats
             return progression.GetHealth(characterClass, startingLevel);
         }
 
-        public float GetExperienceReward()
+        public int GetStartingExperienceReward()
         {
-            return 10;
+            return progression.GetExperienceReward(characterClass, startingLevel);
         }
     }
 }

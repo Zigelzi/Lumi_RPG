@@ -116,7 +116,7 @@ namespace RPG.Attributes
         {
             if (baseStats == null) return;
 
-            float experienceReward = baseStats.GetExperienceReward();
+            float experienceReward = baseStats.GetStartingExperienceReward();
 
             if (attacker.TryGetComponent(out Experience attackerExperience))
             {
