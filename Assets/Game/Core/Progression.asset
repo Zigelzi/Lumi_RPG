@@ -15,88 +15,88 @@ MonoBehaviour:
   characterClasses:
   - classType: 0
     stats:
-      - type: 0
-        levels:
-        - 100
-        - 125
-        - 175
-        - 250
-        - 300
-      - type: 1
-        levels:
-          - 10
-          - 15
-          - 20
-          - 25
-          - 30
-      - type: 2
-        levels:
-          - 100
-          - 250
-          - 400
-          - 750
-          - 1000
+    - type: 0
+      levels:
+      - 100
+      - 125
+      - 175
+      - 250
+      - 300
+    - type: 1
+      levels:
+      - 10
+      - 15
+      - 20
+      - 25
+      - 30
+    - type: 2
+      levels:
+      - 100
+      - 250
+      - 400
+      - 750
+      - 1000
   - classType: 1
     stats:
-      - type: 0
-        levels:
-        - 50
-        - 80
-        - 100
-        - 120
-        - 140
-      - type: 1
-        levels:
-          - 10
-          - 15
-          - 20
-          - 25
-          - 30
+    - type: 0
+      levels:
+      - 50
+      - 80
+      - 100
+      - 120
+      - 140
+    - type: 1
+      levels:
+      - 40
+      - 15
+      - 20
+      - 25
+      - 30
   - classType: 2
     stats:
-      - type: 0
-        levels:
-          - 50
-          - 70
-          - 90
-          - 110
-          - 130
-      - type: 1
-        levels:
-          - 10
-          - 15
-          - 20
-          - 25
-          - 30
+    - type: 0
+      levels:
+      - 50
+      - 70
+      - 90
+      - 110
+      - 130
+    - type: 1
+      levels:
+      - 10
+      - 15
+      - 20
+      - 25
+      - 30
   - classType: 3
     stats:
-      - type: 0
-        levels:
-          - 50
-          - 65
-          - 85
-          - 105
-          - 125
-      - type: 1
-        levels:
-          - 10
-          - 15
-          - 20
-          - 25
-          - 30
+    - type: 0
+      levels:
+      - 50
+      - 65
+      - 85
+      - 105
+      - 125
+    - type: 1
+      levels:
+      - 10
+      - 15
+      - 20
+      - 25
+      - 30
   - classType: 4
     stats:
-      - type: 0
-        levels:
-          - 200
-          - 235
-          - 255
-          - 275
-          - 295
-      - type: 1
-        levels:
-          - 10
-          - 15
-          - 20
-          - 25
-          - 30
+    - type: 0
+      levels:
+      - 200
+      - 235
+      - 255
+      - 275
+      - 295
+    - type: 1
+      levels:
+      - 10
+      - 15
+      - 20
+      - 25
+      - 30

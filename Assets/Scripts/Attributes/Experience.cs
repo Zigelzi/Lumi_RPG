@@ -28,7 +28,15 @@ namespace RPG.Attributes
 
         public void AddExperience(float amount)
         {
-            currentExperience += amount;
+            float experienceAmount = Mathf.Min(requiredExperience - currentExperience, amount);
+            currentExperience += experienceAmount;
+
+            if (currentExperience == requiredExperience)
+            {
+                playerStats.LevelUp();
+                currentExperience = 0;
+                
+            }
             OnExperienceChange?.Invoke(currentExperience);
         }
 

@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using RPG.Saving;
+
 namespace RPG.Stats
 {
-    public class BaseStats : MonoBehaviour
+    public class BaseStats : MonoBehaviour, ISaveable
     {
         [SerializeField] CharacterClass characterClass = CharacterClass.Knight;
 
@@ -15,6 +18,8 @@ namespace RPG.Stats
 
         public int StartingLevel { get { return startingLevel; } }
         public int CurrentLevel { get { return currentLevel; } }
+
+        public Action<int> OnLevelChange;
 
         void Start()
         {
@@ -29,6 +34,19 @@ namespace RPG.Stats
         public void LevelUp()
         {
             currentLevel += 1;
+            OnLevelChange?.Invoke(currentLevel);
+        }
+
+        public object CaptureState()
+        {
+            return currentLevel;
+        }
+
+        public void RestoreState(object state)
+        {
+            int restoredLevel = (int)state;
+            
+            currentLevel = restoredLevel;
         }
     }
 }

@@ -34,6 +34,7 @@ namespace RPG.Attributes
 
             playerHealth.OnHealthChange += HandleHealthUpdate;
             playerExperience.OnExperienceChange += HandleExperienceUpdate;
+            playerStats.OnLevelChange += HandleLevelUpdate;
 
         }
 
@@ -51,6 +52,11 @@ namespace RPG.Attributes
         void HandleExperienceUpdate(float newExperience)
         {
             SetExperience(newExperience);
+        }
+
+        void HandleLevelUpdate(int newLevel)
+        {
+            SetStartingLevel(newLevel);
         }
 
         void SetHealthValue()
@@ -74,6 +80,13 @@ namespace RPG.Attributes
             if (levelValue == null || playerStats == null) return;
 
             levelValue.text = playerStats.StartingLevel.ToString();
+        }
+
+        void SetStartingLevel(int level)
+        {
+            if (levelValue == null || playerStats == null) return;
+
+            levelValue.text = level.ToString();
         }
 
         void SetExperience()
