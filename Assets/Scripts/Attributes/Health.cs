@@ -114,7 +114,7 @@ namespace RPG.Attributes
 
         void AwardExperience()
         {
-            if (baseStats == null) return;
+            if (baseStats == null || attacker == null) return;
 
             float experienceReward = baseStats.GetStartingStat(Stat.ExperienceReward);
 

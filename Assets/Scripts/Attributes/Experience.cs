@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using RPG.Stats;
+using RPG.Saving;
 
 namespace RPG.Attributes
 {
-    public class Experience : MonoBehaviour
+    public class Experience : MonoBehaviour, ISaveable
     {
         [SerializeField] float currentExperience = 0;
         [SerializeField] float requiredExperience = 0;
@@ -29,6 +30,20 @@ namespace RPG.Attributes
         {
             currentExperience += amount;
             OnExperienceChange?.Invoke(currentExperience);
+        }
+
+        public object CaptureState()
+        {
+            return currentExperience;
+        }
+
+        public void RestoreState(object state)
+        {
+            float restoredExperience = (float)state;
+
+            currentExperience = restoredExperience;
+            OnExperienceChange?.Invoke(currentExperience);
+
         }
     }
 }

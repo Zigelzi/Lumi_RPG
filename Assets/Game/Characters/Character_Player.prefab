@@ -16,6 +16,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1792
   spellCastingPoint: {fileID: 6600454130212123151}
+--- !u!114 &5016114491809748287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8911502055413707231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f31360725fc07c469b94566786a5bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentExperience: 0
+  requiredExperience: 0
 --- !u!114 &6939780008792097456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,19 +45,6 @@ MonoBehaviour:
   healAmount: 50
   cooldownTime: 2
   spellParticles: {fileID: 2822917930449453751, guid: 90206772f7a9d8c479c8392c06bd1afb, type: 3}
---- !u!114 &5016114491809748287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911502055413707231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f31360725fc07c469b94566786a5bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentExperience: 0
 --- !u!1001 &2877326096519122261
 PrefabInstance:
   m_ObjectHideFlags: 0
