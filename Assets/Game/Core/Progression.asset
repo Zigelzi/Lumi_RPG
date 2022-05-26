@@ -29,6 +29,13 @@ MonoBehaviour:
           - 20
           - 25
           - 30
+      - type: 2
+        levels:
+          - 100
+          - 250
+          - 400
+          - 750
+          - 1000
   - classType: 1
     stats:
       - type: 0
