@@ -35,7 +35,7 @@ namespace RPG.Attributes
             OnHealthChange += HandleHeathUpdate;
 
 
-            maxHealth = baseStats.GetStartingHealth();
+            maxHealth = baseStats.GetStartingStat(Stat.Health);
             currentHealth = maxHealth;
 
         }
@@ -116,7 +116,7 @@ namespace RPG.Attributes
         {
             if (baseStats == null) return;
 
-            float experienceReward = baseStats.GetStartingExperienceReward();
+            float experienceReward = baseStats.GetStartingStat(Stat.ExperienceReward);
 
             if (attacker.TryGetComponent(out Experience attackerExperience))
             {

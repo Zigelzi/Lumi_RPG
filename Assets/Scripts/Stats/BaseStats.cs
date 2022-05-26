@@ -14,14 +14,9 @@ namespace RPG.Stats
 
         public int StartingLevel { get { return startingLevel; } }
 
-        public float GetStartingHealth()
+        public float GetStartingStat(Stat statType)
         {
-            return progression.GetHealth(characterClass, startingLevel);
-        }
-
-        public int GetStartingExperienceReward()
-        {
-            return progression.GetExperienceReward(characterClass, startingLevel);
+            return progression.GetStat(characterClass, statType, startingLevel);
         }
     }
 }
