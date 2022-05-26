@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 using RPG.Stats;
@@ -12,6 +13,7 @@ namespace RPG.Attributes
         [SerializeField] TMP_Text healthValue;
         [SerializeField] TMP_Text levelValue;
         [SerializeField] TMP_Text experienceValue;
+        [SerializeField] Slider experienceSlider;
 
         GameObject player;
         BaseStats playerStats;
@@ -76,16 +78,23 @@ namespace RPG.Attributes
 
         void SetExperience()
         {
-            if (experienceValue == null || playerExperience == null) return;
+            if (experienceValue == null || 
+                playerExperience == null || 
+                experienceSlider == null) return;
 
             experienceValue.text = $"{playerExperience.CurrentExperience} / {playerExperience.RequiredExperience}";
+            experienceSlider.maxValue = playerExperience.RequiredExperience;
+            experienceSlider.value = playerExperience.CurrentExperience;
         }
 
         void SetExperience(float amount)
         {
-            if (experienceValue == null || playerExperience == null) return;
+            if (experienceValue == null ||
+                playerExperience == null ||
+                experienceSlider == null) return;
 
             experienceValue.text = $"{amount} / {playerExperience.RequiredExperience}";
+            experienceSlider.value = amount;
         }
     }
 }

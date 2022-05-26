@@ -362,6 +362,7 @@ MonoBehaviour:
   healthValue: {fileID: 5141464103437525221}
   levelValue: {fileID: 747569820925002485}
   experienceValue: {fileID: 2716092086550655815}
+  experienceSlider: {fileID: 4777121459237178103}
 --- !u!1 &961042013132665650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1119,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 489867609386496886, guid: eda0811c930098e4cb59f4c21271dd9b, type: 3}
       propertyPath: m_Name
-      value: Slider
+      value: Slider_Experience
       objectReference: {fileID: 0}
     - target: {fileID: 1883388825210726102, guid: eda0811c930098e4cb59f4c21271dd9b, type: 3}
       propertyPath: m_Pivot.x
@@ -1235,3 +1236,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1883388825210726102, guid: eda0811c930098e4cb59f4c21271dd9b, type: 3}
   m_PrefabInstance: {fileID: 7366881447675141577}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4777121459237178103 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2627803159500543806, guid: eda0811c930098e4cb59f4c21271dd9b, type: 3}
+  m_PrefabInstance: {fileID: 7366881447675141577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
