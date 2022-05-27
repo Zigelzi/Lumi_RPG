@@ -32,8 +32,9 @@ namespace RPG.Attributes
         {
             animator = GetComponent<Animator>();
             baseStats = GetComponent<BaseStats>();
+            
             OnHealthChange += HandleHeathUpdate;
-
+            baseStats.OnLevelChange += HandleLevelChange;
 
             maxHealth = baseStats.GetStartingStat(Stat.Health);
             currentHealth = maxHealth;
@@ -88,6 +89,14 @@ namespace RPG.Attributes
             {
                 Die();
             }
+        }
+
+        void HandleLevelChange(int newLevel)
+        {
+            maxHealth = baseStats.GetStat(Stat.Health, newLevel);
+            currentHealth = maxHealth;
+
+            OnHealthChange?.Invoke(currentHealth);
         }
 
         void Die()

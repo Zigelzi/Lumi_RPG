@@ -31,6 +31,11 @@ namespace RPG.Stats
             return progression.GetStat(characterClass, statType, startingLevel);
         }
 
+        public float GetStat(Stat statType, int level)
+        {
+            return progression.GetStat(characterClass, statType, level);
+        }
+
         public void LevelUp()
         {
             currentLevel += 1;

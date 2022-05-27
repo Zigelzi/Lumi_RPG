@@ -19,5 +19,3 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 2
   isRightHanded: 1
-  id: 0
-  weaponType: 1
