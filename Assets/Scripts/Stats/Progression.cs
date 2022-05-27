@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace RPG.Stats
 {
@@ -7,24 +8,35 @@ namespace RPG.Stats
     {
         [SerializeField] ProgressionCharacterClass[] characterClasses;
 
+        Dictionary<CharacterClass, Dictionary<Stat, float[]>> characterProgressions;
+
         public float GetStat(CharacterClass characterClass, Stat stat, int level)
         {
-            ProgressionStat progressionStat;
+            BuildProgressions();
 
-            foreach (ProgressionCharacterClass progressionClass in characterClasses)
+            if (characterProgressions.ContainsKey(characterClass) && characterProgressions[characterClass].ContainsKey(stat))
             {
-                if (progressionClass.classType == characterClass)
-                {
-                    progressionStat = progressionClass.GetStat(stat);
-
-                    if (progressionStat == null) return 0;
-                    if (progressionStat.levels.Length < level) return 0;
-
-                    return progressionStat.levels[level - 1];
-                }
+                return characterProgressions[characterClass][stat][level - 1];
             }
 
             return 0;
+        }
+
+        void BuildProgressions()
+        {
+            if (characterProgressions != null) return;
+
+            characterProgressions = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
+
+            foreach (ProgressionCharacterClass progressionClass in characterClasses)
+            {
+                Dictionary<Stat, float[]> statProgressions = new Dictionary<Stat, float[]>();
+                foreach (ProgressionStat stat in progressionClass.stats)
+                {
+                    statProgressions.Add(stat.type, stat.levels);
+                }
+                characterProgressions.Add(progressionClass.classType, statProgressions);
+            }
         }
 
         [System.Serializable]
@@ -32,19 +44,6 @@ namespace RPG.Stats
         {
             public CharacterClass classType = CharacterClass.Knight;
             public ProgressionStat[] stats;
-
-            public ProgressionStat GetStat(Stat statType)
-            {
-                foreach (ProgressionStat stat in stats)
-                {
-                    if (stat.type == statType)
-                    {
-                        return stat;
-                    }
-                }
-
-                return null;
-            }
         }
 
         [System.Serializable]

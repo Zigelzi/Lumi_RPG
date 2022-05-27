@@ -49,9 +49,9 @@ namespace RPG.Attributes
             SetHealthValue(newHealth);
         }
 
-        void HandleExperienceUpdate(float newExperience)
+        void HandleExperienceUpdate(float newCurrentExperience, float newRequiredExperience)
         {
-            SetExperience(newExperience);
+            SetExperience(newCurrentExperience, newRequiredExperience);
         }
 
         void HandleLevelUpdate(int newLevel)
@@ -100,14 +100,16 @@ namespace RPG.Attributes
             experienceSlider.value = playerExperience.CurrentExperience;
         }
 
-        void SetExperience(float amount)
+        void SetExperience(float currentExperience, float requiredExperience)
         {
             if (experienceValue == null ||
                 playerExperience == null ||
                 experienceSlider == null) return;
 
-            experienceValue.text = $"{amount} / {playerExperience.RequiredExperience}";
-            experienceSlider.value = amount;
+            experienceValue.text = $"{currentExperience} / {requiredExperience}";
+
+            experienceSlider.value = currentExperience;
+            experienceSlider.maxValue = requiredExperience;
         }
     }
 }

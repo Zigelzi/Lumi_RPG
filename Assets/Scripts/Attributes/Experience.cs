@@ -18,7 +18,7 @@ namespace RPG.Attributes
         public float CurrentExperience { get { return currentExperience; } }
         public float RequiredExperience {  get { return requiredExperience; } }
 
-        public Action<float> OnExperienceChange;
+        public Action<float, float> OnExperienceChange;
 
         void Awake()
         {
@@ -35,9 +35,9 @@ namespace RPG.Attributes
             {
                 playerStats.LevelUp();
                 currentExperience = 0;
-                
+                requiredExperience = playerStats.GetStat(Stat.ExperienceRequirement, playerStats.CurrentLevel);
             }
-            OnExperienceChange?.Invoke(currentExperience);
+            OnExperienceChange?.Invoke(currentExperience, requiredExperience);
         }
 
         public object CaptureState()
@@ -50,7 +50,7 @@ namespace RPG.Attributes
             float restoredExperience = (float)state;
 
             currentExperience = restoredExperience;
-            OnExperienceChange?.Invoke(currentExperience);
+            OnExperienceChange?.Invoke(currentExperience, requiredExperience);
 
         }
     }
