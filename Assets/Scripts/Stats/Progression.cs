@@ -14,9 +14,14 @@ namespace RPG.Stats
         {
             BuildProgressions();
 
-            if (characterProgressions.ContainsKey(characterClass) && characterProgressions[characterClass].ContainsKey(stat))
+            if (characterProgressions.ContainsKey(characterClass) && 
+                characterProgressions[characterClass].ContainsKey(stat))
             {
-                return characterProgressions[characterClass][stat][level - 1];
+                float[] levels = characterProgressions[characterClass][stat];
+
+                if (levels.Length < level) return 0;
+
+                return levels[level - 1];
             }
 
             return 0;
