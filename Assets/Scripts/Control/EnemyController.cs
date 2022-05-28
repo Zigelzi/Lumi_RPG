@@ -20,6 +20,7 @@ namespace RPG.Control
 
         ActionScheduler actionScheduler;
         Attacking attacking;
+        CapsuleCollider enemyCollider;
         GameObject player;
         Health health;
         Vector3 guardPosition;
@@ -34,6 +35,7 @@ namespace RPG.Control
         {
             actionScheduler = GetComponent<ActionScheduler>();
             attacking = GetComponent<Attacking>();
+            enemyCollider = GetComponent<CapsuleCollider>();
             movement = GetComponent<UnitMovement>();
             health = GetComponent<Health>();
             
@@ -69,8 +71,12 @@ namespace RPG.Control
 
         void HandleDeath()
         {
+            
+
             actionScheduler.CancelCurrentAction();
             movement.SetNavAgent(false);
+            enemyCollider.enabled = false;
+
             enabled = false;
         }
 
