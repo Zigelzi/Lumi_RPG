@@ -49,6 +49,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DeleteSave"",
+                    ""type"": ""Button"",
+                    ""id"": ""de144586-5bfb-4fa8-bbe9-8da0cb20a5a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -95,6 +103,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""OpenMainMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75ee5982-20c6-4e53-9504-8e04364f3816"",
+                    ""path"": ""<Keyboard>/f12"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DeleteSave"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -107,6 +126,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
         m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
         m_Player_OpenMainMenu = m_Player.FindAction("OpenMainMenu", throwIfNotFound: true);
+        m_Player_DeleteSave = m_Player.FindAction("DeleteSave", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -160,6 +180,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Save;
     private readonly InputAction m_Player_Load;
     private readonly InputAction m_Player_OpenMainMenu;
+    private readonly InputAction m_Player_DeleteSave;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -168,6 +189,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Save => m_Wrapper.m_Player_Save;
         public InputAction @Load => m_Wrapper.m_Player_Load;
         public InputAction @OpenMainMenu => m_Wrapper.m_Player_OpenMainMenu;
+        public InputAction @DeleteSave => m_Wrapper.m_Player_DeleteSave;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +211,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @OpenMainMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMainMenu;
                 @OpenMainMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMainMenu;
                 @OpenMainMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMainMenu;
+                @DeleteSave.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteSave;
+                @DeleteSave.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteSave;
+                @DeleteSave.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteSave;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -205,6 +230,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @OpenMainMenu.started += instance.OnOpenMainMenu;
                 @OpenMainMenu.performed += instance.OnOpenMainMenu;
                 @OpenMainMenu.canceled += instance.OnOpenMainMenu;
+                @DeleteSave.started += instance.OnDeleteSave;
+                @DeleteSave.performed += instance.OnDeleteSave;
+                @DeleteSave.canceled += instance.OnDeleteSave;
             }
         }
     }
@@ -215,5 +243,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
         void OnOpenMainMenu(InputAction.CallbackContext context);
+        void OnDeleteSave(InputAction.CallbackContext context);
     }
 }

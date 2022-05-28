@@ -15,6 +15,7 @@ namespace RPG.SceneManagement
         CanvasFader canvasFader;
         InputAction savingInput;
         InputAction loadingInput;
+        InputAction deleteSaveInput;
         PlayerInputActions playerInputActions;
         SavingSystem savingSystem;
 
@@ -29,12 +30,15 @@ namespace RPG.SceneManagement
 
             savingInput = playerInputActions.Player.Save;
             loadingInput = playerInputActions.Player.Load;
+            deleteSaveInput = playerInputActions.Player.DeleteSave;
 
             savingInput.Enable();
             loadingInput.Enable();
+            deleteSaveInput.Enable();
 
             savingInput.performed += Save;
             loadingInput.performed += Load;
+            deleteSaveInput.performed += DeleteSave;
 
             canvasFader.SetCanvasToOpaque();
             yield return savingSystem.LoadLastScene(defaultSaveFile);
@@ -69,6 +73,15 @@ namespace RPG.SceneManagement
         void Load(InputAction.CallbackContext ctx)
         {
             savingSystem.Load(defaultSaveFile);
+        }
+
+        public void DeleteSave()
+        {
+            savingSystem.Delete(defaultSaveFile);
+        }
+        public void DeleteSave(InputAction.CallbackContext ctx)
+        {
+            savingSystem.Delete(defaultSaveFile);
         }
     }
 }
