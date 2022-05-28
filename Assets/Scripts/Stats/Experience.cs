@@ -17,7 +17,7 @@ namespace RPG.Stats
         public float CurrentExperience { get { return currentExperience; } }
         public float RequiredExperience {  get { return requiredExperience; } }
 
-        public Action<float, float> onExperienceChange;
+        public event Action<float, float> onExperienceChange;
 
         void Awake()
         {

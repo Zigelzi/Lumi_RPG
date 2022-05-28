@@ -19,7 +19,7 @@ namespace RPG.Stats
         public int StartingLevel { get { return startingLevel; } }
         public int CurrentLevel { get { return currentLevel; } }
 
-        public Action<int> onLevelChange;
+        public event Action<int> onLevelChange;
 
         void Awake()
         {
