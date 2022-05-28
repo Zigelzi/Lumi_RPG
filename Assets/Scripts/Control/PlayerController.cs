@@ -41,7 +41,7 @@ namespace RPG.Control
             attacking = GetComponent<Attacking>();
             health = GetComponent<Health>();
 
-            health.OnUnitDeath += HandleDeath;
+            health.onUnitDeath += HandleDeath;
             
 
             playerInputActions = new PlayerInputActions();
@@ -54,7 +54,7 @@ namespace RPG.Control
         }
         void OnDestroy()
         {
-            health.OnUnitDeath -= HandleDeath;
+            health.onUnitDeath -= HandleDeath;
 
             movementInput.Disable();
             movementInput.performed -= HandleMousePressedDown;

@@ -40,7 +40,7 @@ namespace RPG.Control
             health = GetComponent<Health>();
             
 
-            health.OnUnitDeath += HandleDeath;
+            health.onUnitDeath += HandleDeath;
 
             player = GameObject.FindGameObjectWithTag("Player");
             guardPosition = transform.position;
@@ -48,7 +48,7 @@ namespace RPG.Control
 
         void OnDestroy()
         {
-            health.OnUnitDeath -= HandleDeath;
+            health.onUnitDeath -= HandleDeath;
         }
 
         void Update()

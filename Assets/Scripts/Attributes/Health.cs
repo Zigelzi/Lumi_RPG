@@ -24,8 +24,8 @@ namespace RPG.Attributes
         public float MaxHealth { get { return maxHealth; } }
         public bool IsAlive { get { return isAlive; } }
 
-        public event Action OnUnitDeath;
-        public event Action<float> OnHealthChange;
+        public event Action onUnitDeath;
+        public event Action<float> onHealthChange;
 
         // Start is called before the first frame update
         void Awake()
@@ -33,8 +33,8 @@ namespace RPG.Attributes
             animator = GetComponent<Animator>();
             baseStats = GetComponent<BaseStats>();
             
-            OnHealthChange += HandleHeathUpdate;
-            baseStats.OnLevelChange += HandleLevelChange;
+            onHealthChange += HandleHeathUpdate;
+            baseStats.onLevelChange += HandleLevelChange;
 
             maxHealth = baseStats.GetStartingStat(Stat.Health);
             currentHealth = maxHealth;
@@ -43,13 +43,13 @@ namespace RPG.Attributes
 
         void OnDestroy()
         {
-            OnHealthChange -= HandleHeathUpdate;
+            onHealthChange -= HandleHeathUpdate;
         }
 
         public void TakeDamage(float amount, GameObject attacker)
         {
             currentHealth = Mathf.Max(currentHealth - amount, 0);
-            OnHealthChange?.Invoke(currentHealth);
+            onHealthChange?.Invoke(currentHealth);
 
             this.attacker = attacker;
 
@@ -61,7 +61,7 @@ namespace RPG.Attributes
             {
                 float healAmount = Mathf.Min(maxHealth - currentHealth, amount);
                 currentHealth += healAmount;
-                OnHealthChange?.Invoke(currentHealth);
+                onHealthChange?.Invoke(currentHealth);
 
                 return true;
             }
@@ -80,7 +80,7 @@ namespace RPG.Attributes
 
             currentHealth = restoredHealth;
 
-            OnHealthChange?.Invoke(currentHealth);
+            onHealthChange?.Invoke(currentHealth);
         }
 
         void HandleHeathUpdate(float newHealth)
@@ -96,7 +96,7 @@ namespace RPG.Attributes
             maxHealth = baseStats.GetStat(Stat.Health, newLevel);
             currentHealth = maxHealth;
 
-            OnHealthChange?.Invoke(currentHealth);
+            onHealthChange?.Invoke(currentHealth);
         }
 
         void Die()
@@ -105,7 +105,7 @@ namespace RPG.Attributes
             {
                 isAlive = false;
                 animator.SetTrigger("die");
-                OnUnitDeath?.Invoke();
+                onUnitDeath?.Invoke();
 
                 if (gameObject.tag != "Player")
                 {

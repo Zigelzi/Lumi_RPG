@@ -17,12 +17,12 @@ public class HealthBar : MonoBehaviour
         healthSlider.maxValue = health.MaxHealth;
         healthSlider.value = health.MaxHealth;
 
-        health.OnHealthChange += HandleHealthUpdate;
+        health.onHealthChange += HandleHealthUpdate;
     }
 
     void OnDestroy()
     {
-        health.OnHealthChange -= HandleHealthUpdate;
+        health.onHealthChange -= HandleHealthUpdate;
     }
 
     void HandleHealthUpdate(float newHealth)

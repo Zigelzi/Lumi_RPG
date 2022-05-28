@@ -23,12 +23,12 @@ namespace RPG.Combat
             health = GetComponent<Health>();
             player = GetComponent<PlayerController>();
 
-            health.OnUnitDeath += HandleUnitDeath;
+            health.onUnitDeath += HandleUnitDeath;
         }
 
         void OnDestroy()
         {
-            health.OnUnitDeath -= HandleUnitDeath;
+            health.onUnitDeath -= HandleUnitDeath;
         }
 
         // Update is called once per frame
