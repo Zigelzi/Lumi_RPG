@@ -8,7 +8,7 @@ public class HealthBar : MonoBehaviour
 {
     Health health;
     Slider healthSlider;
-    // Start is called before the first frame update
+
     void Awake()
     {
         health = GetComponentInParent<Health>();
@@ -27,6 +27,7 @@ public class HealthBar : MonoBehaviour
 
     void HandleHealthUpdate(float newHealth)
     {
+        healthSlider.maxValue = health.MaxHealth;
         healthSlider.value = newHealth;
     }
 }

@@ -31,11 +31,11 @@ MonoBehaviour:
       - 30
     - type: 2
       levels:
+      - 50
       - 100
+      - 140
       - 250
-      - 400
-      - 750
-      - 1000
+      - 350
   - classType: 1
     stats:
     - type: 0

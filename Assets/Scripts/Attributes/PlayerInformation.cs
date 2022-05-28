@@ -56,7 +56,7 @@ namespace RPG.Attributes
 
         void HandleLevelUpdate(int newLevel)
         {
-            SetStartingLevel(newLevel);
+            SetLevel(newLevel);
         }
 
         void SetHealthValue()
@@ -82,7 +82,7 @@ namespace RPG.Attributes
             levelValue.text = playerStats.StartingLevel.ToString();
         }
 
-        void SetStartingLevel(int level)
+        void SetLevel(int level)
         {
             if (levelValue == null || playerStats == null) return;
 

@@ -21,7 +21,7 @@ namespace RPG.Stats
 
         public Action<int> OnLevelChange;
 
-        void Start()
+        void Awake()
         {
             currentLevel = startingLevel;    
         }
