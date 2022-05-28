@@ -8,14 +8,14 @@ public class GameOverCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController.OnPlayerDeath += HandlePlayerDeath;
+        PlayerController.onPlayerDeath += HandlePlayerDeath;
 
         DisplayGameOverUI(false);
     }
 
     void OnDestroy()
     {
-        PlayerController.OnPlayerDeath -= HandlePlayerDeath;
+        PlayerController.onPlayerDeath -= HandlePlayerDeath;
     }
 
     void HandlePlayerDeath()

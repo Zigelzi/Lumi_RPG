@@ -29,7 +29,7 @@ namespace RPG.Control
         public PlayerInputActions PlayerInputActions { get { return playerInputActions; } }
         public Transform SpellCastingPoint { get { return spellCastingPoint; } }
 
-        public static event Action OnPlayerDeath;
+        public static event Action onPlayerDeath;
 
         // Start is called before the first frame update
         void Awake()
@@ -70,7 +70,7 @@ namespace RPG.Control
 
         void HandleDeath()
         {
-            OnPlayerDeath?.Invoke();
+            onPlayerDeath?.Invoke();
             enabled = false;
             actionScheduler.CancelCurrentAction();
             movement.SetNavAgent(false);

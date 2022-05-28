@@ -33,7 +33,7 @@ namespace RPG.Attributes
             SetExperience();
 
             playerHealth.onHealthChange += HandleHealthUpdate;
-            playerExperience.OnExperienceChange += HandleExperienceUpdate;
+            playerExperience.onExperienceChange += HandleExperienceUpdate;
             playerStats.onLevelChange += HandleLevelUpdate;
 
         }
@@ -41,7 +41,7 @@ namespace RPG.Attributes
         void OnDestroy()
         {
             playerHealth.onHealthChange -= HandleHealthUpdate;
-            playerExperience.OnExperienceChange -= HandleExperienceUpdate;
+            playerExperience.onExperienceChange -= HandleExperienceUpdate;
         }
 
         void HandleHealthUpdate(float newHealth)
