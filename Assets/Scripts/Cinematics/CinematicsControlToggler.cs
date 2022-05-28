@@ -14,7 +14,7 @@ namespace RPG.Cinematics
         PlayableDirector director;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             actionScheduler = playerController.GetComponent<ActionScheduler>();

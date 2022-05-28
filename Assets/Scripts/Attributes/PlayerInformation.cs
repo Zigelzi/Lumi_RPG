@@ -21,7 +21,7 @@ namespace RPG.Attributes
         Health playerHealth;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             player = GameObject.FindGameObjectWithTag("Player");
             playerHealth = player.GetComponent<Health>();

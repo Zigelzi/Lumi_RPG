@@ -12,7 +12,6 @@ namespace RPG.SceneManagement
     {
         [SerializeField][Range(0, 5f)] float loadingDuration = 1f;
 
-        CanvasFader canvasFader;
         InputAction savingInput;
         InputAction loadingInput;
         InputAction deleteSaveInput;
@@ -21,12 +20,10 @@ namespace RPG.SceneManagement
 
         const string defaultSaveFile = "lumi_save";
 
-        // Start is called before the first frame update
-        IEnumerator Start()
+        void Awake()
         {
             playerInputActions = new PlayerInputActions();
             savingSystem = GetComponent<SavingSystem>();
-            canvasFader = FindObjectOfType<CanvasFader>();
 
             savingInput = playerInputActions.Player.Save;
             loadingInput = playerInputActions.Player.Load;
@@ -40,10 +37,7 @@ namespace RPG.SceneManagement
             loadingInput.performed += Load;
             deleteSaveInput.performed += DeleteSave;
 
-            canvasFader.SetCanvasToOpaque();
-            yield return savingSystem.LoadLastScene(defaultSaveFile);
-            yield return canvasFader.FadeIn(loadingDuration);
-            
+            StartCoroutine(LoadLastScene());    
         }
 
         void OnDestroy()
@@ -60,17 +54,7 @@ namespace RPG.SceneManagement
             savingSystem.Save(defaultSaveFile);
         }
 
-        void Save(InputAction.CallbackContext ctx)
-        {
-            savingSystem.Save(defaultSaveFile);
-        }
-
         public void Load()
-        {
-            savingSystem.Load(defaultSaveFile);
-        }
-
-        void Load(InputAction.CallbackContext ctx)
         {
             savingSystem.Load(defaultSaveFile);
         }
@@ -79,9 +63,30 @@ namespace RPG.SceneManagement
         {
             savingSystem.Delete(defaultSaveFile);
         }
-        public void DeleteSave(InputAction.CallbackContext ctx)
+
+        void Save(InputAction.CallbackContext ctx)
+        {
+            savingSystem.Save(defaultSaveFile);
+        }
+
+        void Load(InputAction.CallbackContext ctx)
+        {
+            savingSystem.Load(defaultSaveFile);
+        }
+
+        
+        void DeleteSave(InputAction.CallbackContext ctx)
         {
             savingSystem.Delete(defaultSaveFile);
+        }
+
+        IEnumerator LoadLastScene()
+        {
+            CanvasFader canvasFader = FindObjectOfType<CanvasFader>();
+
+            canvasFader.SetCanvasToOpaque();
+            yield return savingSystem.LoadLastScene(defaultSaveFile);
+            yield return canvasFader.FadeIn(loadingDuration);
         }
     }
 }

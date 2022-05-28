@@ -16,6 +16,7 @@ namespace RPG.SceneManagement
 
         public void SetCanvasToOpaque()
         {
+            canvasGroup = GetComponent<CanvasGroup>();
             canvasGroup.alpha = 1;
             StartCoroutine(FadeIn(2f));
         }
