@@ -15,6 +15,7 @@ namespace RPG.Stats
         [SerializeField] int startingLevel = 1;
         [SerializeField] int currentLevel = 1;
         [SerializeField] Progression progression;
+        [SerializeField] GameObject levelUpVFX;
 
         public int StartingLevel { get { return startingLevel; } }
         public int CurrentLevel { get { return currentLevel; } }
@@ -40,6 +41,7 @@ namespace RPG.Stats
         {
             currentLevel += 1;
             onLevelChange?.Invoke(currentLevel);
+            SpawnLevelUpVFX();
         }
 
         public object CaptureState()
@@ -52,6 +54,13 @@ namespace RPG.Stats
             int restoredLevel = (int)state;
             
             currentLevel = restoredLevel;
+        }
+
+        void SpawnLevelUpVFX()
+        {
+            if (levelUpVFX == null) return;
+
+            Instantiate(levelUpVFX, transform.position, transform.rotation);
         }
     }
 }
