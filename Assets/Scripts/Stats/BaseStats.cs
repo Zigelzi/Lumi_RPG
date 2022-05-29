@@ -60,7 +60,7 @@ namespace RPG.Stats
         {
             if (levelUpVFX == null) return;
 
-            Instantiate(levelUpVFX, transform.position, transform.rotation);
+            Instantiate(levelUpVFX, transform);
         }
     }
 }
