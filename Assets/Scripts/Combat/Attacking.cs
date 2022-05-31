@@ -5,6 +5,7 @@ using UnityEngine;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Stats;
 
 namespace RPG.Combat
 {
@@ -12,11 +13,13 @@ namespace RPG.Combat
     {
         ActionScheduler actionScheduler;
         Animator animator;
+        BaseStats baseStats;
         GameObject currentTarget;
         UnitMovement movement;
         WeaponManager weaponManager;
 
         float timeSinceLastAttack = Mathf.Infinity;
+        float baseDamage = 10f;
 
         void Start()
         {
@@ -24,6 +27,10 @@ namespace RPG.Combat
             animator = GetComponent<Animator>();
             movement = GetComponent<UnitMovement>();
             weaponManager = GetComponent<WeaponManager>();
+            baseStats = GetComponent<BaseStats>();
+
+            if (baseStats == null) return;
+            baseDamage = baseStats.GetStartingStat(Stat.Damage);
         }
 
         void Update()
@@ -150,6 +157,12 @@ namespace RPG.Combat
             animator.SetTrigger("stopAttack");
         }
 
+        // Triggered by attacking animation event "Shoot"
+        void Shoot()
+        {
+            Hit();
+        }
+
         // Triggered by attacking animation event "Hit"
         void Hit()
         {
@@ -167,16 +180,17 @@ namespace RPG.Combat
                 }
                 else
                 {
-                    currentTargetHealth.TakeDamage(currentWeapon.AttackDamage, gameObject);
+                    DealMeleeDamage(currentWeapon, currentTargetHealth);
                 }
                 
             }
         }
 
-        // Triggered by attacking animation event "Shoot"
-        void Shoot()
+        void DealMeleeDamage(Weapon weapon,Health currentTarget)
         {
-            Hit();
+            float totalDamage = baseDamage + weapon.AttackDamage;
+            Debug.Log($"Dealing {totalDamage}, base damage {baseDamage} + weapon damage {weapon.AttackDamage}");
+            currentTarget.TakeDamage(totalDamage, gameObject);
         }
 
     }

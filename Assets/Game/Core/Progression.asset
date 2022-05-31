@@ -36,6 +36,13 @@ MonoBehaviour:
       - 140
       - 250
       - 350
+    - type: 3
+      levels:
+      - 15
+      - 20
+      - 25
+      - 35
+      - 45
   - classType: 1
     stats:
     - type: 0
@@ -48,6 +55,13 @@ MonoBehaviour:
     - type: 1
       levels:
       - 40
+      - 15
+      - 20
+      - 25
+      - 30
+    - type: 3
+      levels:
+      - 10
       - 15
       - 20
       - 25
@@ -68,6 +82,13 @@ MonoBehaviour:
       - 20
       - 25
       - 30
+    - type: 3
+      levels:
+      - 5
+      - 10
+      - 15
+      - 20
+      - 25
   - classType: 3
     stats:
     - type: 0
@@ -84,6 +105,13 @@ MonoBehaviour:
       - 20
       - 25
       - 30
+    - type: 3
+      levels:
+      - 15
+      - 25
+      - 35
+      - 45
+      - 55
   - classType: 4
     stats:
     - type: 0
@@ -100,3 +128,10 @@ MonoBehaviour:
       - 20
       - 25
       - 30
+    - type: 3
+      levels:
+      - 35
+      - 45
+      - 55
+      - 65
+      - 75

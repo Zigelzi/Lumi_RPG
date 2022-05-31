@@ -15,7 +15,7 @@ MonoBehaviour:
   attackAnimation: {fileID: 22100000, guid: 72dc1cb07e74952408194e36589ac900, type: 2}
   equippedPrefab: {fileID: 7770529719666194537, guid: d05ddab5f79176d48883ad974c67e865, type: 3}
   projectile: {fileID: 6806433064547001854, guid: 998431217f50c1a46a63b670e72d98a0, type: 3}
-  attackDamage: 15
+  attackDamage: 10
   attackSpeed: 1
   attackRange: 40
   isRightHanded: 0

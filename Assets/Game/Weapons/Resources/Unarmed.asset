@@ -15,7 +15,7 @@ MonoBehaviour:
   attackAnimation: {fileID: 0}
   equippedPrefab: {fileID: 0}
   projectile: {fileID: 0}
-  attackDamage: 15
+  attackDamage: 5
   attackSpeed: 1
   attackRange: 2
   isRightHanded: 1
