@@ -21,7 +21,7 @@ namespace RPG.Combat
         float timeSinceLastAttack = Mathf.Infinity;
         float baseDamage = 10f;
 
-        void Start()
+        void Awake()
         {
             actionScheduler = GetComponent<ActionScheduler>();
             animator = GetComponent<Animator>();
@@ -31,6 +31,13 @@ namespace RPG.Combat
 
             if (baseStats == null) return;
             baseDamage = baseStats.GetStartingStat(Stat.Damage);
+
+            baseStats.onLevelChange += HandleLevelChange;
+        }
+
+        void OnDestroy()
+        {
+            baseStats.onLevelChange -= HandleLevelChange;
         }
 
         void Update()
@@ -54,6 +61,11 @@ namespace RPG.Combat
 
             StopAttackAnimation();
             movement.Cancel();
+        }
+
+        void HandleLevelChange(int newLevel)
+        {
+            baseDamage = baseStats.GetStat(Stat.Damage, newLevel);
         }
 
         void UpdateLastAttackTime()
@@ -176,7 +188,8 @@ namespace RPG.Combat
                     currentWeapon.LaunchProjectile(weaponManager.LeftHandHoldingLocation, 
                         weaponManager.RightHandHoldingLocation,
                         currentTargetHealth,
-                        gameObject);
+                        gameObject,
+                        baseDamage);
                 }
                 else
                 {
@@ -189,7 +202,6 @@ namespace RPG.Combat
         void DealMeleeDamage(Weapon weapon,Health currentTarget)
         {
             float totalDamage = baseDamage + weapon.AttackDamage;
-            Debug.Log($"Dealing {totalDamage}, base damage {baseDamage} + weapon damage {weapon.AttackDamage}");
             currentTarget.TakeDamage(totalDamage, gameObject);
         }
 
