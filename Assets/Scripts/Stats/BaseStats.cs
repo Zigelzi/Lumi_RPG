@@ -14,6 +14,7 @@ namespace RPG.Stats
         [Range(1, 99)]
         [SerializeField] int startingLevel = 1;
         [SerializeField] int currentLevel = 0;
+        [SerializeField] bool isUsingModifiers = false;
         [SerializeField] Progression progression;
         [SerializeField] GameObject levelUpVFX;
 
@@ -64,6 +65,8 @@ namespace RPG.Stats
 
         float GetAdditiveModifiers(Stat statType)
         {
+            if (!isUsingModifiers) return 0;
+
             float totalStatValue = 0;
             foreach (IStatModifier statModifier in GetComponents<IStatModifier>())
             {
@@ -78,6 +81,8 @@ namespace RPG.Stats
 
         float GetPercentageModifiers(Stat statType)
         {
+            if (!isUsingModifiers) return 1;
+
             float totalPercentageMultiplier = 0;
             foreach (IStatModifier statModifier in GetComponents<IStatModifier>())
             {
