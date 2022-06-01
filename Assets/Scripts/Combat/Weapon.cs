@@ -11,12 +11,14 @@ namespace RPG.Combat
         [SerializeField] Projectile projectile;
 
         [SerializeField][Range(0, 100f)] float attackDamage = 20f;
+        [SerializeField] float attackMultiplier = 0f;
         [SerializeField][Range(0, 3f)] float attackSpeed = 1f;
         [SerializeField] float attackRange = 2f;
         [SerializeField] bool isRightHanded = true;
 
         public bool HasProjectile { get { return projectile != null; } }
         public float AttackDamage { get { return attackDamage; } }
+        public float AttackMultiplier { get { return attackMultiplier; } }
         public float AttackRange { get { return attackRange; } }
         public float AttackSpeed { get { return attackSpeed; } }
 
@@ -50,14 +52,12 @@ namespace RPG.Combat
             Transform rightHand,
             Health target,
             GameObject owner,
-            float baseDamage)
+            float damage)
         {
             Transform handTransform = GetHandTransform(leftHand, rightHand);
             Projectile projectileInstance = Instantiate(projectile, handTransform.position, Quaternion.identity);
 
-            float totalDamage = baseDamage + attackDamage;
-
-            projectileInstance.SetDamage(totalDamage);
+            projectileInstance.SetDamage(damage);
             projectileInstance.SetTarget(target);
             projectileInstance.SetProjectileOwner(owner);
         }

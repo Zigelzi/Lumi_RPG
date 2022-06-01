@@ -29,18 +29,12 @@ namespace RPG.Stats
 
         public float GetStat(Stat statType)
         {
-            float baseStatValue = progression.GetStat(characterClass, statType, GetLevel());
+            float baseStatValue = GetBaseStat(statType);
             float additiveStatValue = GetAdditiveModifiers(statType);
+            float percentageStatValue = GetPercentageModifiers(statType);
 
-            if (gameObject.tag == "Player")
-            {
-                Debug.Log($"{gameObject.name} stats {statType}");
-                Debug.Log($"Base stat: {baseStatValue}");
-                Debug.Log($"Additive stat: {additiveStatValue}");
-            }
-            
+            float totalStatValue = (baseStatValue + additiveStatValue) * percentageStatValue;
 
-            float totalStatValue = baseStatValue + additiveStatValue;
             return totalStatValue;
         }
 
@@ -63,18 +57,37 @@ namespace RPG.Stats
             currentLevel = restoredLevel;
         }
 
-        public float GetAdditiveModifiers(Stat stat)
+        float GetBaseStat(Stat statType)
+        {
+            return progression.GetStat(characterClass, statType, GetLevel());
+        }
+
+        float GetAdditiveModifiers(Stat statType)
         {
             float totalStatValue = 0;
             foreach (IStatModifier statModifier in GetComponents<IStatModifier>())
             {
-                foreach (float modifierValue in statModifier.GetAdditiveModifier(stat))
+                foreach (float modifierValue in statModifier.GetAdditiveModifier(statType))
                 {
                     totalStatValue += modifierValue;
                 }
             }
 
             return totalStatValue;
+        }
+
+        float GetPercentageModifiers(Stat statType)
+        {
+            float totalPercentageMultiplier = 0;
+            foreach (IStatModifier statModifier in GetComponents<IStatModifier>())
+            {
+                foreach (float modifierValue in statModifier.GetPercentageModifier(statType))
+                {
+                    totalPercentageMultiplier += modifierValue;
+                }
+            }
+
+            return 1 + totalPercentageMultiplier / 100;
         }
 
         void SpawnLevelUpVFX()
