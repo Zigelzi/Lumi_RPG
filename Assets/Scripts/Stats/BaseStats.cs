@@ -56,6 +56,20 @@ namespace RPG.Stats
             currentLevel = restoredLevel;
         }
 
+        public float GetAdditiveModifiers(Stat stat)
+        {
+            float totalStatValue = 0;
+            foreach (IStatModifier statModifier in GetComponents<IStatModifier>())
+            {
+                foreach (float modifierValue in statModifier.GetAdditiveModifiers(stat))
+                {
+                    totalStatValue += modifierValue;
+                }
+            }
+
+            return totalStatValue;
+        }
+
         void SpawnLevelUpVFX()
         {
             if (levelUpVFX == null) return;

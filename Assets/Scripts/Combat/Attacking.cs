@@ -10,7 +10,7 @@ using System;
 
 namespace RPG.Combat
 {
-    public class Attacking : MonoBehaviour, IAction
+    public class Attacking : MonoBehaviour, IAction, IStatModifier
     {
         ActionScheduler actionScheduler;
         Animator animator;
@@ -71,6 +71,14 @@ namespace RPG.Combat
 
             StopAttackAnimation();
             movement.Cancel();
+        }
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return baseDamage;
+            }
         }
 
         void HandleLevelChange(int newLevel)
@@ -203,18 +211,17 @@ namespace RPG.Combat
                 }
                 else
                 {
-                    DealMeleeDamage(currentWeapon, currentTargetHealth);
+                    DealMeleeDamage(currentTargetHealth);
                 }
                 
             }
         }
 
-        void DealMeleeDamage(Weapon weapon,Health currentTarget)
+        void DealMeleeDamage(Health currentTarget)
         {
-            float totalDamage = baseDamage + weapon.AttackDamage;
+            float totalDamage = baseStats.GetAdditiveModifiers(Stat.Damage);
             currentTarget.TakeDamage(totalDamage, gameObject);
         }
-
     }
 }
 

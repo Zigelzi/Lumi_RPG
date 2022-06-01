@@ -4,9 +4,11 @@ using UnityEngine;
 using RPG.Saving;
 using System;
 
+using RPG.Stats;
+
 namespace RPG.Combat
 {
-    public class WeaponManager : MonoBehaviour, ISaveable
+    public class WeaponManager : MonoBehaviour, ISaveable, IStatModifier
     {
         [SerializeField] Transform leftHandHoldingLocation = null;
         [SerializeField] Transform rightHandHoldingLocation = null;
@@ -43,6 +45,14 @@ namespace RPG.Combat
                 onWeaponChange?.Invoke(currentWeapon);
             }
         }
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return currentWeapon.AttackDamage;
+            }
+        }
+
 
         bool CanSpawnWeapon()
         {
