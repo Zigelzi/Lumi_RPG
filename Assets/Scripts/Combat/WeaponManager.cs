@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Saving;
+using System;
 
 namespace RPG.Combat
 {
@@ -14,10 +15,11 @@ namespace RPG.Combat
 
         GameObject currentWeaponInstance = null;
         
-
         public Transform LeftHandHoldingLocation { get { return leftHandHoldingLocation; } }
         public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
         public Weapon CurrentWeapon { get {  return currentWeapon; } }
+
+        public event Action<Weapon> onWeaponChange;
 
         void Awake()
         {
@@ -38,6 +40,7 @@ namespace RPG.Combat
                 weapon.SetAttackAnimation(animator);
 
                 currentWeapon = weapon;
+                onWeaponChange?.Invoke(currentWeapon);
             }
         }
 

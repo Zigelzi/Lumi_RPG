@@ -6,6 +6,7 @@ using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
 using RPG.Stats;
+using System;
 
 namespace RPG.Combat
 {
@@ -14,6 +15,7 @@ namespace RPG.Combat
         ActionScheduler actionScheduler;
         Animator animator;
         BaseStats baseStats;
+        Weapon currentWeapon;
         GameObject currentTarget;
         UnitMovement movement;
         WeaponManager weaponManager;
@@ -29,15 +31,23 @@ namespace RPG.Combat
             weaponManager = GetComponent<WeaponManager>();
             baseStats = GetComponent<BaseStats>();
 
-            if (baseStats == null) return;
-            baseDamage = baseStats.GetStartingStat(Stat.Damage);
+            if (baseStats != null)
+            {
+                baseDamage = baseStats.GetStartingStat(Stat.Damage);
+                baseStats.onLevelChange += HandleLevelChange;
+            }     
 
-            baseStats.onLevelChange += HandleLevelChange;
+            if (weaponManager != null)
+            {
+                weaponManager.onWeaponChange += HandleWeaponChange;
+                currentWeapon = weaponManager.CurrentWeapon;
+            }
         }
 
         void OnDestroy()
         {
             baseStats.onLevelChange -= HandleLevelChange;
+            weaponManager.onWeaponChange -= HandleWeaponChange;
         }
 
         void Update()
@@ -66,6 +76,10 @@ namespace RPG.Combat
         void HandleLevelChange(int newLevel)
         {
             baseDamage = baseStats.GetStat(Stat.Damage, newLevel);
+        }
+        void HandleWeaponChange(Weapon newWeapon)
+        {
+            currentWeapon = newWeapon;
         }
 
         void UpdateLastAttackTime()
@@ -110,7 +124,6 @@ namespace RPG.Combat
                 currentTarget.transform.position
                 );
 
-            Weapon currentWeapon = weaponManager.CurrentWeapon;
             if (distanceFromTarget <= currentWeapon.AttackRange)
             {
                 return true;
@@ -121,8 +134,6 @@ namespace RPG.Combat
 
         bool IsAbleToAttackAgain()
         {
-            Weapon currentWeapon = weaponManager.CurrentWeapon;
-
             if (timeSinceLastAttack >= currentWeapon.AttackSpeed)
             {
                 return true;
@@ -180,7 +191,6 @@ namespace RPG.Combat
         {
             if (currentTarget == null) return;
 
-            Weapon currentWeapon = weaponManager.CurrentWeapon;
             if (currentTarget.TryGetComponent<Health>(out Health currentTargetHealth))
             {
                 if (currentWeapon.HasProjectile)
