@@ -22,7 +22,7 @@ namespace RPG.Stats
         void Awake()
         {
             playerStats = GetComponent<BaseStats>();
-            requiredExperience = playerStats.GetStartingStat(Stat.ExperienceRequirement);
+            requiredExperience = playerStats.GetStat(Stat.ExperienceRequirement);
         }
 
         public void AddExperience(float amount)
@@ -34,7 +34,7 @@ namespace RPG.Stats
             {
                 playerStats.LevelUp();
                 currentExperience = 0;
-                requiredExperience = playerStats.GetStat(Stat.ExperienceRequirement, playerStats.CurrentLevel);
+                requiredExperience = playerStats.GetStat(Stat.ExperienceRequirement);
             }
             onExperienceChange?.Invoke(currentExperience, requiredExperience);
         }

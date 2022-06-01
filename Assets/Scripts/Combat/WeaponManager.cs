@@ -45,7 +45,7 @@ namespace RPG.Combat
                 onWeaponChange?.Invoke(currentWeapon);
             }
         }
-        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
         {
             if (stat == Stat.Damage)
             {

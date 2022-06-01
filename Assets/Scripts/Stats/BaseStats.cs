@@ -13,7 +13,7 @@ namespace RPG.Stats
 
         [Range(1, 99)]
         [SerializeField] int startingLevel = 1;
-        [SerializeField] int currentLevel = 1;
+        [SerializeField] int currentLevel = 0;
         [SerializeField] Progression progression;
         [SerializeField] GameObject levelUpVFX;
 
@@ -24,17 +24,24 @@ namespace RPG.Stats
 
         void Awake()
         {
-            currentLevel = startingLevel;    
+            currentLevel = GetLevel();    
         }
 
-        public float GetStartingStat(Stat statType)
+        public float GetStat(Stat statType)
         {
-            return progression.GetStat(characterClass, statType, startingLevel);
-        }
+            float baseStatValue = progression.GetStat(characterClass, statType, GetLevel());
+            float additiveStatValue = GetAdditiveModifiers(statType);
 
-        public float GetStat(Stat statType, int level)
-        {
-            return progression.GetStat(characterClass, statType, level);
+            if (gameObject.tag == "Player")
+            {
+                Debug.Log($"{gameObject.name} stats {statType}");
+                Debug.Log($"Base stat: {baseStatValue}");
+                Debug.Log($"Additive stat: {additiveStatValue}");
+            }
+            
+
+            float totalStatValue = baseStatValue + additiveStatValue;
+            return totalStatValue;
         }
 
         public void LevelUp()
@@ -61,7 +68,7 @@ namespace RPG.Stats
             float totalStatValue = 0;
             foreach (IStatModifier statModifier in GetComponents<IStatModifier>())
             {
-                foreach (float modifierValue in statModifier.GetAdditiveModifiers(stat))
+                foreach (float modifierValue in statModifier.GetAdditiveModifier(stat))
                 {
                     totalStatValue += modifierValue;
                 }
@@ -75,6 +82,16 @@ namespace RPG.Stats
             if (levelUpVFX == null) return;
 
             Instantiate(levelUpVFX, transform);
+        }
+
+        int GetLevel()
+        {
+            if (currentLevel < 1)
+            {
+                currentLevel = startingLevel;
+            }
+
+            return currentLevel;
         }
     }
 }

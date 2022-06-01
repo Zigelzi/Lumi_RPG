@@ -36,7 +36,7 @@ namespace RPG.Attributes
             onHealthChange += HandleHeathUpdate;
             baseStats.onLevelChange += HandleLevelChange;
 
-            maxHealth = baseStats.GetStartingStat(Stat.Health);
+            maxHealth = baseStats.GetStat(Stat.Health);
             currentHealth = maxHealth;
 
         }
@@ -48,6 +48,7 @@ namespace RPG.Attributes
 
         public void TakeDamage(float amount, GameObject attacker)
         {
+            Debug.Log($"{gameObject.name} took {amount} damage from {attacker.name}");
             currentHealth = Mathf.Max(currentHealth - amount, 0);
             onHealthChange?.Invoke(currentHealth);
 
@@ -93,7 +94,7 @@ namespace RPG.Attributes
 
         void HandleLevelChange(int newLevel)
         {
-            maxHealth = baseStats.GetStat(Stat.Health, newLevel);
+            maxHealth = baseStats.GetStat(Stat.Health);
             currentHealth = maxHealth;
 
             onHealthChange?.Invoke(currentHealth);
@@ -125,7 +126,7 @@ namespace RPG.Attributes
         {
             if (baseStats == null || attacker == null) return;
 
-            float experienceReward = baseStats.GetStartingStat(Stat.ExperienceReward);
+            float experienceReward = baseStats.GetStat(Stat.ExperienceReward);
 
             if (attacker.TryGetComponent(out Experience attackerExperience))
             {

@@ -10,7 +10,7 @@ using System;
 
 namespace RPG.Combat
 {
-    public class Attacking : MonoBehaviour, IAction, IStatModifier
+    public class Attacking : MonoBehaviour, IAction
     {
         ActionScheduler actionScheduler;
         Animator animator;
@@ -21,7 +21,6 @@ namespace RPG.Combat
         WeaponManager weaponManager;
 
         float timeSinceLastAttack = Mathf.Infinity;
-        float baseDamage = 10f;
 
         void Awake()
         {
@@ -30,12 +29,6 @@ namespace RPG.Combat
             movement = GetComponent<UnitMovement>();
             weaponManager = GetComponent<WeaponManager>();
             baseStats = GetComponent<BaseStats>();
-
-            if (baseStats != null)
-            {
-                baseDamage = baseStats.GetStartingStat(Stat.Damage);
-                baseStats.onLevelChange += HandleLevelChange;
-            }     
 
             if (weaponManager != null)
             {
@@ -46,7 +39,6 @@ namespace RPG.Combat
 
         void OnDestroy()
         {
-            baseStats.onLevelChange -= HandleLevelChange;
             weaponManager.onWeaponChange -= HandleWeaponChange;
         }
 
@@ -73,18 +65,6 @@ namespace RPG.Combat
             movement.Cancel();
         }
 
-        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return baseDamage;
-            }
-        }
-
-        void HandleLevelChange(int newLevel)
-        {
-            baseDamage = baseStats.GetStat(Stat.Damage, newLevel);
-        }
         void HandleWeaponChange(Weapon newWeapon)
         {
             currentWeapon = newWeapon;
@@ -199,6 +179,8 @@ namespace RPG.Combat
         {
             if (currentTarget == null) return;
 
+            float damage = baseStats.GetStat(Stat.Damage);
+
             if (currentTarget.TryGetComponent<Health>(out Health currentTargetHealth))
             {
                 if (currentWeapon.HasProjectile)
@@ -207,20 +189,14 @@ namespace RPG.Combat
                         weaponManager.RightHandHoldingLocation,
                         currentTargetHealth,
                         gameObject,
-                        baseDamage);
+                        damage);
                 }
                 else
                 {
-                    DealMeleeDamage(currentTargetHealth);
+                    currentTargetHealth.TakeDamage(damage, gameObject);
                 }
                 
             }
-        }
-
-        void DealMeleeDamage(Health currentTarget)
-        {
-            float totalDamage = baseStats.GetAdditiveModifiers(Stat.Damage);
-            currentTarget.TakeDamage(totalDamage, gameObject);
         }
     }
 }
