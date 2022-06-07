@@ -21,15 +21,6 @@ namespace RPG.SceneManagement
             A, B
         }
 
-        void Update()
-        {
-            if (!Application.isPlaying)
-            {
-                //gameObject.name = $"Portal_{identifier}";
-            }
-                     
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Player")

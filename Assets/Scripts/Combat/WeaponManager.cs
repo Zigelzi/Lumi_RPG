@@ -23,7 +23,7 @@ namespace RPG.Combat
 
         public event Action<Weapon> onWeaponChange;
 
-        void Awake()
+        void Start()
         {
             if (currentWeapon == null)
             {

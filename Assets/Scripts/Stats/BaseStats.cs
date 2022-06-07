@@ -58,6 +58,16 @@ namespace RPG.Stats
             currentLevel = restoredLevel;
         }
 
+        int GetLevel()
+        {
+            if (currentLevel < 1)
+            {
+                currentLevel = startingLevel;
+            }
+
+            return currentLevel;
+        }
+
         float GetBaseStat(Stat statType)
         {
             return progression.GetStat(characterClass, statType, GetLevel());
@@ -100,16 +110,6 @@ namespace RPG.Stats
             if (levelUpVFX == null) return;
 
             Instantiate(levelUpVFX, transform);
-        }
-
-        int GetLevel()
-        {
-            if (currentLevel < 1)
-            {
-                currentLevel = startingLevel;
-            }
-
-            return currentLevel;
         }
     }
 }

@@ -28,7 +28,7 @@ namespace RPG.Attributes
         public event Action<float> onHealthChange;
 
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
             animator = GetComponent<Animator>();
             baseStats = GetComponent<BaseStats>();
@@ -48,7 +48,6 @@ namespace RPG.Attributes
 
         public void TakeDamage(float amount, GameObject attacker)
         {
-            Debug.Log($"{gameObject.name} took {amount} damage from {attacker.name}");
             currentHealth = Mathf.Max(currentHealth - amount, 0);
             onHealthChange?.Invoke(currentHealth);
 

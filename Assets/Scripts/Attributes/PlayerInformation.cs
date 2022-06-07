@@ -28,13 +28,13 @@ namespace RPG.Attributes
             playerStats = player.GetComponent<BaseStats>();
             playerExperience = player.GetComponent<Experience>();
 
-            SetHealthValue();
-            SetStartingLevel();
-            SetExperience();
-
             playerHealth.onHealthChange += HandleHealthUpdate;
             playerExperience.onExperienceChange += HandleExperienceUpdate;
             playerStats.onLevelChange += HandleLevelUpdate;
+
+            SetHealthValue();
+            SetStartingLevel();
+            SetExperience();
 
         }
 
