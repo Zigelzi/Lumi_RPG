@@ -27,18 +27,20 @@ namespace RPG.Attributes
         public event Action onUnitDeath;
         public event Action<float> onHealthChange;
 
-        // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             animator = GetComponent<Animator>();
             baseStats = GetComponent<BaseStats>();
-            
+        }
+
+        // Start is called before the first frame update
+        void Start()
+        {
             onHealthChange += HandleHeathUpdate;
             baseStats.onLevelChange += HandleLevelChange;
 
             maxHealth = baseStats.GetStat(Stat.Health);
             currentHealth = maxHealth;
-
         }
 
         void OnDestroy()

@@ -43,7 +43,6 @@ namespace RPG.Control
 
             health.onUnitDeath += HandleDeath;
             
-
             playerInputActions = new PlayerInputActions();
 
             movementInput = playerInputActions.Player.Movement;

@@ -33,6 +33,14 @@ namespace RPG.Combat
             if (weaponManager != null)
             {
                 weaponManager.onWeaponChange += HandleWeaponChange;
+                
+            }
+        }
+
+        void Start()
+        {
+            if (weaponManager != null)
+            {
                 currentWeapon = weaponManager.CurrentWeapon;
             }
         }

@@ -32,10 +32,13 @@ namespace RPG.Attributes
             playerExperience.onExperienceChange += HandleExperienceUpdate;
             playerStats.onLevelChange += HandleLevelUpdate;
 
+        }
+
+        void Start()
+        {
             SetHealthValue();
             SetStartingLevel();
             SetExperience();
-
         }
 
         void OnDestroy()

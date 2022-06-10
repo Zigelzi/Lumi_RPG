@@ -33,16 +33,19 @@ namespace RPG.Control
 
         void Awake()
         {
+            player = GameObject.FindGameObjectWithTag("Player");
             actionScheduler = GetComponent<ActionScheduler>();
             attacking = GetComponent<Attacking>();
             enemyCollider = GetComponent<CapsuleCollider>();
             movement = GetComponent<UnitMovement>();
             health = GetComponent<Health>();
             
-
             health.onUnitDeath += HandleDeath;
 
-            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        void Start()
+        {
             guardPosition = transform.position;
         }
 

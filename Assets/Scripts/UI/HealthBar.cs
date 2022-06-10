@@ -14,10 +14,13 @@ public class HealthBar : MonoBehaviour
         health = GetComponentInParent<Health>();
         healthSlider = GetComponentInChildren<Slider>();
 
+        health.onHealthChange += HandleHealthUpdate;
+    }
+
+    void Start()
+    {
         healthSlider.maxValue = health.MaxHealth;
         healthSlider.value = health.MaxHealth;
-
-        health.onHealthChange += HandleHealthUpdate;
     }
 
     void OnDestroy()

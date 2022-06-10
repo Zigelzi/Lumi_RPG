@@ -21,7 +21,11 @@ namespace RPG.Stats
 
         void Awake()
         {
-            playerStats = GetComponent<BaseStats>();
+            playerStats = GetComponent<BaseStats>(); 
+        }
+
+        void Start()
+        {
             requiredExperience = playerStats.GetStat(Stat.ExperienceRequirement);
         }
 
