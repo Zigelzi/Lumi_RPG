@@ -35,32 +35,38 @@ namespace RPG.Control
         void Awake()
         {
             actionScheduler = GetComponent<ActionScheduler>();
-            mainCamera = Camera.main;
-            
-            movement = GetComponent<UnitMovement>();
             attacking = GetComponent<Attacking>();
+            movement = GetComponent<UnitMovement>();
+            mainCamera = Camera.main;
             health = GetComponent<Health>();
 
-            health.onUnitDeath += HandleDeath;
-            
             playerInputActions = new PlayerInputActions();
-
             movementInput = playerInputActions.Player.Movement;
-            movementInput.Enable();
+        }
+
+        void OnEnable()
+        {
+            health.onUnitDeath += HandleDeath;
 
             movementInput.performed += HandleMousePressedDown;
             movementInput.canceled += HandleMouseReleased;
         }
-        void OnDestroy()
+
+        void Start()
+        {
+            movementInput.Enable();
+        }
+
+        void OnDisable()
         {
             health.onUnitDeath -= HandleDeath;
 
-            movementInput.Disable();
             movementInput.performed -= HandleMousePressedDown;
             movementInput.canceled -= HandleMouseReleased;
+
+            movementInput.Disable();
         }
 
-        // Update is called once per frame
         void Update()
         {
             if (InteractWithCombat()) return;

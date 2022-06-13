@@ -22,11 +22,14 @@ namespace RPG.Combat
         {
             health = GetComponent<Health>();
             player = GetComponent<PlayerController>();
+        }
 
+        void OnEnable()
+        {
             health.onUnitDeath += HandleUnitDeath;
         }
 
-        void OnDestroy()
+        void OnDisable()
         {
             health.onUnitDeath -= HandleUnitDeath;
         }

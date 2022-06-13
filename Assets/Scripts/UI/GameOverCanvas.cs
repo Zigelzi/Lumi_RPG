@@ -5,15 +5,17 @@ using RPG.Control;
 
 public class GameOverCanvas : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         PlayerController.onPlayerDeath += HandlePlayerDeath;
+    }
 
+    void Start()
+    {
         DisplayGameOverUI(false);
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         PlayerController.onPlayerDeath -= HandlePlayerDeath;
     }

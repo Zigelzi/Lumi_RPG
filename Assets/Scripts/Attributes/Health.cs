@@ -11,7 +11,7 @@ namespace RPG.Attributes
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float currentHealth;
-        [SerializeField] float maxHealth = 100f;
+        float maxHealth = -1f;
         [SerializeField] [Range(0, 30f)] float despawnTime = 10f; 
 
         Animator animator;
@@ -33,19 +33,21 @@ namespace RPG.Attributes
             baseStats = GetComponent<BaseStats>();
         }
 
-        // Start is called before the first frame update
-        void Start()
+        void OnEnable()
         {
             onHealthChange += HandleHeathUpdate;
             baseStats.onLevelChange += HandleLevelChange;
-
-            maxHealth = baseStats.GetStat(Stat.Health);
-            currentHealth = maxHealth;
         }
 
-        void OnDestroy()
+        void Start()
+        {
+            SetStartingHealth();
+        }
+
+        void OnDisable()
         {
             onHealthChange -= HandleHeathUpdate;
+            baseStats.onLevelChange -= HandleLevelChange;
         }
 
         public void TakeDamage(float amount, GameObject attacker)
@@ -80,9 +82,21 @@ namespace RPG.Attributes
         {
             float restoredHealth = (float)state;
 
+            maxHealth = baseStats.GetStat(Stat.Health);
             currentHealth = restoredHealth;
 
             onHealthChange?.Invoke(currentHealth);
+        }
+
+        void SetStartingHealth()
+        {
+            if (maxHealth < 0)
+            {
+                maxHealth = baseStats.GetStat(Stat.Health);
+                currentHealth = maxHealth;
+
+                onHealthChange?.Invoke(currentHealth);
+            }
         }
 
         void HandleHeathUpdate(float newHealth)
@@ -133,12 +147,7 @@ namespace RPG.Attributes
             {
                 attackerExperience.AddExperience(experienceReward);
             }
-
-            
-
         }
-
-        
     }
 }
 

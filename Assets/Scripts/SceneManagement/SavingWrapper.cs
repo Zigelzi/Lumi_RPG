@@ -22,31 +22,40 @@ namespace RPG.SceneManagement
 
         void Awake()
         {
-            playerInputActions = new PlayerInputActions();
             savingSystem = GetComponent<SavingSystem>();
-
+            
+            playerInputActions = new PlayerInputActions();
+            
             savingInput = playerInputActions.Player.Save;
             loadingInput = playerInputActions.Player.Load;
             deleteSaveInput = playerInputActions.Player.DeleteSave;
 
+            StartCoroutine(LoadLastScene());
+        }
+
+        void OnEnable()
+        {
+            savingInput.performed += Save;
+            loadingInput.performed += Load;
+            deleteSaveInput.performed += DeleteSave;
+        }
+
+        void Start()
+        {
             savingInput.Enable();
             loadingInput.Enable();
             deleteSaveInput.Enable();
 
-            savingInput.performed += Save;
-            loadingInput.performed += Load;
-            deleteSaveInput.performed += DeleteSave;
-
-            StartCoroutine(LoadLastScene());    
         }
 
-        void OnDestroy()
+        void OnDisable()
         {
             savingInput.Disable();
             loadingInput.Disable();
 
             savingInput.performed -= Save;
             loadingInput.performed -= Load;
+            deleteSaveInput.performed -= DeleteSave;
         }
 
         public void Save()

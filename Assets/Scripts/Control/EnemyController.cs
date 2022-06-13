@@ -39,9 +39,11 @@ namespace RPG.Control
             enemyCollider = GetComponent<CapsuleCollider>();
             movement = GetComponent<UnitMovement>();
             health = GetComponent<Health>();
-            
-            health.onUnitDeath += HandleDeath;
+        }
 
+        void OnEnable()
+        {
+            health.onUnitDeath += HandleDeath;
         }
 
         void Start()
@@ -49,7 +51,7 @@ namespace RPG.Control
             guardPosition = transform.position;
         }
 
-        void OnDestroy()
+        void OnDisable()
         {
             health.onUnitDeath -= HandleDeath;
         }

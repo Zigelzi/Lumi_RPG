@@ -20,12 +20,15 @@ namespace RPG.Cinematics
             actionScheduler = playerController.GetComponent<ActionScheduler>();
 
             director = GetComponent<PlayableDirector>();
+        }
 
+        void OnEnable()
+        {
             director.played += DisablePlayerControl;
             director.stopped += EnablePlayerControl;
         }
 
-        void OnDestroy()
+        void OnDisable()
         {
             director.played -= DisablePlayerControl;
             director.stopped -= EnablePlayerControl;

@@ -12,8 +12,11 @@ public class HealthBar : MonoBehaviour
     void Awake()
     {
         health = GetComponentInParent<Health>();
-        healthSlider = GetComponentInChildren<Slider>();
+        healthSlider = GetComponentInChildren<Slider>();    
+    }
 
+    void OnEnable()
+    {
         health.onHealthChange += HandleHealthUpdate;
     }
 
@@ -23,7 +26,7 @@ public class HealthBar : MonoBehaviour
         healthSlider.value = health.MaxHealth;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         health.onHealthChange -= HandleHealthUpdate;
     }

@@ -30,10 +30,14 @@ namespace RPG.Combat
             weaponManager = GetComponent<WeaponManager>();
             baseStats = GetComponent<BaseStats>();
 
+            
+        }
+
+        void OnEnable()
+        {
             if (weaponManager != null)
             {
                 weaponManager.onWeaponChange += HandleWeaponChange;
-                
             }
         }
 
@@ -45,9 +49,12 @@ namespace RPG.Combat
             }
         }
 
-        void OnDestroy()
+        void OnDisable()
         {
-            weaponManager.onWeaponChange -= HandleWeaponChange;
+            if (weaponManager != null)
+            {
+                weaponManager.onWeaponChange -= HandleWeaponChange;
+            }
         }
 
         void Update()

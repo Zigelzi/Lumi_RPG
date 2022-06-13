@@ -27,11 +27,13 @@ namespace RPG.Attributes
             playerHealth = player.GetComponent<Health>();
             playerStats = player.GetComponent<BaseStats>();
             playerExperience = player.GetComponent<Experience>();
+        }
 
+        void OnEnable()
+        {
             playerHealth.onHealthChange += HandleHealthUpdate;
             playerExperience.onExperienceChange += HandleExperienceUpdate;
             playerStats.onLevelChange += HandleLevelUpdate;
-
         }
 
         void Start()
@@ -41,10 +43,11 @@ namespace RPG.Attributes
             SetExperience();
         }
 
-        void OnDestroy()
+        void OnDisable()
         {
             playerHealth.onHealthChange -= HandleHealthUpdate;
             playerExperience.onExperienceChange -= HandleExperienceUpdate;
+            playerStats.onLevelChange -= HandleLevelUpdate;
         }
 
         void HandleHealthUpdate(float newHealth)
