@@ -23,7 +23,7 @@ namespace RPG.Stats
 
         public event Action<int> onLevelChange;
 
-        void Start()
+        void Awake()
         {
             currentLevel = GetLevel();    
         }

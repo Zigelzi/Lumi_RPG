@@ -4,6 +4,8 @@ using UnityEngine;
 using RPG.Saving;
 using System;
 
+using GameDevTV.Utils;
+
 using RPG.Stats;
 
 namespace RPG.Combat
@@ -12,44 +14,39 @@ namespace RPG.Combat
     {
         [SerializeField] Transform leftHandHoldingLocation = null;
         [SerializeField] Transform rightHandHoldingLocation = null;
-        [SerializeField] Weapon currentWeapon = null;
+        LazyValue<Weapon> currentWeapon;
         [SerializeField] Weapon defaultWeapon = null;
 
         GameObject currentWeaponInstance = null;
         
         public Transform LeftHandHoldingLocation { get { return leftHandHoldingLocation; } }
         public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
-        public Weapon CurrentWeapon { get {  return currentWeapon; } }
+        public Weapon CurrentWeapon { get {  return currentWeapon.value; } }
 
         public event Action<Weapon> onWeaponChange;
 
+        void Awake()
+        {
+            currentWeapon = new LazyValue<Weapon>(SetDefaultWeapon);
+        }
+
         void Start()
         {
-            if (currentWeapon == null)
-            {
-                EquipWeapon(defaultWeapon);
-            } 
+            currentWeapon.ForceInit();
         }
 
         public void EquipWeapon(Weapon weapon)
         {
-            Animator animator = GetComponent<Animator>();
-            if (CanSpawnWeapon())
-            {
-
-                DestroyCurrentWeapon();
-                currentWeaponInstance = weapon.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
-                weapon.SetAttackAnimation(animator);
-
-                currentWeapon = weapon;
-                onWeaponChange?.Invoke(currentWeapon);
-            }
+            SpawnWeapon(weapon);
+            currentWeapon.value = weapon;
+            onWeaponChange?.Invoke(currentWeapon.value);
         }
+
         public IEnumerable<float> GetAdditiveModifier(Stat stat)
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.AttackDamage;
+                yield return currentWeapon.value.AttackDamage;
             }
         }
 
@@ -57,7 +54,7 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.AttackMultiplier;
+                yield return currentWeapon.value.AttackMultiplier;
             }
         }
 
@@ -74,18 +71,37 @@ namespace RPG.Combat
             }
         }
 
+        Weapon SetDefaultWeapon()
+        {
+            SpawnWeapon(defaultWeapon);
+            return defaultWeapon;
+        }
+
+        void SpawnWeapon(Weapon weapon)
+        {
+            Animator animator = GetComponent<Animator>();
+
+            if (CanSpawnWeapon())
+            {
+                DestroyCurrentWeapon();
+                currentWeaponInstance = weapon.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
+                weapon.SetAttackAnimation(animator);
+            }
+            
+        }
+
         void DestroyCurrentWeapon()
         {
-            if (currentWeapon != null)
+            if (currentWeaponInstance != null)
             {
                 Destroy(currentWeaponInstance);
-                currentWeapon = null;
+                currentWeapon.value = null;
             }
         }
 
         public object CaptureState()
         {
-            return currentWeapon.name;
+            return currentWeapon.value.name;
         }
 
         public void RestoreState(object state)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+using GameDevTV.Utils;
+
 using RPG.Saving;
 using RPG.Stats;
 
@@ -10,18 +12,19 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float currentHealth;
-        float maxHealth = -1f;
         [SerializeField] [Range(0, 30f)] float despawnTime = 10f; 
 
         Animator animator;
         BaseStats baseStats;
         GameObject attacker;
 
+        float currentHealth = -1f;
         bool isAlive = true;
+        LazyValue<float> maxHealth;
+        
 
         public float CurrentHealth { get { return currentHealth; } }
-        public float MaxHealth { get { return maxHealth; } }
+        public float MaxHealth { get { return maxHealth.value; } }
         public bool IsAlive { get { return isAlive; } }
 
         public event Action onUnitDeath;
@@ -31,6 +34,7 @@ namespace RPG.Attributes
         {
             animator = GetComponent<Animator>();
             baseStats = GetComponent<BaseStats>();
+            maxHealth = new LazyValue<float>(GetStartingHealth);
         }
 
         void OnEnable()
@@ -61,9 +65,9 @@ namespace RPG.Attributes
 
         public bool AddHealth(float amount)
         {
-            if (currentHealth < maxHealth)
+            if (currentHealth < maxHealth.value)
             {
-                float healAmount = Mathf.Min(maxHealth - currentHealth, amount);
+                float healAmount = Mathf.Min(maxHealth.value - currentHealth, amount);
                 currentHealth += healAmount;
                 onHealthChange?.Invoke(currentHealth);
 
@@ -82,21 +86,27 @@ namespace RPG.Attributes
         {
             float restoredHealth = (float)state;
 
-            maxHealth = baseStats.GetStat(Stat.Health);
+            maxHealth.value = baseStats.GetStat(Stat.Health);
             currentHealth = restoredHealth;
 
             onHealthChange?.Invoke(currentHealth);
         }
 
+        float GetStartingHealth()
+        {
+            return baseStats.GetStat(Stat.Health);
+        }
+
         void SetStartingHealth()
         {
-            if (maxHealth < 0)
-            {
-                maxHealth = baseStats.GetStat(Stat.Health);
-                currentHealth = maxHealth;
+            maxHealth.ForceInit();
 
-                onHealthChange?.Invoke(currentHealth);
+            if (currentHealth < 0)
+            {
+                currentHealth = maxHealth.value;
             }
+            
+            onHealthChange?.Invoke(currentHealth);
         }
 
         void HandleHeathUpdate(float newHealth)
@@ -109,8 +119,8 @@ namespace RPG.Attributes
 
         void HandleLevelChange(int newLevel)
         {
-            maxHealth = baseStats.GetStat(Stat.Health);
-            currentHealth = maxHealth;
+            maxHealth.value = baseStats.GetStat(Stat.Health);
+            currentHealth = maxHealth.value;
 
             onHealthChange?.Invoke(currentHealth);
         }

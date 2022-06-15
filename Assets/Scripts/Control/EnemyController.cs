@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using GameDevTV.Utils;
+
 using RPG.Attributes;
 using RPG.Combat;
 using RPG.Core;
@@ -23,7 +25,7 @@ namespace RPG.Control
         CapsuleCollider enemyCollider;
         GameObject player;
         Health health;
-        Vector3 guardPosition;
+        LazyValue<Vector3> guardPosition;
         UnitMovement movement;
 
         int currentWaypointIndex = 0;
@@ -39,6 +41,8 @@ namespace RPG.Control
             enemyCollider = GetComponent<CapsuleCollider>();
             movement = GetComponent<UnitMovement>();
             health = GetComponent<Health>();
+
+            guardPosition = new LazyValue<Vector3>(GetStartingPosition);
         }
 
         void OnEnable()
@@ -48,7 +52,7 @@ namespace RPG.Control
 
         void Start()
         {
-            guardPosition = transform.position;
+            guardPosition.ForceInit();
         }
 
         void OnDisable()
@@ -76,13 +80,16 @@ namespace RPG.Control
 
         void HandleDeath()
         {
-            
-
             actionScheduler.CancelCurrentAction();
             movement.SetNavAgent(false);
             enemyCollider.enabled = false;
 
             enabled = false;
+        }
+
+        Vector3 GetStartingPosition()
+        {
+            return transform.position;
         }
 
         bool IsPlayerInAggroRange()
@@ -113,7 +120,7 @@ namespace RPG.Control
 
         void GuardBehaviour()
         {
-            Vector3 nextPosition = guardPosition;
+            Vector3 nextPosition = guardPosition.value;
 
             if (patrolPath != null)
             {
