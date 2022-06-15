@@ -23,7 +23,7 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         healthSlider.maxValue = health.MaxHealth;
-        healthSlider.value = health.MaxHealth;
+        healthSlider.value = health.CurrentHealth;
     }
 
     void OnDisable()

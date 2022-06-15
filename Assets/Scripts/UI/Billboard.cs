@@ -9,7 +9,7 @@ namespace RPG.UI
         Camera mainCamera;
 
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
             mainCamera = Camera.main;
         }

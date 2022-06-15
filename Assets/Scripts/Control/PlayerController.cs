@@ -37,7 +37,7 @@ namespace RPG.Control
             actionScheduler = GetComponent<ActionScheduler>();
             attacking = GetComponent<Attacking>();
             movement = GetComponent<UnitMovement>();
-            mainCamera = Camera.main;
+            
             health = GetComponent<Health>();
 
             playerInputActions = new PlayerInputActions();
@@ -55,6 +55,7 @@ namespace RPG.Control
         void Start()
         {
             movementInput.Enable();
+            mainCamera = Camera.main;
         }
 
         void OnDisable()

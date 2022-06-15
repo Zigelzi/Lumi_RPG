@@ -91,10 +91,10 @@ namespace RPG.SceneManagement
 
         IEnumerator LoadLastScene()
         {
-            CanvasFader canvasFader = FindObjectOfType<CanvasFader>();
-
-            canvasFader.SetCanvasToOpaque();
             yield return savingSystem.LoadLastScene(defaultSaveFile);
+
+            CanvasFader canvasFader = FindObjectOfType<CanvasFader>();
+            canvasFader.SetCanvasToOpaque();
             yield return canvasFader.FadeIn(loadingDuration);
         }
     }

@@ -28,9 +28,7 @@ namespace RPG.Combat
             animator = GetComponent<Animator>();
             movement = GetComponent<UnitMovement>();
             weaponManager = GetComponent<WeaponManager>();
-            baseStats = GetComponent<BaseStats>();
-
-            
+            baseStats = GetComponent<BaseStats>();    
         }
 
         void OnEnable()
