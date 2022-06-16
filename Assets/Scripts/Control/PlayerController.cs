@@ -8,6 +8,7 @@ using RPG.Attributes;
 using RPG.Core;
 using RPG.Combat;
 using RPG.Movement;
+using RPG.UI;
 
 namespace RPG.Control
 {
@@ -19,6 +20,7 @@ namespace RPG.Control
         ActionScheduler actionScheduler;
         Attacking attacking;
         Camera mainCamera;
+        CursorManager cursor;
         Health health;
         InputAction movementInput;
         PlayerInputActions playerInputActions;
@@ -36,8 +38,8 @@ namespace RPG.Control
         {
             actionScheduler = GetComponent<ActionScheduler>();
             attacking = GetComponent<Attacking>();
+            cursor = GetComponent<CursorManager>();
             movement = GetComponent<UnitMovement>();
-            
             health = GetComponent<Health>();
 
             playerInputActions = new PlayerInputActions();
@@ -72,6 +74,8 @@ namespace RPG.Control
         {
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
+
+            cursor.SetCursor(CursorType.Unclickable);
         }
 
         void HandleDeath()
@@ -115,6 +119,8 @@ namespace RPG.Control
                 {
                     attacking.StartAttackAction(target.gameObject);
                 }
+
+                cursor.SetCursor(CursorType.Combat);
                 return true;
             }
 
@@ -141,6 +147,8 @@ namespace RPG.Control
                 {
                     movement.StartMovementAction(rayHit.point);
                 }
+                cursor.SetCursor(CursorType.Movement);
+
                 return true;
             }
             
