@@ -6,35 +6,37 @@ namespace RPG.UI
 {
     public class CursorManager : MonoBehaviour
     {
-        [SerializeField] CursorTypeClass[] cursorTypes;
-        Dictionary<CursorType, Texture2D> cursors;
+        [System.Serializable]
+        struct RPGCursor
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector3 hotspot;
+        }
+
+        [SerializeField] RPGCursor[] cursors;
 
         public void SetCursor(CursorType type)
         {
-            BuildCursors();
+            if (cursors.Length == 0) return;
 
-            Texture2D cursorTexture = cursors[type];
+            RPGCursor cursor = GetCursor(type);
 
-            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(cursor.texture, cursor.hotspot, CursorMode.Auto);
+        
         }
 
-        void BuildCursors()
+        RPGCursor GetCursor(CursorType type)
         {
-            if (cursorTypes == null) return;
-
-            cursors = new Dictionary<CursorType, Texture2D>();
-
-            foreach(CursorTypeClass cursorType in cursorTypes)
+            foreach (RPGCursor cursor in cursors)
             {
-                cursors.Add(cursorType.type, cursorType.texture);
+                if (cursor.type == type)
+                {
+                    return cursor;
+                }
             }
-        }
 
-        [System.Serializable]
-        class CursorTypeClass
-        {
-            public CursorType type = CursorType.Unclickable;
-            public Texture2D texture;
+            return cursors[0];
         }
     }
 }
