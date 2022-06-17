@@ -8,6 +8,7 @@ namespace RPG.UI
     {
         Combat,
         Movement,
+        UI,
         Unclickable
     }
 }

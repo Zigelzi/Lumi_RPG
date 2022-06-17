@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System;
 
 using RPG.Attributes;
@@ -33,7 +34,6 @@ namespace RPG.Control
 
         public static event Action onPlayerDeath;
 
-        // Start is called before the first frame update
         void Awake()
         {
             actionScheduler = GetComponent<ActionScheduler>();
@@ -72,6 +72,7 @@ namespace RPG.Control
 
         void Update()
         {
+            if (InteractWithUI()) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
 
@@ -94,6 +95,18 @@ namespace RPG.Control
         void HandleMouseReleased(InputAction.CallbackContext ctx)
         {
             rightButtonPressed = false;
+        }
+
+        bool InteractWithUI()
+        {
+
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                cursor.SetCursor(CursorType.UI);
+                return true;
+            }
+
+            return false;
         }
 
         bool InteractWithCombat()
@@ -127,11 +140,6 @@ namespace RPG.Control
             return false;
         }
 
-        Ray GetMouseRay()
-        {
-            return mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        }
-
         bool InteractWithMovement()
         {
             bool isHoveringOverInteractable = Physics.Raycast(
@@ -154,6 +162,11 @@ namespace RPG.Control
             
             return false;
             
+        }
+
+        Ray GetMouseRay()
+        {
+            return mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         }
     }
 }
