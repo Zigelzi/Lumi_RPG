@@ -9,6 +9,7 @@ namespace RPG.UI
         Combat,
         Movement,
         UI,
-        Unclickable
+        Unclickable,
+        Interactable
     }
 }

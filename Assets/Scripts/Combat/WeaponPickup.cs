@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using RPG.Control;
+
 namespace RPG.Combat
 {
-    public class WeaponPickup : MonoBehaviour
+    public class WeaponPickup : MonoBehaviour, IRaycastable
     {
         [SerializeField] Weapon weapon;
         [SerializeField][Range(0, 20)] float respawnTime = 5f;
@@ -17,6 +19,12 @@ namespace RPG.Combat
                 weaponManager.EquipWeapon(weapon);
                 StartCoroutine(HideForSeconds(respawnTime));
             }
+        }
+
+        public bool HandleRaycast(PlayerController player, RaycastHit hit)
+        {
+            player.TryStartMoveAction(hit.point);
+            return true;
         }
 
         IEnumerator HideForSeconds(float duration)
@@ -36,6 +44,8 @@ namespace RPG.Combat
             }
             collider.enabled = isVisible;
         }
+
+        
     }
 }
 

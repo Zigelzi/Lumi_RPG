@@ -73,10 +73,28 @@ namespace RPG.Control
         void Update()
         {
             if (InteractWithUI()) return;
-            if (InteractWithCombat()) return;
+
+            if (InteractWithComponent()) return;
+
             if (InteractWithMovement()) return;
 
             cursor.SetCursor(CursorType.Unclickable);
+        }
+
+        public void TryStartMoveAction(Vector3 position)
+        {
+            if (rightButtonPressed)
+            {
+                movement.StartMovementAction(position);
+            }
+        }
+
+        public void TryStartAttackAction(GameObject target)
+        {
+            if (rightButtonPressed)
+            {
+                attacking.StartAttackAction(target);
+            }
         }
 
         void HandleDeath()
@@ -99,7 +117,6 @@ namespace RPG.Control
 
         bool InteractWithUI()
         {
-
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 cursor.SetCursor(CursorType.UI);
@@ -109,32 +126,21 @@ namespace RPG.Control
             return false;
         }
 
-        bool InteractWithCombat()
+        bool InteractWithComponent()
         {
-            bool isHoveringOverInteractable = Physics.Raycast(
-                GetMouseRay(),
-                out RaycastHit rayHit,
-                Mathf.Infinity,
-                interactableLayers
-                );
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
 
-            if (rayHit.collider == null) { return false; }
-
-            bool isEnemy = rayHit.collider.TryGetComponent<CombatTarget>(
-                out CombatTarget target
-                );
-            
-
-            if (isHoveringOverInteractable &&
-                isEnemy)
+            foreach (RaycastHit hit in hits)
             {
-                if (rightButtonPressed)
+                IRaycastable[] components = hit.transform.GetComponents<IRaycastable>();
+                foreach (IRaycastable component in components)
                 {
-                    attacking.StartAttackAction(target.gameObject);
+                    if (component.HandleRaycast(this, hit))
+                    {
+                        cursor.SetCursor(CursorType.Interactable);
+                        return true;
+                    }
                 }
-
-                cursor.SetCursor(CursorType.Combat);
-                return true;
             }
 
             return false;
@@ -151,10 +157,7 @@ namespace RPG.Control
 
             if (isHoveringOverInteractable)
             {
-                if (rightButtonPressed)
-                {
-                    movement.StartMovementAction(rayHit.point);
-                }
+                TryStartMoveAction(rayHit.point);
                 cursor.SetCursor(CursorType.Movement);
 
                 return true;
@@ -168,5 +171,7 @@ namespace RPG.Control
         {
             return mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         }
+
+        
     }
 }
