@@ -9,7 +9,6 @@ using RPG.Attributes;
 using RPG.Core;
 using RPG.Combat;
 using RPG.Movement;
-using RPG.UI;
 
 namespace RPG.Control
 {
@@ -137,7 +136,7 @@ namespace RPG.Control
                 {
                     if (component.HandleRaycast(this, hit))
                     {
-                        cursor.SetCursor(CursorType.Interactable);
+                        cursor.SetCursor(component.GetCursorType());
                         return true;
                     }
                 }

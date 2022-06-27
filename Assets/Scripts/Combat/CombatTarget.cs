@@ -4,7 +4,6 @@ using UnityEngine;
 
 using RPG.Attributes;
 using RPG.Control;
-using RPG.UI;
 
 namespace RPG.Combat
 {
@@ -15,6 +14,11 @@ namespace RPG.Combat
         {
             player.TryStartAttackAction(this.gameObject);
             return true;
+        }
+
+        public CursorType GetCursorType()
+        {
+            return CursorType.Combat;
         }
     }
 }

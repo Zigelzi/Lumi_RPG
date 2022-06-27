@@ -27,6 +27,11 @@ namespace RPG.Combat
             return true;
         }
 
+        public CursorType GetCursorType()
+        {
+            return CursorType.Interactable;
+        }
+
         IEnumerator HideForSeconds(float duration)
         {
             ShowPickup(false);
