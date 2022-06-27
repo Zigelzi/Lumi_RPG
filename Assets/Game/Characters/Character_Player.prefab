@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3f06e9e795f9b4caa7e0215f15ee92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshProximityRange: 0.5
   interactableLayers:
     serializedVersion: 2
     m_Bits: 1792

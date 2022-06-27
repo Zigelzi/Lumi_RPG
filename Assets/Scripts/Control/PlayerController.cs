@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 using System;
 
 using RPG.Attributes;
@@ -14,6 +15,7 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] float navMeshProximityRange = 2f;
         [SerializeField] LayerMask interactableLayers;
         [SerializeField] Transform spellCastingPoint;
 
@@ -165,16 +167,11 @@ namespace RPG.Control
 
         bool InteractWithMovement()
         {
-            bool isHoveringOverInteractable = Physics.Raycast(
-                GetMouseRay(),
-                out RaycastHit rayHit,
-                Mathf.Infinity,
-                interactableLayers
-                );
+            bool isHoveringOverNavMesh = RaycastNavMesh(out Vector3 targetPosition);
 
-            if (isHoveringOverInteractable)
+            if (isHoveringOverNavMesh)
             {
-                TryStartMoveAction(rayHit.point);
+                TryStartMoveAction(targetPosition);
                 cursor.SetCursor(CursorType.Movement);
 
                 return true;
@@ -182,6 +179,30 @@ namespace RPG.Control
             
             return false;
             
+        }
+
+        bool RaycastNavMesh(out Vector3 targetPosition)
+        {
+            bool isHoveringOverInteractable = Physics.Raycast(
+                GetMouseRay(),
+                out RaycastHit rayHit,
+                Mathf.Infinity,
+                interactableLayers
+                );
+
+            targetPosition = new Vector3();
+
+            if (!isHoveringOverInteractable) return false;
+
+            bool isNearNavMesh = NavMesh.SamplePosition(rayHit.point,
+                    out NavMeshHit navHit,
+                    navMeshProximityRange,
+                    NavMesh.AllAreas);
+
+            targetPosition = navHit.position;
+
+            return isNearNavMesh;
+
         }
 
         Ray GetMouseRay()
