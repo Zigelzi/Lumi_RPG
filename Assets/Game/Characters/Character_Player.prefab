@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshProximityRange: 0.5
+  maxPathLength: 20
   interactableLayers:
     serializedVersion: 2
     m_Bits: 1792
   spellCastingPoint: {fileID: 6600454130212123151}
+  pathLength: 0
 --- !u!114 &5016114491809748287
 MonoBehaviour:
   m_ObjectHideFlags: 0
