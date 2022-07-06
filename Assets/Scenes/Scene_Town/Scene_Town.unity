@@ -4570,6 +4570,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1689527339538918055, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4282532607
+      objectReference: {fileID: 0}
     - target: {fileID: 1692388800923394958, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
       propertyPath: m_CameraDistance
       value: 10

@@ -29,6 +29,7 @@ namespace RPG.Attributes
 
         public event Action onUnitDeath;
         public event Action<float> onHealthChange;
+        public event Action<float> onDamageTaken;
 
         void Awake()
         {
@@ -58,6 +59,7 @@ namespace RPG.Attributes
         {
             currentHealth = Mathf.Max(currentHealth - amount, 0);
             onHealthChange?.Invoke(currentHealth);
+            onDamageTaken?.Invoke(amount);
 
             this.attacker = attacker;
 

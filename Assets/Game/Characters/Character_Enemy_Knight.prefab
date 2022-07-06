@@ -141,6 +141,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 369f269a6cae34b4ba3a635362a489fa, type: 2}
+    - target: {fileID: 646093907802588657, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 646093907802588657, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 704809371613627490, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: defaultWeapon
       value: 
@@ -159,7 +167,7 @@ PrefabInstance:
       objectReference: {fileID: 3743096574903243938}
     - target: {fileID: 2358616886315960968, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: m_Name
-      value: Character_Enemy_Knight_Default
+      value: Character_Enemy_Knight
       objectReference: {fileID: 0}
     - target: {fileID: 2898046297569839315, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: attackDamage
