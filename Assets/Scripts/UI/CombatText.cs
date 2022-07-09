@@ -9,7 +9,7 @@ namespace RPG.UI
 {
     public class CombatText : MonoBehaviour
     {
-        [SerializeField] GameObject damageTextPrefab;
+        [SerializeField] DamageText damageTextPrefab;
         [SerializeField] float destroyDelay = 2f;
 
 
@@ -29,21 +29,16 @@ namespace RPG.UI
         {
             if (damageTextPrefab == null) return;
 
-            GameObject damageTextInstance = Instantiate(damageTextPrefab,
+            DamageText damageTextInstance = Instantiate<DamageText>(damageTextPrefab,
                 transform.position, 
                 transform.rotation, 
                 gameObject.transform);
 
-            DamageText damageText = damageTextInstance.GetComponent<DamageText>();
+            if (damageTextInstance == null) return;
 
-            if (damageText == null) return;
+            damageTextInstance.SetText(amount.ToString());
 
-            damageText.SetText(amount.ToString());
-
-            StartCoroutine(damageText.DisplayText(.5f, 2f, .5f));
         }
-
-        
     }
 
 }
