@@ -40,8 +40,7 @@ namespace RPG.UI
 
             damageText.SetText(amount.ToString());
 
-            StartCoroutine(damageText.DestoyDamageText(destroyDelay));
-            StartCoroutine(damageText.FadeIn(.5f));
+            StartCoroutine(damageText.DisplayText(.5f, 2f, .5f));
         }
 
         
