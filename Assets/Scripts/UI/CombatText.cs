@@ -36,7 +36,7 @@ namespace RPG.UI
 
             if (damageTextInstance == null) return;
 
-            damageTextInstance.SetText(amount.ToString());
+            damageTextInstance.SetText(amount);
 
         }
     }

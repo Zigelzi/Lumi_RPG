@@ -18,6 +18,7 @@ public class HealthBar : MonoBehaviour
     void OnEnable()
     {
         health.onHealthChange += HandleHealthUpdate;
+        health.onUnitDeath += HandleUnitDeath;
     }
 
     void Start()
@@ -29,11 +30,17 @@ public class HealthBar : MonoBehaviour
     void OnDisable()
     {
         health.onHealthChange -= HandleHealthUpdate;
+        health.onUnitDeath -= HandleUnitDeath;
     }
 
     void HandleHealthUpdate(float newHealth)
     {
         healthSlider.maxValue = health.MaxHealth;
         healthSlider.value = newHealth;
+    }
+
+    void HandleUnitDeath()
+    {
+        gameObject.SetActive(false);
     }
 }

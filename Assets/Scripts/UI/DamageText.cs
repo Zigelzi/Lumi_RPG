@@ -14,9 +14,9 @@ namespace RPG.UI
             damageText = GetComponentInChildren<TMP_Text>();    
         }
 
-        public void SetText(string text)
+        public void SetText(float amount)
         {
-            damageText.text = text;
+            damageText.text = amount.ToString();
         }
     }
 }
