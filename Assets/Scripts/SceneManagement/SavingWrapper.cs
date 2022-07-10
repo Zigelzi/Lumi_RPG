@@ -94,8 +94,8 @@ namespace RPG.SceneManagement
             yield return savingSystem.LoadLastScene(defaultSaveFile);
 
             CanvasFader canvasFader = FindObjectOfType<CanvasFader>();
-            canvasFader.SetCanvasToOpaque();
-            yield return canvasFader.FadeIn(loadingDuration);
+            canvasFader.SetCanvasToTransparent();
+            yield return canvasFader.FadeToTransparent(loadingDuration);
         }
     }
 }

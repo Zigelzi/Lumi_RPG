@@ -8,35 +8,49 @@ namespace RPG.SceneManagement
     public class CanvasFader : MonoBehaviour
     {
         CanvasGroup canvasGroup;
+        Coroutine ongoingRoutine;
 
         void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void SetCanvasToOpaque()
+        public void SetCanvasToTransparent()
         {
             canvasGroup = GetComponent<CanvasGroup>();
             canvasGroup.alpha = 1;
-            StartCoroutine(FadeIn(2f));
+
+            StartCoroutine(Fade(0, 2f));
         }
 
-        public IEnumerator FadeOut(float time)
+        public IEnumerator FadeToTransparent(float duration)
         {
-            while (canvasGroup.alpha < 1)
+            return Fade(0f, duration);
+        }
+
+        public IEnumerator FadeToOpaque(float duration)
+        {
+            return Fade(1f, duration);
+        }
+
+        IEnumerator Fade(float targetAlpha, float duration)
+        {
+            if (ongoingRoutine != null)
             {
-                float deltaAlpha = Time.deltaTime / time;
-                canvasGroup.alpha += deltaAlpha;
-                yield return new WaitForEndOfFrame();
+                StopCoroutine(ongoingRoutine);
             }
+            ongoingRoutine = StartCoroutine(FadeRoutine(targetAlpha, duration));
+            yield return ongoingRoutine;
         }
 
-        public IEnumerator FadeIn(float time)
+        IEnumerator FadeRoutine(float targetAlpha, float duration)
         {
-            while (canvasGroup.alpha > 0)
+            while (!Mathf.Approximately(canvasGroup.alpha, targetAlpha))
             {
-                float deltaAlpha = Time.deltaTime / time;
-                canvasGroup.alpha -= deltaAlpha;
+                float deltaAlpha = Time.deltaTime / duration;
+                canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha,
+                    targetAlpha,
+                    deltaAlpha);
                 yield return new WaitForEndOfFrame();
             }
         }

@@ -79,7 +79,7 @@ MonoBehaviour:
   destinationSceneIndex: 0
   spawnPoint: {fileID: 622368441197844815}
   identifier: 0
-  sceneFadeOutDuration: 1
+  sceneFadeOutDuration: 0.5
   sceneFadeWaitDuration: 0.5
   sceneFadeInDuration: 0.5
 --- !u!1 &8541744421361894942

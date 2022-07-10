@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4828785447496255340}
   - component: {fileID: 5561468985506401190}
   - component: {fileID: 5305288179818803292}
+  - component: {fileID: 6141274591453828213}
   m_Layer: 5
   m_Name: Canvas_HealthBar
   m_TagString: Untagged
@@ -125,6 +126,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f9529b9934eb544a356996d5aedefb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 1
+  fadeOutDelay: 2
+--- !u!225 &6141274591453828213
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7088192733726399075}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &5304475443576364420
 PrefabInstance:
   m_ObjectHideFlags: 0

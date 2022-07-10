@@ -35,7 +35,7 @@ namespace RPG.SceneManagement
             SavingWrapper saving = FindObjectOfType<SavingWrapper>();
 
             DontDestroyOnLoad(gameObject);
-            yield return canvasFader.FadeOut(sceneFadeOutDuration);
+            yield return canvasFader.FadeToOpaque(sceneFadeOutDuration);
 
             saving.Save();
 
@@ -49,7 +49,7 @@ namespace RPG.SceneManagement
             saving.Save();
 
             yield return new WaitForSeconds(sceneFadeWaitDuration);
-            yield return canvasFader.FadeIn(sceneFadeInDuration);
+            yield return canvasFader.FadeToTransparent(sceneFadeInDuration);
 
             Destroy(gameObject);
         }
