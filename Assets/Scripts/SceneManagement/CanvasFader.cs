@@ -20,27 +20,27 @@ namespace RPG.SceneManagement
             canvasGroup = GetComponent<CanvasGroup>();
             canvasGroup.alpha = 1;
 
-            StartCoroutine(Fade(0, 2f));
+            Fade(0, 2f);
         }
 
-        public IEnumerator FadeToTransparent(float duration)
+        public Coroutine FadeToTransparent(float duration)
         {
             return Fade(0f, duration);
         }
 
-        public IEnumerator FadeToOpaque(float duration)
+        public Coroutine FadeToOpaque(float duration)
         {
             return Fade(1f, duration);
         }
 
-        IEnumerator Fade(float targetAlpha, float duration)
+        Coroutine Fade(float targetAlpha, float duration)
         {
             if (ongoingRoutine != null)
             {
                 StopCoroutine(ongoingRoutine);
             }
             ongoingRoutine = StartCoroutine(FadeRoutine(targetAlpha, duration));
-            yield return ongoingRoutine;
+            return ongoingRoutine;
         }
 
         IEnumerator FadeRoutine(float targetAlpha, float duration)

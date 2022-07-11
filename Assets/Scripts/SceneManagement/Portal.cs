@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+using RPG.Control;
 
 namespace RPG.SceneManagement
 {
@@ -32,7 +33,10 @@ namespace RPG.SceneManagement
         IEnumerator TransitionToScene()
         {
             CanvasFader canvasFader = FindObjectOfType<CanvasFader>();
+            PlayerController player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             SavingWrapper saving = FindObjectOfType<SavingWrapper>();
+
+            player.enabled = false;
 
             DontDestroyOnLoad(gameObject);
             yield return canvasFader.FadeToOpaque(sceneFadeOutDuration);
@@ -40,6 +44,10 @@ namespace RPG.SceneManagement
             saving.Save();
 
             yield return SceneManager.LoadSceneAsync(destinationSceneIndex);
+
+            // Disable player again because new player is spawned when level is loaded
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            player.enabled = false;
 
             saving.Load();
 
@@ -49,8 +57,9 @@ namespace RPG.SceneManagement
             saving.Save();
 
             yield return new WaitForSeconds(sceneFadeWaitDuration);
-            yield return canvasFader.FadeToTransparent(sceneFadeInDuration);
+            canvasFader.FadeToTransparent(sceneFadeInDuration);
 
+            player.enabled = true;
             Destroy(gameObject);
         }
 
