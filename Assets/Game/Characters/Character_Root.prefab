@@ -284,6 +284,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4464612458523067130}
   - component: {fileID: 6048545257620569647}
+  - component: {fileID: 3870040500077602132}
+  - component: {fileID: 4520507752745124036}
   m_Layer: 9
   m_Name: SFX_DamageTaken
   m_TagString: Untagged
@@ -315,7 +317,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ef27b789758e41843b4a6dfc3ea51d29, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -401,6 +403,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3870040500077602132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827171077459264127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e299da86a14f545944c4e7db16db9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchMin: 0.9
+  pitchMax: 1.2
+--- !u!114 &4520507752745124036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827171077459264127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c3f5d3f41413c4b9e8b4ac4d869b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageSFX: {fileID: 8300000, guid: ef27b789758e41843b4a6dfc3ea51d29, type: 3}
 --- !u!1 &8661483401128137841
 GameObject:
   m_ObjectHideFlags: 0
