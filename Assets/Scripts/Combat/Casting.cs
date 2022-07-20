@@ -26,12 +26,12 @@ namespace RPG.Combat
 
         void OnEnable()
         {
-            health.onUnitDeath += HandleUnitDeath;
+            health.onUnitDeath.AddListener(Disable);
         }
 
         void OnDisable()
         {
-            health.onUnitDeath -= HandleUnitDeath;
+            health.onUnitDeath.RemoveListener(Disable);
         }
 
         // Update is called once per frame
@@ -45,7 +45,7 @@ namespace RPG.Combat
             }
         }
 
-        void HandleUnitDeath()
+        public void Disable()
         {
             enabled = false;
         }

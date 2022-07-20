@@ -25,7 +25,7 @@ public class HealthBar : MonoBehaviour
     void OnEnable()
     {
         health.onHealthChange += HandleHealthUpdate;
-        health.onUnitDeath += HandleUnitDeath;
+        health.onUnitDeath.AddListener(HandleUnitDeath);
     }
 
     void Start()
@@ -37,7 +37,7 @@ public class HealthBar : MonoBehaviour
     void OnDisable()
     {
         health.onHealthChange -= HandleHealthUpdate;
-        health.onUnitDeath -= HandleUnitDeath;
+        health.onUnitDeath.RemoveListener(HandleUnitDeath);
     }
 
     void HandleHealthUpdate(float newHealth)

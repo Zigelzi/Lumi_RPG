@@ -9,6 +9,8 @@ namespace RPG.Attributes
     public class DamageSound : MonoBehaviour
     {
         [SerializeField] AudioClip damageSFX;
+        [SerializeField] AudioClip deathSFX;
+
         AudioSource audioSource;
         Health health;
         SoundRandomizer soundRandomiser;
@@ -22,21 +24,50 @@ namespace RPG.Attributes
 
         void OnEnable()
         {
-            health.onDamageTaken += HandleDamageTaken;    
+            health.onDamageTaken += HandleDamageTaken;
+            //health.onUnitDeath += HandleUnitDeath;
         }
 
         void OnDisable()
         {
-            health.onDamageTaken -= HandleDamageTaken;    
+            health.onDamageTaken -= HandleDamageTaken;
+            //health.onUnitDeath -= HandleUnitDeath;
         }
 
         void HandleDamageTaken(float amount)
         {
-            if (audioSource == null || damageSFX == null) return;
+            if (IsDamageSFXPlayable())
+            {
+                soundRandomiser.RandomisePitch(audioSource);
+                audioSource.clip = damageSFX;
+                audioSource.Play();
+            }
+        }
 
-            soundRandomiser.RandomisePitch(audioSource);
-            audioSource.clip = damageSFX;
-            audioSource.Play();
+        bool IsDamageSFXPlayable()
+        {
+            if (audioSource != null || 
+                damageSFX != null) return true;
+
+            return false;
+        }
+
+        void HandleUnitDeath()
+        {
+            Debug.Log("Unit died");
+            if (IsDeathSFXPlayable())
+            {
+                audioSource.clip = deathSFX;
+                audioSource.Play();
+            }
+        }
+        
+        bool IsDeathSFXPlayable()
+        {
+            if (audioSource != null ||
+                deathSFX != null) return true;
+
+            return false;
         }
     }
 }

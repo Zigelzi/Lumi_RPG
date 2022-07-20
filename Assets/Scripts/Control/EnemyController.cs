@@ -47,7 +47,7 @@ namespace RPG.Control
 
         void OnEnable()
         {
-            health.onUnitDeath += HandleDeath;
+            health.onUnitDeath.AddListener(HandleDeath);
         }
 
         void Start()
@@ -57,7 +57,7 @@ namespace RPG.Control
 
         void OnDisable()
         {
-            health.onUnitDeath -= HandleDeath;
+            health.onUnitDeath.RemoveListener(HandleDeath);
         }
 
         void Update()

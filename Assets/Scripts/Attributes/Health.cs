@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 using GameDevTV.Utils;
@@ -8,11 +9,12 @@ using GameDevTV.Utils;
 using RPG.Saving;
 using RPG.Stats;
 
+
 namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] [Range(0, 30f)] float despawnTime = 10f; 
+        [SerializeField] [Range(0, 30f)] float despawnTime = 10f;
 
         Animator animator;
         BaseStats baseStats;
@@ -27,7 +29,7 @@ namespace RPG.Attributes
         public float MaxHealth { get { return maxHealth.value; } }
         public bool IsAlive { get { return isAlive; } }
 
-        public event Action onUnitDeath;
+        public UnityEvent onUnitDeath;
         public event Action<float> onHealthChange;
         public event Action<float> onDamageTaken;
 

@@ -241,6 +241,34 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4430146885770297694, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: onUnitDeathUnity.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430146885770297694, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: onUnitDeathUnity.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430146885770297694, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: onUnitDeathUnity.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6939780008792097456}
+    - target: {fileID: 4430146885770297694, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: onUnitDeathUnity.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430146885770297694, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: onUnitDeathUnity.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Disable
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430146885770297694, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: onUnitDeathUnity.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: RPG.Combat.Casting, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430146885770297694, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: onUnitDeathUnity.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
 --- !u!1 &8911502055413707231 stripped
