@@ -7,6 +7,7 @@ using RPG.Core;
 using RPG.Movement;
 using RPG.Stats;
 using System;
+using UnityEngine.Events;
 
 namespace RPG.Combat
 {

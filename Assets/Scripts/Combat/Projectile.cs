@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Attributes;
+using UnityEngine.Events;
 
 namespace RPG.Combat
 {
@@ -17,6 +18,8 @@ namespace RPG.Combat
         GameObject owner;
         Health currentTarget;
         float damage = 0;
+
+        public UnityEvent onProjectileHit;
 
         void Start()
         {
@@ -40,9 +43,12 @@ namespace RPG.Combat
                 if(collidedObject == currentTarget && collidedObject.IsAlive)
                 {
                     collidedObject.TakeDamage(damage, owner);
-                    DestroyOnHitObjects();
                     PlayHitFX();
+                    onProjectileHit?.Invoke();
                     speed = 0;
+
+                    DestroyOnHitObjects();
+                    
                 }
             }
         }

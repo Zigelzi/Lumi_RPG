@@ -10,6 +10,7 @@ namespace RPG.SFX
     {
         [SerializeField] AudioClip soundEffect;
         [SerializeField] bool isRandomized = false;
+        [SerializeField] bool isPlayedOnStart = false;
 
         AudioSource audioSource;
         SoundRandomizer soundRandomiser;
@@ -20,6 +21,14 @@ namespace RPG.SFX
             soundRandomiser = GetComponent<SoundRandomizer>();
         }
 
+        void Start()
+        {
+           if (isPlayedOnStart)
+            {
+                Play();
+            }    
+        }
+
         public void Play()
         {
             if (!IsDamageSFXPlayable()) return;
@@ -28,6 +37,7 @@ namespace RPG.SFX
             {
                 soundRandomiser.RandomisePitch(audioSource);
             }
+            
             audioSource.clip = soundEffect;
             audioSource.Play();
         }
