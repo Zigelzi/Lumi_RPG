@@ -30,8 +30,14 @@ namespace RPG.Attributes
         public bool IsAlive { get { return isAlive; } }
 
         public UnityEvent onUnitDeath;
-        public event Action<float> onHealthChange;
-        public event Action<float> onDamageTaken;
+        public HealthChangeEvent onHealthChange;
+        public DamageTakenEvent onDamageTaken;
+
+        [Serializable]
+        public class HealthChangeEvent : UnityEvent<float> { }
+
+        [Serializable]
+        public class DamageTakenEvent : UnityEvent<float> { } 
 
         void Awake()
         {
@@ -42,7 +48,7 @@ namespace RPG.Attributes
 
         void OnEnable()
         {
-            onHealthChange += HandleHeathUpdate;
+            onHealthChange.AddListener(HandleHeathUpdate);
             baseStats.onLevelChange += HandleLevelChange;
         }
 
@@ -53,7 +59,7 @@ namespace RPG.Attributes
 
         void OnDisable()
         {
-            onHealthChange -= HandleHeathUpdate;
+            onHealthChange.RemoveListener(HandleHeathUpdate);
             baseStats.onLevelChange -= HandleLevelChange;
         }
 

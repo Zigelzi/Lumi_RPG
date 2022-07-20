@@ -31,7 +31,7 @@ namespace RPG.Attributes
 
         void OnEnable()
         {
-            playerHealth.onHealthChange += HandleHealthUpdate;
+            playerHealth.onHealthChange.AddListener(HandleHealthUpdate);
             playerExperience.onExperienceChange += HandleExperienceUpdate;
             playerStats.onLevelChange += HandleLevelUpdate;
         }
@@ -45,7 +45,7 @@ namespace RPG.Attributes
 
         void OnDisable()
         {
-            playerHealth.onHealthChange -= HandleHealthUpdate;
+            playerHealth.onHealthChange.RemoveListener(HandleHealthUpdate);
             playerExperience.onExperienceChange -= HandleExperienceUpdate;
             playerStats.onLevelChange -= HandleLevelUpdate;
         }

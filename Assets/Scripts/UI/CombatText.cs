@@ -22,7 +22,12 @@ namespace RPG.UI
 
         void OnEnable()
         {
-            health.onDamageTaken += HandleDamageTaken;    
+            health.onDamageTaken.AddListener(HandleDamageTaken);    
+        }
+
+        void OnDisable()
+        {
+            health.onDamageTaken.RemoveListener(HandleDamageTaken);
         }
 
         void HandleDamageTaken(float amount)
