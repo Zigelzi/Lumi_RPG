@@ -14,20 +14,20 @@ namespace RPG.Combat
     {
         [SerializeField] Transform leftHandHoldingLocation = null;
         [SerializeField] Transform rightHandHoldingLocation = null;
-        LazyValue<Weapon> currentWeapon;
-        [SerializeField] Weapon defaultWeapon = null;
+        LazyValue<WeaponConfig> currentWeapon;
+        [SerializeField] WeaponConfig defaultWeapon = null;
 
         GameObject currentWeaponInstance = null;
         
         public Transform LeftHandHoldingLocation { get { return leftHandHoldingLocation; } }
         public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
-        public Weapon CurrentWeapon { get {  return currentWeapon.value; } }
+        public WeaponConfig CurrentWeapon { get {  return currentWeapon.value; } }
 
-        public event Action<Weapon> onWeaponChange;
+        public event Action<WeaponConfig> onWeaponChange;
 
         void Awake()
         {
-            currentWeapon = new LazyValue<Weapon>(SetDefaultWeapon);
+            currentWeapon = new LazyValue<WeaponConfig>(SetDefaultWeapon);
         }
 
         void Start()
@@ -35,7 +35,7 @@ namespace RPG.Combat
             currentWeapon.ForceInit();
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(WeaponConfig weapon)
         {
             SpawnWeapon(weapon);
             currentWeapon.value = weapon;
@@ -71,13 +71,13 @@ namespace RPG.Combat
             }
         }
 
-        Weapon SetDefaultWeapon()
+        WeaponConfig SetDefaultWeapon()
         {
             SpawnWeapon(defaultWeapon);
             return defaultWeapon;
         }
 
-        void SpawnWeapon(Weapon weapon)
+        void SpawnWeapon(WeaponConfig weapon)
         {
             Animator animator = GetComponent<Animator>();
 
@@ -107,7 +107,7 @@ namespace RPG.Combat
         public void RestoreState(object state)
         {
             string restoredWeaponName = (string)state;
-            Weapon restoredWeapon = Resources.Load<Weapon>(restoredWeaponName);
+            WeaponConfig restoredWeapon = Resources.Load<WeaponConfig>(restoredWeaponName);
             EquipWeapon(restoredWeapon);
         }
     }

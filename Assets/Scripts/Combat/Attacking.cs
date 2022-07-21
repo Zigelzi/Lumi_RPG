@@ -16,7 +16,7 @@ namespace RPG.Combat
         ActionScheduler actionScheduler;
         Animator animator;
         BaseStats baseStats;
-        Weapon currentWeapon;
+        WeaponConfig currentWeapon;
         GameObject currentTarget;
         UnitMovement movement;
         WeaponManager weaponManager;
@@ -79,7 +79,7 @@ namespace RPG.Combat
             movement.Cancel();
         }
 
-        void HandleWeaponChange(Weapon newWeapon)
+        void HandleWeaponChange(WeaponConfig newWeapon)
         {
             currentWeapon = newWeapon;
         }
