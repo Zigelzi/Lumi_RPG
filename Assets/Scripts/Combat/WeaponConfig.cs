@@ -22,14 +22,14 @@ namespace RPG.Combat
         public float AttackRange { get { return attackRange; } }
         public float AttackSpeed { get { return attackSpeed; } }
 
-        public GameObject Spawn(Transform leftHand, Transform rightHand)
+        public Weapon Spawn(Transform leftHand, Transform rightHand)
         {
             Transform handTransform = GetHandTransform(leftHand, rightHand);
             
             if (equippedPrefab != null)
             {
-                GameObject weaponInstance = Instantiate(equippedPrefab, handTransform).gameObject;
-                return weaponInstance;
+                Weapon weapon = Instantiate(equippedPrefab, handTransform);
+                return weapon;
             }
 
             return null;

@@ -14,39 +14,38 @@ namespace RPG.Combat
     {
         [SerializeField] Transform leftHandHoldingLocation = null;
         [SerializeField] Transform rightHandHoldingLocation = null;
-        LazyValue<WeaponConfig> currentWeapon;
+        LazyValue<WeaponConfig> currentWeaponConfig;
         [SerializeField] WeaponConfig defaultWeapon = null;
 
-        GameObject currentWeaponInstance = null;
+        Weapon currentWeapon = null;
         
         public Transform LeftHandHoldingLocation { get { return leftHandHoldingLocation; } }
         public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
-        public WeaponConfig CurrentWeapon { get {  return currentWeapon.value; } }
+        public WeaponConfig CurrentWeapon { get {  return currentWeaponConfig.value; } }
 
         public event Action<WeaponConfig> onWeaponChange;
 
         void Awake()
         {
-            currentWeapon = new LazyValue<WeaponConfig>(SetDefaultWeapon);
+            currentWeaponConfig = new LazyValue<WeaponConfig>(SetDefaultWeapon);
         }
 
         void Start()
         {
-            currentWeapon.ForceInit();
+            currentWeaponConfig.ForceInit();
         }
 
         public void EquipWeapon(WeaponConfig weapon)
         {
             SpawnWeapon(weapon);
-            currentWeapon.value = weapon;
-            onWeaponChange?.Invoke(currentWeapon.value);
+            onWeaponChange?.Invoke(currentWeaponConfig.value);
         }
 
         public IEnumerable<float> GetAdditiveModifier(Stat stat)
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.value.AttackDamage;
+                yield return currentWeaponConfig.value.AttackDamage;
             }
         }
 
@@ -54,7 +53,7 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.value.AttackMultiplier;
+                yield return currentWeaponConfig.value.AttackMultiplier;
             }
         }
 
@@ -84,7 +83,8 @@ namespace RPG.Combat
             if (CanSpawnWeapon())
             {
                 DestroyCurrentWeapon();
-                currentWeaponInstance = weapon.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
+                currentWeapon = weapon.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
+                currentWeaponConfig.value = weapon;
                 weapon.SetAttackAnimation(animator);
             }
             
@@ -92,16 +92,16 @@ namespace RPG.Combat
 
         void DestroyCurrentWeapon()
         {
-            if (currentWeaponInstance != null)
+            if (currentWeapon != null)
             {
-                Destroy(currentWeaponInstance);
-                currentWeapon.value = null;
+                Destroy(currentWeapon.gameObject);
+                currentWeaponConfig.value = null;
             }
         }
 
         public object CaptureState()
         {
-            return currentWeapon.value.name;
+            return currentWeaponConfig.value.name;
         }
 
         public void RestoreState(object state)
