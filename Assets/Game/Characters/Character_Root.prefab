@@ -171,21 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203f71f38213cfa4c84209b35f35e639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onProjectileLaunch:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1995373829269594563}
-        m_TargetAssemblyTypeName: RPG.SFX.SoundEffect, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1061843811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandHoldingLocation: {fileID: 0}
   rightHandHoldingLocation: {fileID: 0}
-  defaultWeapon: {fileID: 11400000, guid: f3224321ec0f2e94caf90f5221908d11, type: 2}
+  defaultWeaponConfig: {fileID: 11400000, guid: f3224321ec0f2e94caf90f5221908d11, type: 2}
 --- !u!114 &-6926742722821068626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 94fc62564eabf2e429355affe6bee585, type: 3}
   isRandomized: 1
+  isPlayedOnStart: 0
 --- !u!1 &5039411884979157238
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 1851dbb3839b8f44e89b2e201aa8f3b5, type: 3}
   isRandomized: 1
+  isPlayedOnStart: 0
 --- !u!1 &6827171077459264127
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: ef27b789758e41843b4a6dfc3ea51d29, type: 3}
   isRandomized: 0
+  isPlayedOnStart: 0
 --- !u!1 &8661483401128137841
 GameObject:
   m_ObjectHideFlags: 0

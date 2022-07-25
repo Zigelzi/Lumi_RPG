@@ -16,7 +16,8 @@ namespace RPG.Combat
         ActionScheduler actionScheduler;
         Animator animator;
         BaseStats baseStats;
-        WeaponConfig currentWeapon;
+        WeaponConfig currentWeaponConfig;
+        Weapon currentWeapon;
         GameObject currentTarget;
         UnitMovement movement;
         WeaponManager weaponManager;
@@ -44,7 +45,7 @@ namespace RPG.Combat
         {
             if (weaponManager != null)
             {
-                currentWeapon = weaponManager.CurrentWeapon;
+                currentWeaponConfig = weaponManager.CurrentWeaponConfig;
             }
         }
 
@@ -79,8 +80,9 @@ namespace RPG.Combat
             movement.Cancel();
         }
 
-        void HandleWeaponChange(WeaponConfig newWeapon)
+        void HandleWeaponChange(WeaponConfig newWeaponConfig, Weapon newWeapon)
         {
+            currentWeaponConfig = newWeaponConfig;
             currentWeapon = newWeapon;
         }
 
@@ -126,7 +128,7 @@ namespace RPG.Combat
                 currentTarget.transform.position
                 );
 
-            if (distanceFromTarget <= currentWeapon.AttackRange)
+            if (distanceFromTarget <= currentWeaponConfig.AttackRange)
             {
                 return true;
             }
@@ -136,7 +138,7 @@ namespace RPG.Combat
 
         bool IsAbleToAttackAgain()
         {
-            if (timeSinceLastAttack >= currentWeapon.AttackSpeed)
+            if (timeSinceLastAttack >= currentWeaponConfig.AttackSpeed)
             {
                 return true;
             }
@@ -195,11 +197,16 @@ namespace RPG.Combat
 
             float damage = baseStats.GetStat(Stat.Damage);
 
+            if (currentWeapon != null)
+            {
+                currentWeapon.OnHit();
+            }
+
             if (currentTarget.TryGetComponent<Health>(out Health currentTargetHealth))
             {
-                if (currentWeapon.HasProjectile)
+                if (currentWeaponConfig.HasProjectile)
                 {
-                    currentWeapon.LaunchProjectile(weaponManager.LeftHandHoldingLocation, 
+                    currentWeaponConfig.LaunchProjectile(weaponManager.LeftHandHoldingLocation, 
                         weaponManager.RightHandHoldingLocation,
                         currentTargetHealth,
                         gameObject,

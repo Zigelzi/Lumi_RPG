@@ -14,38 +14,40 @@ namespace RPG.Combat
     {
         [SerializeField] Transform leftHandHoldingLocation = null;
         [SerializeField] Transform rightHandHoldingLocation = null;
-        LazyValue<WeaponConfig> currentWeaponConfig;
-        [SerializeField] WeaponConfig defaultWeapon = null;
+        [SerializeField] WeaponConfig defaultWeaponConfig = null;
 
-        Weapon currentWeapon = null;
+        GameObject currentWeaponInstance;
+        WeaponConfig currentWeaponConfig;
+        LazyValue<Weapon> currentWeapon;
         
         public Transform LeftHandHoldingLocation { get { return leftHandHoldingLocation; } }
         public Transform RightHandHoldingLocation { get { return rightHandHoldingLocation; } }
-        public WeaponConfig CurrentWeapon { get {  return currentWeaponConfig.value; } }
+        public WeaponConfig CurrentWeaponConfig { get {  return currentWeaponConfig; } }
+        public Weapon CurrentWeapon { get { return currentWeapon.value; } }
 
-        public event Action<WeaponConfig> onWeaponChange;
+        public event Action<WeaponConfig, Weapon> onWeaponChange;
 
         void Awake()
         {
-            currentWeaponConfig = new LazyValue<WeaponConfig>(SetDefaultWeapon);
+            currentWeaponConfig = defaultWeaponConfig;
+            currentWeapon = new LazyValue<Weapon>(SetDefaultWeapon);
         }
 
         void Start()
         {
-            currentWeaponConfig.ForceInit();
+            currentWeapon.ForceInit();
         }
 
-        public void EquipWeapon(WeaponConfig weapon)
+        public void EquipWeapon(WeaponConfig weaponConfig)
         {
-            SpawnWeapon(weapon);
-            onWeaponChange?.Invoke(currentWeaponConfig.value);
+            SpawnWeapon(weaponConfig);
         }
 
         public IEnumerable<float> GetAdditiveModifier(Stat stat)
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeaponConfig.value.AttackDamage;
+                yield return currentWeaponConfig.AttackDamage;
             }
         }
 
@@ -53,10 +55,39 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeaponConfig.value.AttackMultiplier;
+                yield return currentWeaponConfig.AttackMultiplier;
             }
         }
 
+        Weapon SetDefaultWeapon()
+        {
+            Weapon spawnedWeapon = SpawnWeapon(defaultWeaponConfig);
+            return spawnedWeapon;
+        }
+
+        Weapon SpawnWeapon(WeaponConfig weaponConfig)
+        {
+            Animator animator = GetComponent<Animator>();
+            Weapon spawnedWeapon = null;
+
+            if (CanSpawnWeapon())
+            {
+                DestroyCurrentWeapon();
+                spawnedWeapon = weaponConfig.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
+                if (spawnedWeapon != null)
+                {
+                    currentWeaponInstance = spawnedWeapon.gameObject;
+                }
+                weaponConfig.SetAttackAnimation(animator);
+
+                currentWeaponConfig = weaponConfig;
+                currentWeapon.value = spawnedWeapon;
+
+                onWeaponChange?.Invoke(currentWeaponConfig, spawnedWeapon);
+            }
+
+            return spawnedWeapon;
+        }
 
         bool CanSpawnWeapon()
         {
@@ -70,38 +101,18 @@ namespace RPG.Combat
             }
         }
 
-        WeaponConfig SetDefaultWeapon()
-        {
-            SpawnWeapon(defaultWeapon);
-            return defaultWeapon;
-        }
-
-        void SpawnWeapon(WeaponConfig weapon)
-        {
-            Animator animator = GetComponent<Animator>();
-
-            if (CanSpawnWeapon())
-            {
-                DestroyCurrentWeapon();
-                currentWeapon = weapon.Spawn(leftHandHoldingLocation, rightHandHoldingLocation);
-                currentWeaponConfig.value = weapon;
-                weapon.SetAttackAnimation(animator);
-            }
-            
-        }
-
         void DestroyCurrentWeapon()
         {
-            if (currentWeapon != null)
+            if (currentWeaponInstance != null)
             {
-                Destroy(currentWeapon.gameObject);
-                currentWeaponConfig.value = null;
+                Destroy(currentWeaponInstance);
+                currentWeaponConfig = null;
             }
         }
 
         public object CaptureState()
         {
-            return currentWeaponConfig.value.name;
+            return currentWeaponConfig.name;
         }
 
         public void RestoreState(object state)

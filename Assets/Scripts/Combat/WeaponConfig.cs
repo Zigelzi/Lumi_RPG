@@ -25,14 +25,14 @@ namespace RPG.Combat
         public Weapon Spawn(Transform leftHand, Transform rightHand)
         {
             Transform handTransform = GetHandTransform(leftHand, rightHand);
-            
+            Weapon weapon = null;
+
             if (equippedPrefab != null)
             {
-                Weapon weapon = Instantiate(equippedPrefab, handTransform);
-                return weapon;
+                weapon = Instantiate(equippedPrefab, handTransform);
             }
 
-            return null;
+            return weapon;
         }
 
         public void SetAttackAnimation(Animator animator)
