@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Unarmed
   m_EditorClassIdentifier: 
   attackAnimation: {fileID: 0}
-  equippedPrefab: {fileID: 0}
+  equippedPrefab: {fileID: 537517046528378897, guid: 0df278af2a12b1647a3efd0805b9daf7, type: 3}
   projectile: {fileID: 0}
   attackDamage: 5
+  attackMultiplier: 0
   attackSpeed: 1
   attackRange: 2
   isRightHanded: 1
