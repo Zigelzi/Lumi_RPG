@@ -4877,7 +4877,7 @@ Transform:
   m_GameObject: {fileID: 6326823010798494677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 6326823011101001912}
   - {fileID: 6326823010793618834}
@@ -4896,7 +4896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c5092fd0927a141933e3ccb179171c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onStartAttack:
+  onWeaponHit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &472130337643156369
