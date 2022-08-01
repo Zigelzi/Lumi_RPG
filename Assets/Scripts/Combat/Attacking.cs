@@ -18,7 +18,7 @@ namespace RPG.Combat
         BaseStats baseStats;
         WeaponConfig currentWeaponConfig;
         Weapon currentWeapon;
-        GameObject currentTarget;
+        [SerializeField] GameObject currentTarget;
         UnitMovement movement;
         WeaponManager weaponManager;
 
