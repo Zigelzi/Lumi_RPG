@@ -4874,6 +4874,7 @@ GameObject:
   - component: {fileID: 6457753856395627339}
   - component: {fileID: 7412839373347750917}
   - component: {fileID: 8994146420302179576}
+  - component: {fileID: 3428270105191128333}
   m_Layer: 0
   m_Name: Pickup_Health
   m_TagString: Untagged
@@ -4924,6 +4925,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   consumableType: 0
   amount: 20
+--- !u!114 &3428270105191128333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270531799589925680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4586541de9ed24ea0ba9df86d4f31e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFloating: 1
+  floatingSpeed: 0.15
+  maxDistance: 0.5
+  destinationRadius: 0.1
 --- !u!1001 &1918647923448058873
 PrefabInstance:
   m_ObjectHideFlags: 0
