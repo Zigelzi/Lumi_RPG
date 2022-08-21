@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Attributes;
 
+using RPG.Control;
+
 namespace RPG.Combat
 {
-    public class ConsumablePickup : MonoBehaviour
+    public class ConsumablePickup : MonoBehaviour, IRaycastable
     {
         [SerializeField] ConsumableType consumableType = ConsumableType.Health;
         [SerializeField][Range(0, 100)] int amount = 20;
@@ -21,6 +23,17 @@ namespace RPG.Combat
             {
                 ConsumePickup(other);
             }    
+        }
+
+        public bool HandleRaycast(PlayerController player, RaycastHit hit)
+        {
+            player.TryStartMoveAction(hit.point);
+            return true;
+        }
+
+        public CursorType GetCursorType()
+        {
+            return CursorType.Interactable;
         }
 
         void ConsumePickup(Collider playerCollider)
