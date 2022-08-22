@@ -8,7 +8,7 @@ using RPG.Control;
 
 namespace RPG.SceneManagement
 {
-    public class Portal : MonoBehaviour
+    public class Portal : MonoBehaviour, IRaycastable
     {
         [SerializeField] [Range(0, 10)] int destinationSceneIndex = 0;
         [SerializeField] Transform spawnPoint;
@@ -28,6 +28,17 @@ namespace RPG.SceneManagement
             {
                 StartCoroutine(TransitionToScene());
             }
+        }
+
+        public CursorType GetCursorType()
+        {
+            return CursorType.Interactable;
+        }
+
+        public bool HandleRaycast(PlayerController player, RaycastHit hit)
+        {
+            player.TryStartMoveAction(hit.point);
+            return true;
         }
 
         IEnumerator TransitionToScene()
