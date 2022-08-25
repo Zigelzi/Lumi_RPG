@@ -4,6 +4,8 @@ using UnityEngine;
 using RPG.Attributes;
 
 using RPG.Control;
+using RPG.SFX;
+using UnityEngine.Events;
 
 namespace RPG.Combat
 {
@@ -11,6 +13,8 @@ namespace RPG.Combat
     {
         [SerializeField] ConsumableType consumableType = ConsumableType.Health;
         [SerializeField][Range(0, 100)] int amount = 20;
+
+        public UnityEvent onPickup;
 
         enum ConsumableType
         {

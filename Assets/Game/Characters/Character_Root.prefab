@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3f5d3f41413c4b9e8b4ac4d869b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffect: {fileID: 8300000, guid: 1851dbb3839b8f44e89b2e201aa8f3b5, type: 3}
+  soundEffect: {fileID: 8300000, guid: 0c373d456afde6e4bb00d4a4eb0d695d, type: 3}
   isRandomized: 1
   isPlayedOnStart: 0
 --- !u!1 &6827171077459264127
