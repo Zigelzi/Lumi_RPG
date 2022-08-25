@@ -58,6 +58,7 @@ namespace RPG.Combat
 
             if (isHealed)
             {
+                onPickup?.Invoke();
                 Destroy(gameObject);
             }
         } 

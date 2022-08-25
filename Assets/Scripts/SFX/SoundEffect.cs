@@ -37,9 +37,13 @@ namespace RPG.SFX
             {
                 soundRandomiser.RandomisePitch(audioSource);
             }
-            
             audioSource.clip = soundEffect;
             audioSource.Play();
+        }
+
+        public void PlayPersistantSFX()
+        {
+            AudioSource.PlayClipAtPoint(soundEffect, transform.position);
         }
 
         bool IsDamageSFXPlayable()

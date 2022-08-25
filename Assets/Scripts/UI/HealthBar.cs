@@ -63,24 +63,24 @@ public class HealthBar : MonoBehaviour
 
     IEnumerator FadeToTransparent(bool isDelayed)
     {
-        Debug.Log($"Fading to transparent started and fade is delayed: {isDelayed}");
+        //Debug.Log($"Fading to transparent started and fade is delayed: {isDelayed}");
         if (isDelayed)
         {
             yield return new WaitForSeconds(fadeOutDelay);
         }
-        Debug.Log("Starting to fade out");
-        Debug.Log($"Canvasgroup alpha is bigger than 0: {canvasGroup.alpha > 0}");
+        //Debug.Log("Starting to fade out");
+        //Debug.Log($"Canvasgroup alpha is bigger than 0: {canvasGroup.alpha > 0}");
         while (canvasGroup.alpha > 0)
         {
             float deltaAlpha = Time.deltaTime / fadeDuration;
 
-            Debug.Log($"DeltaAlpha: {deltaAlpha}");
-            Debug.Log($"Canvas group alpha before {canvasGroup.alpha}");
+            //Debug.Log($"DeltaAlpha: {deltaAlpha}");
+            //Debug.Log($"Canvas group alpha before {canvasGroup.alpha}");
             canvasGroup.alpha -= deltaAlpha;
-            Debug.Log($"Canvas group alpha after {canvasGroup.alpha}");
+            //Debug.Log($"Canvas group alpha after {canvasGroup.alpha}");
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("Finished to fade out");
+        //Debug.Log("Finished to fade out");
     }
 
     IEnumerator FadeToOpaque()
