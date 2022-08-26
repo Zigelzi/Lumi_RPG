@@ -16,7 +16,7 @@ MonoBehaviour:
   suspiciousDuration: 3
   patrolStopDuration: 1
   patrolSpeedMultiplier: 0.5
-  waypointTolerance: 0.3
+  waypointTolerance: 0.55
   patrolPath: {fileID: 0}
 --- !u!114 &1028511446174766933
 MonoBehaviour:
