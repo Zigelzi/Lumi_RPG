@@ -135,6 +135,8 @@ namespace RPG.Control
             foreach (RaycastHit hit in hits)
             {
                 IRaycastable[] components = hit.transform.GetComponents<IRaycastable>();
+
+                if (!IsValidPathAvailable(hit.transform.position)) return false;
                 foreach (IRaycastable component in components)
                 {
                     if (component.HandleRaycast(this, hit))
