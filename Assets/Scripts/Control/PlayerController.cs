@@ -16,7 +16,6 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] float navMeshProximityRange = 2f;
-        [SerializeField] float maxPathLength = 20f;
         [SerializeField] LayerMask interactableLayers;
         [SerializeField] Transform spellCastingPoint;
 
@@ -136,7 +135,8 @@ namespace RPG.Control
             {
                 IRaycastable[] components = hit.transform.GetComponents<IRaycastable>();
 
-                if (!IsValidPathAvailable(hit.transform.position)) return false;
+                if (!movement.CanMoveTo(hit.transform.position)) return false;
+
                 foreach (IRaycastable component in components)
                 {
                     if (component.HandleRaycast(this, hit))
@@ -172,7 +172,7 @@ namespace RPG.Control
         {
             bool isHoveringOverNavMesh = RaycastNavMesh(out Vector3 targetPosition);
             
-            if (isHoveringOverNavMesh && IsValidPathAvailable(targetPosition))
+            if (isHoveringOverNavMesh && movement.CanMoveTo(targetPosition))
             {
                 TryStartMoveAction(targetPosition);
                 cursor.SetCursor(CursorType.Movement);           
@@ -212,40 +212,8 @@ namespace RPG.Control
             return mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         }
 
-        bool IsValidPathAvailable(Vector3 targetPosition)
-        {
-            NavMeshPath path = new NavMeshPath();
-
-            bool isPathFound = NavMesh.CalculatePath(
-                transform.position,
-                targetPosition,
-                NavMesh.AllAreas,
-                path);
-
-            float pathLength = GetPathLength(path);
-
-            if (isPathFound 
-                && pathLength <= maxPathLength
-                && path.status == NavMeshPathStatus.PathComplete)
-            {
-                return true;
-            }
-
-            return false;
-        }
         
-        float GetPathLength(NavMeshPath path)
-        {
-            float totalPathLength = 0;
-
-            if (path.corners.Length < 2) return totalPathLength;
-
-            for (int i = 0; i < path.corners.Length - 1; i++)
-            {
-                totalPathLength += Vector3.Distance(path.corners[i], path.corners[i + 1]);
-            }
-
-            return totalPathLength;
-        }
+        
+        
     }
 }

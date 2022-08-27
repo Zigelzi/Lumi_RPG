@@ -10,6 +10,8 @@ namespace RPG.Movement
     public class UnitMovement : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float maxSpeed = 3f;
+        [SerializeField] float maxPathLength = 20f;
+
         ActionScheduler actionScheduler;
         Animator animator;
         NavMeshAgent navAgent;
@@ -41,19 +43,25 @@ namespace RPG.Movement
         }
         public void MoveTo(Vector3 destination)
         {
-            navAgent.speed = maxSpeed;
-            navAgent.SetDestination(destination);
-            navAgent.isStopped = false;
+            if (CanMoveTo(destination))
+            {
+                navAgent.speed = maxSpeed;
+                navAgent.SetDestination(destination);
+                navAgent.isStopped = false;
+            }
         }
 
         public void MoveTo(Vector3 destination, float speedMultiplier)
         {
-            // Safeguard to keep the multiplier between 0 and 1
-            speedMultiplier = Mathf.Clamp01(speedMultiplier);
+            if (CanMoveTo(destination))
+            {
+                // Safeguard to keep the multiplier between 0 and 1
+                speedMultiplier = Mathf.Clamp01(speedMultiplier);
 
-            navAgent.speed = maxSpeed * speedMultiplier;
-            navAgent.SetDestination(destination);
-            navAgent.isStopped = false;
+                navAgent.speed = maxSpeed * speedMultiplier;
+                navAgent.SetDestination(destination);
+                navAgent.isStopped = false;
+            }
         }
 
         public void Cancel()
@@ -64,6 +72,42 @@ namespace RPG.Movement
         public void SetNavAgent(bool isActive)
         {
             navAgent.enabled = isActive;
+        }
+
+        public bool CanMoveTo(Vector3 targetPosition)
+        {
+            NavMeshPath path = new NavMeshPath();
+
+            bool isPathFound = NavMesh.CalculatePath(
+                transform.position,
+                targetPosition,
+                NavMesh.AllAreas,
+                path);
+
+            float pathLength = GetPathLength(path);
+
+            if (isPathFound
+                && pathLength <= maxPathLength
+                && path.status == NavMeshPathStatus.PathComplete)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        float GetPathLength(NavMeshPath path)
+        {
+            float totalPathLength = 0;
+
+            if (path.corners.Length < 2) return totalPathLength;
+
+            for (int i = 0; i < path.corners.Length - 1; i++)
+            {
+                totalPathLength += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            }
+
+            return totalPathLength;
         }
 
         void UpdateRunAnimation()
