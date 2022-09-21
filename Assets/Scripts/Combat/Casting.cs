@@ -77,7 +77,7 @@ namespace RPG.Combat
             if (spellParticles == null && player != null) return;
 
             Transform spellCastingPoint = player.SpellCastingPoint;
-            Instantiate(spellParticles, spellCastingPoint.position, spellCastingPoint.rotation);
+            Instantiate(spellParticles, spellCastingPoint.position, Quaternion.identity, transform);
 
         }
 
