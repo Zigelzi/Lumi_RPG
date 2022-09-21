@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 627713907287801867}
+  - component: {fileID: 8156915290480962540}
   m_Layer: 0
-  m_Name: FX_LevelUp
+  m_Name: VFX_LevelUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8156915290480962540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223077122251745631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67248ff17de0f3b4390d7049a5109c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4049371868572583876
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +55,6 @@ GameObject:
   - component: {fileID: 1701276967789805526}
   - component: {fileID: 8880150463666873455}
   - component: {fileID: 3167993695020481947}
-  - component: {fileID: 2127518436216283792}
   m_Layer: 0
   m_Name: Sparkles
   m_TagString: Untagged
@@ -4854,15 +4866,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &2127518436216283792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4049371868572583876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67248ff17de0f3b4390d7049a5109c51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

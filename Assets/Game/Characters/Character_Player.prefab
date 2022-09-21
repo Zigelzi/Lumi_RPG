@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshProximityRange: 0.5
-  maxPathLength: 20
   interactableLayers:
     serializedVersion: 2
     m_Bits: 1793
@@ -73,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healAmount: 50
   cooldownTime: 2
-  spellParticles: {fileID: 2822917930449453751, guid: 90206772f7a9d8c479c8392c06bd1afb, type: 3}
+  spellParticles: {fileID: 5891066834319419313, guid: 035e6918667cc8f43ad974cec55151e0, type: 3}
 --- !u!1001 &4988064121868118085
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ MonoBehaviour:
   lifetime: 5
   lifetimeAfterImpact: 1
   isHoming: 0
-  hitEffect: {fileID: 4590551974732223, guid: f8b26770661cc3a46be1b5e7ba6e1aa1, type: 3}
+  hitEffect: {fileID: 3175786900251672572, guid: bea5fdc782e38ba44917e0ca1b693972, type: 3}
   onHitDestroyedObjects: []
   onProjectileHit:
     m_PersistentCalls:

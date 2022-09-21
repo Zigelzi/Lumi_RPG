@@ -6,13 +6,48 @@ namespace RPG.Combat
 {
     public class DestroyFXAfterEffect : MonoBehaviour
     {
-        void Update()
+        List<ParticleSystem> childParticles = new List<ParticleSystem>();
+        List<ParticleSystem> aliveParticles = new List<ParticleSystem>();
+
+        void Awake()
         {
-            if (!GetComponent<ParticleSystem>().IsAlive())
+            GetChildParticles();
+            StartCoroutine(DestroyFinishedFXWithChildren(0));
+        }
+
+        void GetChildParticles()
+        {
+            ParticleSystem[] particles = transform.GetComponentsInChildren<ParticleSystem>();
+
+            foreach (ParticleSystem particle in particles)
             {
-                Destroy(gameObject);
+                childParticles.Add(particle);
+                aliveParticles.Add(particle);
             }
         }
+
+        IEnumerator DestroyFinishedFXWithChildren(float waitTime) { 
+            while (aliveParticles.Count > 0)
+            {
+                foreach (ParticleSystem vfx in childParticles)
+                {
+                    DisableFinishedParticle(vfx);
+                }
+                yield return new WaitForSeconds(waitTime);
+            }
+            Destroy(gameObject);
+        }
+
+        void DisableFinishedParticle(ParticleSystem vfx)
+        {
+            if (!vfx.IsAlive())
+            {
+                vfx.gameObject.SetActive(false);
+                aliveParticles.Remove(vfx);
+            }
+        }
+
+        
     }
 }
 
