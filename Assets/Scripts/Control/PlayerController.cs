@@ -17,7 +17,6 @@ namespace RPG.Control
     {
         [SerializeField] float navMeshProximityRange = 2f;
         [SerializeField] LayerMask interactableLayers;
-        [SerializeField] Transform spellCastingPoint;
 
         ActionScheduler actionScheduler;
         Attacking attacking;
@@ -31,7 +30,6 @@ namespace RPG.Control
         bool rightButtonPressed = false;
 
         public PlayerInputActions PlayerInputActions { get { return playerInputActions; } }
-        public Transform SpellCastingPoint { get { return spellCastingPoint; } }
 
         public static event Action onPlayerDeath;
 

@@ -17,7 +17,7 @@ namespace RPG.Combat
 
         void ConsumePickup(Collider playerCollider)
         {
-            Casting casting = playerCollider.gameObject.GetComponent<Casting>();
+            AbilityManager casting = playerCollider.gameObject.GetComponent<AbilityManager>();
 
             if (casting != null && !casting.enabled)
             {

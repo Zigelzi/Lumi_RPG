@@ -1,27 +1,31 @@
-﻿using System.Collections;
+﻿using RPG.Attributes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using RPG.Control;
-using RPG.Attributes;
 
 namespace RPG.Combat
 {
     public class Casting : MonoBehaviour
     {
-        [SerializeField] float healAmount = 50f;
-        [SerializeField] float cooldownTime = 2f;
-        [SerializeField] GameObject spellParticles;
+        [SerializeField] Transform castPoint;
 
         float timeSinceLastUsage = Mathf.Infinity;
+        AbilityManager abilityManager;
+        AbilityConfig currentAbility;
         Health health;
-        PlayerController player;
 
-        // Start is called before the first frame update
         void Awake()
         {
+            abilityManager = GetComponent<AbilityManager>();
             health = GetComponent<Health>();
-            player = GetComponent<PlayerController>();
+        }
+
+        void Start()
+        {
+            if (abilityManager == null) return;
+
+            currentAbility = abilityManager.CurrentAbility;
         }
 
         void OnEnable()
@@ -34,14 +38,15 @@ namespace RPG.Combat
             health.onUnitDeath.RemoveListener(Disable);
         }
 
-        // Update is called once per frame
         void Update()
         {
             timeSinceLastUsage += Time.deltaTime;
 
-            if (Keyboard.current.digit1Key.wasReleasedThisFrame && IsSpellReady())
+            if (Keyboard.current.digit1Key.wasReleasedThisFrame && 
+                IsAbilityReady() &&
+                castPoint != null)
             {
-                Heal();
+                currentAbility.Cast(health, castPoint);
             }
         }
 
@@ -50,38 +55,15 @@ namespace RPG.Combat
             enabled = false;
         }
 
-        bool IsSpellReady()
+        bool IsAbilityReady()
         {
-            if (timeSinceLastUsage >= cooldownTime)
+            if (timeSinceLastUsage >= currentAbility.Cooldown)
             {
                 return true;
             }
 
             return false;
         }
-
-        void Heal()
-        {
-            bool isHealed = health.AddHealth(healAmount);
-
-            if (isHealed)
-            {
-                SpawnHealParticles();
-                timeSinceLastUsage = 0;
-            }
-            
-        }
-
-        void SpawnHealParticles()
-        {
-            if (spellParticles == null && player != null) return;
-
-            Transform spellCastingPoint = player.SpellCastingPoint;
-            Instantiate(spellParticles, spellCastingPoint.position, Quaternion.identity, transform);
-
-        }
-
-        
     }
 }
 
