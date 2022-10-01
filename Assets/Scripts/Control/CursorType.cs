@@ -10,6 +10,7 @@ namespace RPG.Control
         Movement,
         UI,
         Unclickable,
-        Interactable
+        Interactable,
+        Targeting
     }
 }
