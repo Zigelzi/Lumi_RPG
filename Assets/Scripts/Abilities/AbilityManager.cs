@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using RPG.Control;
 using RPG.Attributes;
 
-namespace RPG.Combat
+namespace RPG.Abilities
 {
     public class AbilityManager : MonoBehaviour
     {
@@ -13,12 +13,12 @@ namespace RPG.Combat
         [SerializeField] GameObject spellParticles;
         [SerializeField] Ability[] abilities;
 
-        AbilityConfig currentAbility;
+        Abilities.Ability currentAbility;
 
         Health health;
         PlayerController player;
 
-        public AbilityConfig CurrentAbility { get { return currentAbility; } }
+        public Abilities.Ability CurrentAbility { get { return currentAbility; } }
 
         // Start is called before the first frame update
         void Awake()
@@ -54,7 +54,7 @@ namespace RPG.Combat
         public class Ability
         {
             public int id;
-            public AbilityConfig abilityConfig;
+            public Abilities.Ability abilityConfig;
         }
     }
 }

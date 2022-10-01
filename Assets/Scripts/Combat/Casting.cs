@@ -1,8 +1,10 @@
-﻿using RPG.Attributes;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+using RPG.Abilities;
+using RPG.Attributes;
 
 namespace RPG.Combat
 {
@@ -12,7 +14,7 @@ namespace RPG.Combat
 
         float timeSinceLastUsage = Mathf.Infinity;
         AbilityManager abilityManager;
-        AbilityConfig currentAbility;
+        Ability currentAbility;
         Health health;
 
         void Awake()
@@ -46,7 +48,7 @@ namespace RPG.Combat
                 IsAbilityReady() &&
                 castPoint != null)
             {
-                currentAbility.Cast(health, castPoint);
+                currentAbility.Use(health, castPoint);
             }
         }
 
