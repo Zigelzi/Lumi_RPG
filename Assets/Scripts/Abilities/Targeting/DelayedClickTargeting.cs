@@ -35,6 +35,8 @@ namespace RPG.Abilities
                 // Run in the beginning of every frame
                 yield return null;
             }
+
+            playerController.IsInputAllowed = true;
         }
     }
 }
