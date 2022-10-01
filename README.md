@@ -6,7 +6,7 @@ The sheet used to balance the player and enemy characters: [Lumi Balancing sheet
 
 ## Issues
 - [ ] Fix characters turning after stopping moving
-- [ ] Fix portal being too large in indoor level
+- [x] Fix portal being too large in indoor level
 - [ ] Fix health bars not always fading out correctly
 - [ ] Fix game over screen not triggering
 - [ ] Fix characters sometimes floating after dying
