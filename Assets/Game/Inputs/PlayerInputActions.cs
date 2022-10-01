@@ -57,6 +57,22 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""c00b7384-c31f-4f37-ad3c-be5f77786b07"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d7fb77e-6340-4b44-b72e-36084d22767c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -114,6 +130,50 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""DeleteSave"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""baae33ca-e3f9-4bc6-bf8b-5862a86d28a5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3f73597-a82f-4dc8-b3ec-1b79b88f49b0"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd3be8bf-bf19-441a-9516-faff702d9f73"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e0cf91c-4c99-48ab-9048-e10aa8e7ac09"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -127,6 +187,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
         m_Player_OpenMainMenu = m_Player.FindAction("OpenMainMenu", throwIfNotFound: true);
         m_Player_DeleteSave = m_Player.FindAction("DeleteSave", throwIfNotFound: true);
+        m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
+        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -181,6 +243,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Load;
     private readonly InputAction m_Player_OpenMainMenu;
     private readonly InputAction m_Player_DeleteSave;
+    private readonly InputAction m_Player_Select;
+    private readonly InputAction m_Player_Use;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -190,6 +254,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Load => m_Wrapper.m_Player_Load;
         public InputAction @OpenMainMenu => m_Wrapper.m_Player_OpenMainMenu;
         public InputAction @DeleteSave => m_Wrapper.m_Player_DeleteSave;
+        public InputAction @Select => m_Wrapper.m_Player_Select;
+        public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -214,6 +280,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @DeleteSave.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteSave;
                 @DeleteSave.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteSave;
                 @DeleteSave.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteSave;
+                @Select.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
+                @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -233,6 +305,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @DeleteSave.started += instance.OnDeleteSave;
                 @DeleteSave.performed += instance.OnDeleteSave;
                 @DeleteSave.canceled += instance.OnDeleteSave;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
             }
         }
     }
@@ -244,5 +322,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnLoad(InputAction.CallbackContext context);
         void OnOpenMainMenu(InputAction.CallbackContext context);
         void OnDeleteSave(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
     }
 }

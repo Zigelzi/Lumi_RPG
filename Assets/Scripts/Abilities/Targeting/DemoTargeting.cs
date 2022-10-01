@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace RPG.Abilities
 {
-    [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/Targeting/Create targeting strategy", order = 0)]
+    [CreateAssetMenu(fileName = "Self targeting", menuName = "Abilities/Targeting/Self", order = 0)]
     public class DemoTargeting : TargetingStrategy
     {
-        public override void StartTargeting()
+        public override void StartTargeting(GameObject user)
         {
             Debug.Log("Demo targeting started");
         }

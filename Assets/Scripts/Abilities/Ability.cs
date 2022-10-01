@@ -16,10 +16,10 @@ namespace RPG.Abilities
 
 
 
-        public void Use(Health target, Transform castPoint)
+        public void Use(GameObject user, Transform castPoint)
         {
             Debug.Log($"Casted ability {this}!");
-            targetingStrategy.StartTargeting();
+            targetingStrategy.StartTargeting(user);
             SpawnVFX(castPoint);
 
         }

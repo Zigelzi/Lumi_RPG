@@ -48,7 +48,7 @@ namespace RPG.Combat
                 IsAbilityReady() &&
                 castPoint != null)
             {
-                currentAbility.Use(health, castPoint);
+                currentAbility.Use(gameObject, castPoint);
             }
         }
 

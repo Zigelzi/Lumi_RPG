@@ -24,12 +24,19 @@ namespace RPG.Control
         CursorManager cursor;
         Health health;
         InputAction movementInput;
+        InputAction selectInput;
+        InputAction useInput;
         PlayerInputActions playerInputActions;
         UnitMovement movement;
 
         bool rightButtonPressed = false;
+        bool leftButtonPressed = false;
+        bool isInputAllowed = true;
 
         public PlayerInputActions PlayerInputActions { get { return playerInputActions; } }
+
+        public bool LeftButtonPressed { get { return leftButtonPressed; } }
+        public bool IsInputAllowed { get { return isInputAllowed; } set { isInputAllowed = value; } }
 
         public static event Action onPlayerDeath;
 
@@ -43,19 +50,28 @@ namespace RPG.Control
 
             playerInputActions = new PlayerInputActions();
             movementInput = playerInputActions.Player.Movement;
+            selectInput = playerInputActions.Player.Select;
+            useInput = playerInputActions.Player.Use;
         }
 
         void OnEnable()
         {
             health.onUnitDeath.AddListener(HandleDeath);
 
-            movementInput.performed += HandleMousePressedDown;
-            movementInput.canceled += HandleMouseReleased;
+            movementInput.performed += HandleRightMouseButtonPressedDown;
+            movementInput.canceled += HandleRightMouseButtonReleased;
+
+            selectInput.performed += HandleLeftMouseButtonPressedDown;
+            selectInput.canceled += HandleLeftMouseButtonReleased;
+
+
         }
 
         void Start()
         {
             movementInput.Enable();
+            selectInput.Enable();
+
             mainCamera = Camera.main;
         }
 
@@ -63,14 +79,20 @@ namespace RPG.Control
         {
             health.onUnitDeath.RemoveListener(HandleDeath);
 
-            movementInput.performed -= HandleMousePressedDown;
-            movementInput.canceled -= HandleMouseReleased;
+            movementInput.performed -= HandleRightMouseButtonPressedDown;
+            movementInput.canceled -= HandleRightMouseButtonReleased;
+
+            selectInput.performed -= HandleLeftMouseButtonPressedDown;
+            selectInput.canceled -= HandleLeftMouseButtonReleased;
 
             movementInput.Disable();
+            selectInput.Disable();
         }
 
         void Update()
         {
+            if (!IsInputAllowed) return;
+
             if (InteractWithUI()) return;
 
             if (InteractWithComponent()) return;
@@ -104,12 +126,24 @@ namespace RPG.Control
             movement.SetNavAgent(false);
         }
 
-        void HandleMousePressedDown(InputAction.CallbackContext ctx)
+        void HandleLeftMouseButtonPressedDown(InputAction.CallbackContext ctx)
+        {
+            leftButtonPressed = true;
+            Debug.Log($"Leftbutton: {leftButtonPressed}");
+        }
+
+        void HandleLeftMouseButtonReleased(InputAction.CallbackContext ctx)
+        {
+            leftButtonPressed = false;
+            Debug.Log($"Leftbutton: {leftButtonPressed}");
+        }
+
+        void HandleRightMouseButtonPressedDown(InputAction.CallbackContext ctx)
         {
             rightButtonPressed = true;
         }
 
-        void HandleMouseReleased(InputAction.CallbackContext ctx)
+        void HandleRightMouseButtonReleased(InputAction.CallbackContext ctx)
         {
             rightButtonPressed = false;
         }
