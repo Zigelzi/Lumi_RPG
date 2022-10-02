@@ -11,5 +11,10 @@ namespace RPG.Abilities
         {
             Debug.Log("Demo targeting started");
         }
+
+        public override void StopTargeting(GameObject user)
+        {
+            Debug.Log("Demo targeting stopped");
+        }
     }
 }

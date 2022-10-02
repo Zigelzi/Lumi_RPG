@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Core;
+using RPG.Combat;
 using RPG.Saving;
 
 namespace RPG.Movement
@@ -14,6 +15,7 @@ namespace RPG.Movement
 
         ActionScheduler actionScheduler;
         Animator animator;
+        Casting casting;
         NavMeshAgent navAgent;
 
         // Start is called before the first frame update
@@ -21,6 +23,7 @@ namespace RPG.Movement
         {
             actionScheduler = GetComponent<ActionScheduler>();
             animator = GetComponent<Animator>();
+            casting = GetComponent<Casting>();
             navAgent = GetComponent<NavMeshAgent>();
         }
 
@@ -33,12 +36,23 @@ namespace RPG.Movement
         public void StartMovementAction(Vector3 destination)
         {
             actionScheduler.StartAction(this);
+
+            if (casting != null && casting.IsTargeting)
+            {
+                casting.Cancel();
+            }
+            
             MoveTo(destination);
         }
 
         public void StartMovementAction(Vector3 destination, float speedMultiplier)
         {
             actionScheduler.StartAction(this);
+
+            if (casting != null && casting.IsTargeting)
+            {
+                casting.Cancel();
+            }
             MoveTo(destination, speedMultiplier);
         }
         public void MoveTo(Vector3 destination)

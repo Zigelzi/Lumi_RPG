@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using RPG.Control;
+using RPG.Combat;
 
 namespace RPG.Abilities
 {
@@ -13,14 +14,24 @@ namespace RPG.Abilities
         public override void StartTargeting(GameObject user)
         {
             PlayerController playerController = user.GetComponent<PlayerController>();
+            
             playerController.StartCoroutine(Targeting(user, playerController));
+        }
+
+        public override void StopTargeting(GameObject user)
+        {
+            Casting casting = user.GetComponent<Casting>();
+            casting.IsTargeting = false;
         }
 
         IEnumerator Targeting(GameObject user, PlayerController playerController)
         {
             CursorManager cursorManager = playerController.GetComponent<CursorManager>();
-            playerController.IsInputAllowed = false;
-            while (true)
+            Casting casting = user.GetComponent<Casting>();
+
+            //playerController.IsInputAllowed = false;
+            casting.IsTargeting = true;
+            while (casting.IsTargeting)
             {
                 if (cursorManager != null)
                 {
@@ -29,14 +40,13 @@ namespace RPG.Abilities
 
                 if (playerController.LeftButtonPressed)
                 {
-                    playerController.IsInputAllowed = true;
+                    //playerController.IsInputAllowed = true;
+                    casting.IsTargeting = false;
                     yield break;
                 }
                 // Run in the beginning of every frame
                 yield return null;
             }
-
-            playerController.IsInputAllowed = true;
         }
     }
 }

@@ -11,5 +11,10 @@ namespace RPG.Abilities {
         {
             throw new System.NotImplementedException();
         }
+
+        public override void StopTargeting(GameObject user)
+        {
+            Debug.Log("Self targeting stopped");
+        }
     }
 }

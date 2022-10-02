@@ -20,6 +20,7 @@ namespace RPG.Control
 
         ActionScheduler actionScheduler;
         Attacking attacking;
+        Casting casting;
         Camera mainCamera;
         CursorManager cursor;
         Health health;
@@ -31,12 +32,10 @@ namespace RPG.Control
 
         bool rightButtonPressed = false;
         bool leftButtonPressed = false;
-        bool isInputAllowed = true;
 
         public PlayerInputActions PlayerInputActions { get { return playerInputActions; } }
 
         public bool LeftButtonPressed { get { return leftButtonPressed; } }
-        public bool IsInputAllowed { get { return isInputAllowed; } set { isInputAllowed = value; } }
 
         public static event Action onPlayerDeath;
 
@@ -44,6 +43,7 @@ namespace RPG.Control
         {
             actionScheduler = GetComponent<ActionScheduler>();
             attacking = GetComponent<Attacking>();
+            casting = GetComponent<Casting>();
             cursor = GetComponent<CursorManager>();
             movement = GetComponent<UnitMovement>();
             health = GetComponent<Health>();
@@ -64,13 +64,14 @@ namespace RPG.Control
             selectInput.performed += HandleLeftMouseButtonPressedDown;
             selectInput.canceled += HandleLeftMouseButtonReleased;
 
-
+            useInput.performed += HandleUseInput;
         }
 
         void Start()
         {
             movementInput.Enable();
             selectInput.Enable();
+            useInput.Enable();
 
             mainCamera = Camera.main;
         }
@@ -85,14 +86,14 @@ namespace RPG.Control
             selectInput.performed -= HandleLeftMouseButtonPressedDown;
             selectInput.canceled -= HandleLeftMouseButtonReleased;
 
+            useInput.performed -= HandleUseInput;
+
             movementInput.Disable();
             selectInput.Disable();
         }
 
         void Update()
         {
-            if (!IsInputAllowed) return;
-
             if (InteractWithUI()) return;
 
             if (InteractWithComponent()) return;
@@ -129,13 +130,11 @@ namespace RPG.Control
         void HandleLeftMouseButtonPressedDown(InputAction.CallbackContext ctx)
         {
             leftButtonPressed = true;
-            Debug.Log($"Leftbutton: {leftButtonPressed}");
         }
 
         void HandleLeftMouseButtonReleased(InputAction.CallbackContext ctx)
         {
             leftButtonPressed = false;
-            Debug.Log($"Leftbutton: {leftButtonPressed}");
         }
 
         void HandleRightMouseButtonPressedDown(InputAction.CallbackContext ctx)
@@ -146,6 +145,13 @@ namespace RPG.Control
         void HandleRightMouseButtonReleased(InputAction.CallbackContext ctx)
         {
             rightButtonPressed = false;
+        }
+
+        void HandleUseInput(InputAction.CallbackContext ctx)
+        {
+            int inputKey = int.Parse(ctx.control.name);
+
+            casting.StartCastingAction(inputKey);
         }
 
         bool InteractWithUI()
@@ -173,7 +179,10 @@ namespace RPG.Control
                 {
                     if (component.HandleRaycast(this, hit))
                     {
-                        cursor.SetCursor(component.GetCursorType());
+                        if (!casting.IsTargeting)
+                        {
+                            cursor.SetCursor(component.GetCursorType());
+                        }
                         return true;
                     }
                 }
@@ -207,8 +216,11 @@ namespace RPG.Control
             if (isHoveringOverNavMesh && movement.CanMoveTo(targetPosition))
             {
                 TryStartMoveAction(targetPosition);
-                cursor.SetCursor(CursorType.Movement);           
 
+                if (!casting.IsTargeting)
+                {
+                    cursor.SetCursor(CursorType.Movement);
+                }
                 return true;
             }
             

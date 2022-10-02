@@ -14,14 +14,16 @@ namespace RPG.Abilities
 
         public float Cooldown { get { return cooldown; } }
 
-
-
         public void Use(GameObject user, Transform castPoint)
         {
-            Debug.Log($"Casted ability {this}!");
             targetingStrategy.StartTargeting(user);
             SpawnVFX(castPoint);
 
+        }
+
+        public void Cancel(GameObject user)
+        {
+            targetingStrategy.StopTargeting(user);
         }
 
         void SpawnVFX(Transform castPoint)

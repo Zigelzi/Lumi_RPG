@@ -18,6 +18,18 @@ namespace RPG.Abilities
             currentAbility = abilities[0].abilityConfig;
         }
 
+        public Abilities.Ability SelectAbility(int inputKey)
+        {
+            // Input bindings start from 1 and abilities are zero indexed
+            int abilityNumber = inputKey - 1;
+            if (abilityNumber < abilities.Length)
+            {
+                currentAbility = abilities[abilityNumber].abilityConfig;
+            }
+
+            return currentAbility;
+        }
+
         [System.Serializable]
         public class Ability
         {
