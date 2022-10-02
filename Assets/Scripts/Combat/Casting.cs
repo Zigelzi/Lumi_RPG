@@ -61,6 +61,7 @@ namespace RPG.Combat
             {
                 actionScheduler.StartAction(this);
                 currentAbility.Use(gameObject, castPoint);
+                timeSinceLastUsage = 0;
             }
         }
 

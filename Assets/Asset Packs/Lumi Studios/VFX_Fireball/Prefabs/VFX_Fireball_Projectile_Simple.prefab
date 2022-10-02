@@ -4824,6 +4824,8 @@ GameObject:
   - component: {fileID: 2401404053005194772}
   - component: {fileID: -7752291764120236126}
   - component: {fileID: 202474848567832056}
+  - component: {fileID: -8556425564665580014}
+  - component: {fileID: 7363281630501755156}
   m_Layer: 8
   m_Name: VFX_Fireball_Projectile_Simple
   m_TagString: Untagged
@@ -4872,12 +4874,45 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2401404053005194775}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.35
   m_Height: 2.25
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8556425564665580014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2401404053005194775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67248ff17de0f3b4390d7049a5109c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7363281630501755156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2401404053005194775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45fd0466e03fae40b185d116979d817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  lifetime: 3
+  lifetimeAfterImpact: 1
+  isHoming: 0
+  hitEffect: {fileID: 0}
+  onHitDestroyedObjects: []
+  onProjectileHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3369566681492717236
 GameObject:
   m_ObjectHideFlags: 0

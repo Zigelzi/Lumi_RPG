@@ -23,7 +23,7 @@ namespace RPG.Combat
 
         void Start()
         {
-            if (!isHoming)
+            if (isHoming)
             {
                 Vector3 aimLocation = GetAimLocation();
                 transform.LookAt(aimLocation);

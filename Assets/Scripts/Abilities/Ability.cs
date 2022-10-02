@@ -30,7 +30,7 @@ namespace RPG.Abilities
         {
             if (vfx == null) return;
 
-            Instantiate(vfx, castPoint.position, castPoint.rotation, castPoint);
+            Instantiate(vfx, castPoint.position, castPoint.rotation);
         }
 
         
