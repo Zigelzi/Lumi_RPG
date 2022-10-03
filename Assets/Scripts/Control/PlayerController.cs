@@ -21,7 +21,6 @@ namespace RPG.Control
         ActionScheduler actionScheduler;
         Attacking attacking;
         Casting casting;
-        Camera mainCamera;
         CursorManager cursor;
         Health health;
         InputAction movementInput;
@@ -74,7 +73,6 @@ namespace RPG.Control
             selectInput.Enable();
             useInput.Enable();
 
-            mainCamera = Camera.main;
         }
 
         void OnDisable()
@@ -118,6 +116,11 @@ namespace RPG.Control
             {
                 attacking.StartAttackAction(target);
             }
+        }
+
+        public static Ray GetMouseRay()
+        {
+            return Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         }
 
         void HandleDeath()
@@ -250,15 +253,6 @@ namespace RPG.Control
             targetPosition = navHit.position;
 
             return isNearNavMesh;
-        }
-
-        Ray GetMouseRay()
-        {
-            return mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        }
-
-        
-        
-        
+        }   
     }
 }

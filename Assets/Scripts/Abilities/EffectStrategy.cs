@@ -6,7 +6,7 @@ namespace RPG.Abilities
 {
     public abstract class EffectStrategy : ScriptableObject
     {
-        public abstract void StartTargeting(GameObject user);
-        public abstract void StopTargeting(GameObject user);
+        public abstract void StartEffect(GameObject user);
+        
     }
 }

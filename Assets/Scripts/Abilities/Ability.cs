@@ -16,7 +16,7 @@ namespace RPG.Abilities
 
         public void Use(GameObject user, Transform castPoint)
         {
-            targetingStrategy.StartTargeting(user);
+            targetingStrategy.StartTargeting(user, TargetAquired);
             SpawnVFX(castPoint);
 
         }
@@ -24,6 +24,16 @@ namespace RPG.Abilities
         public void Cancel(GameObject user)
         {
             targetingStrategy.StopTargeting(user);
+        }
+
+        void TargetAquired(IEnumerable<GameObject> targets)
+        {
+            if (targets == null) return;
+
+            foreach (GameObject target in targets)
+            {
+                Debug.Log($"Targeted :{target}");
+            }
         }
 
         void SpawnVFX(Transform castPoint)

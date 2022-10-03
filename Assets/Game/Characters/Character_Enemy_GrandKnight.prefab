@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: 6639938406139425055, guid: 3e36416133ab4c14eaa495cddcc33578, type: 3}
       propertyPath: weaponHoldingLocation
       value: 
-      objectReference: {fileID: 8393453214514307392}
+      objectReference: {fileID: 0}
     - target: {fileID: 7537121085664801827, guid: 3e36416133ab4c14eaa495cddcc33578, type: 3}
       propertyPath: maxHealth
       value: 175
@@ -61,8 +61,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e36416133ab4c14eaa495cddcc33578, type: 3}
---- !u!4 &8393453214514307392 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3743096574903243938, guid: 3e36416133ab4c14eaa495cddcc33578, type: 3}
-  m_PrefabInstance: {fileID: 5154844464634312162}
-  m_PrefabAsset: {fileID: 0}
