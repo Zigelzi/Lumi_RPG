@@ -23,11 +23,11 @@ namespace RPG.Combat
 
         void Start()
         {
-            if (isHoming)
-            {
-                Vector3 aimLocation = GetAimLocation();
-                transform.LookAt(aimLocation);
-            }
+            if (currentTarget == null) return;
+
+            Vector3 aimLocation = GetAimLocation();
+            transform.LookAt(aimLocation);
+
             Invoke(nameof(DestroyProjectile), lifetime);
         }
 
@@ -104,6 +104,7 @@ namespace RPG.Combat
                 Vector3 aimLocation = GetAimLocation();
                 transform.LookAt(aimLocation);
             }
+
             transform.position += transform.forward * speed * Time.deltaTime;
         }
 
