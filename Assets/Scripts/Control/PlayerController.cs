@@ -49,6 +49,7 @@ namespace RPG.Control
             health = GetComponent<Health>();
 
             playerInputActions = new PlayerInputActions();
+
             movementInput = playerInputActions.Player.Movement;
             selectInput = playerInputActions.Player.Select;
             useInput = playerInputActions.Player.Use;

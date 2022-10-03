@@ -1,32 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 using RPG.Control;
 
-public class GameOverCanvas : MonoBehaviour
+namespace RPG.UI
 {
-    void OnEnable()
+    public class GameOverCanvas : MonoBehaviour
     {
-        PlayerController.onPlayerDeath += HandlePlayerDeath;
-    }
+        
+        void OnEnable()
+        {
+            PlayerController.onPlayerDeath += HandlePlayerDeath;
+        }
 
-    void Start()
-    {
-        DisplayGameOverUI(false);
-    }
+        void Start()
+        {
+            DisplayGameOverUI(false);
+        }
 
-    void OnDisable()
-    {
-        PlayerController.onPlayerDeath -= HandlePlayerDeath;
-    }
+        void OnDisable()
+        {
+            PlayerController.onPlayerDeath -= HandlePlayerDeath;
+        }
 
-    void HandlePlayerDeath()
-    {
-        DisplayGameOverUI(true);
-    }
+        void HandlePlayerDeath()
+        {
+            DisplayGameOverUI(true);
+        }
 
-    void DisplayGameOverUI(bool isVisible)
-    {
-        gameObject.SetActive(isVisible);
+        void DisplayGameOverUI(bool isVisible)
+        {
+            Canvas gameOverCanvas = GetComponent<Canvas>();
+            gameOverCanvas.enabled = isVisible;
+        }
     }
 }
