@@ -11,7 +11,6 @@ namespace RPG.Environment
         [SerializeField][Range(0, 1f)] float maxDistance = .5f;
         [SerializeField] float destinationRadius = .1f;
 
-        bool isMovingUp = true;
         Vector3 startingPosition;
         Vector3 startingDestination;
         Vector3 currentDestination;

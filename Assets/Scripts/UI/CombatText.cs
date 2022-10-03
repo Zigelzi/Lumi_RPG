@@ -10,8 +10,6 @@ namespace RPG.UI
     public class CombatText : MonoBehaviour
     {
         [SerializeField] DamageText damageTextPrefab;
-        [SerializeField] float destroyDelay = 2f;
-
 
         Health health;
 
