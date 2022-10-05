@@ -11,26 +11,34 @@ namespace RPG.Abilities
         [SerializeField] GameObject vfx;
         [SerializeField] float cooldown = 2f;
         [SerializeField] TargetingStrategy targetingStrategy;
+        [SerializeField] FilterStrategy filterStrategy;
 
         public float Cooldown { get { return cooldown; } }
 
         public void Use(GameObject user, Transform castPoint)
         {
-            targetingStrategy.StartTargeting(user, TargetAquired);
-            SpawnVFX(castPoint);
-
+            if (HasStrategies())
+            {
+                targetingStrategy.StartTargeting(user, TargetAquired);
+                SpawnVFX(castPoint);
+            }
         }
 
         public void Cancel(GameObject user)
         {
-            targetingStrategy.StopTargeting(user);
+            if (HasStrategies())
+            {
+                targetingStrategy.StopTargeting(user);
+            }
         }
 
         void TargetAquired(IEnumerable<GameObject> targets)
         {
             if (targets == null) return;
 
-            foreach (GameObject target in targets)
+            IEnumerable<GameObject> filteredTargets = filterStrategy.Filter(targets);
+            
+            foreach (GameObject target in filteredTargets)
             {
                 Debug.Log($"Targeted :{target}");
             }
@@ -43,7 +51,18 @@ namespace RPG.Abilities
             Instantiate(vfx, castPoint.position, castPoint.rotation);
         }
 
-        
+        bool HasStrategies()
+        {
+            if (targetingStrategy != null &&
+                filterStrategy != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }

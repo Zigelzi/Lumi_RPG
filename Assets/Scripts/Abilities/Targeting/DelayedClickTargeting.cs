@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace RPG.Abilities
 {
-    [CreateAssetMenu(fileName = "Delayed click targeting", menuName = "Abilities/Targeting/Delayed click targeting", order = 0)]
+    [CreateAssetMenu(fileName = "Targeting_Delayed_Click_", menuName = "Abilities/Targeting/Delayed click targeting", order = 1)]
     public class DelayedClickTargeting : TargetingStrategy
     {
         [SerializeField] LayerMask targetableLayers;
@@ -59,8 +59,8 @@ namespace RPG.Abilities
                 Mathf.Infinity,
                 targetableLayers))
             {
-                CombatTarget target = rayHit.collider.GetComponent<CombatTarget>();
-                yield return target.gameObject;
+                GameObject target = rayHit.collider.gameObject;
+                yield return target;
             }
         }
     }
