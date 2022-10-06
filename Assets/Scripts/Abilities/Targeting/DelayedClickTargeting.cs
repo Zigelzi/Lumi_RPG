@@ -13,11 +13,11 @@ namespace RPG.Abilities
     public class DelayedClickTargeting : TargetingStrategy
     {
         [SerializeField] LayerMask targetableLayers;
-        public override void StartTargeting(GameObject user, Action<IEnumerable<GameObject>> targetingFinished)
+        public override void StartTargeting(GameObject user, Action<IEnumerable<GameObject>> onTargetingFinished)
         {
             PlayerController playerController = user.GetComponent<PlayerController>();
             
-            playerController.StartCoroutine(Targeting(user, playerController, targetingFinished));
+            playerController.StartCoroutine(Targeting(user, playerController, onTargetingFinished));
         }
 
         public override void StopTargeting(GameObject user)
@@ -28,7 +28,7 @@ namespace RPG.Abilities
 
         IEnumerator Targeting(GameObject user, 
             PlayerController playerController, 
-            Action<IEnumerable<GameObject>> targetingFinished)
+            Action<IEnumerable<GameObject>> onTargetingFinished)
         {
             CursorManager cursorManager = playerController.GetComponent<CursorManager>();
             Casting casting = user.GetComponent<Casting>();
@@ -44,7 +44,7 @@ namespace RPG.Abilities
                 if (playerController.LeftButtonPressed)
                 {
                     casting.IsTargeting = false;
-                    targetingFinished(GetTargetInMousePosition());
+                    onTargetingFinished(GetTargetInMousePosition());
                     yield break;
                 }
                 // Run in the beginning of every frame

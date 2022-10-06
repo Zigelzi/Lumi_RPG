@@ -85,8 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880082661542d4f40be12ffb9400d02e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 50
-  spellParticles: {fileID: 5891066834319419313, guid: 035e6918667cc8f43ad974cec55151e0, type: 3}
   abilities:
   - id: 0
     abilityConfig: {fileID: 11400000, guid: 315e69e0fc62b3e4eb66f1428c5f6835, type: 2}
@@ -209,8 +207,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 40242568789526872, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 40242568789526872, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.952
+      value: 1.078
+      objectReference: {fileID: 0}
+    - target: {fileID: 40242568789526872, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.342
       objectReference: {fileID: 0}
     - target: {fileID: 427676080936540758, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: m_Avatar

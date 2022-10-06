@@ -15,4 +15,7 @@ MonoBehaviour:
   vfx: {fileID: 2401404053005194775, guid: d3f939fb4380fc54688d0fa231e50cf3, type: 3}
   cooldown: 2
   targetingStrategy: {fileID: 11400000, guid: c17ef5c341675024e9244f3890d1a5ab, type: 2}
-  filterStrategy: {fileID: 11400000, guid: cf8f77c09b1fe2243977a698de7b7ad6, type: 2}
+  filterStrategies:
+  - {fileID: 11400000, guid: cf8f77c09b1fe2243977a698de7b7ad6, type: 2}
+  effectStrategies:
+  - {fileID: 11400000, guid: ec2bcbffa0f12624fa9e064ce7f838f2, type: 2}

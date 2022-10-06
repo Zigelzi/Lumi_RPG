@@ -40,15 +40,13 @@ namespace RPG.Combat
         {
             if(other.TryGetComponent<Health>(out Health collidedObject))
             {
-                if(collidedObject == currentTarget && collidedObject.IsAlive)
+                if (isHoming)
                 {
-                    collidedObject.TakeDamage(damage, owner);
-                    PlayHitFX();
-                    onProjectileHit?.Invoke();
-                    speed = 0;
-
-                    DestroyOnHitObjects();
-                    
+                    CollideWithCurrentTarget(collidedObject);
+                }
+                else
+                {
+                    CollideWithAnyEnemy(collidedObject);
                 }
             }
         }
@@ -106,6 +104,27 @@ namespace RPG.Combat
             }
 
             transform.position += transform.forward * speed * Time.deltaTime;
+        }
+
+        void CollideWithCurrentTarget(Health collidedObject) 
+        {
+            if (collidedObject == currentTarget && collidedObject.IsAlive)
+            {
+                CollideWithAnyEnemy(collidedObject);
+            }
+        }
+
+        void CollideWithAnyEnemy(Health collidedObject)
+        {
+            if (collidedObject.gameObject.CompareTag("Enemy"))
+            {
+                collidedObject.TakeDamage(damage, owner);
+                PlayHitFX();
+                onProjectileHit?.Invoke();
+                speed = 0;
+
+                DestroyOnHitObjects();
+            }
         }
 
         void PlayHitFX()
