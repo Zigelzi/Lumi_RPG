@@ -36,6 +36,7 @@ namespace RPG.Abilities
             casting.IsTargeting = true;
             while (casting.IsTargeting)
             {
+                FaceTowardsCursor(user);
                 if (cursorManager != null)
                 {
                     cursorManager.SetCursor(CursorType.Targeting);
@@ -49,6 +50,16 @@ namespace RPG.Abilities
                 }
                 // Run in the beginning of every frame
                 yield return null;
+            }
+        }
+
+        void FaceTowardsCursor(GameObject user)
+        {
+            if (Physics.Raycast(PlayerController.GetMouseRay(),
+                out RaycastHit rayhit,
+                Mathf.Infinity))
+            {
+                user.transform.LookAt(rayhit.point);
             }
         }
 
