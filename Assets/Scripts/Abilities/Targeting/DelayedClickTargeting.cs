@@ -59,7 +59,13 @@ namespace RPG.Abilities
                 out RaycastHit rayhit,
                 Mathf.Infinity))
             {
-                user.transform.LookAt(rayhit.point);
+                Quaternion lookRotation = Quaternion.LookRotation(rayhit.point - user.transform.position);
+                
+                // Lock the rotation in X and Z axises
+                lookRotation.x = 0;
+                lookRotation.z = 0;
+                
+                user.transform.rotation = lookRotation;
             }
         }
 
