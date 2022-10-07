@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Effect_Projectile_Fireball
   m_EditorClassIdentifier: 
   damageAmount: 10
-  vfx: {fileID: 0}
+  projectilePrefab: {fileID: 2401404053005194775, guid: d3f939fb4380fc54688d0fa231e50cf3, type: 3}

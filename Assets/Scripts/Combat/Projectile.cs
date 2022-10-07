@@ -40,13 +40,18 @@ namespace RPG.Combat
         {
             if(other.TryGetComponent<Health>(out Health collidedObject))
             {
+                // Never collide with the owner of the projectile
+                
                 if (isHoming)
                 {
                     CollideWithCurrentTarget(collidedObject);
                 }
                 else
                 {
-                    CollideWithAnyEnemy(collidedObject);
+                    // Enemy projectiles only collide with player
+                    // Player projectiles collide with all enemies
+                    // Homing projectiles only collide with their target
+                    CollideWithHostileTarget(collidedObject);
                 }
             }
         }
@@ -110,21 +115,32 @@ namespace RPG.Combat
         {
             if (collidedObject == currentTarget && collidedObject.IsAlive)
             {
-                CollideWithAnyEnemy(collidedObject);
+                Collide(collidedObject);
             }
         }
 
-        void CollideWithAnyEnemy(Health collidedObject)
+        void CollideWithHostileTarget(Health collidedObject)
         {
-            if (collidedObject.gameObject.CompareTag("Enemy"))
+            if (owner.gameObject.CompareTag("Player") && collidedObject.CompareTag("Enemy"))
             {
-                collidedObject.TakeDamage(damage, owner);
-                PlayHitFX();
-                onProjectileHit?.Invoke();
-                speed = 0;
-
-                DestroyOnHitObjects();
+                Collide(collidedObject);
             }
+            else if (owner.gameObject.CompareTag("Enemy") && collidedObject.CompareTag("Player"))
+            {
+                Collide(collidedObject);
+            }
+        }
+
+        void Collide(Health collidedObject)
+        {
+            if (owner == collidedObject.gameObject) return;
+
+            collidedObject.TakeDamage(damage, owner);
+            PlayHitFX();
+            onProjectileHit?.Invoke();
+            speed = 0;
+
+            DestroyOnHitObjects();
         }
 
         void PlayHitFX()
