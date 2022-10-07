@@ -17,13 +17,14 @@ namespace RPG.Abilities
 
         public void Use(GameObject user)
         {
-            if (HasStrategies())
-            {
-                // Use lambda to provide TargetAquired context about it's user
-                targetingStrategy.StartTargeting(user,
-                    (IEnumerable <GameObject> targets) => TargetAquired(user, targets));
-                //SpawnVFX(castPoint);
-            }
+
+            if (targetingStrategy != null) return;
+
+            // Use lambda to provide TargetAquired context about it's user
+            targetingStrategy.StartTargeting(user,
+                (IEnumerable <GameObject> targets) => TargetAquired(user, targets));
+            //SpawnVFX(castPoint);
+
         }
 
         public void Cancel(GameObject user)
@@ -45,9 +46,7 @@ namespace RPG.Abilities
 
         bool HasStrategies()
         {
-            if (targetingStrategy != null &&
-                filterStrategies.Length > 0 &&
-                effectStrategies.Length > 0)
+            if (targetingStrategy != null)
             {
                 return true;
             }

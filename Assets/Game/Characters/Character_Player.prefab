@@ -87,7 +87,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - id: 0
-    abilityConfig: {fileID: 11400000, guid: 315e69e0fc62b3e4eb66f1428c5f6835, type: 2}
+    abilityConfig: {fileID: 11400000, guid: de99a4af69faa6e4c9e3a6f779bcaa02, type: 2}
+  - id: 0
+    abilityConfig: {fileID: 11400000, guid: d2e2153e15b4e804db73a52225669333, type: 2}
 --- !u!1001 &4988064121868118085
 PrefabInstance:
   m_ObjectHideFlags: 0
