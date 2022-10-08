@@ -24,7 +24,6 @@ namespace RPG.Abilities
 
             // Use lambda to provide TargetAquired context about it's user
             targetingStrategy.StartTargeting(data, () => TargetAquired(data));
-            //SpawnVFX(castPoint);
 
         }
 
@@ -84,7 +83,7 @@ namespace RPG.Abilities
 
         void EffectFinished()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
     }

@@ -6559,7 +6559,7 @@ PrefabInstance:
     - target: {fileID: 8589384303204465239, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
       propertyPath: abilities.Array.data[1].abilityConfig
       value: 
-      objectReference: {fileID: 11400000, guid: 315e69e0fc62b3e4eb66f1428c5f6835, type: 2}
+      objectReference: {fileID: 11400000, guid: d2e2153e15b4e804db73a52225669333, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
 --- !u!1001 &2380250600612902088

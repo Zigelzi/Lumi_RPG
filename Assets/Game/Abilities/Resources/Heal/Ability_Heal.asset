@@ -17,3 +17,4 @@ MonoBehaviour:
   filterStrategies: []
   effectStrategies:
   - {fileID: 11400000, guid: f762ce108071d724f82450ce59a1eab5, type: 2}
+  - {fileID: 11400000, guid: 21bc5af0a4070bd47b22faebc463f460, type: 2}

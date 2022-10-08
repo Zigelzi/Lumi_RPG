@@ -10,7 +10,10 @@ namespace RPG.Abilities {
     {
         public override void StartTargeting(AbilityData data, Action onTargetingFinished)
         {
-            throw new System.NotImplementedException();
+            // Convert the single owner to array so that it can be processed as target
+            GameObject[] target = new GameObject[] { data.GetUser() };
+            data.SetTargets(target);
+            onTargetingFinished();
         }
 
         public override void StopTargeting(GameObject user)
