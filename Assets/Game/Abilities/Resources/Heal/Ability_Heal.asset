@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206bf86d38636f542b528be3a966f306, type: 3}
   m_Name: Ability_Heal
   m_EditorClassIdentifier: 
-  cooldown: 2
+  cooldown: 10
   targetingStrategy: {fileID: 11400000, guid: 13af439e97cacb34c9dd08e4c0289a32, type: 2}
   filterStrategies: []
   effectStrategies:
