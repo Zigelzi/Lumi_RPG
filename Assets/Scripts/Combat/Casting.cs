@@ -11,7 +11,8 @@ namespace RPG.Combat
 {
     public class Casting : MonoBehaviour, IAction
     {
-        [SerializeField] Transform castPoint;
+        [SerializeField] Transform castPointProjectile;
+        [SerializeField] Transform castPointCharacter;
 
         AbilityManager abilityManager;
         Ability currentAbility;
@@ -57,7 +58,8 @@ namespace RPG.Combat
             currentAbility = abilityManager.SelectAbility(inputKey);
 
             if (IsAbilityReady() &&
-                castPoint != null)
+                castPointProjectile != null &&
+                castPointCharacter != null)
             {
                 actionScheduler.StartAction(this);
                 currentAbility.Use(gameObject);

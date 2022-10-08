@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: -1614425023234381436}
   - component: {fileID: 704809371613627490}
   - component: {fileID: -6926742722821068626}
+  - component: {fileID: 3089477456424603187}
   m_Layer: 9
   m_Name: Character_Root
   m_TagString: Character
@@ -69,7 +70,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1485436083194464502}
-  - {fileID: 40242568789526872}
+  - {fileID: 6763849556320584397}
   - {fileID: 6367771594779609045}
   - {fileID: 5465175285069042726}
   - {fileID: 530676622549608347}
@@ -278,6 +279,63 @@ MonoBehaviour:
   isUsingModifiers: 0
   progression: {fileID: 11400000, guid: 3f9d31c8d9def9442ab7e599c80f8f76, type: 2}
   levelUpVFX: {fileID: 0}
+--- !u!114 &3089477456424603187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358616886315960968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3fe911a7f43c9468f4c1aee0362ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castPointProjectile: {fileID: 40242568789526872}
+  castPointCharacter: {fileID: 73165584689349760}
+--- !u!1 &3350485984586026023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 73165584689349760}
+  - component: {fileID: 7593792944049674251}
+  m_Layer: 9
+  m_Name: Castpoint_Character
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &73165584689349760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350485984586026023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6763849556320584397}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7593792944049674251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350485984586026023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ffcb2321d1876e45b66457ccfc06c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3755269846108716304
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +685,38 @@ MonoBehaviour:
   soundEffect: {fileID: 8300000, guid: 0c373d456afde6e4bb00d4a4eb0d695d, type: 3}
   isRandomized: 1
   isPlayedOnStart: 0
+--- !u!1 &5268881412615187050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6763849556320584397}
+  m_Layer: 9
+  m_Name: Castpoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6763849556320584397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268881412615187050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 40242568789526872}
+  - {fileID: 73165584689349760}
+  m_Father: {fileID: 5180658012786564}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6827171077459264127
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +886,7 @@ GameObject:
   - component: {fileID: 40242568789526872}
   - component: {fileID: 7802109116027867980}
   m_Layer: 9
-  m_Name: Castpoint_Spell
+  m_Name: Castpoint_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -809,12 +899,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8661483401128137841}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5180658012786564}
-  m_RootOrder: 1
+  m_Father: {fileID: 6763849556320584397}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7802109116027867980
 MonoBehaviour:

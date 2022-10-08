@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class CastPoint : MonoBehaviour
+    public class CastPointCharacter : MonoBehaviour
     {
         // Used to identify the cast point of the character
     }

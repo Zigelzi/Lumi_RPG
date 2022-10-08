@@ -41,6 +41,8 @@ namespace RPG.Abilities
             if (data == null) return;
 
             IEnumerable<GameObject> filteredTargets = ApplyFilters(data.GetTargets());
+            data.SetTargets(filteredTargets);
+
             StartEffects(data);
 
         }

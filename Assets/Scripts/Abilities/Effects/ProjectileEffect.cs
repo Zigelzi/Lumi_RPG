@@ -13,19 +13,19 @@ namespace RPG.Abilities
         [SerializeField] GameObject projectilePrefab;
         public override void StartEffect(AbilityData data, Action onEffectFinished)
         {
-            SpawnProjectile(data.GetUser());
+            SpawnProjectile(data);
         }
 
-        void SpawnProjectile(GameObject user)
+        void SpawnProjectile(AbilityData data)
         {
             if (projectilePrefab == null) return;
 
-            Transform castPoint = user.GetComponentInChildren<CastPoint>().transform;
+            Transform castPoint = data.GetProjectileCastpoint();
             GameObject projectileInstance = Instantiate(projectilePrefab, castPoint.position, castPoint.rotation);
             Projectile projectile = projectileInstance.GetComponent<Projectile>();
 
             projectile.SetDamage(damageAmount);
-            projectile.SetProjectileOwner(user);
+            projectile.SetProjectileOwner(data.GetUser());
         }
     }
 }
