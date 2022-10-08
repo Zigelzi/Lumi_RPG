@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Attributes;
+using System;
 
 namespace RPG.Abilities
 {
@@ -17,12 +18,12 @@ namespace RPG.Abilities
 
         public void Use(GameObject user)
         {
+            AbilityData data = new AbilityData(user);
 
-            if (targetingStrategy != null) return;
+            if (targetingStrategy == null) return;
 
             // Use lambda to provide TargetAquired context about it's user
-            targetingStrategy.StartTargeting(user,
-                (IEnumerable <GameObject> targets) => TargetAquired(user, targets));
+            targetingStrategy.StartTargeting(data, () => TargetAquired(data));
             //SpawnVFX(castPoint);
 
         }
@@ -35,12 +36,12 @@ namespace RPG.Abilities
             }
         }
 
-        void TargetAquired(GameObject user, IEnumerable<GameObject> targets)
+        void TargetAquired(AbilityData data)
         {
-            if (targets == null) return;
+            if (data == null) return;
 
-            IEnumerable<GameObject> filteredTargets = ApplyFilters(targets);
-            StartEffects(user, filteredTargets);
+            IEnumerable<GameObject> filteredTargets = ApplyFilters(data.GetTargets());
+            StartEffects(data);
 
         }
 
@@ -70,18 +71,18 @@ namespace RPG.Abilities
             return filteredTargets;
         }
 
-        void StartEffects(GameObject user, IEnumerable<GameObject> targets)
+        void StartEffects(AbilityData data)
         {
             foreach (EffectStrategy effect in effectStrategies)
             {
                 if (effect == null) return;
-                effect.StartEffect(user, targets, EffectFinished);
+                effect.StartEffect(data, EffectFinished);
             }
         }
 
         void EffectFinished()
         {
-
+            throw new NotImplementedException();
         }
 
     }

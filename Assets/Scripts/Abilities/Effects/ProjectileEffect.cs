@@ -11,10 +11,9 @@ namespace RPG.Abilities
     {
         [SerializeField] float damageAmount = 10f;
         [SerializeField] GameObject projectilePrefab;
-        public override void StartEffect(GameObject user, IEnumerable<GameObject> targets, Action onEffectFinished)
+        public override void StartEffect(AbilityData data, Action onEffectFinished)
         {
-            
-            SpawnProjectile(user);
+            SpawnProjectile(data.GetUser());
         }
 
         void SpawnProjectile(GameObject user)

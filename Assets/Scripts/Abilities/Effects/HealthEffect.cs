@@ -11,22 +11,22 @@ namespace RPG.Abilities
     {
         [Tooltip("Negative values deal damage and positive values heal")]
         [SerializeField] float healthChange = 10f;
-        public override void StartEffect(GameObject user, IEnumerable<GameObject> targets, Action onEffectFinished)
+        public override void StartEffect(AbilityData data, Action onEffectFinished)
         {
-            foreach(GameObject target in targets)
+            foreach(GameObject target in data.GetTargets())
             {
-                ApplyHealthEffect(user, target);
+                ApplyHealthEffect(data, target);
             }
             onEffectFinished();
         }
 
-        void ApplyHealthEffect(GameObject user, GameObject target)
+        void ApplyHealthEffect(AbilityData data, GameObject target)
         {
             if (target.TryGetComponent<Health>(out Health targetHealth))
             {
                 if (healthChange < 0)
                 {
-                    targetHealth.TakeDamage(-healthChange, user);
+                    targetHealth.TakeDamage(-healthChange, data.GetUser());
                 }
                 else
                 {

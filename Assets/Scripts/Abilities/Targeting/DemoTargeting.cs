@@ -8,10 +8,10 @@ namespace RPG.Abilities
     [CreateAssetMenu(fileName = "Targeting_Demo_", menuName = "Abilities/Targeting/Demo", order = 0)]
     public class DemoTargeting : TargetingStrategy
     {
-        public override void StartTargeting(GameObject user, Action<IEnumerable<GameObject>> targetingFinished)
+        public override void StartTargeting(AbilityData data, Action onTargetingFinished)
         {
             Debug.Log("Demo targeting started");
-            targetingFinished(null);
+            onTargetingFinished();
         }
 
         public override void StopTargeting(GameObject user)

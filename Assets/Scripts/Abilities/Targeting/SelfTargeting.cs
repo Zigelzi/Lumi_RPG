@@ -8,7 +8,7 @@ namespace RPG.Abilities {
     [CreateAssetMenu(fileName = "Targeting_Self_", menuName = "Abilities/Targeting/Self", order = 0)]
     public class SelfTargeting: TargetingStrategy
     {
-        public override void StartTargeting(GameObject user, Action<IEnumerable<GameObject>> targetingFinished)
+        public override void StartTargeting(AbilityData data, Action onTargetingFinished)
         {
             throw new System.NotImplementedException();
         }

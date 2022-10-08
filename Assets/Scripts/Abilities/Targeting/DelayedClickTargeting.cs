@@ -13,11 +13,11 @@ namespace RPG.Abilities
     public class DelayedClickTargeting : TargetingStrategy
     {
         [SerializeField] LayerMask targetableLayers;
-        public override void StartTargeting(GameObject user, Action<IEnumerable<GameObject>> onTargetingFinished)
+        public override void StartTargeting(AbilityData data, Action onTargetingFinished)
         {
-            PlayerController playerController = user.GetComponent<PlayerController>();
-            
-            playerController.StartCoroutine(Targeting(user, playerController, onTargetingFinished));
+            PlayerController playerController = data.GetUser().GetComponent<PlayerController>();
+
+            playerController.StartCoroutine(Targeting(data, onTargetingFinished));
         }
 
         public override void StopTargeting(GameObject user)
@@ -26,11 +26,12 @@ namespace RPG.Abilities
             casting.IsTargeting = false;
         }
 
-        IEnumerator Targeting(GameObject user, 
-            PlayerController playerController, 
-            Action<IEnumerable<GameObject>> onTargetingFinished)
+        IEnumerator Targeting(AbilityData data,  
+            Action onTargetingFinished)
         {
-            CursorManager cursorManager = playerController.GetComponent<CursorManager>();
+            GameObject user = data.GetUser();
+            PlayerController playerController = user.GetComponent<PlayerController>();
+            CursorManager cursorManager = user.GetComponent<CursorManager>();
             Casting casting = user.GetComponent<Casting>();
 
             casting.IsTargeting = true;
@@ -45,7 +46,8 @@ namespace RPG.Abilities
                 if (playerController.LeftButtonPressed)
                 {
                     casting.IsTargeting = false;
-                    onTargetingFinished(GetTargetInMousePosition());
+                    data.SetTargets(GetTargetInMousePosition());
+                    onTargetingFinished();
                     yield break;
                 }
                 // Run in the beginning of every frame
