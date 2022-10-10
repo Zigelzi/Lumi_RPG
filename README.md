@@ -52,7 +52,9 @@ Player should feel like...
    1. Player needs to asses how many enemies they can engage
    2. Bad decisions often lead to tricky moments
    3. Room for correction, player can return from their bad decisions with correct decision making
+
 #### Movement
+WIP
 
 #### World
 The rules that are in place in the world. What is normal and what is not.
@@ -68,3 +70,10 @@ The rules that are in place in the world. What is normal and what is not.
    1. Harvesting resources from nature is expensive
    2. Metal is rare
    3. Wood is most often used material
+
+### UI
+How the UI delivers the player experience
+1. Clean
+   1. Only elements that are relevant for users current action are displayed
+2. Nature
+   1. Elements have color scheme that resemble nature elements
