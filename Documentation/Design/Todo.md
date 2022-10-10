@@ -7,6 +7,8 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Player continues attacking while targeting
    - [ ] Player continues attacking after using ability
 2. Adept magic user
+   - [ ] Player abilities power have some random element
+   - [ ] Player ability randomness is reduced based on their level
 3. Actions are purposeful
 4. Funny with strong feedback
 5. Though, but fair
@@ -32,3 +34,4 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Player can see the name and description of the abilities
    - [ ] Player can see the resource cost of the abilities
    - [ ] Player can get feedback when they don't have sufficient resources to use the ability
+   - [ ] Player can see the icon of the ability

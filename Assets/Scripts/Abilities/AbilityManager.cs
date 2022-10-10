@@ -6,35 +6,46 @@ namespace RPG.Abilities
 {
     public class AbilityManager : MonoBehaviour
     {
-        [SerializeField] Ability[] abilities;
+        [SerializeField] AbilityConfig[] abilities;
 
-        Abilities.Ability currentAbility;
+        Ability currentAbility;
 
-        public Abilities.Ability CurrentAbility { get { return currentAbility; } }
+        public Ability CurrentAbility { get { return currentAbility; } }
 
-        // Start is called before the first frame update
         void Awake()
         {
-            currentAbility = abilities[0].abilityConfig;
+            currentAbility = abilities[0].ability;
         }
 
-        public Abilities.Ability SelectAbility(int inputKey)
+        void Update()
+        {
+            foreach (AbilityConfig abilityConfig in abilities)
+            {
+                Debug.Log($"{abilityConfig.ability} was used {abilityConfig.ability.TimeSinceLastUsage} seconds ago");
+                if (!abilityConfig.ability.IsAbilityReady())
+                {
+                    abilityConfig.ability.TimeSinceLastUsage += Time.deltaTime;
+                }
+            }    
+        }
+
+        public Ability SelectAbility(int inputKey)
         {
             // Input bindings start from 1 and abilities are zero indexed
             int abilityNumber = inputKey - 1;
             if (abilityNumber < abilities.Length)
             {
-                currentAbility = abilities[abilityNumber].abilityConfig;
+                currentAbility = abilities[abilityNumber].ability;
             }
 
             return currentAbility;
         }
 
         [System.Serializable]
-        public class Ability
+        public class AbilityConfig
         {
             public int id;
-            public Abilities.Ability abilityConfig;
+            public Ability ability;
         }
     }
 }

@@ -14,7 +14,9 @@ namespace RPG.Abilities
         [SerializeField] FilterStrategy[] filterStrategies;
         [SerializeField] EffectStrategy[] effectStrategies;
 
-        public float Cooldown { get { return cooldown; } }
+        float timeSinceLastUsage = Mathf.Infinity;
+
+        public float TimeSinceLastUsage { get { return timeSinceLastUsage; } set { timeSinceLastUsage = value; } }
 
         public void Use(GameObject user)
         {
@@ -24,7 +26,6 @@ namespace RPG.Abilities
 
             // Use lambda to provide TargetAquired context about it's user
             targetingStrategy.StartTargeting(data, () => TargetAquired(data));
-
         }
 
         public void Cancel(GameObject user)
@@ -32,6 +33,18 @@ namespace RPG.Abilities
             if (HasStrategies())
             {
                 targetingStrategy.StopTargeting(user);
+            }
+        }
+
+        public bool IsAbilityReady()
+        {
+            if (timeSinceLastUsage >= cooldown)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -43,6 +56,7 @@ namespace RPG.Abilities
             data.SetTargets(filteredTargets);
 
             StartEffects(data);
+            timeSinceLastUsage = 0;
 
         }
 

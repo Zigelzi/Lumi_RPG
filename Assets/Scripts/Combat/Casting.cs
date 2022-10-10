@@ -19,7 +19,6 @@ namespace RPG.Combat
         ActionScheduler actionScheduler;
         Health health;
 
-        float timeSinceLastUsage = Mathf.Infinity;
         bool isTargeting = false;
 
         public bool IsTargeting { get { return isTargeting; } set { isTargeting = value; } }
@@ -48,22 +47,16 @@ namespace RPG.Combat
             health.onUnitDeath.RemoveListener(Disable);
         }
 
-        void Update()
-        {
-            timeSinceLastUsage += Time.deltaTime;
-        }
-
         public void StartCastingAction(int inputKey)
         {
             currentAbility = abilityManager.SelectAbility(inputKey);
 
-            if (IsAbilityReady() &&
+            if (currentAbility.IsAbilityReady() &&
                 castPointProjectile != null &&
                 castPointCharacter != null)
             {
                 actionScheduler.StartAction(this);
                 currentAbility.Use(gameObject);
-                timeSinceLastUsage = 0;
             }
         }
 
@@ -75,16 +68,6 @@ namespace RPG.Combat
         public void Cancel()
         {
             currentAbility.Cancel(gameObject);
-        }
-
-        bool IsAbilityReady()
-        {
-            if (timeSinceLastUsage >= currentAbility.Cooldown)
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

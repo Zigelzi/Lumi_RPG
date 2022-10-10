@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using RPG.Combat;
+using System.Collections;
 
 namespace RPG.Abilities
 {
@@ -11,11 +12,13 @@ namespace RPG.Abilities
         Transform castPointCharacter;
         IEnumerable<GameObject> targets;
 
-        public AbilityData(GameObject user)
+        float cooldown = 0f;
+
+        public AbilityData(GameObject newUser)
         {
-            this.user = user;
-            this.castPointProjectile = user.GetComponentInChildren<CastPointProjectile>().transform;
-            this.castPointCharacter = user.GetComponentInChildren<CastPointCharacter>().transform;
+            this.user = newUser;
+            this.castPointProjectile = newUser.GetComponentInChildren<CastPointProjectile>().transform;
+            this.castPointCharacter = newUser.GetComponentInChildren<CastPointCharacter>().transform;
         }
 
         public void SetTargets(IEnumerable<GameObject> newTargets)
@@ -40,6 +43,11 @@ namespace RPG.Abilities
         public Transform GetCharacterCastpoint()
         {
             return this.castPointCharacter;
+        }
+
+        public void StartCoroutine(IEnumerator coroutine)
+        {
+            user.GetComponent<MonoBehaviour>().StartCoroutine(coroutine);
         }
     }
 }
