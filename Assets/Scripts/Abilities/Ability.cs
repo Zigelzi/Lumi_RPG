@@ -16,6 +16,7 @@ namespace RPG.Abilities
 
         float timeSinceLastUsage = Mathf.Infinity;
 
+        // TODO: Refactor the cooldown to AbilityData so it's referenced correctly
         public float TimeSinceLastUsage { get { return timeSinceLastUsage; } set { timeSinceLastUsage = value; } }
 
         public void Use(GameObject user)
