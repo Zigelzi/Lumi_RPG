@@ -16,19 +16,19 @@ namespace RPG.Combat
         [SerializeField] GameObject[] onHitDestroyedObjects = null;
 
         GameObject owner;
-        [SerializeField] Health currentTarget;
+        Health currentTarget;
         float damage = 0;
 
         public UnityEvent onProjectileHit;
 
         void Start()
         {
+            Invoke(nameof(DestroyProjectile), lifetime);
+
             if (currentTarget == null) return;
 
             Vector3 aimLocation = GetAimLocation();
             transform.LookAt(aimLocation);
-
-            Invoke(nameof(DestroyProjectile), lifetime);
         }
 
         void Update()
@@ -146,9 +146,8 @@ namespace RPG.Combat
         void PlayHitFX(CapsuleCollider collider)
         {
             if (hitEffect == null) return;
-
-            Vector3 targetCenter = Vector3.up * collider.height / 2;
-            Vector3 hitPosition = collider.transform.position + targetCenter;
+            
+            Vector3 hitPosition = collider.ClosestPoint(transform.position);
             Instantiate(hitEffect, hitPosition, transform.rotation);
         }
     }

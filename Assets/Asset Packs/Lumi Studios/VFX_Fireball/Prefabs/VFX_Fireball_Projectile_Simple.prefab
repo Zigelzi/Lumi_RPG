@@ -4892,12 +4892,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45fd0466e03fae40b185d116979d817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  lifetime: 5
+  speed: 17
+  lifetime: 1
   lifetimeAfterImpact: 1
   isHoming: 0
   hitEffect: {fileID: 132039519773930989, guid: 4c6c86c8ca598044f849d05bc9460190, type: 3}
   onHitDestroyedObjects: []
+  currentTarget: {fileID: 0}
   onProjectileHit:
     m_PersistentCalls:
       m_Calls: []
