@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 namespace RPG.Abilities
 {
@@ -8,6 +10,8 @@ namespace RPG.Abilities
     {
 
         Dictionary<Ability, float> cooldownTimers = new Dictionary<Ability, float>();
+
+        public UnityEvent onAbilityCooldownUpdate;
 
         void Update()
         {
