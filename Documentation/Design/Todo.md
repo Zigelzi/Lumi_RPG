@@ -9,9 +9,10 @@ List of issues that can be worked to deliver the desired player experience categ
 2. Adept magic user
    - [ ] Player abilities power have some random element
    - [ ] Player ability randomness is reduced based on their level
-   - [ ] Tune the power of fireball
+   - [x] Tune the power of fireball
    - [ ] Tune the power of heal
 3. Actions are purposeful
+   - [ ] Actions have independant cooldowns
 4. Funny with strong feedback
 5. Though, but fair
 ## Movement
