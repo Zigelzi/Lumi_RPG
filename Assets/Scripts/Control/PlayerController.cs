@@ -155,7 +155,7 @@ namespace RPG.Control
         {
             int inputKey = int.Parse(ctx.control.name);
 
-            casting.StartCastingAction(inputKey);
+            casting.StartUsingAbilityAction(inputKey);
         }
 
         bool InteractWithUI()

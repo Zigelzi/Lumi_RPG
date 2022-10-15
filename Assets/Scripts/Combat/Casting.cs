@@ -51,11 +51,11 @@ namespace RPG.Combat
             health.onUnitDeath.RemoveListener(Disable);
         }
 
-        public void StartCastingAction(int inputKey)
+        public void StartUsingAbilityAction(int inputKey)
         {
             currentAbility = abilityManager.SelectAbility(inputKey);
 
-            if (IsAbleToCastCurrentAbility())
+            if (IsAbleToUseCurrentAbility())
             {
                 actionScheduler.StartAction(this);
                 currentAbility.Use(gameObject);                    
@@ -72,7 +72,7 @@ namespace RPG.Combat
             currentAbility.Cancel(gameObject);
         }
 
-        bool IsAbleToCastCurrentAbility()
+        bool IsAbleToUseCurrentAbility()
         {
             if (cooldownStore.IsAbilityReady(currentAbility) &&
                 castPointProjectile != null &&
