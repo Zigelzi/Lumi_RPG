@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAttunement: 0
   maxAttunement: 100
-  regenSpeed: 1
+  regenSpeed: 5
   onAttunementChange:
     m_PersistentCalls:
       m_Calls: []

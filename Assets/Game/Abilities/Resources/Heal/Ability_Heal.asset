@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ability_Heal
   m_EditorClassIdentifier: 
   abilityName: Regrowth
-  attunementCost: 30
-  cooldown: 10
+  attunementCost: 60
+  cooldown: 5
   targetingStrategy: {fileID: 11400000, guid: 13af439e97cacb34c9dd08e4c0289a32, type: 2}
   filterStrategies: []
   effectStrategies:
