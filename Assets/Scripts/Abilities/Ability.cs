@@ -20,17 +20,13 @@ namespace RPG.Abilities
         public float AttunementCost { get { return attunementCost; } }
         public float Cooldown { get { return cooldown; } }
 
-        public bool Use(GameObject user)
+        public void Use(GameObject user)
         {
             AbilityData data = new AbilityData(user);
-            bool isUsed = false;
-            if (targetingStrategy == null) return isUsed;
+            if (targetingStrategy == null) return ;
 
             // Use lambda to provide TargetAquired context about it's user
-            targetingStrategy.StartTargeting(data, () => {
-                isUsed = TargetAquired(data);
-            });
-            return isUsed;
+            targetingStrategy.StartTargeting(data, () => TargetAquired(data));
         }
 
         public void Cancel(GameObject user)
@@ -41,18 +37,19 @@ namespace RPG.Abilities
             }
         }
 
-        bool TargetAquired(AbilityData data)
+        void TargetAquired(AbilityData data)
         {
-            if (data == null) return false;
+            if (data == null) return;
 
+            Attunement attunement = data.GetUser().GetComponent<Attunement>();
             CooldownStore cooldownStore = data.GetUser().GetComponent<CooldownStore>();
 
             IEnumerable <GameObject> filteredTargets = ApplyFilters(data.GetTargets());
             data.SetTargets(filteredTargets);
 
             StartEffects(data);
+            attunement.ConsumeAttunement(attunementCost);
             cooldownStore.StartCooldown(this, cooldown);
-            return true;
 
         }
 

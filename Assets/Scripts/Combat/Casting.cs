@@ -53,17 +53,12 @@ namespace RPG.Combat
 
         public void StartCastingAction(int inputKey)
         {
-            bool hasCasted = false;
             currentAbility = abilityManager.SelectAbility(inputKey);
 
             if (IsAbleToCastCurrentAbility())
             {
                 actionScheduler.StartAction(this);
-                hasCasted = currentAbility.Use(gameObject);
-                if (hasCasted)
-                {
-                    attunement.ConsumeAttunement(currentAbility.AttunementCost);
-                }
+                currentAbility.Use(gameObject);                    
             }
         }
 
