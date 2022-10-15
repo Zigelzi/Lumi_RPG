@@ -38,11 +38,13 @@ Player should feel like...
 2. Adept magic user
    1. Slightly unreliable magic
    2. Using magic is very consuming
+   3. Magic is channeled from nature and consumes attunement
 3. Actions are purposeful
    1. Combining abilities creates interesting combat moments
    2. Decisions matter, benefit comes with a risk
    3. Actions have consequences
    4. Powerful attacks carry high risk, player can reduce this with playing well
+   5. Enemies telegraph their attacks clearly
 4. Funny with strong feedback
    1. Slightly over the top effects
    2. Whimsical spells that don't take themselves too seriously
