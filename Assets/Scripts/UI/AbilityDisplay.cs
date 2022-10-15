@@ -38,7 +38,7 @@ namespace RPG.UI
             {
                 Ability ability = abilityManager.Abilities[i].ability;
                 string cooldownRemaining = cooldownStore.GetCooldownRemaining(ability).ToString("0.0");
-                textSlots[i].text = $"{i + 1} - {ability.AbilityName} ({cooldownRemaining} / {ability.Cooldown} s CD)";
+                textSlots[i].text = $"{i + 1} - {ability.AbilityName} ({cooldownRemaining} / {ability.Cooldown} s CD) - {ability.AttunementCost} A";
             }
         }
     }
