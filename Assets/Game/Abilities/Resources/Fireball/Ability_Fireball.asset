@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ability_Fireball
   m_EditorClassIdentifier: 
   abilityName: Fireball
+  attunementCost: 10
   cooldown: 2
   targetingStrategy: {fileID: 11400000, guid: c17ef5c341675024e9244f3890d1a5ab, type: 2}
   filterStrategies:

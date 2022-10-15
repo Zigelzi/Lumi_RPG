@@ -10,22 +10,27 @@ namespace RPG.Abilities
     public class Ability : ScriptableObject
     {
         [SerializeField] string abilityName;
+        [SerializeField] float attunementCost = 5f;
         [SerializeField] float cooldown = 2f;
         [SerializeField] TargetingStrategy targetingStrategy;
         [SerializeField] FilterStrategy[] filterStrategies;
         [SerializeField] EffectStrategy[] effectStrategies;
 
         public string AbilityName { get { return abilityName; } }
+        public float AttunementCost { get { return attunementCost; } }
         public float Cooldown { get { return cooldown; } }
 
-        public void Use(GameObject user)
+        public bool Use(GameObject user)
         {
             AbilityData data = new AbilityData(user);
-
-            if (targetingStrategy == null) return;
+            bool isUsed = false;
+            if (targetingStrategy == null) return isUsed;
 
             // Use lambda to provide TargetAquired context about it's user
-            targetingStrategy.StartTargeting(data, () => TargetAquired(data));
+            targetingStrategy.StartTargeting(data, () => {
+                isUsed = TargetAquired(data);
+            });
+            return isUsed;
         }
 
         public void Cancel(GameObject user)
@@ -36,9 +41,9 @@ namespace RPG.Abilities
             }
         }
 
-        void TargetAquired(AbilityData data)
+        bool TargetAquired(AbilityData data)
         {
-            if (data == null) return;
+            if (data == null) return false;
 
             CooldownStore cooldownStore = data.GetUser().GetComponent<CooldownStore>();
 
@@ -47,6 +52,7 @@ namespace RPG.Abilities
 
             StartEffects(data);
             cooldownStore.StartCooldown(this, cooldown);
+            return true;
 
         }
 

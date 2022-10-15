@@ -17,6 +17,7 @@ namespace RPG.Combat
         AbilityManager abilityManager;
         Ability currentAbility;
         ActionScheduler actionScheduler;
+        Attunement attunement;
         CooldownStore cooldownStore;
         Health health;
 
@@ -28,6 +29,7 @@ namespace RPG.Combat
         {
             abilityManager = GetComponent<AbilityManager>();
             actionScheduler = GetComponent<ActionScheduler>();
+            attunement = GetComponent<Attunement>();
             cooldownStore = GetComponent<CooldownStore>();
             health = GetComponent<Health>();
         }
@@ -51,14 +53,17 @@ namespace RPG.Combat
 
         public void StartCastingAction(int inputKey)
         {
+            bool hasCasted = false;
             currentAbility = abilityManager.SelectAbility(inputKey);
 
-            if (cooldownStore.IsAbilityReady(currentAbility) &&
-                castPointProjectile != null &&
-                castPointCharacter != null)
+            if (IsAbleToCastCurrentAbility())
             {
                 actionScheduler.StartAction(this);
-                currentAbility.Use(gameObject);
+                hasCasted = currentAbility.Use(gameObject);
+                if (hasCasted)
+                {
+                    attunement.ConsumeAttunement(currentAbility.AttunementCost);
+                }
             }
         }
 
@@ -70,6 +75,19 @@ namespace RPG.Combat
         public void Cancel()
         {
             currentAbility.Cancel(gameObject);
+        }
+
+        bool IsAbleToCastCurrentAbility()
+        {
+            if (cooldownStore.IsAbilityReady(currentAbility) &&
+                castPointProjectile != null &&
+                castPointCharacter != null &&
+                attunement.HasRequiredAttunement(currentAbility.AttunementCost)) 
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
