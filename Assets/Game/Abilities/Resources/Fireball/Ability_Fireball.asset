@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206bf86d38636f542b528be3a966f306, type: 3}
   m_Name: Ability_Fireball
   m_EditorClassIdentifier: 
+  abilityName: Fireball
   cooldown: 2
   targetingStrategy: {fileID: 11400000, guid: c17ef5c341675024e9244f3890d1a5ab, type: 2}
   filterStrategies:

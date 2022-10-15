@@ -10,6 +10,7 @@ namespace RPG.Abilities
 
         Ability currentAbility;
 
+        public AbilityConfig[] Abilities { get { return abilities; } }
         public Ability CurrentAbility { get { return currentAbility; } }
 
         void Awake()

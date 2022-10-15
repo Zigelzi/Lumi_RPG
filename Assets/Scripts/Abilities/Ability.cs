@@ -9,10 +9,14 @@ namespace RPG.Abilities
     [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/Create New Ability", order = 0)]
     public class Ability : ScriptableObject
     {
+        [SerializeField] string abilityName;
         [SerializeField] float cooldown = 2f;
         [SerializeField] TargetingStrategy targetingStrategy;
         [SerializeField] FilterStrategy[] filterStrategies;
         [SerializeField] EffectStrategy[] effectStrategies;
+
+        public string AbilityName { get { return abilityName; } }
+        public float Cooldown { get { return cooldown; } }
 
         public void Use(GameObject user)
         {
