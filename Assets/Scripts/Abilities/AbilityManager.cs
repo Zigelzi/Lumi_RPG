@@ -17,18 +17,6 @@ namespace RPG.Abilities
             currentAbility = abilities[0].ability;
         }
 
-        void Update()
-        {
-            foreach (AbilityConfig abilityConfig in abilities)
-            {
-                Debug.Log($"{abilityConfig.ability} was used {abilityConfig.ability.TimeSinceLastUsage} seconds ago");
-                if (!abilityConfig.ability.IsAbilityReady())
-                {
-                    abilityConfig.ability.TimeSinceLastUsage += Time.deltaTime;
-                }
-            }    
-        }
-
         public Ability SelectAbility(int inputKey)
         {
             // Input bindings start from 1 and abilities are zero indexed

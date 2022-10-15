@@ -12,7 +12,6 @@ namespace RPG.Abilities
         Transform castPointCharacter;
         IEnumerable<GameObject> targets;
 
-        float cooldown = 0f;
 
         public AbilityData(GameObject newUser)
         {

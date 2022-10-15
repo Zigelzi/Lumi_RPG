@@ -17,6 +17,7 @@ namespace RPG.Combat
         AbilityManager abilityManager;
         Ability currentAbility;
         ActionScheduler actionScheduler;
+        CooldownStore cooldownStore;
         Health health;
 
         bool isTargeting = false;
@@ -26,8 +27,9 @@ namespace RPG.Combat
         void Awake()
         {
             abilityManager = GetComponent<AbilityManager>();
-            health = GetComponent<Health>();
             actionScheduler = GetComponent<ActionScheduler>();
+            cooldownStore = GetComponent<CooldownStore>();
+            health = GetComponent<Health>();
         }
 
         void Start()
@@ -51,7 +53,7 @@ namespace RPG.Combat
         {
             currentAbility = abilityManager.SelectAbility(inputKey);
 
-            if (currentAbility.IsAbilityReady() &&
+            if (cooldownStore.IsAbilityReady(currentAbility) &&
                 castPointProjectile != null &&
                 castPointCharacter != null)
             {

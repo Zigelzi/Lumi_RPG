@@ -14,11 +14,6 @@ namespace RPG.Abilities
         [SerializeField] FilterStrategy[] filterStrategies;
         [SerializeField] EffectStrategy[] effectStrategies;
 
-        float timeSinceLastUsage = Mathf.Infinity;
-
-        // TODO: Refactor the cooldown to AbilityData so it's referenced correctly
-        public float TimeSinceLastUsage { get { return timeSinceLastUsage; } set { timeSinceLastUsage = value; } }
-
         public void Use(GameObject user)
         {
             AbilityData data = new AbilityData(user);
@@ -37,18 +32,6 @@ namespace RPG.Abilities
             }
         }
 
-        public bool IsAbilityReady()
-        {
-            if (timeSinceLastUsage >= cooldown)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         void TargetAquired(AbilityData data)
         {
             if (data == null) return;
@@ -57,7 +40,7 @@ namespace RPG.Abilities
             data.SetTargets(filteredTargets);
 
             StartEffects(data);
-            timeSinceLastUsage = 0;
+            data.GetUser().GetComponent<CooldownStore>().StartCooldown(this, cooldown);
 
         }
 
