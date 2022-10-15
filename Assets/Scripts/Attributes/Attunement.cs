@@ -1,23 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
+using GameDevTV.Utils;
+
 using RPG.Saving;
-using System;
-using UnityEngine.AI;
+using RPG.Stats;
 
 namespace RPG.Attributes
 {
     public class Attunement : MonoBehaviour, ISaveable
     {
-        [SerializeField] float currentAttunement = 0f;
-        [SerializeField] float maxAttunement = 100f;
         [SerializeField] float regenRate = 1f;
         [SerializeField] float regenSpeed = 1f;
 
+        BaseStats baseStats;
+        LazyValue<float> maxAttunement;
+        float currentAttunement = -1f;
+
         public float CurrentAttunement { get { return currentAttunement; } }
-        public float MaxAttunement { get { return maxAttunement; } }
+        public float MaxAttunement { get { return maxAttunement.value; } }
 
         public AttunementChangeEvent onAttunementChange;
 
@@ -26,18 +31,29 @@ namespace RPG.Attributes
 
         void Awake()
         {
-            currentAttunement = maxAttunement;    
+            baseStats = GetComponent<BaseStats>();
+            maxAttunement = new LazyValue<float>(GetStartingAttunement);
+        }
+
+        void OnEnable()
+        {
+            baseStats.onLevelChange += HandleLevelChange;
         }
 
         void Start()
         {
-            onAttunementChange?.Invoke(currentAttunement);
+            SetStartingAttunement();
             StartCoroutine(RegenAttunement());
         }
 
         void Update()
         {
             IsAbleToRegen();
+        }
+
+        void OnDisable()
+        {
+            baseStats.onLevelChange -= HandleLevelChange;
         }
 
         public bool HasRequiredAttunement(float amount)
@@ -68,14 +84,39 @@ namespace RPG.Attributes
             onAttunementChange?.Invoke(currentAttunement);
         }
 
+        void HandleLevelChange(int newLevel)
+        {
+            maxAttunement.value = baseStats.GetStat(Stat.Attunement);
+            currentAttunement = maxAttunement.value;
+
+            onAttunementChange?.Invoke(currentAttunement);
+        }
+
+        float GetStartingAttunement()
+        {
+            return baseStats.GetStat(Stat.Attunement);
+        }
+
+        void SetStartingAttunement()
+        {
+            maxAttunement.ForceInit();
+
+            if (currentAttunement < 0)
+            {
+                currentAttunement = maxAttunement.value;
+            }
+
+            onAttunementChange?.Invoke(currentAttunement);
+        }
+
         IEnumerator RegenAttunement()
         {
             while (true)
             {
-                if (currentAttunement < maxAttunement && IsAbleToRegen())
+                if (currentAttunement < maxAttunement.value && IsAbleToRegen())
                 {
                     yield return new WaitForSeconds(regenSpeed);
-                    float regenAmount = Mathf.Min(maxAttunement - currentAttunement, regenRate);
+                    float regenAmount = Mathf.Min(maxAttunement.value - currentAttunement, regenRate);
                     currentAttunement += regenAmount;
                     onAttunementChange?.Invoke(currentAttunement);
                 }

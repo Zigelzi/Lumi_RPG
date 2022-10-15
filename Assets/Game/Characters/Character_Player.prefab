@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761cdb8ca7146794781c58a4074fc45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAttunement: 0
-  maxAttunement: 100
-  regenSpeed: 5
+  regenRate: 5
+  regenSpeed: 1
   onAttunementChange:
     m_PersistentCalls:
       m_Calls: []

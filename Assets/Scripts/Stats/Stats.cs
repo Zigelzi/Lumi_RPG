@@ -4,6 +4,7 @@
         Health,
         ExperienceReward,
         ExperienceRequirement,
-        Damage
+        Damage,
+        Attunement
     }
 }
