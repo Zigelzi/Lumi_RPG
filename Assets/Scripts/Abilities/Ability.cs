@@ -36,11 +36,13 @@ namespace RPG.Abilities
         {
             if (data == null) return;
 
-            IEnumerable<GameObject> filteredTargets = ApplyFilters(data.GetTargets());
+            CooldownStore cooldownStore = data.GetUser().GetComponent<CooldownStore>();
+
+            IEnumerable <GameObject> filteredTargets = ApplyFilters(data.GetTargets());
             data.SetTargets(filteredTargets);
 
             StartEffects(data);
-            data.GetUser().GetComponent<CooldownStore>().StartCooldown(this, cooldown);
+            cooldownStore.StartCooldown(this, cooldown);
 
         }
 
