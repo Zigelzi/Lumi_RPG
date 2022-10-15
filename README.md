@@ -50,10 +50,6 @@ Player should feel like...
    2. Whimsical spells that don't take themselves too seriously
    3. Clear effects and animations
    4. Enemies telegraph their actions
-5. Though, but fair
-   1. Player needs to asses how many enemies they can engage
-   2. Bad decisions often lead to tricky moments
-   3. Room for correction, player can return from their bad decisions with correct decision making
 
 #### Movement
 WIP

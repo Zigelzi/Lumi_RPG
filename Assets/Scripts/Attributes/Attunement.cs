@@ -13,6 +13,7 @@ namespace RPG.Attributes
     {
         [SerializeField] float currentAttunement = 0f;
         [SerializeField] float maxAttunement = 100f;
+        [SerializeField] float regenRate = 1f;
         [SerializeField] float regenSpeed = 1f;
 
         public float CurrentAttunement { get { return currentAttunement; } }
@@ -73,8 +74,8 @@ namespace RPG.Attributes
             {
                 if (currentAttunement < maxAttunement && IsAbleToRegen())
                 {
-                    yield return new WaitForSeconds(1f);
-                    float regenAmount = Mathf.Min(maxAttunement - currentAttunement, regenSpeed);
+                    yield return new WaitForSeconds(regenSpeed);
+                    float regenAmount = Mathf.Min(maxAttunement - currentAttunement, regenRate);
                     currentAttunement += regenAmount;
                     onAttunementChange?.Invoke(currentAttunement);
                 }

@@ -10,11 +10,16 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Player abilities power have some random element
    - [ ] Player ability randomness is reduced based on their level
    - [x] Tune the power of fireball
-   - [ ] Tune the power of heal
+   - [x] Tune the power of heal
 3. Actions are purposeful
-   - [ ] Actions have independant cooldowns
+   - [x] Actions have independant cooldowns
+   - [ ] Player can combine abilites to create powerful attacks or effects
+   - [ ] Player can use ability to dodge enemy skills
 4. Funny with strong feedback
-5. Though, but fair
+   - [ ] Enemies have telegraphed attacks
+   - [ ] Better level up effect
+   - [ ] Better fireball effect
+   - [ ] Better heal effect
 ## Movement
 
 ### World
@@ -23,19 +28,20 @@ List of issues that can be worked to deliver the desired player experience categ
 3. Medieval world
 4. Nature is respected
    1. Player uses attunement to nature as resource
-      - [ ] Player has attunement resource
-      - [ ] Player can consume attunement by using abilities
-      - [ ] Player can regenerate attunement by staying still
+      - [x] Player has attunement resource
+      - [x] Player can consume attunement by using abilities
+      - [x] Player can regenerate attunement by staying still
 
 ### Story & level design
 1. Town (first level)
 
 ### UI
 1. Clean
-   - [ ] Player can see the abilities that are available for them
-   - [ ] Player can see the current cooldown of the abilities
-   - [ ] Player can see the name and description of the abilities
-   - [ ] Player can see the resource cost of the abilities
-   - [ ] Player can get feedback when they don't have sufficient resources to use the ability
+   - [x] Player can see the abilities that are available for them
+   - [x] Player can see the current cooldown of the abilities
+   - [x] Player can see the name of the abilities
+   - [ ] Player can see the description of what the ability does
+   - [x] Player can see the resource cost of the abilities
+   - [x] Player can get feedback when they don't have sufficient resources to use the ability
    - [ ] Player can see the icon of the ability
    - [ ] Player can see what weapon is equipped
