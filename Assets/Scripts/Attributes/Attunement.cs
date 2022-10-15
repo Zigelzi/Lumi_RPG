@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 using RPG.Saving;
 using System;
+using UnityEngine.AI;
 
 namespace RPG.Attributes
 {
@@ -12,6 +13,7 @@ namespace RPG.Attributes
     {
         [SerializeField] float currentAttunement = 0f;
         [SerializeField] float maxAttunement = 100f;
+        [SerializeField] float regenSpeed = 1f;
 
         public float CurrentAttunement { get { return currentAttunement; } }
         public float MaxAttunement { get { return maxAttunement; } }
@@ -29,6 +31,12 @@ namespace RPG.Attributes
         void Start()
         {
             onAttunementChange?.Invoke(currentAttunement);
+            StartCoroutine(RegenAttunement());
+        }
+
+        void Update()
+        {
+            IsAbleToRegen();
         }
 
         public bool HasRequiredAttunement(float amount)
@@ -57,6 +65,31 @@ namespace RPG.Attributes
             float restoredAttunement = (float)state;
             currentAttunement = restoredAttunement;
             onAttunementChange?.Invoke(currentAttunement);
+        }
+
+        IEnumerator RegenAttunement()
+        {
+            while (true)
+            {
+                if (currentAttunement < maxAttunement && IsAbleToRegen())
+                {
+                    yield return new WaitForSeconds(1f);
+                    float regenAmount = Mathf.Min(maxAttunement - currentAttunement, regenSpeed);
+                    currentAttunement += regenAmount;
+                    onAttunementChange?.Invoke(currentAttunement);
+                }
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        bool IsAbleToRegen()
+        {
+            float playerVelocity = transform.GetComponent<NavMeshAgent>().velocity.magnitude;
+            if (Mathf.Approximately(playerVelocity, 0)) {
+                return true;
+            }
+
+            return false;
         }
     }
 }
