@@ -45,3 +45,7 @@ List of issues that can be worked to deliver the desired player experience categ
    - [x] Player can get feedback when they don't have sufficient resources to use the ability
    - [ ] Player can see the icon of the ability
    - [ ] Player can see what weapon is equipped
+
+### Bugs
+1. Combat
+  - [ ] Defeating enemy with fireball doesn't grant experience
