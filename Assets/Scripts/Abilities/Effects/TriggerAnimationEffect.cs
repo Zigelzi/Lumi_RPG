@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RPG.Abilities
 {
-    [CreateAssetMenu(fileName = "Effect_TriggerAnimationEffect_", menuName = "Abilities/Effects/Trigger animation", order = 0)]
+    [CreateAssetMenu(fileName = "Effect_TriggerAnimation_", menuName = "Abilities/Effects/Trigger animation", order = 0)]
     public class TriggerAnimationEffect : EffectStrategy
     {
         [SerializeField] AnimationTrigger animationTrigger;
