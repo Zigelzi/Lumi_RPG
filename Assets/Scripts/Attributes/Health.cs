@@ -65,12 +65,10 @@ namespace RPG.Attributes
 
         public void TakeDamage(float amount, GameObject attacker)
         {
+            this.attacker = attacker;
             currentHealth = Mathf.Max(currentHealth - amount, 0);
             onHealthChange?.Invoke(currentHealth);
             onDamageTaken?.Invoke(amount);
-
-            this.attacker = attacker;
-
         }
 
         public bool AddHealth(float amount)
