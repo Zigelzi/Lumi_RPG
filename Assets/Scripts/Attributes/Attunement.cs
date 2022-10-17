@@ -15,9 +15,10 @@ namespace RPG.Attributes
     public class Attunement : MonoBehaviour, ISaveable
     {
         [SerializeField] float regenRate = 1f;
-        [SerializeField] float regenSpeed = 1f;
+        [SerializeField] GameObject regenVfxPrefab;
 
         BaseStats baseStats;
+        GameObject regenVfxInstance = null;
         LazyValue<float> maxAttunement;
         float currentAttunement = -1f;
 
@@ -33,6 +34,7 @@ namespace RPG.Attributes
         {
             baseStats = GetComponent<BaseStats>();
             maxAttunement = new LazyValue<float>(GetStartingAttunement);
+            regenVfxInstance = null;
         }
 
         void OnEnable()
@@ -43,12 +45,11 @@ namespace RPG.Attributes
         void Start()
         {
             SetStartingAttunement();
-            StartCoroutine(RegenAttunement());
         }
 
         void Update()
         {
-            IsAbleToRegen();
+            RegenAttunement();
         }
 
         void OnDisable()
@@ -109,29 +110,50 @@ namespace RPG.Attributes
             onAttunementChange?.Invoke(currentAttunement);
         }
 
-        IEnumerator RegenAttunement()
+        void RegenAttunement()
         {
-            while (true)
+            ManageRegenVFX();
+            if (IsAbleToRegen())
             {
-                if (currentAttunement < maxAttunement.value && IsAbleToRegen())
-                {
-                    yield return new WaitForSeconds(regenSpeed);
-                    float regenAmount = Mathf.Min(maxAttunement.value - currentAttunement, regenRate);
-                    currentAttunement += regenAmount;
-                    onAttunementChange?.Invoke(currentAttunement);
-                }
-                yield return new WaitForEndOfFrame();
+                float regenAmount = Mathf.Min(maxAttunement.value - currentAttunement, regenRate * Time.deltaTime);
+                currentAttunement += regenAmount;
+                onAttunementChange?.Invoke(currentAttunement);
             }
+            
         }
 
         bool IsAbleToRegen()
         {
             float playerVelocity = transform.GetComponent<NavMeshAgent>().velocity.magnitude;
-            if (Mathf.Approximately(playerVelocity, 0)) {
+            if (Mathf.Approximately(playerVelocity, 0) && currentAttunement < maxAttunement.value) {
                 return true;
             }
 
             return false;
+        }
+
+        void ManageRegenVFX()
+        {
+            if (regenVfxPrefab == null) return;
+
+            if (IsAbleToRegen())
+            {
+                if (regenVfxInstance == null)
+                {
+                    regenVfxInstance = Instantiate(regenVfxPrefab, transform.position, transform.rotation, transform);
+                }
+                regenVfxInstance.transform.position = transform.position;
+                regenVfxInstance.SetActive(true);
+                
+            }
+            else
+            {
+                if (regenVfxInstance != null)
+                {
+                    regenVfxInstance.SetActive(false);
+                }
+            }
+            
         }
     }
 }

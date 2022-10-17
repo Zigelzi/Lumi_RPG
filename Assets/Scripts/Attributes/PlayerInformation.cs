@@ -79,7 +79,8 @@ namespace RPG.Attributes
         {
             if (attunementValue == null || playerAttunement == null) return;
 
-            string attunementText = $"{playerAttunement.CurrentAttunement} / {playerAttunement.MaxAttunement}";
+            string currentAttunementValue = playerAttunement.CurrentAttunement.ToString("0");
+            string attunementText = $"{currentAttunementValue} / {playerAttunement.MaxAttunement}";
             attunementValue.text = attunementText;
         }
 
@@ -87,7 +88,8 @@ namespace RPG.Attributes
         {
             if (attunementValue == null || playerAttunement == null) return;
 
-            string attunementText = $"{value} / {playerAttunement.MaxAttunement}";
+            string currentAttunementValue = value.ToString("0");
+            string attunementText = $"{currentAttunementValue} / {playerAttunement.MaxAttunement}";
             attunementValue.text = attunementText;
         }
 

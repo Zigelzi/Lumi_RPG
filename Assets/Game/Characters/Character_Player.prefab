@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regenRate: 5
-  regenSpeed: 1
+  regenVfxPrefab: {fileID: 1743953032836072668, guid: ca53e073bdefd1144a7eab55aab32502, type: 3}
   onAttunementChange:
     m_PersistentCalls:
       m_Calls: []
