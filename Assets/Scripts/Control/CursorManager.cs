@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using RPG.Attributes;
+
 namespace RPG.Control
 {
     public class CursorManager : MonoBehaviour
@@ -15,6 +17,23 @@ namespace RPG.Control
         }
 
         [SerializeField] RPGCursor[] cursors;
+
+        Health health;
+
+        void Awake()
+        {
+            health = GetComponent<Health>();    
+        }
+
+        void OnEnable()
+        {
+            health.onUnitDeath.AddListener(HandleUnitDeath);
+        }
+
+        void OnDisable()
+        {
+            health.onUnitDeath.RemoveListener(HandleUnitDeath);
+        }
 
         public void SetCursor(CursorType type)
         {
@@ -37,6 +56,11 @@ namespace RPG.Control
             }
 
             return cursors[0];
+        }
+
+        void HandleUnitDeath()
+        {
+            SetCursor(CursorType.UI);
         }
     }
 }
