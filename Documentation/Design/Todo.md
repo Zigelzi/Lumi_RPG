@@ -23,6 +23,7 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Better level up effect
    - [ ] Better fireball effect
    - [ ] Better heal effect
+   - [ ] Effect to pickups to improve the discoverability
 ## Movement
 
 ### World
@@ -38,6 +39,7 @@ List of issues that can be worked to deliver the desired player experience categ
 ### Story & level design
 1. Town (first level)
    - [ ] Player can only move between scenes when out of combat
+   - [ ] XP pickup to reward discovery
 
 ### UI
 1. Clean
@@ -49,6 +51,11 @@ List of issues that can be worked to deliver the desired player experience categ
    - [x] Player can get feedback when they don't have sufficient resources to use the ability
    - [ ] Player can see the icon of the ability
    - [ ] Player can see what weapon is equipped
+   - [ ] Player can see their HP, A, XP at the bottom of the screen
+   - [ ] Player can see their HP bar at the bottom of the screen
+   - [ ] Player can see ability bar at the bottom of the screen
+   - [ ] Player can see cooldown of the abilities in the ability bar
+   - [ ] Improve the readability of XP amount in the XP bar
 
 ### Bugs
 1. Combat
