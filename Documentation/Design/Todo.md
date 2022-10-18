@@ -11,10 +11,13 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Player ability randomness is reduced based on their level
    - [x] Tune the power of fireball
    - [x] Tune the power of heal
+   - [ ] Attunement only regens when out of combat
 3. Actions are purposeful
    - [x] Actions have independant cooldowns
    - [ ] Player can combine abilites to create powerful attacks or effects
    - [ ] Player can use ability to dodge enemy skills
+   - [ ] Enemies aggro when they're attacked
+   - [ ] Enemies alert the nearby enemies when they're aggroed
 4. Funny with strong feedback
    - [ ] Enemies have telegraphed attacks
    - [ ] Better level up effect
@@ -34,6 +37,7 @@ List of issues that can be worked to deliver the desired player experience categ
 
 ### Story & level design
 1. Town (first level)
+   - [ ] Player can only move between scenes when out of combat
 
 ### UI
 1. Clean
@@ -48,4 +52,6 @@ List of issues that can be worked to deliver the desired player experience categ
 
 ### Bugs
 1. Combat
-  - [ ] Defeating enemy with fireball doesn't grant experience
+   - [x] Defeating enemy with fireball doesn't grant experience
+2. Saving & scene management
+   - [ ] Enemy state isn't loaded correctly when player loads game with existing save
