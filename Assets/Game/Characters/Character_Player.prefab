@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: attackDamage
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3089477456424603187, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
+      propertyPath: castPointProjectile
+      value: 
+      objectReference: {fileID: 4988064121868412923}
     - target: {fileID: 4430146885770297694, guid: 5d3f702d22ccd844ca59a07b27153299, type: 3}
       propertyPath: maxHealth
       value: 100
