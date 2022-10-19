@@ -138,22 +138,32 @@ namespace RPG.Attributes
 
             if (IsAbleToRegen())
             {
-                if (regenVfxInstance == null)
-                {
-                    regenVfxInstance = Instantiate(regenVfxPrefab, transform.position, transform.rotation, transform);
-                }
-                regenVfxInstance.transform.position = transform.position;
-                regenVfxInstance.SetActive(true);
-                
+                SpawnRegenFX();
             }
             else
             {
-                if (regenVfxInstance != null)
-                {
-                    regenVfxInstance.SetActive(false);
-                }
+                StopRegenFX();
             }
             
+        }
+
+        void SpawnRegenFX()
+        {
+            if (regenVfxInstance == null)
+            {
+                regenVfxInstance = Instantiate(regenVfxPrefab, transform.position, transform.rotation, transform);
+            }
+        }
+
+        void StopRegenFX()
+        {
+            if (regenVfxInstance == null) return;
+
+            ParticleSystem[] particleSystems = regenVfxInstance.GetComponentsInChildren<ParticleSystem>();
+            foreach (ParticleSystem particleSystem in particleSystems)
+            {
+                particleSystem.Stop();
+            }
         }
     }
 }

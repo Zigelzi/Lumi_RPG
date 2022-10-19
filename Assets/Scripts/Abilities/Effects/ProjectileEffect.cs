@@ -10,7 +10,7 @@ namespace RPG.Abilities
     public class ProjectileEffect : EffectStrategy
     {
         [SerializeField] float damageAmount = 10f;
-        [SerializeField] GameObject projectilePrefab;
+        [SerializeField] Projectile projectilePrefab;
         public override void StartEffect(AbilityData data, Action onEffectFinished)
         {
             SpawnProjectile(data);
@@ -21,8 +21,7 @@ namespace RPG.Abilities
             if (projectilePrefab == null) return;
 
             Transform castPoint = data.GetProjectileCastpoint();
-            GameObject projectileInstance = Instantiate(projectilePrefab, castPoint.position, castPoint.rotation);
-            Projectile projectile = projectileInstance.GetComponent<Projectile>();
+            Projectile projectile = Instantiate(projectilePrefab, castPoint.position, castPoint.rotation);
 
             projectile.SetDamage(damageAmount);
             projectile.SetProjectileOwner(data.GetUser());
