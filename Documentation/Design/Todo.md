@@ -11,12 +11,12 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Player ability randomness is reduced based on their level
    - [x] Tune the power of fireball
    - [x] Tune the power of heal
-   - [ ] Attunement only regens when out of combat
+   - [x] Attunement only regens when out of combat
 3. Actions are purposeful
    - [x] Actions have independant cooldowns
    - [ ] Player can combine abilites to create powerful attacks or effects
    - [ ] Player can use ability to dodge enemy skills
-   - [ ] Enemies aggro when they're attacked
+   - [x] Enemies aggro when they're attacked
    - [ ] Enemies alert the nearby enemies when they're aggroed
 4. Funny with strong feedback
    - [ ] Enemies have telegraphed attacks

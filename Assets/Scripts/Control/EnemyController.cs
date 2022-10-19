@@ -15,6 +15,7 @@ namespace RPG.Control
     {
         [SerializeField] [Range(0, 100f)] float aggroRadius = 5f;
         [SerializeField] [Range(0, 20f)] float suspiciousDuration = 3f;
+        [SerializeField][Range(0, 20f)] float provokedDuration = 3f;
         [SerializeField] [Range(0, 10f)] float patrolStopDuration = 1f;
         [SerializeField] [Range(0, 1f)] float patrolSpeedMultiplier = 0.5f;
         [SerializeField] float waypointTolerance = 0.3f;
@@ -32,6 +33,7 @@ namespace RPG.Control
         
         float timeLastSawPlayer = Mathf.Infinity;
         float timeAtWaypoint = Mathf.Infinity;
+        float timeSinceProvoked = Mathf.Infinity;
 
         void Awake()
         {
@@ -48,6 +50,7 @@ namespace RPG.Control
         void OnEnable()
         {
             health.onUnitDeath.AddListener(HandleDeath);
+            health.onDamageTaken.AddListener(HandleDamageTaken);
         }
 
         void Start()
@@ -65,6 +68,10 @@ namespace RPG.Control
             if (IsPlayerInAggroRange())
             {
                 timeLastSawPlayer = 0;
+                AttackBehaviour();
+            }
+            else if(IsStillProvoked())
+            {
                 AttackBehaviour();
             }
             else if (IsStillSuspicious()) {
@@ -87,6 +94,11 @@ namespace RPG.Control
             enabled = false;
         }
 
+        void HandleDamageTaken(float amount)
+        {
+            timeSinceProvoked = 0;
+        }
+
         Vector3 GetStartingPosition()
         {
             return transform.position;
@@ -101,6 +113,11 @@ namespace RPG.Control
                 player.transform.position
                 );
             return distanceToPlayer <= aggroRadius;
+        }
+
+        bool IsStillProvoked()
+        {
+            return timeSinceProvoked <= provokedDuration;
         }
 
         bool IsStillSuspicious()
@@ -168,6 +185,7 @@ namespace RPG.Control
         {
             timeLastSawPlayer += Time.deltaTime;
             timeAtWaypoint += Time.deltaTime;
+            timeSinceProvoked += Time.deltaTime;
         }
 
         /*

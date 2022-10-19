@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aggroRadius: 5
   suspiciousDuration: 3
+  provokedDuration: 5
   patrolStopDuration: 1
   patrolSpeedMultiplier: 0.5
   waypointTolerance: 0.55
