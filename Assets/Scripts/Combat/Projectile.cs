@@ -39,18 +39,16 @@ namespace RPG.Combat
         void OnTriggerEnter(Collider other)
         {
             if(other.TryGetComponent<Health>(out Health collidedObject))
-            {
-                // Never collide with the owner of the projectile
-                
+            {                
                 if (isHoming)
                 {
+                    // Homing projectiles only collide with their target
                     CollideWithCurrentTarget(collidedObject);
                 }
                 else
                 {
                     // Enemy projectiles only collide with player
                     // Player projectiles collide with all enemies
-                    // Homing projectiles only collide with their target
                     CollideWithHostileTarget(collidedObject);
                 }
             }

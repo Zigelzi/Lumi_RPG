@@ -9,8 +9,8 @@ using UnityEngine.InputSystem;
 
 namespace RPG.Abilities
 {
-    [CreateAssetMenu(fileName = "Targeting_Delayed_Click_", menuName = "Abilities/Targeting/Delayed click targeting", order = 1)]
-    public class DelayedClickTargeting : TargetingStrategy
+    [CreateAssetMenu(fileName = "Targeting_Delayed_Directional_", menuName = "Abilities/Targeting/Delayed directional targeting", order = 1)]
+    public class DelayedDirectionalTargeting : TargetingStrategy
     {
         [SerializeField] LayerMask targetableLayers;
         public override void StartTargeting(AbilityData data, Action onTargetingFinished)

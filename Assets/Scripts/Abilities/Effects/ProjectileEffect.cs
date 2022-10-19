@@ -14,6 +14,7 @@ namespace RPG.Abilities
         public override void StartEffect(AbilityData data, Action onEffectFinished)
         {
             SpawnProjectile(data);
+            onEffectFinished();
         }
 
         void SpawnProjectile(AbilityData data)
