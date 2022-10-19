@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa810663659c8149a7b4f8419b8a7ec, type: 3}
   m_Name: Effect_Delay_Fireball
   m_EditorClassIdentifier: 
-  delay: 0.2
+  delay: 0.35
   delayedEffects:
   - {fileID: 11400000, guid: 60cf4512198642745b31456a7ce61806, type: 2}
