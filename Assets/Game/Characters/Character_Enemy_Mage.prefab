@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806182c7e7ebcdb469b8396b4eca90c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRadius: 5
+  aggrevationRadius: 5
   suspiciousDuration: 3
-  provokedDuration: 5
+  aggrevatedDuration: 3
+  alertRadius: 5
   patrolStopDuration: 1
   patrolSpeedMultiplier: 0.5
   waypointTolerance: 0.55

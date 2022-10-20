@@ -67,8 +67,8 @@ namespace RPG.Attributes
         {
             this.attacker = attacker;
             currentHealth = Mathf.Max(currentHealth - amount, 0);
-            onHealthChange?.Invoke(currentHealth);
             onDamageTaken?.Invoke(amount);
+            onHealthChange?.Invoke(currentHealth);
         }
 
         public bool AddHealth(float amount)

@@ -13,9 +13,10 @@ namespace RPG.Control
 {
     public class EnemyController : MonoBehaviour
     {
-        [SerializeField] [Range(0, 100f)] float aggroRadius = 5f;
+        [SerializeField] [Range(0, 100f)] float aggrevationRadius = 5f;
         [SerializeField] [Range(0, 20f)] float suspiciousDuration = 3f;
-        [SerializeField][Range(0, 20f)] float provokedDuration = 3f;
+        [SerializeField][Range(0, 20f)] float aggrevatedDuration = 3f;
+        [SerializeField][Range(0, 20f)] float alertRadius = 3f;
         [SerializeField] [Range(0, 10f)] float patrolStopDuration = 1f;
         [SerializeField] [Range(0, 1f)] float patrolSpeedMultiplier = 0.5f;
         [SerializeField] float waypointTolerance = 0.3f;
@@ -33,7 +34,7 @@ namespace RPG.Control
         
         float timeLastSawPlayer = Mathf.Infinity;
         float timeAtWaypoint = Mathf.Infinity;
-        float timeSinceProvoked = Mathf.Infinity;
+        float timeSinceAggrevated = Mathf.Infinity;
 
         void Awake()
         {
@@ -61,16 +62,12 @@ namespace RPG.Control
         void OnDisable()
         {
             health.onUnitDeath.RemoveListener(HandleDeath);
+            health.onDamageTaken.RemoveListener(HandleDamageTaken);
         }
 
         void Update()
         {
-            if (IsPlayerInAggroRange())
-            {
-                timeLastSawPlayer = 0;
-                AttackBehaviour();
-            }
-            else if(IsStillProvoked())
+            if (IsAggrevated())
             {
                 AttackBehaviour();
             }
@@ -85,6 +82,11 @@ namespace RPG.Control
             UpdateTimers();
         }
 
+        public void Aggrevate()
+        {
+            timeSinceAggrevated = 0;
+        }
+
         void HandleDeath()
         {
             actionScheduler.CancelCurrentAction();
@@ -96,7 +98,8 @@ namespace RPG.Control
 
         void HandleDamageTaken(float amount)
         {
-            timeSinceProvoked = 0;
+            timeSinceAggrevated = 0;
+            AggrevateNearbyEnemies();
         }
 
         Vector3 GetStartingPosition()
@@ -104,7 +107,12 @@ namespace RPG.Control
             return transform.position;
         }
 
-        bool IsPlayerInAggroRange()
+        bool IsAggrevated()
+        {
+            return IsPlayerInAggrevationRange() || IsStillAggrevated();
+        }
+
+        bool IsPlayerInAggrevationRange()
         {
             if (player == null) return false;
 
@@ -112,12 +120,12 @@ namespace RPG.Control
                 transform.position,
                 player.transform.position
                 );
-            return distanceToPlayer <= aggroRadius;
+            return distanceToPlayer <= aggrevationRadius;
         }
 
-        bool IsStillProvoked()
+        bool IsStillAggrevated()
         {
-            return timeSinceProvoked <= provokedDuration;
+            return timeSinceAggrevated <= aggrevatedDuration;
         }
 
         bool IsStillSuspicious()
@@ -127,7 +135,24 @@ namespace RPG.Control
 
         void AttackBehaviour()
         {
+            if (IsPlayerInAggrevationRange())
+            {
+                timeLastSawPlayer = 0;
+            }
             attacking.StartAttackAction(player);
+        }
+
+        void AggrevateNearbyEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, alertRadius, Vector3.up, 0);
+
+            foreach(RaycastHit hit in hits)
+            {
+                if (hit.collider.gameObject.TryGetComponent<EnemyController>(out EnemyController enemy))
+                {
+                    enemy.Aggrevate();
+                }
+            }
         }
 
         void SuspiciousBehaviour()
@@ -185,7 +210,7 @@ namespace RPG.Control
         {
             timeLastSawPlayer += Time.deltaTime;
             timeAtWaypoint += Time.deltaTime;
-            timeSinceProvoked += Time.deltaTime;
+            timeSinceAggrevated += Time.deltaTime;
         }
 
         /*
@@ -194,7 +219,9 @@ namespace RPG.Control
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, aggroRadius);
+            Gizmos.DrawWireSphere(transform.position, aggrevationRadius);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, alertRadius);
         }
     }
 }
