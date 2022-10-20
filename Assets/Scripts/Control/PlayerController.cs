@@ -16,6 +16,7 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] float navMeshProximityRange = 2f;
+        [SerializeField][Range(0, 2f)] float interactionTolerance = .3f;
         [SerializeField] LayerMask interactableLayers;
 
         ActionScheduler actionScheduler;
@@ -177,8 +178,6 @@ namespace RPG.Control
             {
                 IRaycastable[] components = hit.transform.GetComponents<IRaycastable>();
 
-                if (!movement.CanMoveTo(hit.transform.position)) return false;
-
                 foreach (IRaycastable component in components)
                 {
                     if (component.HandleRaycast(this, hit))
@@ -197,8 +196,8 @@ namespace RPG.Control
 
         RaycastHit[] GetRaycastHitsByDistance()
         {
-            float sphereCastRadius = .3f;
-            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), sphereCastRadius);
+            
+            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), interactionTolerance);
 
             float[] distancesFromHit = new float[hits.Length];
 

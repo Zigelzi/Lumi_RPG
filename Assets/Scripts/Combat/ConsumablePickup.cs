@@ -6,6 +6,7 @@ using RPG.Attributes;
 using RPG.Control;
 using RPG.SFX;
 using UnityEngine.Events;
+using RPG.Movement;
 
 namespace RPG.Combat
 {
@@ -31,8 +32,14 @@ namespace RPG.Combat
 
         public bool HandleRaycast(PlayerController player, RaycastHit hit)
         {
-            player.TryStartMoveAction(hit.point);
-            return true;
+            UnitMovement movement = player.GetComponent<UnitMovement>();
+            if (movement.CanMoveTo(hit.point))
+            {
+                player.TryStartMoveAction(hit.point);
+                return true;
+            }
+
+            return false;
         }
 
         public CursorType GetCursorType()

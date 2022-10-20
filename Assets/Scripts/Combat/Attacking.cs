@@ -80,6 +80,21 @@ namespace RPG.Combat
             movement.Cancel();
         }
 
+        public bool IsInAttackRange(Transform targetTransform)
+        {
+            float distanceFromTarget = Vector3.Distance(
+                transform.position,
+                targetTransform.position
+                );
+
+            if (distanceFromTarget <= currentWeaponConfig.AttackRange)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         void HandleWeaponChange(WeaponConfig newWeaponConfig, Weapon newWeapon)
         {
             currentWeaponConfig = newWeaponConfig;
@@ -93,7 +108,7 @@ namespace RPG.Combat
 
         void ChaseTarget()
         {
-            if (IsInAttackRange())
+            if (IsInAttackRange(currentTarget.transform))
             {
                 movement.Cancel();
                 transform.LookAt(currentTarget.transform.position);
@@ -106,7 +121,7 @@ namespace RPG.Combat
 
         void TryAttackTarget()
         {
-            if (IsInAttackRange() && 
+            if (IsInAttackRange(currentTarget.transform) && 
                 IsAbleToAttackAgain() &&
                 IsTargetAlive())
             {
@@ -121,20 +136,7 @@ namespace RPG.Combat
             }
         }
 
-        bool IsInAttackRange()
-        {
-            float distanceFromTarget = Vector3.Distance(
-                transform.position,
-                currentTarget.transform.position
-                );
-
-            if (distanceFromTarget <= currentWeaponConfig.AttackRange)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        
 
         bool IsAbleToAttackAgain()
         {

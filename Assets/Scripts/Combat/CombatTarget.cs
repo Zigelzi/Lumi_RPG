@@ -12,8 +12,15 @@ namespace RPG.Combat
     {
         public bool HandleRaycast(PlayerController player, RaycastHit hit)
         {
-            player.TryStartAttackAction(this.gameObject);
-            return true;
+            Attacking attacking = player.GetComponent<Attacking>();
+
+            if (attacking.IsInAttackRange(gameObject.transform))
+            {
+                player.TryStartAttackAction(this.gameObject);
+                return true;
+            }
+
+            return false;
         }
 
         public CursorType GetCursorType()

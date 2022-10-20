@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 using RPG.Control;
+using RPG.Movement;
 
 namespace RPG.SceneManagement
 {
@@ -37,8 +38,15 @@ namespace RPG.SceneManagement
 
         public bool HandleRaycast(PlayerController player, RaycastHit hit)
         {
-            player.TryStartMoveAction(hit.point);
-            return true;
+            UnitMovement movement = player.GetComponent<UnitMovement>();
+
+            if (movement.CanMoveTo(hit.point))
+            {
+                player.TryStartMoveAction(hit.point);
+                return true;
+            }
+
+            return false;
         }
 
         IEnumerator TransitionToScene()
