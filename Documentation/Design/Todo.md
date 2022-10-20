@@ -17,7 +17,7 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Player can combine abilites to create powerful attacks or effects
    - [ ] Player can use ability to dodge enemy skills
    - [x] Enemies aggro when they're attacked
-   - [ ] Enemies alert the nearby enemies when they're aggroed
+   - [x] Enemies alert the nearby enemies when they're aggroed
 4. Funny with strong feedback
    - [ ] Enemies have telegraphed attacks
    - [ ] Better level up effect

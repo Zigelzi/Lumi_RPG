@@ -197,7 +197,8 @@ namespace RPG.Control
 
         RaycastHit[] GetRaycastHitsByDistance()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            float sphereCastRadius = .3f;
+            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), sphereCastRadius);
 
             float[] distancesFromHit = new float[hits.Length];
 
