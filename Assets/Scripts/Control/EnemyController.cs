@@ -25,6 +25,7 @@ namespace RPG.Control
         ActionScheduler actionScheduler;
         Attacking attacking;
         CapsuleCollider enemyCollider;
+        CombatManager combatManager;
         GameObject player;
         Health health;
         LazyValue<Vector3> guardPosition;
@@ -41,6 +42,7 @@ namespace RPG.Control
             player = GameObject.FindGameObjectWithTag("Player");
             actionScheduler = GetComponent<ActionScheduler>();
             attacking = GetComponent<Attacking>();
+            combatManager = player.GetComponent<CombatManager>();
             enemyCollider = GetComponent<CapsuleCollider>();
             movement = GetComponent<UnitMovement>();
             health = GetComponent<Health>();
@@ -137,6 +139,8 @@ namespace RPG.Control
         {
             if (IsPlayerInAggrevationRange())
             {
+                combatManager.TriggerCombat();
+
                 timeLastSawPlayer = 0;
             }
             attacking.StartAttackAction(player);

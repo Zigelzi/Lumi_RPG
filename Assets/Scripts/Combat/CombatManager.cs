@@ -40,6 +40,11 @@ namespace RPG.Combat
             return durationInCombatRemaining > 0;
         }
 
+        public void TriggerCombat()
+        {
+            durationInCombatRemaining = combatDuration;
+        }
+
         void HandleCombatEvent()
         {
             durationInCombatRemaining = combatDuration;
