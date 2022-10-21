@@ -43,6 +43,8 @@ List of issues that can be worked to deliver the desired player experience categ
    - [x] Player can only move between scenes when out of combat
  3. Level design
    - [ ] Create shop level (level 2)
+     - [ ] Add talisman to pick up
+     - [ ] Create transition to level 3 after picking up the talisman
    - [ ] Create anger hill (level 3)
    - [ ] Create love bet (level 4)
    - [ ] Create lonliness (level 5)
