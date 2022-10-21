@@ -10,16 +10,19 @@ namespace RPG.Combat
         [SerializeField] float combatDuration = 3f;
         [SerializeField] float durationInCombatRemaining = 0;
 
+        Attacking attacking;
         Health health;
 
         void Awake()
         {
+            attacking = GetComponent<Attacking>();
             health = GetComponent<Health>();
         }
 
         void OnEnable()
         {
-            health.onDamageTaken.AddListener(HandleDamageTaken);
+            attacking.onAttackHit.AddListener(HandleCombatEvent);
+            health.onDamageTaken.AddListener(HandleCombatEvent);
         }
 
         void Update()
@@ -29,7 +32,7 @@ namespace RPG.Combat
 
         void OnDisable()
         {
-            health.onDamageTaken.RemoveListener(HandleDamageTaken);
+            health.onDamageTaken.RemoveListener(HandleCombatEvent);
         }
 
         public bool IsInCombat()
@@ -37,7 +40,12 @@ namespace RPG.Combat
             return durationInCombatRemaining > 0;
         }
 
-        void HandleDamageTaken(float amount)
+        void HandleCombatEvent()
+        {
+            durationInCombatRemaining = combatDuration;
+        }
+
+        void HandleCombatEvent(float amount)
         {
             durationInCombatRemaining = combatDuration;
         }

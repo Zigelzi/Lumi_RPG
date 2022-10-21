@@ -24,6 +24,8 @@ namespace RPG.Combat
 
         float timeSinceLastAttack = Mathf.Infinity;
 
+        public UnityEvent onAttackHit;
+
         void Awake()
         {
             actionScheduler = GetComponent<ActionScheduler>();
@@ -218,7 +220,7 @@ namespace RPG.Combat
                 {
                     currentTargetHealth.TakeDamage(damage, gameObject);
                 }
-                
+                onAttackHit?.Invoke();
             }
         }
     }
