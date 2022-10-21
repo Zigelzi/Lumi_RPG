@@ -1,4 +1,5 @@
 ﻿using RPG.Attributes;
+using RPG.Combat;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace RPG.Abilities
             {
                 if (healthChange < 0)
                 {
+                    EmitAttackingEvent(data);
                     targetHealth.TakeDamage(-healthChange, data.GetUser());
                 }
                 else
@@ -33,6 +35,15 @@ namespace RPG.Abilities
                     targetHealth.AddHealth(healthChange);
                 }
             }
+        }
+
+        void EmitAttackingEvent(AbilityData data)
+        {
+            Attacking attacking = data.GetUser().GetComponent<Attacking>();
+
+            if (attacking == null) return;
+
+            attacking.onAttackHit?.Invoke();
         }
     }
 }

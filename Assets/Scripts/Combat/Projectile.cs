@@ -135,8 +135,11 @@ namespace RPG.Combat
 
             collidedObject.TakeDamage(damage, owner);
             PlayHitFX(collidedObject.GetComponent<CapsuleCollider>());
+
             onProjectileHit?.Invoke();
+            EmitAttackingEvent();
             speed = 0;
+
 
             DestroyOnHitObjects();
         }
@@ -147,6 +150,15 @@ namespace RPG.Combat
             
             Vector3 hitPosition = collider.ClosestPoint(transform.position);
             Instantiate(hitEffect, hitPosition, transform.rotation);
+        }
+
+        void EmitAttackingEvent()
+        {
+            Attacking attacking = owner.GetComponent<Attacking>();
+
+            if (attacking == null) return;
+
+            attacking.onAttackHit?.Invoke();
         }
     }
 }
