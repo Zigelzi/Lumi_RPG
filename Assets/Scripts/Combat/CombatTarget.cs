@@ -4,6 +4,7 @@ using UnityEngine;
 
 using RPG.Attributes;
 using RPG.Control;
+using RPG.Movement;
 
 namespace RPG.Combat
 {
@@ -13,8 +14,9 @@ namespace RPG.Combat
         public bool HandleRaycast(PlayerController player, RaycastHit hit)
         {
             Attacking attacking = player.GetComponent<Attacking>();
+            UnitMovement movement = player.GetComponent<UnitMovement>();
 
-            if (attacking.IsInAttackRange(gameObject.transform))
+            if (attacking.IsInAttackRange(transform) || movement.CanMoveTo(transform.position))
             {
                 player.TryStartAttackAction(this.gameObject);
                 return true;
