@@ -18,5 +18,5 @@ MonoBehaviour:
   attackDamage: 10
   attackMultiplier: 0
   attackSpeed: 1
-  attackRange: 15
+  attackRange: 10
   isRightHanded: 0

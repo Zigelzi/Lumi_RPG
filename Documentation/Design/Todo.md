@@ -40,7 +40,7 @@ List of issues that can be worked to deliver the desired player experience categ
 1. Town (first level)
    - [ ] XP pickup to reward discovery
 2. Scene management
-   - [ ] Player can only move between scenes when out of combat
+   - [x] Player can only move between scenes when out of combat
  3. Level design
    - [ ] Create shop level (level 2)
    - [ ] Create anger hill (level 3)
