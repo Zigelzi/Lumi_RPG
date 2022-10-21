@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 using RPG.Control;
 using RPG.Movement;
+using RPG.Combat;
 
 namespace RPG.SceneManagement
 {
@@ -25,7 +26,7 @@ namespace RPG.SceneManagement
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            if (IsAbleToEnterPortal(other))
             {
                 StartCoroutine(TransitionToScene());
             }
@@ -43,6 +44,20 @@ namespace RPG.SceneManagement
             if (movement.CanMoveTo(hit.point))
             {
                 player.TryStartMoveAction(hit.point);
+                return true;
+            }
+
+            return false;
+        }
+
+        bool IsAbleToEnterPortal(Collider other)
+        {
+            CombatManager combatManager = other.GetComponent<CombatManager>();
+
+            if (combatManager == null) return false;
+
+            if (other.gameObject.tag == "Player" && !combatManager.IsInCombat())
+            {
                 return true;
             }
 
