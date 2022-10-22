@@ -11,7 +11,8 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Player ability randomness is reduced based on their level
    - [x] Tune the power of fireball
    - [x] Tune the power of heal
-   - [x] Attunement only regens when out of combat
+   - [x] ~~Attunement only regens when out of combat~~
+   - [ ] Attunement regens slowly when moving
 3. Actions are purposeful
    - [x] Actions have independant cooldowns
    - [ ] Player can combine abilites to create powerful attacks or effects
@@ -24,6 +25,8 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Better fireball effect
    - [ ] Better heal effect
    - [ ] Effect to pickups to improve the discoverability
+   - [ ] Feedback when picks up new weapon
+   - [ ] Better feedback and explanation how casting works
 ## Movement
 
 ### World
@@ -43,7 +46,7 @@ List of issues that can be worked to deliver the desired player experience categ
    - [x] Player can only move between scenes when out of combat
  3. Level design
    - [ ] Create shop level (level 2)
-     - [ ] Add talisman to pick up
+     - [x] Add talisman to pick up
      - [ ] Create transition to level 3 after picking up the talisman
    - [ ] Create anger hill (level 3)
    - [ ] Create love bet (level 4)
@@ -70,3 +73,4 @@ List of issues that can be worked to deliver the desired player experience categ
    - [x] Defeating enemy with fireball doesn't grant experience
 2. Saving & scene management
    - [ ] Enemy state isn't loaded correctly when player loads game with existing save
+   - [ ] Level isn't saved correctly when navigating between scenes
