@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFloating: 0
-  floatingSpeed: 2
-  maxDistance: 0.5
+  floatingSpeed: 0.2
+  maxDistance: 1
   destinationRadius: 0.1
 --- !u!1 &6660359778406515104
 GameObject:
