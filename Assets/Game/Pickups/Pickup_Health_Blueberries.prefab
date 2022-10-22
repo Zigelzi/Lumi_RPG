@@ -33,34 +33,6 @@ Transform:
   m_Father: {fileID: 7569678561199633305}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9155062482609057435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6397944489958796189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc803dd980830e44a6b6e5da150cbe8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpConfig: {fileID: 11400000, guid: 351fec51f82ad09448a9b67f60884955, type: 2}
-  onPickup:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3734865581599845702}
-        m_TargetAssemblyTypeName: RPG.SFX.SoundEffect, Assembly-CSharp
-        m_MethodName: PlayPersistantSFX
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &81527534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -422,6 +394,38 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3049323136227312741, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
+      propertyPath: pickUpConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 351fec51f82ad09448a9b67f60884955, type: 2}
+    - target: {fileID: 3049323136227312741, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
+      propertyPath: onPickup.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049323136227312741, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
+      propertyPath: onPickup.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049323136227312741, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
+      propertyPath: onPickup.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3734865581599845702}
+    - target: {fileID: 3049323136227312741, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
+      propertyPath: onPickup.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049323136227312741, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
+      propertyPath: onPickup.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayPersistantSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049323136227312741, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
+      propertyPath: onPickup.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RPG.SFX.SoundEffect, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049323136227312741, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
+      propertyPath: onPickup.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3298862788387789179, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
       propertyPath: m_Size.y
       value: 0.55
@@ -528,11 +532,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
---- !u!1 &6397944489958796189 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3298862788387789181, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}
-  m_PrefabInstance: {fileID: 8434673276331143904}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &885738031704259344 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8739020311233268208, guid: 6ccdc0750c440f74280dc038c4f3868d, type: 3}

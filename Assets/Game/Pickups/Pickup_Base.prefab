@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 3298862788387789180}
   - component: {fileID: 3298862788387789179}
   - component: {fileID: 3298862788387789178}
+  - component: {fileID: 3049323136227312741}
   m_Layer: 0
   m_Name: Pickup_Base
   m_TagString: Untagged
@@ -94,6 +95,22 @@ MonoBehaviour:
   floatingSpeed: 0.2
   maxDistance: 1
   destinationRadius: 0.1
+--- !u!114 &3049323136227312741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3298862788387789181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc803dd980830e44a6b6e5da150cbe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpConfig: {fileID: 0}
+  onPickup:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6660359778406515104
 GameObject:
   m_ObjectHideFlags: 0
