@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f364163e899dc468ad6d20c1017ae8, type: 3}
-  m_Name: Pickup_Weapon_Sword
+  m_Script: {fileID: 11500000, guid: 4adba1b1ecb4f1c4ca6084bfd86b9abb, type: 3}
+  m_Name: Consumption_Respawn_Sword
   m_EditorClassIdentifier: 
-  pickupEffectStrategy: {fileID: 11400000, guid: 71edf240c452efa41976f77e6ef77a99, type: 2}
-  consumptionStrategy: {fileID: 11400000, guid: 62033259fee535b48886b257c1401c7f, type: 2}
+  respawnDuration: 3

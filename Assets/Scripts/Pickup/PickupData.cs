@@ -16,5 +16,12 @@ namespace RPG.Pickup
             this.gameObject = newPickup;
             this.user = newUser;
         }
+
+        public void StartCoroutineOnPickup(IEnumerator coroutine)
+        {
+            if (gameObject == null) return;
+
+            gameObject.GetComponent<MonoBehaviour>().StartCoroutine(coroutine);
+        }
     }
 }

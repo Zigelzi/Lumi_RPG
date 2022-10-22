@@ -1390,7 +1390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8223431757833141067, guid: dc34b73599d699c4894ad5aab9aef9f0, type: 3}
       propertyPath: m_Name
-      value: Pickup_Weapon_Sword_Var
+      value: Pickup_Weapon_Sword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc34b73599d699c4894ad5aab9aef9f0, type: 3}
