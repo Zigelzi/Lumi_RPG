@@ -12,7 +12,7 @@ namespace RPG.Pickup
             if (pickUpConfig == null) return;
             if (!other.CompareTag("Player")) return;
 
-            pickUpConfig.Use(other.gameObject);
+            pickUpConfig.Use(gameObject, other.gameObject);
         }
     }
 }

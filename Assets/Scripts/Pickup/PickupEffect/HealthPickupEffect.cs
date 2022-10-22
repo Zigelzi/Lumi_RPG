@@ -6,7 +6,7 @@ using UnityEngine;
 namespace RPG.Pickup
 {
     [CreateAssetMenu(fileName = "PickupEffect_Health_", menuName = "Pickups/Pickup effects/Health", order = 0)]
-    public class PickupEffectHealth : PickupEffectStrategy
+    public class HealthPickupEffect : PickupEffectStrategy
     {
         [SerializeField] float healAmount = 20f;
 

@@ -7,12 +7,19 @@ namespace RPG.Pickup {
     public class PickupConfig : ScriptableObject
     {
         [SerializeField] PickupEffectStrategy pickupEffectStrategy;
-        public void Use(GameObject user)
+        [SerializeField] ConsumptionStrategy consumptionStrategy;
+        public void Use(GameObject pickup, GameObject user)
         {
-            PickupData data = new PickupData(user);
+            PickupData data = new PickupData(pickup, user);
             if (pickupEffectStrategy == null) return; 
 
-            pickupEffectStrategy.GrantEffect(data);
+            if (pickupEffectStrategy.GrantEffect(data))
+            {
+                if (consumptionStrategy == null) return;
+
+                consumptionStrategy.Consume(data);
+            }
+
         }
     }
 }
