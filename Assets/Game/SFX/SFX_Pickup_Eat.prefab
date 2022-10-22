@@ -141,6 +141,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 8300000, guid: 39f686faea84dcb42bb86bb3eaa30501, type: 3}
-  sfxPrefab: {fileID: 4973621632667296201}
   isRandomized: 0
   isPlayedOnStart: 0

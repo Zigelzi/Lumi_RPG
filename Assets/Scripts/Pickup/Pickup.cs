@@ -4,12 +4,15 @@ using UnityEngine;
 
 using RPG.Control;
 using RPG.Movement;
+using UnityEngine.Events;
 
 namespace RPG.Pickup
 {
     public class Pickup : MonoBehaviour, IRaycastable
     {
         [SerializeField] PickupConfig pickUpConfig;
+
+        public UnityEvent onPickup;
 
         public bool HandleRaycast(PlayerController player, RaycastHit hit)
         {
@@ -34,7 +37,12 @@ namespace RPG.Pickup
             if (pickUpConfig == null) return;
             if (!other.CompareTag("Player")) return;
 
-            pickUpConfig.Use(gameObject, other.gameObject);
+            bool isConsumed = pickUpConfig.TryPickup(gameObject, other.gameObject);
+
+            if (isConsumed)
+            {
+                onPickup?.Invoke();
+            }
         }
     }
 }
