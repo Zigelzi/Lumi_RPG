@@ -2816,7 +2816,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: db96e04f47f6c2a44bc6bb90f93602ec, type: 2}
+  - {fileID: 2100000, guid: 94f4c00a9a5091948bccd678213a7708, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6513,6 +6513,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 1692388800958024349, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1692388801148396257, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6560,6 +6564,10 @@ PrefabInstance:
     - target: {fileID: 1692388801148396262, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
       propertyPath: m_Name
       value: Core
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692388801236939449, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1692388801236939454, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
       propertyPath: m_LocalPosition.x
