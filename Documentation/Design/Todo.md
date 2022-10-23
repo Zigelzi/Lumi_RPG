@@ -24,8 +24,8 @@ List of issues that can be worked to deliver the desired player experience categ
    - [ ] Better level up effect
    - [ ] Better fireball effect
    - [ ] Better heal effect
-   - [ ] Effect to pickups to improve the discoverability
-   - [ ] Feedback when picks up new weapon
+   - [x] Effect to pickups to improve the discoverability
+   - [x] Feedback when picks up new weapon
    - [ ] Better feedback and explanation how casting works
 ## Movement
 

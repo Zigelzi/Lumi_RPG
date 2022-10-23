@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36073ef70b1761245b1b9b202ba90cfa, type: 3}
   m_Name: PickupEffect_Experience_Memory
   m_EditorClassIdentifier: 
-  experienceAmount: 200
+  experienceAmount: 800
