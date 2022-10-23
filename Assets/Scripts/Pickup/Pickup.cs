@@ -10,9 +10,28 @@ namespace RPG.Pickup
 {
     public class Pickup : MonoBehaviour, IRaycastable
     {
+        
         [SerializeField] PickupConfig pickUpConfig;
 
         public UnityEvent onPickup;
+
+        void OnTriggerEnter(Collider other)
+        {
+            
+            PickupData data;
+            bool isConsumed;
+
+            if (pickUpConfig == null) return;
+            if (!other.CompareTag("Player")) return;
+
+            data = new PickupData(gameObject, other.gameObject);
+            isConsumed = pickUpConfig.TryPickup(data);
+
+            if (isConsumed)
+            {
+                onPickup?.Invoke();
+            }
+        }
 
         public bool HandleRaycast(PlayerController player, RaycastHit hit)
         {
@@ -30,19 +49,6 @@ namespace RPG.Pickup
         {
             return CursorType.Interactable;
         }
-
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (pickUpConfig == null) return;
-            if (!other.CompareTag("Player")) return;
-
-            bool isConsumed = pickUpConfig.TryPickup(gameObject, other.gameObject);
-
-            if (isConsumed)
-            {
-                onPickup?.Invoke();
-            }
-        }
+       
     }
 }

@@ -18,6 +18,7 @@ namespace RPG.Pickup
             if (data.User.TryGetComponent<WeaponManager>(out WeaponManager weaponManager))
             {
                 weaponManager.EquipWeapon(weaponConfig);
+                data.Value = 1f;
                 return true;
             }
             return false;

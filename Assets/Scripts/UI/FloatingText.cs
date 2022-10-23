@@ -5,14 +5,14 @@ using TMPro;
 
 namespace RPG.UI
 {
-    public class DamageText : MonoBehaviour
+    public class FloatingText : MonoBehaviour
     {
         Animation textAnimation;
-        TMP_Text damageText;
+        TMP_Text floatingText;
 
         void Awake()
         {
-            damageText = GetComponentInChildren<TMP_Text>();
+            floatingText = GetComponentInChildren<TMP_Text>();
             textAnimation = GetComponent<Animation>();
         }
 
@@ -26,7 +26,12 @@ namespace RPG.UI
 
         public void SetText(float amount)
         {
-            damageText.text = amount.ToString();
+            floatingText.text = amount.ToString();
+        }
+
+        public void SetText(string text)
+        {
+            floatingText.text = text;
         }
     }
 }

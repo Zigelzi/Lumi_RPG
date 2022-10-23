@@ -7,9 +7,12 @@ namespace RPG.Pickup
     {
         GameObject user;
         GameObject gameObject;
+        float value;
 
         public GameObject User { get { return user; } }
         public GameObject GameObject { get { return gameObject; } }
+
+        public float Value { get { return value; } set { this.value = value; } }
 
         public PickupData(GameObject newPickup, GameObject newUser)
         {

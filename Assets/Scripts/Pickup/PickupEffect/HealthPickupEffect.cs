@@ -14,6 +14,7 @@ namespace RPG.Pickup
         {
             if (data.User.TryGetComponent<Health>(out Health health))
             {
+                data.Value = healAmount;
                 return health.AddHealth(healAmount);
             }
             return false;

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f364163e899dc468ad6d20c1017ae8, type: 3}
   m_Name: Pickup_Experience_Memory
   m_EditorClassIdentifier: 
+  pickupName: Experience
   pickupEffectStrategy: {fileID: 11400000, guid: 939794b39c5bf324c987f46bf56911e5, type: 2}
   consumptionStrategy: {fileID: 11400000, guid: c9cc841cb3367034ba075bbae5572bf0, type: 2}
+  floatingTextPrefab: {fileID: 8168394836839941767, guid: 2200f82a2fd921e4e98aa601d86490cd, type: 3}

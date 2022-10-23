@@ -9,7 +9,7 @@ namespace RPG.UI
 {
     public class CombatText : MonoBehaviour
     {
-        [SerializeField] DamageText damageTextPrefab;
+        [SerializeField] FloatingText damageTextPrefab;
 
         Health health;
 
@@ -32,7 +32,7 @@ namespace RPG.UI
         {
             if (damageTextPrefab == null) return;
 
-            DamageText damageTextInstance = Instantiate<DamageText>(damageTextPrefab,
+            FloatingText damageTextInstance = Instantiate<FloatingText>(damageTextPrefab,
                 transform.position, 
                 transform.rotation, 
                 gameObject.transform);

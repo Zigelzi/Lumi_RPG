@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f364163e899dc468ad6d20c1017ae8, type: 3}
   m_Name: Pickup_Weapon_Bow_Homing
   m_EditorClassIdentifier: 
+  pickupName: Bow
   pickupEffectStrategy: {fileID: 11400000, guid: c89e5b61c3f3a1d46880b8381ae078cc, type: 2}
   consumptionStrategy: {fileID: 11400000, guid: 8ac025a39fb83424b966e9bbd1f33d9d, type: 2}
+  floatingTextPrefab: {fileID: 8168394836839941767, guid: 2200f82a2fd921e4e98aa601d86490cd, type: 3}

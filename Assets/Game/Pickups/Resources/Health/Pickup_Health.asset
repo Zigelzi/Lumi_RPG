@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f364163e899dc468ad6d20c1017ae8, type: 3}
   m_Name: Pickup_Health
   m_EditorClassIdentifier: 
+  pickupName: Health
   pickupEffectStrategy: {fileID: 11400000, guid: 857e8a2cad920cc4ca3c1957097315e4, type: 2}
   consumptionStrategy: {fileID: 11400000, guid: 2d22512fe16b10447b38407513c14807, type: 2}
+  floatingTextPrefab: {fileID: 8168394836839941767, guid: 2200f82a2fd921e4e98aa601d86490cd, type: 3}

@@ -15,6 +15,7 @@ namespace RPG.Pickup
             if (data.User.TryGetComponent<Experience>(out Experience experience))
             {
                 experience.AddExperience(experienceAmount);
+                data.Value = experienceAmount;
                 return true;
             }
             return false;
