@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fireball_Add
+  m_Name: Lumi_Mat_VFX_Textures_8x8_Add
   m_Shader: {fileID: -6465566751694194690, guid: c18ad5577b9a253488a010a621945f72, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,10 +20,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_330E31C0:
-        m_Texture: {fileID: 2800000, guid: a73f4d8289859db45b9bce20b5d1a5e8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7ca56a253f467d844850801c311e1be5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_E3925ACE: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 1}
+    - Color_E3925ACE: {r: 11.984314, g: 11.984314, b: 11.984314, a: 1}
   m_BuildTextureStacks: []
