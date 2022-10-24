@@ -4898,7 +4898,6 @@ MonoBehaviour:
   isHoming: 0
   hitEffect: {fileID: 132039519773930989, guid: 4c6c86c8ca598044f849d05bc9460190, type: 3}
   onHitDestroyedObjects: []
-  currentTarget: {fileID: 0}
   onProjectileHit:
     m_PersistentCalls:
       m_Calls: []
@@ -9681,7 +9680,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e92d3681c15cea740859a48191f3c344, type: 2}
-  - {fileID: 2100000, guid: 3c82c63997f5dac4b94d3a3119818f3c, type: 2}
+  - {fileID: 2100000, guid: 1a955b9a801ccba448309521f5b8758c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

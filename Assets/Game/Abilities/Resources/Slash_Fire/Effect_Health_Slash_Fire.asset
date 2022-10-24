@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef84b25049fb8ae43889f2229ab5280c, type: 3}
-  m_Name: Effect_TriggerAnimation_Heal
+  m_Script: {fileID: 11500000, guid: 0cf393a400c3f284a95eec02fdc8a29b, type: 3}
+  m_Name: Effect_Health_Slash_Fire
   m_EditorClassIdentifier: 
-  animationTrigger: 1
+  healthChange: -10

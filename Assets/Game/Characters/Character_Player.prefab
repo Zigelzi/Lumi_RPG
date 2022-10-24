@@ -109,6 +109,8 @@ MonoBehaviour:
     ability: {fileID: 11400000, guid: de99a4af69faa6e4c9e3a6f779bcaa02, type: 2}
   - id: 0
     ability: {fileID: 11400000, guid: d2e2153e15b4e804db73a52225669333, type: 2}
+  - id: 0
+    ability: {fileID: 11400000, guid: 1276b44975967184cb1ebf2d0b541dd6, type: 2}
 --- !u!114 &8957127762956953359
 MonoBehaviour:
   m_ObjectHideFlags: 0

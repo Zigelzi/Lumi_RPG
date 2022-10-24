@@ -36,6 +36,8 @@ namespace RPG.UI
             TMP_Text[] textSlots = GetComponentsInChildren<TMP_Text>();
             for (int i = 0; i < textSlots.Length; i++)
             {
+                if (i >= abilityManager.Abilities.Length) return;
+
                 Ability ability = abilityManager.Abilities[i].ability;
                 string cooldownRemaining = cooldownStore.GetCooldownRemaining(ability).ToString("0.0");
                 textSlots[i].text = $"{i + 1} - {ability.AbilityName} ({cooldownRemaining} / {ability.Cooldown} s CD) - {ability.AttunementCost} A";

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 206bf86d38636f542b528be3a966f306, type: 3}
-  m_Name: Ability_Heal
+  m_Name: Ability_Slash_Fire
   m_EditorClassIdentifier: 
-  abilityName: Regrowth
-  attunementCost: 60
-  cooldown: 5
-  targetingStrategy: {fileID: 11400000, guid: 13af439e97cacb34c9dd08e4c0289a32, type: 2}
+  abilityName: Cinder slash
+  attunementCost: 10
+  cooldown: 2
+  targetingStrategy: {fileID: 11400000, guid: c17ef5c341675024e9244f3890d1a5ab, type: 2}
   filterStrategies: []
   effectStrategies:
-  - {fileID: 11400000, guid: f762ce108071d724f82450ce59a1eab5, type: 2}
-  - {fileID: 11400000, guid: 21bc5af0a4070bd47b22faebc463f460, type: 2}
-  - {fileID: 11400000, guid: 04512495a5cde7b4f9632614b6cadfc3, type: 2}
+  - {fileID: 11400000, guid: 589021d2d4ca52a4f9394302064b9b7b, type: 2}
+  - {fileID: 11400000, guid: c97813706bff8f949ab10fecf57f977c, type: 2}
+  - {fileID: 11400000, guid: d044cd2c82910bc4c986e8cdc3b209e4, type: 2}

@@ -13,7 +13,8 @@ namespace RPG.Abilities
         // List of triggers in characted animator
         public enum AnimationTrigger
         {
-            useOffensiveAbility,
+            useOffensiveMeleeAbility,
+            useOffensiveSpellAbility,
             useBuffAbility
         }
         public override void StartEffect(AbilityData data, Action onEffectFinished)
