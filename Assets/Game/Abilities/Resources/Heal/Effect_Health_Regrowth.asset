@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf393a400c3f284a95eec02fdc8a29b, type: 3}
   m_Name: Effect_Health_Regrowth
   m_EditorClassIdentifier: 
+  isDamaging: 0
   healthChange: 30

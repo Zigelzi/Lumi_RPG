@@ -26,6 +26,8 @@ namespace RPG.Combat
 
         public UnityEvent onAttackHit;
 
+        public GameObject CurrentTarget { get { return currentTarget; } set { currentTarget = value; } }
+
         void Awake()
         {
             actionScheduler = GetComponent<ActionScheduler>();
@@ -80,6 +82,21 @@ namespace RPG.Combat
 
             StopAttackAnimation();
             movement.Cancel();
+        }
+
+        public bool IsInAttackRange()
+        {
+            float distanceFromTarget = Vector3.Distance(
+                transform.position,
+                currentTarget.transform.position
+                );
+
+            if (distanceFromTarget <= currentWeaponConfig.AttackRange)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public bool IsInAttackRange(Transform targetTransform)

@@ -13,7 +13,6 @@ namespace RPG.Abilities
         public override void StartEffect(AbilityData data, Action onEffectFinished)
         {
             data.StartCoroutine(DelayEffects(data, onEffectFinished));
-            onEffectFinished();
         }
 
         IEnumerator DelayEffects(AbilityData data, Action onEffectFinished)

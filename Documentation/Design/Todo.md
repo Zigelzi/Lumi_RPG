@@ -41,7 +41,7 @@ List of issues that can be worked to deliver the desired player experience categ
 
 ### Story & level design
 1. Town (first level)
-   - [ ] XP pickup to reward discovery
+   - [x] XP pickup to reward discovery
 2. Scene management
    - [x] Player can only move between scenes when out of combat
  3. Level design

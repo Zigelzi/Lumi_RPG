@@ -10,12 +10,13 @@ namespace RPG.Abilities
     [CreateAssetMenu(fileName = "Effect_Health_", menuName = "Abilities/Effects/Health", order = 0)]
     public class HealthEffect : EffectStrategy
     {
-        [Tooltip("Negative values deal damage and positive values heal")]
+        [SerializeField] bool isDamaging = true;
         [SerializeField] float healthChange = 10f;
         public override void StartEffect(AbilityData data, Action onEffectFinished)
         {
-            foreach(GameObject target in data.GetTargets())
+            foreach (GameObject target in data.GetTargets())
             {
+                Debug.Log($"{target}");
                 ApplyHealthEffect(data, target);
             }
             onEffectFinished();
@@ -25,10 +26,10 @@ namespace RPG.Abilities
         {
             if (target.TryGetComponent<Health>(out Health targetHealth))
             {
-                if (healthChange < 0)
+                if (isDamaging)
                 {
                     EmitAttackingEvent(data);
-                    targetHealth.TakeDamage(-healthChange, data.GetUser());
+                    targetHealth.TakeDamage(healthChange, data.GetUser());
                 }
                 else
                 {
