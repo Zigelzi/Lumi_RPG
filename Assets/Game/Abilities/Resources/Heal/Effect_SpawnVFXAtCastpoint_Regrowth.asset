@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954acbd8dd5cfd84c87946e532d7c482, type: 3}
   m_Name: Effect_SpawnVFXAtCastpoint_Regrowth
   m_EditorClassIdentifier: 
-  vfx: {fileID: 713461078160927534, guid: 62d1aa1eace9d6c4ab6540c42122cb06, type: 3}
+  vfx: {fileID: 548292841820973404, guid: 5b138eef0679d2c43acad9a7f6217752, type: 3}
