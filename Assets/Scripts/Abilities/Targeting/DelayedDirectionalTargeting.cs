@@ -71,16 +71,17 @@ namespace RPG.Abilities
             }
         }
 
-        IEnumerable<GameObject> GetTargetInMousePosition()
+        List<GameObject> GetTargetInMousePosition()
         {
+            List<GameObject> targets = new List<GameObject>();
             if (Physics.Raycast(PlayerController.GetMouseRay(),
                 out RaycastHit rayHit,
                 Mathf.Infinity,
                 targetableLayers))
             {
-                GameObject target = rayHit.collider.gameObject;
-                yield return target;
+                targets.Add(rayHit.collider.gameObject);
             }
+            return targets;
         }
     }
 }

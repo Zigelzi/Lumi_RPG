@@ -15,6 +15,7 @@ namespace RPG.Abilities
         {
             Attacking attacking = data.GetUser().GetComponent<Attacking>();
 
+
             foreach (GameObject target in data.GetTargets())
             {
                 attacking.CurrentTarget = target;
@@ -32,11 +33,11 @@ namespace RPG.Abilities
                 yield return null;
             }
 
-            // TODO: Figure out why health effect isn't applied correctly.
             foreach (EffectStrategy effect in appliedEffectsOnRange)
             {
                 effect.StartEffect(data, onEffectFinished);
             }
+            yield break;
         }
 
         

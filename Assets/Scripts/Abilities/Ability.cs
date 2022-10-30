@@ -40,6 +40,7 @@ namespace RPG.Abilities
         void TargetAquired(AbilityData data)
         {
             if (data == null) return;
+            
 
             Attunement attunement = data.GetUser().GetComponent<Attunement>();
             CooldownStore cooldownStore = data.GetUser().GetComponent<CooldownStore>();

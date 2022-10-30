@@ -86,6 +86,7 @@ namespace RPG.Combat
 
         public bool IsInAttackRange()
         {
+            if (currentTarget == null) return false;
             float distanceFromTarget = Vector3.Distance(
                 transform.position,
                 currentTarget.transform.position

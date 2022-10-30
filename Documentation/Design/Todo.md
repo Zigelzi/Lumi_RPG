@@ -74,3 +74,4 @@ List of issues that can be worked to deliver the desired player experience categ
 2. Saving & scene management
    - [ ] Enemy state isn't loaded correctly when player loads game with existing save
    - [ ] Level isn't saved correctly when navigating between scenes
+   - [ ] Player can't assign any new action after using melee ability
