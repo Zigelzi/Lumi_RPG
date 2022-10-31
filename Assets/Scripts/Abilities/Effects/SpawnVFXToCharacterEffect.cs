@@ -10,6 +10,8 @@ namespace RPG.Abilities
     public class SpawnVFXToCharacterEffect : EffectStrategy
     {
         [SerializeField] GameObject vfx;
+        [SerializeField] float spawnOffsetAmount;
+        [SerializeField] Quaternion spawnRotationOffset;
         public override void StartEffect(AbilityData data, Action onEffectFinished)
         {
             SpawnVFX(data);
@@ -23,7 +25,10 @@ namespace RPG.Abilities
 
             if (vfx == null) return;
 
-            Instantiate(vfx, castPoint.position, castPoint.rotation, user.transform);
+            Vector3 spawnOffset = castPoint.forward * spawnOffsetAmount;
+            Vector3 spawnPosition = castPoint.transform.position + spawnOffset;
+            Quaternion spawnRotation = castPoint.rotation * spawnRotationOffset;
+            Instantiate(vfx, spawnPosition,spawnRotation , user.transform);
         }
     }
 }

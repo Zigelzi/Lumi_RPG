@@ -74,4 +74,14 @@ List of issues that can be worked to deliver the desired player experience categ
 2. Saving & scene management
    - [ ] Enemy state isn't loaded correctly when player loads game with existing save
    - [ ] Level isn't saved correctly when navigating between scenes
+3. Melee ability
    - [ ] Player can't assign any new action after using melee ability
+     - Expected: Player can perform new action which will cancel the attack action
+   - [ ] Attunement is consumed even when player doesn't acquire target
+     - Expected: Attunement is consumed when player uses the ability
+   - [ ] Attunement is consumed immediately when ability is casted
+     - Expected: Consumed when ability is used
+   - [ ] Health effect is applied immediately
+     - Expected: Applied in sync with VFX
+   - [ ] VFX is spawned in incorrect position and rotation
+     - Expected: VFX is spawned horizontally in front of player
