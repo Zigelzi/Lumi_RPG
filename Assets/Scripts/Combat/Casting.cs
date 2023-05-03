@@ -58,7 +58,7 @@ namespace RPG.Combat
             if (IsAbleToUseCurrentAbility())
             {
                 actionScheduler.StartAction(this);
-                currentAbility.Use(gameObject);                    
+                currentAbility.Use(gameObject);
             }
         }
 

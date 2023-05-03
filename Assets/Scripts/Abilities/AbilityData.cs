@@ -8,14 +8,16 @@ namespace RPG.Abilities
 {
     public class AbilityData
     {
+        float castRange;
         GameObject user;
         Transform castPointProjectile;
         Transform castPointCharacter;
         IEnumerable<GameObject> targets;
 
 
-        public AbilityData(GameObject newUser)
+        public AbilityData(float newCastRange, GameObject newUser)
         {
+            this.castRange = newCastRange;
             this.user = newUser;
             this.castPointProjectile = newUser.GetComponentInChildren<CastPointProjectile>().transform;
             this.castPointCharacter = newUser.GetComponentInChildren<CastPointCharacter>().transform;
@@ -29,6 +31,11 @@ namespace RPG.Abilities
         public IEnumerable<GameObject> GetTargets()
         {
             return this.targets;
+        }
+
+        public float GetCastRange()
+        {
+            return this.castRange;
         }
 
         public GameObject GetUser()

@@ -31,17 +31,13 @@ namespace RPG.Abilities
         {
             GameObject user = data.GetUser();
             PlayerController playerController = user.GetComponent<PlayerController>();
-            CursorManager cursorManager = user.GetComponent<CursorManager>();
             Casting casting = user.GetComponent<Casting>();
 
             casting.IsTargeting = true;
             while (casting.IsTargeting)
             {
                 FaceTowardsCursor(user);
-                if (cursorManager != null)
-                {
-                    cursorManager.SetCursor(CursorType.Targeting);
-                }
+                SetCursorType(data);
 
                 if (playerController.LeftButtonPressed)
                 {
@@ -50,6 +46,7 @@ namespace RPG.Abilities
                     onTargetingFinished();
                     yield break;
                 }
+
                 // Run in the beginning of every frame
                 yield return null;
             }
@@ -69,6 +66,38 @@ namespace RPG.Abilities
                 
                 user.transform.rotation = lookRotation;
             }
+        }
+
+        void SetCursorType(AbilityData data)
+        {
+            CursorManager cursorManager = data.GetUser().GetComponent<CursorManager>();
+            if (cursorManager != null)
+            {
+                if (IsInCastRange(data))
+                {
+                    cursorManager.SetCursor(CursorType.Targeting);
+                }
+                cursorManager.SetCursor(CursorType.Unclickable);
+            }
+
+        }
+
+        bool IsInCastRange(AbilityData data)
+        {
+            GameObject user = data.GetUser();
+            if (Physics.Raycast(PlayerController.GetMouseRay(),
+                out RaycastHit rayHit,
+                Mathf.Infinity,
+                targetableLayers))
+            {
+
+                if (Vector3.Distance(rayHit.point, user.transform.position) <= data.GetCastRange())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         List<GameObject> GetTargetInMousePosition()

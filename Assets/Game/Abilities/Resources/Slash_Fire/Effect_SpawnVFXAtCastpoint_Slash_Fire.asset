@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Effect_SpawnVFXAtCastpoint_Slash_Fire
   m_EditorClassIdentifier: 
   vfx: {fileID: 8936078450473999131, guid: 1afae75315d74964e90d0f85c68b31f0, type: 3}
-  spawnOffset: {x: 0, y: 0, z: 0.6}
+  spawnOffsetAmount: 0.5
   spawnRotationOffset: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}

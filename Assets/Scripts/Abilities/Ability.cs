@@ -12,6 +12,7 @@ namespace RPG.Abilities
         [SerializeField] string abilityName;
         [SerializeField] float attunementCost = 5f;
         [SerializeField] float cooldown = 2f;
+        [SerializeField] float castRange = 2f;
         [SerializeField] TargetingStrategy targetingStrategy;
         [SerializeField] FilterStrategy[] filterStrategies;
         [SerializeField] EffectStrategy[] effectStrategies;
@@ -22,7 +23,7 @@ namespace RPG.Abilities
 
         public void Use(GameObject user)
         {
-            AbilityData data = new AbilityData(user);
+            AbilityData data = new AbilityData(castRange, user);
             if (targetingStrategy == null) return ;
 
             // Use lambda to provide TargetAquired context about it's user
@@ -41,7 +42,8 @@ namespace RPG.Abilities
         {
             if (data == null) return;
             
-
+            // TODO: Figure out how to cancel using the ability if player targets further than the
+            // cast range of the ability
             Attunement attunement = data.GetUser().GetComponent<Attunement>();
             CooldownStore cooldownStore = data.GetUser().GetComponent<CooldownStore>();
 
