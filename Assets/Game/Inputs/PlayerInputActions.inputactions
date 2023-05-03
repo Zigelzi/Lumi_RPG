@@ -163,6 +163,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "8655b024-ff47-4241-a55a-b447a6a485e8",
+            "actions": [
+                {
+                    "name": "ToggleTraits",
+                    "type": "Button",
+                    "id": "319029e3-733a-4414-a58d-89927fbc990d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4d0549ca-5ae3-42ce-94e1-710ced0b99cc",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleTraits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

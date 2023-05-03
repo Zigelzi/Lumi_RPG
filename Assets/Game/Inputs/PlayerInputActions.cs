@@ -176,6 +176,33 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""8655b024-ff47-4241-a55a-b447a6a485e8"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleTraits"",
+                    ""type"": ""Button"",
+                    ""id"": ""319029e3-733a-4414-a58d-89927fbc990d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4d0549ca-5ae3-42ce-94e1-710ced0b99cc"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleTraits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -189,6 +216,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_DeleteSave = m_Player.FindAction("DeleteSave", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_ToggleTraits = m_UI.FindAction("ToggleTraits", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +345,39 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_ToggleTraits;
+    public struct UIActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleTraits => m_Wrapper.m_UI_ToggleTraits;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @ToggleTraits.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTraits;
+                @ToggleTraits.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTraits;
+                @ToggleTraits.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTraits;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ToggleTraits.started += instance.OnToggleTraits;
+                @ToggleTraits.performed += instance.OnToggleTraits;
+                @ToggleTraits.canceled += instance.OnToggleTraits;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -324,5 +387,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnDeleteSave(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnToggleTraits(InputAction.CallbackContext context);
     }
 }
