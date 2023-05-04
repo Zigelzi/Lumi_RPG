@@ -43,6 +43,11 @@ namespace RPG.UI
             _toggledElement.SetActive(!_toggledElement.activeSelf);
         }
 
+        public void Toggle()
+        {
+            _toggledElement.SetActive(!_toggledElement.activeSelf);
+        }
+
     }
 
 }
