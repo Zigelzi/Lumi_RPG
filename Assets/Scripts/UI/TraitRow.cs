@@ -4,18 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using RPG.Stats;
+
 namespace RPG.UI
 {
     public class TraitRow : MonoBehaviour
     {
-        [SerializeField] TMP_Text _traitText;
         [SerializeField] Button _minusButton;
         [SerializeField] Button _plusButton;
+        [SerializeField] Trait _traitType;
+        [SerializeField] TMP_Text _traitText;
+        [SerializeField] TMP_Text _traitTitle;
         int _unassignedPoints = 0;
 
         void Awake()
         {
-            _traitText.text = _unassignedPoints.ToString();    
+            _traitText.text = _unassignedPoints.ToString();
+            _traitTitle.text = _traitType.ToString();
         }
 
         void OnEnable()

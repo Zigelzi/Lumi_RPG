@@ -573,9 +573,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1a2751da4d5d246a03d131bf0d238a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _traitText: {fileID: 1185239054319537304}
   _minusButton: {fileID: 5088628667725174124}
   _plusButton: {fileID: 5654759924526731805}
+  _traitType: 0
+  _traitText: {fileID: 1185239054319537304}
+  _traitTitle: {fileID: 3175485505034588304}
 --- !u!1 &6475739570467684458
 GameObject:
   m_ObjectHideFlags: 0

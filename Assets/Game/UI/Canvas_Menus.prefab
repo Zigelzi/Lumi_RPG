@@ -1138,6 +1138,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7980002902607521684}
     m_Modifications:
+    - target: {fileID: 131310548151148683, guid: 37b813f03758975439a33479b2182e90, type: 3}
+      propertyPath: _traitType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3175485505034588304, guid: 37b813f03758975439a33479b2182e90, type: 3}
       propertyPath: m_text
       value: Agility
@@ -1244,6 +1248,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7980002902607521684}
     m_Modifications:
+    - target: {fileID: 131310548151148683, guid: 37b813f03758975439a33479b2182e90, type: 3}
+      propertyPath: _traitType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3175485505034588304, guid: 37b813f03758975439a33479b2182e90, type: 3}
       propertyPath: m_text
       value: Intelligence
