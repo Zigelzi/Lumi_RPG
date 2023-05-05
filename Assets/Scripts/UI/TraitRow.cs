@@ -15,11 +15,13 @@ namespace RPG.UI
         [SerializeField] Trait _traitType;
         [SerializeField] TMP_Text _traitText;
         [SerializeField] TMP_Text _traitTitle;
-        int _unassignedPoints = 0;
+        int _assignedPoints = 0;
+        TraitStore _traitStore;
 
         void Awake()
         {
-            _traitText.text = _unassignedPoints.ToString();
+            _traitStore = FindObjectOfType<TraitStore>();
+            _traitText.text = _assignedPoints.ToString();
             _traitTitle.text = _traitType.ToString();
         }
 
@@ -32,7 +34,8 @@ namespace RPG.UI
 
         void Update()
         {
-            _minusButton.interactable = _unassignedPoints > 0;    
+            _minusButton.interactable = _assignedPoints > 0;
+            _plusButton.interactable = _traitStore.AvailablePoints > 0;
         }
 
         void OnDisable()
@@ -45,10 +48,15 @@ namespace RPG.UI
 
         void Allocate(int points)
         {
-            if (points < 0 && _unassignedPoints <= 0) return;
+            if (points < 0 && _assignedPoints <= 0) return;
+            if (points > 0 && _traitStore.AvailablePoints <= 0) return;
 
-            _unassignedPoints += points;
-            _traitText.text = _unassignedPoints.ToString();
+            _assignedPoints += points;
+
+            // Positive numbers consume available points
+            // and negative numbers increase the available points
+            _traitStore.UpdatePoints(-points); 
+            _traitText.text = _assignedPoints.ToString();
         }
 
         void DecrementAllocation() => Allocate(-1);
