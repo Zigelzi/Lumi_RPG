@@ -11,14 +11,14 @@ namespace RPG.Stats
         // TODO: Player can GAIN X trait points when leveling up
         // TODO: Player can COMMIT points to increase the traits permanently
         // TODO: Player can increase their stats when traits are committed
-        [SerializeField] int _availablePoints = 5;
+        [SerializeField] int _unassignedPoints = 5;
 
         Dictionary<Trait, int> _assignedTraits = new Dictionary<Trait, int>();
         Dictionary<Trait, int> _stagedTraits = new Dictionary<Trait, int>();
 
         public UnityEvent onTraitAssigned;
 
-        public int AvailablePoints { get { return _availablePoints; } }
+        public int UnassignedPoints { get { return _unassignedPoints; } }
 
         public int GetPoints(Trait trait)
         {
@@ -28,22 +28,20 @@ namespace RPG.Stats
         public void Assign(Trait trait, int amount)
         {
 
-            if (_assignedTraits.ContainsKey(trait))
-            {
-                if (_assignedTraits[trait] + amount < 0) return;
+            if (!CanAssignPoints(trait, amount)) return;
 
-                _assignedTraits[trait] += amount;
-            }
-            else
-            {
-                _assignedTraits.Add(trait, amount);
-            }
-
-            _availablePoints += -amount;
+            _assignedTraits[trait] = GetPoints(trait) + amount;
+            _unassignedPoints -= amount;
             onTraitAssigned?.Invoke();
         }
 
+        public bool CanAssignPoints(Trait trait,int amount)
+        {
+            if (GetPoints(trait) + amount < 0) return false;
+            if (_unassignedPoints < amount) return false;
 
+            return true;
+        }
     }
 
 }

@@ -19,13 +19,13 @@ namespace RPG.UI
 
         void Awake()
         {
-            _traitStore = FindObjectOfType<TraitStore>();
-            
             _traitTitle.text = _traitType.ToString();
         }
 
         void Start()
         {
+            _traitStore = GameObject.FindGameObjectWithTag("Player").GetComponent<TraitStore>();
+
             if (_traitStore == null) return;
 
             _traitCurrentValue.text = _traitStore.GetPoints(_traitType).ToString();
@@ -40,8 +40,8 @@ namespace RPG.UI
 
         void Update()
         {
-            _minusButton.interactable = _traitStore.GetPoints(_traitType) > 0;
-            _plusButton.interactable = _traitStore.AvailablePoints > 0;
+            _minusButton.interactable = _traitStore.CanAssignPoints(_traitType, -1);
+            _plusButton.interactable = _traitStore.CanAssignPoints(_traitType, 1);
         }
 
         void OnDisable()
@@ -54,7 +54,6 @@ namespace RPG.UI
 
         void Allocate(int points)
         {
-            if (points > 0 && _traitStore.AvailablePoints <= 0) return;
             _traitStore.Assign(_traitType, points);
             _traitCurrentValue.text = _traitStore.GetPoints(_traitType).ToString();
         }

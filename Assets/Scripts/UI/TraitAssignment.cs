@@ -24,7 +24,7 @@ namespace RPG.UI
         void Start()
         {
             if (_traitStore == null) return;
-            _unassignedTraitsText.text = _traitStore.AvailablePoints.ToString();
+            _unassignedTraitsText.text = _traitStore.UnassignedPoints.ToString();
         }
 
         void OnEnable()
@@ -49,7 +49,7 @@ namespace RPG.UI
         {
             if (_unassignedTraitsText == null) return;
 
-            _unassignedTraitsText.text = _traitStore.AvailablePoints.ToString();
+            _unassignedTraitsText.text = _traitStore.UnassignedPoints.ToString();
         }
 
         void AssignTraits()
