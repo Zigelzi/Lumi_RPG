@@ -1014,6 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unassignedTraitsText: {fileID: 7790994232324566635}
+  _assignTraitsButton: {fileID: 241370919762802620}
 --- !u!1 &8267457774822093789
 GameObject:
   m_ObjectHideFlags: 0

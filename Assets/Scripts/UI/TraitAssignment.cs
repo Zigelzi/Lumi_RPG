@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 
 using RPG.Stats;
+using UnityEngine.UI;
 
 namespace RPG.UI
 {
@@ -12,24 +13,36 @@ namespace RPG.UI
         // Player can view how many unassigned points they have
         // When available traits update, update  the trait text content
         [SerializeField] TMP_Text _unassignedTraitsText;
+        [SerializeField] Button _assignTraitsButton;
         TraitStore _traitStore;
 
         void Awake()
         {
             _traitStore = FindObjectOfType<TraitStore>();
+        }
 
+        void Start()
+        {
             if (_traitStore == null) return;
             _unassignedTraitsText.text = _traitStore.AvailablePoints.ToString();
         }
 
         void OnEnable()
         {
-            _traitStore.onTraitUpdate.AddListener(UpdateUnassignedPoints);
+            if (_traitStore == null) return;
+            _traitStore.onTraitAssigned.AddListener(UpdateUnassignedPoints);
+
+            if (_assignTraitsButton == null) return;
+            _assignTraitsButton.onClick.AddListener(AssignTraits);
         }
 
         void OnDisable()
         {
-            _traitStore.onTraitUpdate.RemoveListener(UpdateUnassignedPoints);
+            if (_traitStore == null) return;
+            _traitStore.onTraitAssigned.RemoveListener(UpdateUnassignedPoints);
+
+            if (_assignTraitsButton == null) return;
+            _assignTraitsButton.onClick.AddListener(AssignTraits);
         }
 
         void UpdateUnassignedPoints()
@@ -37,6 +50,10 @@ namespace RPG.UI
             if (_unassignedTraitsText == null) return;
 
             _unassignedTraitsText.text = _traitStore.AvailablePoints.ToString();
+        }
+
+        void AssignTraits()
+        {
         }
     }
 }

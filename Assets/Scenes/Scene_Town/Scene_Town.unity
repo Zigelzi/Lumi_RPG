@@ -6673,6 +6673,10 @@ PrefabInstance:
       propertyPath: abilities.Array.data[1].abilityConfig
       value: 
       objectReference: {fileID: 11400000, guid: d2e2153e15b4e804db73a52225669333, type: 2}
+    - target: {fileID: 8953538259119117675, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: _availablePoints
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
 --- !u!1001 &2380250600612902088
