@@ -55,7 +55,7 @@ namespace RPG.UI
         void Allocate(int points)
         {
             _traitStore.Assign(_traitType, points);
-            _traitCurrentValue.text = _traitStore.GetPoints(_traitType).ToString();
+            _traitCurrentValue.text = _traitStore.GetProposedPoints(_traitType).ToString();
         }
 
         void DecrementAllocation() => Allocate(-1);

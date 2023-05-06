@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 4831507093133529586}
   - component: {fileID: 241370919762802620}
   m_Layer: 5
-  m_Name: Button_Assign
+  m_Name: Button_Commit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unassignedTraitsText: {fileID: 7790994232324566635}
-  _assignTraitsButton: {fileID: 241370919762802620}
+  _commitTraitsButton: {fileID: 241370919762802620}
 --- !u!1 &8267457774822093789
 GameObject:
   m_ObjectHideFlags: 0

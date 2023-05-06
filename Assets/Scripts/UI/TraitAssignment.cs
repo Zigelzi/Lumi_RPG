@@ -13,27 +13,23 @@ namespace RPG.UI
         // Player can view how many unassigned points they have
         // When available traits update, update  the trait text content
         [SerializeField] TMP_Text _unassignedTraitsText;
-        [SerializeField] Button _assignTraitsButton;
+        [SerializeField] Button _commitTraitsButton;
         TraitStore _traitStore;
-
-        void Awake()
-        {
-            _traitStore = FindObjectOfType<TraitStore>();
-        }
 
         void Start()
         {
+            _traitStore = GameObject.FindGameObjectWithTag("Player").GetComponent<TraitStore>();
             if (_traitStore == null) return;
             _unassignedTraitsText.text = _traitStore.UnassignedPoints.ToString();
+            _traitStore.onTraitAssigned.AddListener(UpdateUnassignedPoints);
+
+            if (_commitTraitsButton == null) return;
+            _commitTraitsButton.onClick.AddListener(_traitStore.Commit);
         }
 
         void OnEnable()
         {
-            if (_traitStore == null) return;
-            _traitStore.onTraitAssigned.AddListener(UpdateUnassignedPoints);
-
-            if (_assignTraitsButton == null) return;
-            _assignTraitsButton.onClick.AddListener(AssignTraits);
+            
         }
 
         void OnDisable()
@@ -41,8 +37,8 @@ namespace RPG.UI
             if (_traitStore == null) return;
             _traitStore.onTraitAssigned.RemoveListener(UpdateUnassignedPoints);
 
-            if (_assignTraitsButton == null) return;
-            _assignTraitsButton.onClick.AddListener(AssignTraits);
+            if (_commitTraitsButton == null) return;
+            _commitTraitsButton.onClick.RemoveListener(_traitStore.Commit);
         }
 
         void UpdateUnassignedPoints()
@@ -50,10 +46,6 @@ namespace RPG.UI
             if (_unassignedTraitsText == null) return;
 
             _unassignedTraitsText.text = _traitStore.UnassignedPoints.ToString();
-        }
-
-        void AssignTraits()
-        {
         }
     }
 }

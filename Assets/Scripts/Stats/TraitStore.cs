@@ -20,9 +20,19 @@ namespace RPG.Stats
 
         public int UnassignedPoints { get { return _unassignedPoints; } }
 
+        public int GetProposedPoints(Trait trait)
+        {
+            return GetPoints(trait) + GetStagedPoints(trait);
+        }
+
         public int GetPoints(Trait trait)
         {
             return _assignedTraits.ContainsKey(trait) ? _assignedTraits[trait] : 0;
+        }
+
+        public int GetStagedPoints(Trait trait)
+        {
+            return _stagedTraits.ContainsKey(trait) ? _stagedTraits[trait] : 0;
         }
 
         public void Assign(Trait trait, int amount)
@@ -30,17 +40,27 @@ namespace RPG.Stats
 
             if (!CanAssignPoints(trait, amount)) return;
 
-            _assignedTraits[trait] = GetPoints(trait) + amount;
+            _stagedTraits[trait] = GetStagedPoints(trait) + amount;
             _unassignedPoints -= amount;
             onTraitAssigned?.Invoke();
         }
 
         public bool CanAssignPoints(Trait trait,int amount)
         {
-            if (GetPoints(trait) + amount < 0) return false;
+            if (GetStagedPoints(trait) + amount < 0) return false;
             if (_unassignedPoints < amount) return false;
 
             return true;
+        }
+
+        public void Commit()
+        {
+            foreach(Trait trait in _stagedTraits.Keys)
+            {
+                _assignedTraits[trait] = GetProposedPoints(trait);
+            }
+
+            _stagedTraits.Clear();
         }
     }
 
