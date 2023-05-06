@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Stats
 {
@@ -12,6 +13,8 @@ namespace RPG.Stats
         // TODO: Player can increase their stats when traits are committed
         [SerializeField] int _availablePoints = 0;
 
+        public UnityEvent onTraitUpdate;
+
         public int AvailablePoints { get { return _availablePoints; } }
 
         public void UpdatePoints(int amount)
@@ -19,6 +22,7 @@ namespace RPG.Stats
             if (_availablePoints + amount < 0) return;
 
             _availablePoints += amount;
+            onTraitUpdate?.Invoke();
         }
     }
 

@@ -960,6 +960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3098302298763464661}
   - component: {fileID: 763242214178397857}
+  - component: {fileID: 568665391253115448}
   m_Layer: 5
   m_Name: UI_Traits
   m_TagString: Untagged
@@ -1000,6 +1001,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toggledElement: {fileID: 2467352866137775640}
+--- !u!114 &568665391253115448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5573298501506435053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b7ee896f7cec5459a1b51222ee20c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unassignedTraitsText: {fileID: 7790994232324566635}
 --- !u!1 &8267457774822093789
 GameObject:
   m_ObjectHideFlags: 0
