@@ -35,8 +35,6 @@ namespace RPG.Stats
             _unassignedPoints = GetUnassignedPoints();
         }
 
-        
-
         void OnDisable()
         {
             _baseStats.onLevelChange -= HandleLevelChange;
@@ -63,16 +61,21 @@ namespace RPG.Stats
             if (!CanAssignPoints(trait, amount)) return;
 
             _stagedTraits[trait] = GetStagedPoints(trait) + amount;
-            _unassignedPoints -= amount;
+            _unassignedPoints = GetUnassignedPoints();
             onTraitAssigned?.Invoke();
         }
 
         public bool CanAssignPoints(Trait trait,int amount)
         {
             if (GetStagedPoints(trait) + amount < 0) return false;
-            if (_unassignedPoints < amount) return false;
+            if (GetUnassignedPoints() < amount) return false;
 
             return true;
+        }
+
+        public int GetAssignablePoints()
+        {
+            return (int)GetComponent<BaseStats>().GetStat(Stat.TotalTraitPoints);
         }
 
         public void Commit()
@@ -83,6 +86,7 @@ namespace RPG.Stats
             }
 
             _stagedTraits.Clear();
+            onTraitAssigned?.Invoke();
         }
 
         void HandleLevelChange(int newLevel)
@@ -95,17 +99,23 @@ namespace RPG.Stats
         {
             if (_baseStats == null) return 0;
 
-            return (int)_baseStats.GetStat(Stat.TotalTraitPoints) - GetTotalAssignedPoints();
+            return GetAssignablePoints() - GetTotalProposedPoints();
         }
 
-        int GetTotalAssignedPoints()
+        int GetTotalProposedPoints()
         {
             int totalPoints = 0;
 
-            foreach (Trait trait in _assignedTraits.Keys)
+            foreach (int assignedPoints in _assignedTraits.Values)
             {
-                totalPoints += GetPoints(trait);
+                totalPoints += assignedPoints;
             }
+
+            foreach (int stagedPoints in _stagedTraits.Keys)
+            {
+                totalPoints += stagedPoints;
+            }
+
 
             return totalPoints;
         }
