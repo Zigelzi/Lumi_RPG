@@ -8,17 +8,39 @@ namespace RPG.Stats
 {
     public class TraitStore : MonoBehaviour
     {
-        // TODO: Player can GAIN X trait points when leveling up
-        // TODO: Player can COMMIT points to increase the traits permanently
         // TODO: Player can increase their stats when traits are committed
-        [SerializeField] int _unassignedPoints = 5;
+        [SerializeField] int _unassignedPoints = 0;
 
         Dictionary<Trait, int> _assignedTraits = new Dictionary<Trait, int>();
         Dictionary<Trait, int> _stagedTraits = new Dictionary<Trait, int>();
 
+        BaseStats _baseStats;
+
         public UnityEvent onTraitAssigned;
 
         public int UnassignedPoints { get { return _unassignedPoints; } }
+
+        void Awake()
+        {
+            _baseStats = GetComponent<BaseStats>();
+        }
+
+        void OnEnable()
+        {
+            _baseStats.onLevelChange += HandleLevelChange;
+        }
+
+        void Start()
+        {
+            _unassignedPoints = GetUnassignedPoints();
+        }
+
+        
+
+        void OnDisable()
+        {
+            _baseStats.onLevelChange -= HandleLevelChange;
+        }
 
         public int GetProposedPoints(Trait trait)
         {
@@ -62,6 +84,32 @@ namespace RPG.Stats
 
             _stagedTraits.Clear();
         }
+
+        void HandleLevelChange(int newLevel)
+        {
+            _unassignedPoints = GetUnassignedPoints();
+            onTraitAssigned.Invoke();
+        }
+
+        int GetUnassignedPoints()
+        {
+            if (_baseStats == null) return 0;
+
+            return (int)_baseStats.GetStat(Stat.TotalTraitPoints) - GetTotalAssignedPoints();
+        }
+
+        int GetTotalAssignedPoints()
+        {
+            int totalPoints = 0;
+
+            foreach (Trait trait in _assignedTraits.Keys)
+            {
+                totalPoints += GetPoints(trait);
+            }
+
+            return totalPoints;
+        }
+
     }
 
 }

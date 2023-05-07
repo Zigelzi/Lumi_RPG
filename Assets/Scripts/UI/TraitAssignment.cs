@@ -27,11 +27,6 @@ namespace RPG.UI
             _commitTraitsButton.onClick.AddListener(_traitStore.Commit);
         }
 
-        void OnEnable()
-        {
-            
-        }
-
         void OnDisable()
         {
             if (_traitStore == null) return;

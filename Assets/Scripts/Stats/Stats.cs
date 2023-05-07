@@ -5,6 +5,7 @@
         ExperienceReward,
         ExperienceRequirement,
         Damage,
-        Attunement
+        Attunement,
+        TotalTraitPoints
     }
 }
