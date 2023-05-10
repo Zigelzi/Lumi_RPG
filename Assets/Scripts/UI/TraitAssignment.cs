@@ -10,21 +10,20 @@ namespace RPG.UI
 {
     public class TraitAssignment : MonoBehaviour
     {
-        // Player can view how many unassigned points they have
-        // When available traits update, update  the trait text content
         [SerializeField] TMP_Text _unassignedTraitsText;
         [SerializeField] Button _commitTraitsButton;
         TraitStore _traitStore;
 
-        void Start()
+        void Awake()
         {
             _traitStore = GameObject.FindGameObjectWithTag("Player").GetComponent<TraitStore>();
-            if (_traitStore == null) return;
-            _unassignedTraitsText.text = _traitStore.UnassignedPoints.ToString();
-            _traitStore.onTraitAssigned.AddListener(UpdateUnassignedPoints);
+        }
 
-            // FIX: Unassigned points are not initialised correctly in the beginning.
-            // Require assigning points to update.
+        void Start()
+        {
+            if (_traitStore == null) return;
+            _traitStore.onTraitAssigned.AddListener(UpdateUnassignedPoints);
+            _unassignedTraitsText.text = _traitStore.UnassignedPoints.ToString();
 
             if (_commitTraitsButton == null) return;
             _commitTraitsButton.onClick.AddListener(_traitStore.Commit);

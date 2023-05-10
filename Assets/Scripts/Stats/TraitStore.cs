@@ -33,6 +33,7 @@ namespace RPG.Stats
         void Start()
         {
             _unassignedPoints = GetUnassignedPoints();
+            onTraitAssigned?.Invoke();
         }
 
         void OnDisable()
