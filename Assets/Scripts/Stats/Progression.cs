@@ -19,7 +19,8 @@ namespace RPG.Stats
             {
                 float[] levels = characterProgressions[characterClass][stat];
 
-                if (levels.Length < level) return 0;
+                if (levels.Length == 0) return 0;
+                if (levels.Length < level) return levels[levels.Length - 1];
 
                 return levels[level - 1];
             }

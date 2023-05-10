@@ -23,6 +23,9 @@ namespace RPG.UI
             _unassignedTraitsText.text = _traitStore.UnassignedPoints.ToString();
             _traitStore.onTraitAssigned.AddListener(UpdateUnassignedPoints);
 
+            // FIX: Unassigned points are not initialised correctly in the beginning.
+            // Require assigning points to update.
+
             if (_commitTraitsButton == null) return;
             _commitTraitsButton.onClick.AddListener(_traitStore.Commit);
         }
