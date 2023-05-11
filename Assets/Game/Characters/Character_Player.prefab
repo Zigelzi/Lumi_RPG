@@ -111,18 +111,6 @@ MonoBehaviour:
     ability: {fileID: 11400000, guid: d2e2153e15b4e804db73a52225669333, type: 2}
   - id: 0
     ability: {fileID: 11400000, guid: 1276b44975967184cb1ebf2d0b541dd6, type: 2}
---- !u!114 &8957127762956953359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911502055413707231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2faf9893851a33e4e847cbf8b8442f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7727553805861154188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +121,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04a7136b1995a41448415e66031f6cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unassignedPoints: 0
+  _bonusConfig:
+  - trait: 0
+    stat: 3
+    additiveBonusPerPoint: 5
+    percentageBonusPerPoint: 0
+  - trait: 1
+    stat: 4
+    additiveBonusPerPoint: 20
+    percentageBonusPerPoint: 0
+  - trait: 2
+    stat: 0
+    additiveBonusPerPoint: 10
+    percentageBonusPerPoint: 10
+  onTraitAssigned:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8957127762956953359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8911502055413707231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2faf9893851a33e4e847cbf8b8442f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4988064121868118085

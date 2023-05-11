@@ -6677,6 +6677,30 @@ PrefabInstance:
       propertyPath: _availablePoints
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8953538259119117675, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: _bonusConfig.Array.data[0].stat
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953538259119117675, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: _bonusConfig.Array.data[1].stat
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953538259119117675, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: _bonusConfig.Array.data[0].additiveBonusPerPoint
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953538259119117675, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: _bonusConfig.Array.data[1].additiveBonusPerPoint
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953538259119117675, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: _bonusConfig.Array.data[2].additiveBonusPerPoint
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953538259119117675, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
+      propertyPath: _bonusConfig.Array.data[2].percentageBonusPerPoint
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff30e8d0695a1240bba262fdec1722f, type: 3}
 --- !u!1001 &2380250600612902088
