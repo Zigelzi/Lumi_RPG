@@ -40,8 +40,7 @@ namespace RPG.UI
 
         void Update()
         {
-            _minusButton.interactable = _traitStore.CanAssignPoints(_traitType, -1);
-            _plusButton.interactable = _traitStore.CanAssignPoints(_traitType, 1);
+            UpdateButtonState();
         }
 
         void OnDisable()
@@ -56,6 +55,12 @@ namespace RPG.UI
         {
             _traitStore.Assign(_traitType, points);
             _traitCurrentValue.text = _traitStore.GetProposedPoints(_traitType).ToString();
+        }
+
+        void UpdateButtonState()
+        {
+            _minusButton.interactable = _traitStore.CanAssignPoints(_traitType, -1);
+            _plusButton.interactable = _traitStore.CanAssignPoints(_traitType, 1);
         }
 
         void DecrementAllocation() => Allocate(-1);

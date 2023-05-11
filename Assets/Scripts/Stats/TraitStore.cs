@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace RPG.Stats
 {
-    public class TraitStore : MonoBehaviour
+    public class TraitStore : MonoBehaviour, IStatModifier
     {
         // TODO: Player can increase their stats when traits are committed
         [SerializeField] int _unassignedPoints = 0;
@@ -90,6 +90,16 @@ namespace RPG.Stats
             onTraitAssigned?.Invoke();
         }
 
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
+        {
+            yield return 0;
+        }
+
+        public IEnumerable<float> GetPercentageModifier(Stat stat)
+        {
+            yield return 0;
+        }
+
         void HandleLevelChange(int newLevel)
         {
             _unassignedPoints = GetUnassignedPoints();
@@ -112,7 +122,7 @@ namespace RPG.Stats
                 totalPoints += assignedPoints;
             }
 
-            foreach (int stagedPoints in _stagedTraits.Keys)
+            foreach (int stagedPoints in _stagedTraits.Values)
             {
                 totalPoints += stagedPoints;
             }
@@ -120,7 +130,6 @@ namespace RPG.Stats
 
             return totalPoints;
         }
-
     }
 
 }

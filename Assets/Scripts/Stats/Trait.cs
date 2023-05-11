@@ -8,6 +8,6 @@ namespace RPG.Stats
     {
         Strength,
         Intelligence,
-        Agility
+        Vitality
     }
 }
